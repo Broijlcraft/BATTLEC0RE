@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class InteractablesInSceneList : MonoBehaviour {
     public static InteractablesInSceneList single_PPL;
-    [HideInInspector] public List<InteractableInScene> interactableProductList = new List<InteractableInScene>();
+    [HideInInspector] public List<InteractableObject> interactableProductList = new List<InteractableObject>();
     private void Awake() {
         single_PPL = this;
     }
@@ -26,13 +26,12 @@ public class PhotonProductListEditor : Editor {
     }
 
     void SetInteractableList() {
-        InteractableInScene[] iaInScene = FindObjectsOfType<InteractableInScene>();
-        List<InteractableInScene> interactList = new List<InteractableInScene>();
+        InteractableObject[] iaInScene = FindObjectsOfType<InteractableObject>();
+        List<InteractableObject> interactList = new List<InteractableObject>();
         iaTarget.interactableProductList.Clear();
         for (int i = 0; i < iaInScene.Length; i++) {
-            InteractableInScene tempIaInScene = iaInScene[i];
+            InteractableObject tempIaInScene = iaInScene[i];
             interactList.Add(tempIaInScene);
-            tempIaInScene.index = i;
             tempIaInScene.colliders = GetColliders(tempIaInScene.transform);
             if (tempIaInScene.scriptableObject) {
                 tempIaInScene.scriptableObject = CreateInstance(tempIaInScene.scriptableObject.GetType()) as Interactable_SOBJ;

@@ -151,11 +151,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerView: {fileID: 1761153458948728927}
   cam: {fileID: 7595647503515677790}
+  itemCam: {fileID: 0}
+  defaultFov: 0
   text_Nickname: {fileID: 6703715164598437452}
   meshRenderersToDisableLocally:
   - {fileID: 766201534298816339}
   - {fileID: 9151762809210650660}
-  localInGameHud: {fileID: 0}
+  inGameHud: {fileID: 0}
   hideCursorOnStart: 1
   keepLocalMeshesEnabled: 1
   defaultWalkSpeed: 0.15
@@ -164,6 +166,7 @@ MonoBehaviour:
   maxVerticalTopViewAngle: 90
   maxVerticalBottomViewAngle: 90
   localPlayerLayer: 10
+  ia_InHand: {fileID: 0}
   canMove: 0
   startPosition: {x: 0, y: 0, z: 0}
   startRotation: {x: 0, y: 0, z: 0, w: 0}

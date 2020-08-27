@@ -3,25 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Movement : MonoBehaviourPun {
+public class Controller : MonoBehaviourPun {
     public PlayerView playerView;
-    public Camera cam;
+
+    public Camera cam, itemCam;
+    public float defaultFov;
+
     public Text text_Nickname;
+
     public MeshRenderer[] meshRenderersToDisableLocally;
-
     [Space]
-    public GameObject localInGameHud;
+    public GameObject inGameHud;
     public bool hideCursorOnStart, keepLocalMeshesEnabled;
-
     [Space]
-    public float defaultWalkSpeed; 
+    public float defaultWalkSpeed;
     public float sprintMultiplier = 1.2f, mouseSensitivity = 1f;
-
     [Range(0, 90)]
     public float maxVerticalTopViewAngle = 30, maxVerticalBottomViewAngle = 30;
-
     [Space]
     public int localPlayerLayer = 10;
+
+    [Header("Dev")]
+    public InteractableObject ia_InHand;
 
     [Header("Particles")]
     //public VisualFX[] particles;
@@ -51,24 +54,12 @@ public class Movement : MonoBehaviourPun {
                 }
             }
         } else {
-            if (localInGameHud) {
-                localInGameHud.SetActive(false);
+            if (inGameHud) {
+                inGameHud.SetActive(false);
             }
         }
         if (PhotonNetwork.IsConnected) {
             photonView.RPC("RPC_SetNicknameTargets", RpcTarget.All);
-        }
-    }
-
-    public void Init() {
-        startPosition = transform.position;
-        startRotation = transform.rotation;
-        if (photonView.IsMine || playerView.devView) {
-            for (int i = 0; i < cams.Length; i++) {
-                cams[i].enabled = true;
-            }
-            audioListeners.enabled = true;
-            gameObject.layer = localPlayerLayer;
         }
     }
 
@@ -84,8 +75,28 @@ public class Movement : MonoBehaviourPun {
             Cursor.visible = false;
         }
         Init();
-        canMove = true;
-        Debug.LogWarning("(bool)canMove WAS ACCESSED BY A DEV FUNCTION, CHANGE TO ALTERNATIVE WHEN READY");
+    }
+
+    private void Update() {
+        if (ia_InHand && photonView.IsMine) {
+            if (Input.GetMouseButton(0)) {
+                ia_InHand.PrimaryUse(true);
+            }
+            if (Input.GetMouseButtonUp(0)) {
+                ia_InHand.PrimaryUse(false);
+            }
+            if (Input.GetMouseButton(1)) {
+                ia_InHand.SecondaryUse(true);
+            }
+            if (Input.GetMouseButtonUp(1)) {
+                ia_InHand.SecondaryUse(true);
+            }
+        }
+        if(!ia_InHand && TestController.tc_Single && TestController.tc_Single.testing) {
+            if (Input.GetButtonDown("Jump")) {
+                ia_InHand = FindObjectOfType<Gun>();
+            }
+        }
     }
 
     private void FixedUpdate() {
@@ -104,6 +115,20 @@ public class Movement : MonoBehaviourPun {
             text_Nickname.transform.LookAt(localPlayerTarget);
             text_Nickname.transform.Rotate(0, 180, 0);
         }
+    }
+
+    public void Init() {
+        startPosition = transform.position;
+        startRotation = transform.rotation;
+        if (photonView.IsMine || playerView.devView) {
+            for (int i = 0; i < cams.Length; i++) {
+                cams[i].enabled = true;
+            }
+            audioListeners.enabled = true;
+            gameObject.layer = localPlayerLayer;
+        }
+        canMove = true;
+        Debug.LogWarning("(bool)canMove WAS ACCESSED BY A DEV FUNCTION, CHANGE TO ALTERNATIVE WHEN READY");
     }
 
     void Rotate() {
@@ -158,7 +183,7 @@ public class Movement : MonoBehaviourPun {
     [PunRPC]
     void RPC_SetNicknameTargets() {
         if (photonView.IsMine) {
-            Movement[] controllers = FindObjectsOfType<Movement>();
+            Controller[] controllers = FindObjectsOfType<Controller>();
             for (int i = 0; i < controllers.Length; i++) {
                 controllers[i].localPlayerTarget = cam.transform;
                 controllers[i].text_Nickname.text = PhotonRoomCustomMatchMaking.roomSingle.RemoveIdFromNickname(controllers[i].photonView.Owner.NickName);
