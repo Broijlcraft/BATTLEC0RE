@@ -34,8 +34,10 @@ public class PhotonLobbyCustomMatchMaking : MonoBehaviourPunCallbacks, ILobbyCal
 
     private void Start() {
         if (devLobby.dev) {
-            OpenMultiplayer();
             input_Roomname.text = PlayerPrefs.GetString("Roomname");
+            if (devLobby.devForceOnline) {
+                OpenMultiplayer();
+            }
         }
     }
 
@@ -145,5 +147,5 @@ public class PhotonLobbyCustomMatchMaking : MonoBehaviourPunCallbacks, ILobbyCal
 
 [System.Serializable]
 public class DevLobby {
-    public bool dev;
+    public bool dev, devForceOnline;
 }
