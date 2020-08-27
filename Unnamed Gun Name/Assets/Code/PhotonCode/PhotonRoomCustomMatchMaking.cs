@@ -58,13 +58,10 @@ public class PhotonRoomCustomMatchMaking : MonoBehaviourPunCallbacks, IInRoomCal
             roomGameObject.SetActive(true);
         }
         if (startButton) {
-            print("has button");
             if (PhotonNetwork.IsMasterClient) {
                 startButton.SetActive(true);
-                print("Is master");
             } else {
                 startButton.SetActive(false);
-                print("Is not master");
             }
         }
     }
@@ -77,12 +74,9 @@ public class PhotonRoomCustomMatchMaking : MonoBehaviourPunCallbacks, IInRoomCal
             roomGameObject.SetActive(true);
         }
         if (startButton) {
-            print("has button");
             if (PhotonNetwork.IsMasterClient) {
-                print("Is master");
                 startButton.SetActive(true);
             } else {
-                print("Is not master");
                 startButton.SetActive(false);
             }
         }

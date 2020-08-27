@@ -43,6 +43,7 @@ MonoBehaviour:
   - RPC_LoadedGameScene
   - RPC_DestroyIa
   - RPC_DisableAllIaColliders
+  - RPC_SetNicknameTargets
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0

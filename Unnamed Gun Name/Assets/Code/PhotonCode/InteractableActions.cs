@@ -80,14 +80,6 @@ public class InteractableActions : MonoBehaviourPun {
     //    photonView.RPC("RPC_SetAffectedController", selectedTarget, index, id, wasCapsuleHit);
     //}
 
-    //public void EnableDisableControllerOutline(int id, bool enableOutline, RpcTarget selectedTarget) {
-    //    int enable = 0;
-    //    if (enableOutline) {
-    //        enable = 1;
-    //    }
-    //    photonView.RPC("RPC_EnableDisableControllerOutline", selectedTarget, id, enable);
-    //}
-
     //public void StartStopParticleOnPlayer(int index, int id, Vector3 pos, bool play, bool shouldBeLocal, RpcTarget selectedTarget) {
     //    int startPlaying = 0;
     //    if (play) {
@@ -261,15 +253,6 @@ public class InteractableActions : MonoBehaviourPun {
     //            pu.gameObject.layer = Manager.staticInformation.int_DontShowTheseLayersLocal;
     //        }
     //    }
-    //}
-
-    //[PunRPC]
-    //void RPC_EnableDisableControllerOutline(int id, int enableOutline) {
-    //    bool enable = false;
-    //    if(enableOutline == 1) {
-    //        enable = true;
-    //    }
-    //    PhotonNetwork.GetPhotonView(id).GetComponent<Controller>().myOutline.enabled = enable;
     //}
 
     //[PunRPC]
