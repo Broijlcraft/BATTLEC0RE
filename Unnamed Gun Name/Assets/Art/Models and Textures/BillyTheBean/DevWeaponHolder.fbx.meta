@@ -1,16 +1,16 @@
 fileFormatVersion: 2
-guid: b660d60a93b54ae438a42c88aaa21e96
+guid: e6df91e2fcc332b4baf53c96855f9fb9
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
     2100000: No Name
-    2100002: ExportMat_BillyHat
+    2100002: ExportMat_WeaponHolder
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Cylinder
-    4300002: BillyHatMesh
+    4300000: Cube
+    4300002: WeaponHolderMesh
   externalObjects: {}
   materials:
     importMaterials: 1
