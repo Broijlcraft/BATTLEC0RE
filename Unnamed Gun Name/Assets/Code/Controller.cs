@@ -92,9 +92,16 @@ public class Controller : MonoBehaviourPun {
                 ia_InHand.SecondaryUse(true);
             }
         }
-        if(!ia_InHand && TestController.tc_Single && TestController.tc_Single.testing) {
-            if (Input.GetButtonDown("Jump")) {
-                ia_InHand = FindObjectOfType<Gun>();
+        if(TestController.tc_Single && TestController.tc_Single.testing) {
+            if (!ia_InHand) {
+                if (Input.GetButtonDown("Jump")) {
+                    ia_InHand = FindObjectOfType<Gun>();
+                }
+            }
+            if (TestController.tc_Single.anim) {
+                if (Input.GetMouseButtonDown(1)) {
+                    TestController.tc_Single.anim.SetBool("Moving", true); 
+                }
             }
         }
     }
