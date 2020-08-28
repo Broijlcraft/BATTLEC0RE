@@ -24,5 +24,8 @@ public class InteractableObject : MonoBehaviour {
 
 [CreateAssetMenu]
 public class Interactable_SOBJ : ScriptableObject{
+    public string weaponName;
+
+    //HideInInspector
     public int index, usesLeft;
 }
