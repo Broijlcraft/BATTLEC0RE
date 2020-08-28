@@ -189,6 +189,11 @@ PrefabInstance:
       propertyPath: viewIdField
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1761153458948728927, guid: 7cd21258632805b478b7c73aeda3c465,
+        type: 3}
+      propertyPath: devView
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3444772126607971661, guid: 7cd21258632805b478b7c73aeda3c465,
         type: 3}
       propertyPath: viewIdField
@@ -224,7 +229,7 @@ Light:
   serializedVersion: 8
   m_Type: 1
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 1
+  m_Intensity: 1.2
   m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -284,7 +289,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1065587987
 BoxCollider:
   m_ObjectHideFlags: 0
