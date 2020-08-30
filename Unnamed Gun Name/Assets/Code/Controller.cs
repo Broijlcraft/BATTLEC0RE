@@ -1,46 +1,43 @@
 ﻿using Photon.Pun;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Controller : MonoBehaviourPun {
+
     public PlayerView playerView;
-
-    public Camera cam, itemCam;
-    public float defaultFov;
-
+    public Camera cam, localLayerCam;
     public Text text_Nickname;
+    public float interactRange;
 
+    [Space]
+    public SpeedSettings forwardsSpeedSettings;
+    public SpeedSettings sidewaysSpeedSettings;
+
+    [Space]
+    public MouseSettings mouseSettings;
+    
+    [Header("Local Settings")]
     public MeshRenderer[] meshRenderersToDisableLocally;
-    [Space]
-    public GameObject inGameHud;
     public bool hideCursorOnStart, keepLocalMeshesEnabled;
-    [Space]
-    public float defaultWalkSpeed;
-    public float sprintMultiplier = 1.2f, mouseSensitivity = 1f;
-    [Range(0, 90)]
-    public float maxVerticalTopViewAngle = 30, maxVerticalBottomViewAngle = 30;
-    [Space]
-    public int localPlayerLayer = 10;
-
-    [Header("Dev")]
-    public InteractableObject ia_InHand;
-
-    [Header("Particles")]
-    //public VisualFX[] particles;
-
+    
     [HideInInspector] public bool canMove;
+    [HideInInspector] public Rigidbody rigid;
+    [HideInInspector] public Collider[] colliders;
     [HideInInspector] public Vector3 startPosition;
     [HideInInspector] public Quaternion startRotation;
-    [HideInInspector] public Transform localPlayerTarget;
-    [HideInInspector] public Collider[] colliders;
+    [HideInInspector] public Transform nicknameTarget;
+    [HideInInspector] public WeaponController weaponsController;
+
     Camera[] cams;
     AudioListener audioListeners;
-    float currentSprintValue, xRotationAxisAngle;
+    float currentForwardSprintValue, currentSidewaysSprintValue, xRotationAxisAngle;
 
     private void Awake() {
         TurnCollidersOnOff(false);
+        rigid = GetComponent<Rigidbody>();
         cams = GetComponentsInChildren<Camera>();
+        weaponsController = GetComponent<WeaponController>();
+        weaponsController.controller = this;
         for (int i = 0; i < cams.Length; i++) {
             cams[i].enabled = false;
         }
@@ -53,10 +50,6 @@ public class Controller : MonoBehaviourPun {
                     meshRenderersToDisableLocally[i].enabled = false;
                 }
             }
-        } else {
-            if (inGameHud) {
-                inGameHud.SetActive(false);
-            }
         }
         if (PhotonNetwork.IsConnected) {
             photonView.RPC("RPC_SetNicknameTargets", RpcTarget.All);
@@ -64,43 +57,39 @@ public class Controller : MonoBehaviourPun {
     }
 
     private void Start() {
-        //if (photonView.IsMine && Spawnpoints.sp_Single && PhotonRoomCustomMatchMaking.roomSingle) {
-        //    Vector3[] posAndRot = Spawnpoints.sp_Single.GetSpPositionAndRotation(PhotonRoomCustomMatchMaking.roomSingle.myNumberInRoom - 1);
-        //    transform.position = posAndRot[0];
-        //    transform.rotation = Quaternion.Euler(posAndRot[1]);
-        //}
+        if (photonView.IsMine && Spawnpoints.sp_Single && PhotonRoomCustomMatchMaking.roomSingle) {
+            if(Spawnpoints.sp_Single.spawnpoints.Length > 0) {
+                Spawnpoints.sp_Single.SetSpPositionAndRotation(transform, PhotonRoomCustomMatchMaking.roomSingle.myNumberInRoom - 1);
+            }
+        }
         TurnCollidersOnOff(true);
+        Init();
+    }
+
+    void Init() {
+        startPosition = transform.position;
+        startRotation = transform.rotation;
+        if (photonView.IsMine || playerView.devView) {
+            for (int i = 0; i < cams.Length; i++) {
+                cams[i].enabled = true;
+            }
+            audioListeners.enabled = true;
+            gameObject.layer = TagsAndLayersManager.single_TLM.localPlayerLayerInfo.index;
+        }
+        canMove = true;
         if (hideCursorOnStart) {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
-        Init();
+        Debug.LogWarning("(bool)canMove WAS ACCESSED BY A DEV FUNCTION, CHANGE TO ALTERNATIVE WHEN READY");
     }
 
     private void Update() {
-        if (ia_InHand && photonView.IsMine) {
-            if (Input.GetMouseButton(0)) {
-                ia_InHand.PrimaryUse(true);
-            }
-            if (Input.GetMouseButtonUp(0)) {
-                ia_InHand.PrimaryUse(false);
-            }
-            if (Input.GetMouseButton(1)) {
-                ia_InHand.SecondaryUse(true);
-            }
-            if (Input.GetMouseButtonUp(1)) {
-                ia_InHand.SecondaryUse(true);
-            }
-        }
-        if(TestController.tc_Single && TestController.tc_Single.testing) {
-            if (!ia_InHand) {
-                if (Input.GetButtonDown("Jump")) {
-                    ia_InHand = FindObjectOfType<Gun>();
-                }
-            }
-            if (TestController.tc_Single.anim) {
-                if (Input.GetMouseButtonDown(1)) {
-                    TestController.tc_Single.anim.SetBool("Moving", true); 
+        if ((photonView.IsMine || playerView.devView) && Input.GetButtonDown("Interact")) {
+            RaycastHit hit;
+            if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, interactRange, ~TagsAndLayersManager.single_TLM.localPlayerLayerInfo.layerMask)) {
+                if (hit.transform.CompareTag(TagsAndLayersManager.single_TLM.interactableTag)) {
+                    hit.transform.GetComponent<Interactable>().Interact(this);
                 }
             }
         }
@@ -111,49 +100,44 @@ public class Controller : MonoBehaviourPun {
             Rotate();
 
             SprintCheck();
-            float vertical = Input.GetAxis("Vertical") * currentSprintValue * defaultWalkSpeed;
-            float horizontal = Input.GetAxis("Horizontal") * currentSprintValue * defaultWalkSpeed;            
+            float vertical = Input.GetAxis("Vertical") * currentForwardSprintValue * forwardsSpeedSettings.defaultSpeed;
+            float horizontal = Input.GetAxis("Horizontal") * currentSidewaysSprintValue * sidewaysSpeedSettings.defaultSpeed;            
 
             Vector3 newPos = new Vector3(horizontal, 0, vertical);
             transform.Translate(newPos);
         }
 
-        if (localPlayerTarget) {
-            text_Nickname.transform.LookAt(localPlayerTarget);
+        if (nicknameTarget) {
+            text_Nickname.transform.LookAt(nicknameTarget);
             text_Nickname.transform.Rotate(0, 180, 0);
         }
     }
 
-    public void Init() {
-        startPosition = transform.position;
-        startRotation = transform.rotation;
-        if (photonView.IsMine || playerView.devView) {
-            for (int i = 0; i < cams.Length; i++) {
-                cams[i].enabled = true;
-            }
-            audioListeners.enabled = true;
-            gameObject.layer = localPlayerLayer;
+    void SprintCheck() {
+        if (Input.GetButton("Shift")) {
+            currentForwardSprintValue = forwardsSpeedSettings.sprintMultiplier;
+            currentSidewaysSprintValue = sidewaysSpeedSettings.sprintMultiplier;
+        } else {
+            currentForwardSprintValue = 1;
+            currentSidewaysSprintValue = 1;
         }
-        canMove = true;
-        Debug.LogWarning("(bool)canMove WAS ACCESSED BY A DEV FUNCTION, CHANGE TO ALTERNATIVE WHEN READY");
     }
 
     void Rotate() {
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
-        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
+        float mouseX = Input.GetAxis("Mouse X") * mouseSettings.mouseSensitivity;
+        float mouseY = Input.GetAxis("Mouse Y") * mouseSettings.mouseSensitivity;
 
         xRotationAxisAngle += mouseY;
 
-        if (xRotationAxisAngle > maxVerticalTopViewAngle) {
-            xRotationAxisAngle = maxVerticalTopViewAngle;
+        if (xRotationAxisAngle > mouseSettings.maxVerticalTopViewAngle) {
+            xRotationAxisAngle = mouseSettings.maxVerticalTopViewAngle;
             mouseY = 0f;
-            ClampXRotationAxisToValue(cam.transform, -maxVerticalTopViewAngle);
-        } else if (xRotationAxisAngle < -maxVerticalBottomViewAngle) {
-            xRotationAxisAngle = -maxVerticalBottomViewAngle;
+            ClampXRotationAxisToValue(cam.transform, -mouseSettings.maxVerticalTopViewAngle);
+        } else if (xRotationAxisAngle < -mouseSettings.maxVerticalBottomViewAngle) {
+            xRotationAxisAngle = -mouseSettings.maxVerticalBottomViewAngle;
             mouseY = 0f;
-            ClampXRotationAxisToValue(cam.transform, maxVerticalBottomViewAngle);
+            ClampXRotationAxisToValue(cam.transform, mouseSettings.maxVerticalBottomViewAngle);
         }
-
         cam.transform.Rotate(Vector3.left * mouseY);
         transform.Rotate(Vector3.up * mouseX);
     }
@@ -162,14 +146,6 @@ public class Controller : MonoBehaviourPun {
         colliders = GetComponentsInChildren<Collider>();
         for (int i = 0; i < colliders.Length; i++) {
             colliders[i].enabled = state;
-        }
-    }
-
-    void SprintCheck() {
-        if (Input.GetButton("Shift") /*&& for only sprinting when going forward Input.GetAxis("Vertical") > 0*/) {
-            currentSprintValue = sprintMultiplier;
-        } else {
-            currentSprintValue = 1;
         }
     }
 
@@ -192,9 +168,21 @@ public class Controller : MonoBehaviourPun {
         if (photonView.IsMine) {
             Controller[] controllers = FindObjectsOfType<Controller>();
             for (int i = 0; i < controllers.Length; i++) {
-                controllers[i].localPlayerTarget = cam.transform;
+                controllers[i].nicknameTarget = cam.transform;
                 controllers[i].text_Nickname.text = PhotonRoomCustomMatchMaking.roomSingle.RemoveIdFromNickname(controllers[i].photonView.Owner.NickName);
             }
         }
     }
+}
+
+[System.Serializable]
+public class SpeedSettings {
+    public float defaultSpeed, sprintMultiplier;
+}
+
+[System.Serializable]
+public class MouseSettings {
+    public float mouseSensitivity = 1f;
+    [Range(0, 90)]
+    public float maxVerticalTopViewAngle = 90, maxVerticalBottomViewAngle = 90;
 }

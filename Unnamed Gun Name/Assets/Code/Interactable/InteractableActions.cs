@@ -1,5 +1,5 @@
-﻿using Photon.Pun;
-using UnityEngine;
+﻿using UnityEngine;
+using Photon.Pun;
 
 public class InteractableActions : MonoBehaviourPun {
     public static InteractableActions ia_Single;
@@ -12,9 +12,34 @@ public class InteractableActions : MonoBehaviourPun {
         photonView.RPC("RPC_DestroyIa", selectedTarget, index, time);
     }
 
-    public void DisableAllIaColliders(int index, RpcTarget selectedTarget) {
-        photonView.RPC("RPC_DisableAllIaColliders", selectedTarget, index);
+    [PunRPC]
+    void RPC_DestroyIa(int index, float time) {
+        try {
+            Destroy(InteractablesList.single_IaList.interactables[index].gameObject, time);
+        } catch { }
     }
+
+    public void CheckAndSetInteracting(int index, int id) {
+        photonView.RPC("RPC_CheckAndSetInteracting", RpcTarget.MasterClient, index, id);
+    }
+
+    [PunRPC]
+    void RPC_CheckAndSetInteracting(int index, int id) {
+        if (!InteractablesList.single_IaList.interactables[index].interactingController) {
+            photonView.RPC("RPC_SetInteracting", RpcTarget.All, index, id);
+        }
+    }
+
+    [PunRPC]
+    void RPC_SetInteracting(int index, int id) {
+        Controller controller = PhotonNetwork.GetPhotonView(id).GetComponent<Controller>();
+        InteractablesList.single_IaList.interactables[index].interactingController = controller;
+        InteractablesList.single_IaList.interactables[index].Interact(controller);
+    }
+
+    //public void DisableAllIaColliders(int index, RpcTarget selectedTarget) {
+    //    photonView.RPC("RPC_DisableAllIaColliders", selectedTarget, index);
+    //}
 
     //public void EnableDisableAllProductColliders(int index, bool state, RpcTarget selectedTarget) {
     //    photonView.RPC("RPC_EnableDisableAllProductColliders", selectedTarget, index, state);
@@ -112,22 +137,15 @@ public class InteractableActions : MonoBehaviourPun {
     //    photonView.RPC("RPC_PlaypickUpSoundAndInstantiateParticleOnInteractableProduct", selectedTarget, index, sound, destroyTime, pos);
     //}
 
-    [PunRPC]
-    void RPC_DestroyIa(int index, float time) {
-        try {
-            Destroy(InteractablesInSceneList.single_PPL.interactableProductList[index].gameObject, time);
-        } catch { }
-    }
-
-    [PunRPC]
-    void RPC_DisableAllIaColliders(int index) {
-        try {
-            Collider[] colliders = InteractablesInSceneList.single_PPL.interactableProductList[index].gameObject.GetComponentsInChildren<Collider>();
-            for (int i = colliders.Length - 1; i >= 0; i--) {
-                Destroy(colliders[i]);
-            }
-        } catch { }
-    }
+    //[PunRPC]
+    //void RPC_DisableAllIaColliders(int index) {
+    //    try {
+    //        Collider[] colliders = InteractablesInSceneList.single_PPL.interactableProductList[index].gameObject.GetComponentsInChildren<Collider>();
+    //        for (int i = colliders.Length - 1; i >= 0; i--) {
+    //            Destroy(colliders[i]);
+    //        }
+    //    } catch { }
+    //}
 
     //[PunRPC]
     //void RPC_EnableDisableAllProductColliders(int index, bool state) {
