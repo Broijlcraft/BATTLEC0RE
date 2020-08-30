@@ -1,7 +1,7 @@
-﻿using UnityEngine;
-using Photon.Pun;
+﻿using Photon.Pun;
 
 public class InteractableActions : MonoBehaviourPun {
+
     public static InteractableActions ia_Single;
 
     private void Awake() {

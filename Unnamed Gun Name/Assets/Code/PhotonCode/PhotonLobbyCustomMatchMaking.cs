@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 
-public class PhotonLobbyCustomMatchMaking : MonoBehaviourPunCallbacks, ILobbyCallbacks {
+public class PhotonLobbyCustomMatchMaking : MonoBehaviourPunCallbacks, ILobbyCallbacks { 
+
     public static PhotonLobbyCustomMatchMaking lobbySingle;
 
     public InputField input_Nickname, input_Roomname;

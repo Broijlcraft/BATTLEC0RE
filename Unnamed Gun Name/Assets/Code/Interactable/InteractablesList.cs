@@ -1,9 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
 public class InteractablesList : MonoBehaviour {
+
     public static InteractablesList single_IaList;
     [Header("HideInInspector")]
     public List<Interactable> interactables = new List<Interactable>();
@@ -16,7 +16,9 @@ public class InteractablesList : MonoBehaviour {
 #if UNITY_EDITOR
 [CustomEditor(typeof(InteractablesList))]
 public class InteractablesListEditor : Editor {
+
     InteractablesList target_IaList;
+
     public void OnEnable() {
         target_IaList = (InteractablesList)target;
     }

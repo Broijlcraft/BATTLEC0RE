@@ -1,11 +1,10 @@
 ﻿using System.Collections;
 using UnityEngine;
-using Photon.Pun;
 
 public class WeaponController : MonoBehaviour {
 
     public WeaponsHolder primaryWeaponsHolder, powerWeaponsHolder;
-    
+
     [Header("HideInInspector")]
     public bool isAttaching;
     public bool isDetaching;
@@ -17,8 +16,38 @@ public class WeaponController : MonoBehaviour {
         powerWeaponsHolder.Init();
     }
 
+    private void Update() {
+        InputCheckAndUse(0, primaryWeaponsHolder);
+        InputCheckAndUse(1, powerWeaponsHolder);
+    }
+
+    void InputCheckAndUse(int mouseInput, WeaponsHolder holder) {
+        if (!isAttaching && !isDetaching) {
+            if (holder.weaponAttached) {
+                bool buttonPressed = false;
+                switch (holder.weaponAttached.fireMode) {
+                    case FireMode.Automatic:
+                    if (Input.GetMouseButton(mouseInput)) {
+                        buttonPressed = true;
+                    }
+                    break;
+                    case FireMode.SemiAutomatic:
+                    if (Input.GetMouseButtonDown(mouseInput)) {
+                        buttonPressed = true;
+                    }
+                    break;
+                }
+
+                holder.weaponAttached.Use();
+            }
+
+            if (Input.GetMouseButton(mouseInput)) {
+            }
+        }
+    }
+
     public void AttachDetachWeapon(Weapon weapon) {
-        if (!isAttaching && !isDetaching && (!weapon || (weapon && !weapon.isAttached))) {
+        if (!isAttaching && !isDetaching) {
             WeaponsHolder holder = GetHolder(weapon.weaponType);
             StartCoroutine(CheckForAndSetAttached(holder, weapon));
         }
@@ -80,6 +109,7 @@ public class WeaponController : MonoBehaviour {
 
 [System.Serializable]
 public class WeaponsHolder {
+
     public Transform weaponsHolder;
     public float timeToAttach = 2f, timeToDetach = 1f;
 

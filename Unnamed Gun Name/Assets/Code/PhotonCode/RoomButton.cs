@@ -4,6 +4,7 @@ using Photon.Pun;
 using Photon.Realtime;
 
 public class RoomButton : MonoBehaviour {
+
     public Text nameText, sizeText;
     public Button button;
     [Header("HideInInspector")]

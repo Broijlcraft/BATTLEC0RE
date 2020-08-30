@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 
 public class Weapon : Interactable {
+
+    public FireMode fireMode;
     public WeaponType weaponType;
 
-    [Header("HideInInspector")]
-    public bool isAttached;
     //Dev
     Vector3 startPos;
     Quaternion startRot;
@@ -18,12 +18,16 @@ public class Weapon : Interactable {
 
     public override void Interact(Controller controller) {
         base.Interact(controller);
-        if (interactingController) {
+        if (interactingController == controller) {
             controller.weaponsController.AttachDetachWeapon(this);
         }
     }
 
-    //dev
+    public override void Use() {
+        print(gameObject.name + " goes Bang!");
+    }
+
+    //Dev
     public void ResetPosAndRot() {
         transform.position = startPos;
         transform.rotation = startRot;

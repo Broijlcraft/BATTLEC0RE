@@ -2,6 +2,7 @@
 using UnityEngine;
 
 public class HeatGauge : MonoBehaviour {
+
     public static HeatGauge hg_Single;
     public Image fillImg;
 

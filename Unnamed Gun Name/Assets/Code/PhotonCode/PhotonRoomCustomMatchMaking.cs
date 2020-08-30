@@ -5,7 +5,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PhotonRoomCustomMatchMaking : MonoBehaviourPunCallbacks, IInRoomCallbacks {
+
     public static PhotonRoomCustomMatchMaking roomSingle;
+
     public GameObject playerPrefab, lobbyGameObject, roomGameObject, playerListingPrefab, startButton, loadingTextObject;
     public Transform playersPanel;
     [HideInInspector] public PhotonView PV;
@@ -137,7 +139,7 @@ public class PhotonRoomCustomMatchMaking : MonoBehaviourPunCallbacks, IInRoomCal
 
     void OnSceneFinishedLoading(Scene scene, LoadSceneMode mode) {
         currentScene = scene.buildIndex;
-        if(currentScene == MultiplayerSetting.multiplayerSetting.multiplayerScene) {
+        if(currentScene == MultiplayerSetting.single_MPS.multiplayerScene) {
             isLoaded = true;
             PV.RPC("RPC_LoadedGameScene", RpcTarget.MasterClient);
         }

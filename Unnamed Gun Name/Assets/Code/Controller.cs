@@ -1,6 +1,6 @@
-﻿using Photon.Pun;
+﻿using UnityEngine.UI;
 using UnityEngine;
-using UnityEngine.UI;
+using Photon.Pun;
 
 public class Controller : MonoBehaviourPun {
 
@@ -177,11 +177,13 @@ public class Controller : MonoBehaviourPun {
 
 [System.Serializable]
 public class SpeedSettings {
+
     public float defaultSpeed, sprintMultiplier;
 }
 
 [System.Serializable]
 public class MouseSettings {
+
     public float mouseSensitivity = 1f;
     [Range(0, 90)]
     public float maxVerticalTopViewAngle = 90, maxVerticalBottomViewAngle = 90;
