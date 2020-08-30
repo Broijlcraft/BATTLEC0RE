@@ -24,7 +24,7 @@ public class Weapon : Interactable {
     }
 
     public override void Use() {
-        print(gameObject.name + " goes Bang!");
+
     }
 
     //Dev
