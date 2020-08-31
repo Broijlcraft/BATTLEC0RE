@@ -15,3 +15,16 @@ public class GameAssetsList : MonoBehaviour {
 
     public GameObject player, devPrim, devPower;
 }
+
+public class GameAsset {
+    public GameObject prefab;
+    public string identifier {
+        get {
+            string s = "(identifier here)";
+            if (prefab) {
+                s = prefab.name;
+            }
+            return s;
+        }
+    }
+}
