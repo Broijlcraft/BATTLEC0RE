@@ -9,7 +9,7 @@ public class WeaponController : MonoBehaviour {
     public bool isAttaching;
     public bool isDetaching;
     float animationSpeed;
-    public Controller controller;
+    [HideInInspector] public Controller controller;
 
     private void Awake() {
         primaryWeaponsHolder.Init();
@@ -41,16 +41,13 @@ public class WeaponController : MonoBehaviour {
                     holder.weaponAttached.Use();
                 }
             }
-
-            if (Input.GetMouseButton(mouseInput)) {
-            }
         }
     }
 
-    public void AttachDetachWeapon(Weapon weapon) {
+    public void AttachDetachWeapon(Weapon weapon, bool useAnim) {
         if (!isAttaching && !isDetaching) {
             WeaponsHolder holder = GetHolder(weapon.weaponType);
-            StartCoroutine(CheckForAndSetAttached(holder, weapon));
+            StartCoroutine(CheckForAndSetAttached(holder, weapon, useAnim));
         }
     }
 
@@ -67,39 +64,45 @@ public class WeaponController : MonoBehaviour {
         return holder;
     }
 
-    IEnumerator CheckForAndSetAttached(WeaponsHolder holder, Weapon weapon) {
+    IEnumerator CheckForAndSetAttached(WeaponsHolder holder, Weapon weapon, bool useAnim) {
         if (!isAttaching && !isDetaching) {
             float extraAttachWaitTime = 0f;
             if (holder.weaponAttached) {
                 extraAttachWaitTime = holder.timeToDetach;
                 animationSpeed = 1 / holder.timeToDetach;
-                StartCoroutine(Detach(holder));
+                StartCoroutine(Detach(holder, useAnim));
             }
-            yield return new WaitForSeconds(extraAttachWaitTime);
+            if (useAnim) {
+                yield return new WaitForSeconds(extraAttachWaitTime);
+            }
             animationSpeed = 1 / holder.timeToAttach;
-            StartCoroutine(Attach(holder, weapon));
+            StartCoroutine(Attach(holder, weapon, useAnim));
         }
     }
 
-    IEnumerator Attach(WeaponsHolder holder, Weapon weapon) {
+    IEnumerator Attach(WeaponsHolder holder, Weapon weapon, bool useAnim) {
         if (weapon) {
-            holder.animator.speed = animationSpeed;
-            holder.animator.SetTrigger("ScrewOn");
             isAttaching = true;
             weapon.transform.SetParent(holder.weaponsHolder);
             weapon.transform.localPosition = Vector3.zero;
             weapon.transform.localRotation = Quaternion.identity;
-            yield return new WaitForSeconds(holder.timeToAttach);
+            if (useAnim) {
+                holder.animator.speed = animationSpeed;
+                holder.animator.SetTrigger("ScrewOn");
+                yield return new WaitForSeconds(holder.timeToAttach);
+            }
         }
         holder.weaponAttached = weapon;
         isAttaching = false;
     }
 
-    IEnumerator Detach(WeaponsHolder holder) {
+    IEnumerator Detach(WeaponsHolder holder, bool useAnim) {
         isDetaching = true;
-        holder.animator.speed = animationSpeed;
-        holder.animator.SetTrigger("ScrewOff");
-        yield return new WaitForSeconds(holder.timeToDetach);
+        if (useAnim) {
+            holder.animator.speed = animationSpeed;
+            holder.animator.SetTrigger("ScrewOff");
+            yield return new WaitForSeconds(holder.timeToDetach);
+        }
         holder.weaponAttached.transform.SetParent(null);
         holder.weaponAttached.ResetPosAndRot();
         holder.weaponAttached.interactingController = null;

@@ -17,9 +17,11 @@ public class Weapon : Interactable {
     }
 
     public override void Interact(Controller controller) {
-        base.Interact(controller);
-        if (interactingController == controller) {
-            controller.weaponsController.AttachDetachWeapon(this);
+        if(weaponType != WeaponType.Primary || (Manager.single_M && Manager.single_M.dev)) {
+            base.Interact(controller);
+            if (interactingController == controller) {
+                controller.weaponsController.AttachDetachWeapon(this, true);
+            }
         }
     }
 
