@@ -37,8 +37,9 @@ public class WeaponController : MonoBehaviour {
                     }
                     break;
                 }
-
-                holder.weaponAttached.Use();
+                if (buttonPressed) {
+                    holder.weaponAttached.Use();
+                }
             }
 
             if (Input.GetMouseButton(mouseInput)) {
