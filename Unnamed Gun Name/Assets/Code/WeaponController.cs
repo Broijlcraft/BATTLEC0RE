@@ -132,6 +132,8 @@ public class WeaponsHolder {
     public Animator animator;
 
     public void Init() {
-        animator = weaponsHolder.GetComponent<Animator>();
+        if (weaponsHolder) {
+            animator = weaponsHolder.GetComponent<Animator>();
+        }
     }
 }

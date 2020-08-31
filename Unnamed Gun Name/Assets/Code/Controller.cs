@@ -2,6 +2,7 @@
 using UnityEngine;
 using Photon.Pun;
 
+[RequireComponent(typeof(PlayerView), (typeof(PhotonView)), (typeof(WeaponController)))]
 public class Controller : MonoBehaviourPun {
 
     public PlayerView playerView;
@@ -112,7 +113,7 @@ public class Controller : MonoBehaviourPun {
             text_Nickname.transform.Rotate(0, 180, 0);
         }
     }
-
+    
     void SprintCheck() {
         if (Input.GetButton("Sprint")) {
             currentForwardSprintValue = forwardsSpeedSettings.sprintMultiplier;
