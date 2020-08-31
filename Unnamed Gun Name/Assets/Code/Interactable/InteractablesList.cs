@@ -35,7 +35,7 @@ public class InteractablesListEditor : Editor {
                 EditorUtility.SetDirty(interactable);
             }
             target_IaList.interactables = iaList;
-            Debug.LogWarning($"Successfully set {i} spawnpoints, don't forget to save!");
+            Debug.LogWarning($"Successfully set {i} interactables, don't forget to save!");
         }
     }
 }

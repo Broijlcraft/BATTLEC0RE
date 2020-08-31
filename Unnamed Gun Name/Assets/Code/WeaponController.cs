@@ -25,13 +25,14 @@ public class WeaponController : MonoBehaviour {
         if (!isAttaching && !isDetaching) {
             if (holder.weaponAttached) {
                 bool buttonPressed = false;
-                switch (holder.weaponAttached.fireMode) {
-                    case FireMode.Automatic:
+                int behaviourIndex = GetBehaviourIndex(holder.weaponAttached);
+                switch (holder.weaponAttached.weaponBehaviours[behaviourIndex].attackType) {
+                    case AttackType.Automatic:
                     if (Input.GetMouseButton(mouseInput)) {
                         buttonPressed = true;
                     }
                     break;
-                    case FireMode.SemiAutomatic:
+                    case AttackType.SemiAutomatic:
                     if (Input.GetMouseButtonDown(mouseInput)) {
                         buttonPressed = true;
                     }
@@ -49,6 +50,15 @@ public class WeaponController : MonoBehaviour {
             WeaponsHolder holder = GetHolder(weapon.weaponType);
             StartCoroutine(CheckForAndSetAttached(holder, weapon, useAnim));
         }
+    }
+
+    int GetBehaviourIndex(Weapon weapon) {
+        int index = 0;
+        if(weapon.weaponType == WeaponType.Primary) {
+            PrimaryWeapon prim = weapon as PrimaryWeapon;
+            index = prim.currentActiveWeapon;
+        }
+        return index;
     }
 
     public WeaponsHolder GetHolder(WeaponType type) {

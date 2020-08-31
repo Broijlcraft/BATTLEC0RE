@@ -2,9 +2,8 @@
 
 public class Weapon : Interactable {
 
-    public FireMode fireMode;
     public WeaponType weaponType;
-
+    public WeaponBehaviour[] weaponBehaviours;
     //Dev
     Vector3 startPos;
     Quaternion startRot;
@@ -39,9 +38,21 @@ public class Weapon : Interactable {
     }
 }
 
-public enum FireMode {
+[System.Serializable]
+public class WeaponBehaviour {
+    public Transform[] attackOrigins;
+    public AttackType attackType;
+
+    public float damagePerAttack;
+    public int attacksPerSecond;
+
+    [HideInInspector] public int ao_Index;
+}
+
+public enum AttackType {
     Automatic,
-    SemiAutomatic
+    SemiAutomatic,
+    Melee
 }
 
 public enum WeaponType {
