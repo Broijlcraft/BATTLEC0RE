@@ -114,7 +114,7 @@ public class Controller : MonoBehaviourPun {
     }
 
     void SprintCheck() {
-        if (Input.GetButton("Shift")) {
+        if (Input.GetButton("Sprint")) {
             currentForwardSprintValue = forwardsSpeedSettings.sprintMultiplier;
             currentSidewaysSprintValue = sidewaysSpeedSettings.sprintMultiplier;
         } else {

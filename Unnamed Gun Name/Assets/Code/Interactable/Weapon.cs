@@ -3,7 +3,7 @@
 public class Weapon : Interactable {
 
     public WeaponType weaponType;
-    public WeaponBehaviour[] weaponBehaviours;
+    public WeaponBehaviour[] weaponBehaviours = new WeaponBehaviour[1];
     //Dev
     Vector3 startPos;
     Quaternion startRot;
