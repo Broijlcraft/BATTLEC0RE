@@ -726,12 +726,12 @@ GameObject:
   m_Component:
   - component: {fileID: 4074638269145039665}
   - component: {fileID: 4074638269135760533}
+  - component: {fileID: 7871429636867858952}
+  - component: {fileID: 3327204899640050877}
   - component: {fileID: 5596278731523215244}
   - component: {fileID: 2585566474367771789}
-  - component: {fileID: 7871429636867858952}
   - component: {fileID: 9081990932019451938}
   - component: {fileID: 1750698072}
-  - component: {fileID: 3327204899640050877}
   m_Layer: 9
   m_Name: Prefab_RobotBase
   m_TagString: Untagged
@@ -789,42 +789,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &5596278731523215244
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4074638269145276177}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73e5df2ade1ff8e40b490768ae1cf62b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  devView: 0
-  ready: 0
-  myView: {fileID: 0}
---- !u!114 &2585566474367771789
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4074638269145276177}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 0
-  OwnershipTransfer: 0
-  ObservedComponents: []
-  viewIdField: 0
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
 --- !u!114 &7871429636867858952
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -862,6 +826,69 @@ MonoBehaviour:
   startRotation: {x: 0, y: 0, z: 0, w: 0}
   nicknameTarget: {fileID: 0}
   weaponsController: {fileID: 0}
+--- !u!114 &3327204899640050877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4074638269145276177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b791c6102072c23488fc6019e9a65e5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  primaryWeaponsHolder:
+    weaponsHolder: {fileID: 0}
+    timeToAttach: 2
+    timeToDetach: 1
+    weaponAttached: {fileID: 0}
+    animator: {fileID: 0}
+  powerWeaponsHolder:
+    weaponsHolder: {fileID: 0}
+    timeToAttach: 2
+    timeToDetach: 1
+    weaponAttached: {fileID: 0}
+    animator: {fileID: 0}
+  isAttaching: 0
+  isDetaching: 0
+  controller: {fileID: 0}
+--- !u!114 &5596278731523215244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4074638269145276177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73e5df2ade1ff8e40b490768ae1cf62b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  devView: 0
+  ready: 0
+  myView: {fileID: 0}
+--- !u!114 &2585566474367771789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4074638269145276177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 0
+  OwnershipTransfer: 0
+  ObservedComponents: []
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!54 &9081990932019451938
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -892,33 +919,6 @@ CapsuleCollider:
   m_Height: 1.7
   m_Direction: 1
   m_Center: {x: 0, y: 0.85, z: 0.33}
---- !u!114 &3327204899640050877
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4074638269145276177}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b791c6102072c23488fc6019e9a65e5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  primaryWeaponsHolder:
-    weaponsHolder: {fileID: 0}
-    timeToAttach: 2
-    timeToDetach: 1
-    weaponAttached: {fileID: 0}
-    animator: {fileID: 0}
-  powerWeaponsHolder:
-    weaponsHolder: {fileID: 0}
-    timeToAttach: 2
-    timeToDetach: 1
-    weaponAttached: {fileID: 0}
-    animator: {fileID: 0}
-  isAttaching: 0
-  isDetaching: 0
-  controller: {fileID: 0}
 --- !u!1 &4074638269145276179
 GameObject:
   m_ObjectHideFlags: 0
