@@ -93,8 +93,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 0
   interactingController: {fileID: 0}
-  attackType: 0
   weaponType: 1
+  weaponBehaviours:
+  - attackOrigins: []
+    attackType: 1
+    damagePerAttack: 0
+    attacksPerSecond: 0
+    ao_Index: 0
 --- !u!64 &8051300718018528033
 MeshCollider:
   m_ObjectHideFlags: 0
