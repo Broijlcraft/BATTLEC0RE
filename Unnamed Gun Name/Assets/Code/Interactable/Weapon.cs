@@ -53,6 +53,7 @@ public class WeaponBehaviour {
     public int attacksPerSecond;
 
     [HideInInspector] public int ao_Index;
+    public bool canAttack;
 }
 
 [System.Serializable]

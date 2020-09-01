@@ -198,7 +198,7 @@ GameObject:
   - component: {fileID: 8780956175230965423}
   - component: {fileID: 1415877010834955851}
   m_Layer: 12
-  m_Name: DevWeapon_Primary
+  m_Name: Prefab_DevWeaponPrimary
   m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -284,13 +284,13 @@ MonoBehaviour:
   weaponBehaviours:
   - attackOrigins: []
     attackType: 1
-    damagePerAttack: 0
-    attacksPerSecond: 0
+    damagePerAttack: 10
+    attacksPerSecond: 10
     ao_Index: 0
   - attackOrigins: []
     attackType: 0
-    damagePerAttack: 0
-    attacksPerSecond: 0
+    damagePerAttack: 2
+    attacksPerSecond: 10
     ao_Index: 0
   currentActiveWeapon: 0
   timeToSwitch: 1

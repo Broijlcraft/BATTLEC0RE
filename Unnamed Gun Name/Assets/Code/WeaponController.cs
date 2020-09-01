@@ -9,7 +9,7 @@ public class WeaponController : MonoBehaviourPun {
     [Header("HideInInspector")]
     public bool isAttaching;
     public bool isDetaching;
-    public bool changingBehaviour;
+    public bool isChangingBehaviour;
     float animationSpeed;
     [HideInInspector] public Controller controller;
 
@@ -27,33 +27,37 @@ public class WeaponController : MonoBehaviourPun {
     void WeaponSwitchCheck() {
         float scroll = Input.GetAxis("Mouse ScrollWheel");
         if(!isAttaching && !isDetaching && scroll != 0 && primaryWeaponsHolder.weaponAttached && photonView.IsMine) {
-            if (!changingBehaviour) {
-                int behaviourIndex = GetBehaviourIndex(primaryWeaponsHolder.weaponAttached);
+            if (!isChangingBehaviour) {
+                int behaviourIndex = InteractableActions.ia_Single.GetBehaviourIndex(primaryWeaponsHolder.weaponAttached);
                 InteractableActions.ia_Single.SwitchWeaponBehaviour(photonView.ViewID, behaviourIndex);
             }
         }
     }
 
     public IEnumerator SwitchWeaponBehaviour(int behaviourIndex) {
-        changingBehaviour = true;
+        isChangingBehaviour = true;
         PrimaryAndSecondaryWeapon weapon = primaryWeaponsHolder.weaponAttached as PrimaryAndSecondaryWeapon;
         if (behaviourIndex == 0) {
-            primaryWeaponsHolder.animator.SetTrigger("PrimToSec");
-            weapon.currentActiveWeapon = 1;
+            SwitchBehaviour(weapon, "PrimToSec", ActiveWeapon.secondary);
         } else {
-            primaryWeaponsHolder.animator.SetTrigger("SecToPrim");
-            weapon.currentActiveWeapon = 0;
+            SwitchBehaviour(weapon, "SecToPrim", ActiveWeapon.primary);
         }
         yield return new WaitForSeconds(weapon.timeToSwitch);
-        changingBehaviour = false;
+        isChangingBehaviour = false;
+    }
+
+    void SwitchBehaviour(PrimaryAndSecondaryWeapon weapon, string triggerString, ActiveWeapon newActiveWeapon) {
+        primaryWeaponsHolder.animator.SetTrigger(triggerString);
+        weapon.currentActiveWeapon = newActiveWeapon;
     }
 
     void PrimaryAndPowerInputCheckAndUse(int mouseInput, WeaponsHolder holder) {
-        if (!isAttaching && !isDetaching) {
-            if (holder.weaponAttached) {
+        if (!isAttaching && !isDetaching && photonView.IsMine) {
+            Weapon weapon = holder.weaponAttached;
+            if (weapon && (weapon.weaponType != WeaponType.Primary || (weapon.weaponType == WeaponType.Primary && !isChangingBehaviour))) {
                 bool buttonPressed = false;
-                int behaviourIndex = GetBehaviourIndex(holder.weaponAttached);
-                switch (holder.weaponAttached.weaponBehaviours[behaviourIndex].attackType) {
+                int behaviourIndex = InteractableActions.ia_Single.GetBehaviourIndex(weapon);
+                switch (weapon.weaponBehaviours[behaviourIndex].attackType) {
                     case AttackType.Automatic:
                     if (Input.GetMouseButton(mouseInput)) {
                         buttonPressed = true;
@@ -66,7 +70,7 @@ public class WeaponController : MonoBehaviourPun {
                     break;
                 }
                 if (buttonPressed) {
-                    holder.weaponAttached.Use();
+                    weapon.Use();
                 }
             }
         }
@@ -77,15 +81,6 @@ public class WeaponController : MonoBehaviourPun {
             WeaponsHolder holder = GetHolder(weapon.weaponType);
             StartCoroutine(CheckForAndSetAttached(holder, weapon, useAnim));
         }
-    }
-
-    int GetBehaviourIndex(Weapon weapon) {
-        int index = 0;
-        if(weapon.weaponType == WeaponType.Primary) {
-            PrimaryAndSecondaryWeapon prim = weapon as PrimaryAndSecondaryWeapon;
-            index = prim.currentActiveWeapon;
-        }
-        return index;
     }
 
     public WeaponsHolder GetHolder(WeaponType type) {

@@ -205,7 +205,7 @@ MonoBehaviour:
     animator: {fileID: 0}
   isAttaching: 0
   isDetaching: 0
-  changingBehaviour: 0
+  isChangingBehaviour: 0
   controller: {fileID: 0}
 --- !u!54 &54633012352548232
 Rigidbody:
