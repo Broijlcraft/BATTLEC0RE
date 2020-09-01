@@ -16,11 +16,17 @@ public class Weapon : Interactable {
     }
 
     public override void Interact(Controller controller) {
-        if(weaponType != WeaponType.Primary || (Manager.single_M && Manager.single_M.dev)) {
-            base.Interact(controller);
-            if (interactingController == controller) {
-                controller.weaponsController.AttachDetachWeapon(this, true);
-            }
+        if(weaponType != WeaponType.Primary) {
+            CheckAndAttach(controller);
+        } else if (weaponType == WeaponType.Primary && !controller.weaponsController.primaryWeaponsHolder.weaponAttached) {
+            CheckAndAttach(controller);
+        }
+    }
+
+    void CheckAndAttach(Controller controller) {
+        base.Interact(controller);
+        if (interactingController == controller) {
+            controller.weaponsController.AttachDetachWeapon(this, true);
         }
     }
 
