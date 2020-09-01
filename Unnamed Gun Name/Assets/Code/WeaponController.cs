@@ -1,13 +1,15 @@
 ﻿using System.Collections;
 using UnityEngine;
+using Photon.Pun;
 
-public class WeaponController : MonoBehaviour {
+public class WeaponController : MonoBehaviourPun {
 
     public WeaponsHolder primaryWeaponsHolder, powerWeaponsHolder;
 
     [Header("HideInInspector")]
     public bool isAttaching;
     public bool isDetaching;
+    public bool changingBehaviour;
     float animationSpeed;
     [HideInInspector] public Controller controller;
 
@@ -17,11 +19,36 @@ public class WeaponController : MonoBehaviour {
     }
 
     private void Update() {
-        InputCheckAndUse(0, primaryWeaponsHolder);
-        InputCheckAndUse(1, powerWeaponsHolder);
+        PrimaryAndPowerInputCheckAndUse(1, powerWeaponsHolder);
+        WeaponSwitchCheck();
+        PrimaryAndPowerInputCheckAndUse(0, primaryWeaponsHolder);
     }
 
-    void InputCheckAndUse(int mouseInput, WeaponsHolder holder) {
+    void WeaponSwitchCheck() {
+        float scroll = Input.GetAxis("Mouse ScrollWheel");
+        if(scroll != 0 && primaryWeaponsHolder.weaponAttached) {
+            if (!changingBehaviour) {
+                int behaviourIndex = GetBehaviourIndex(primaryWeaponsHolder.weaponAttached);
+                InteractableActions.ia_Single.SwitchWeaponBehaviour(photonView.ViewID, behaviourIndex);
+            }
+        }
+    }
+
+    public IEnumerator SwitchWeaponBehaviour(int behaviourIndex) {
+        changingBehaviour = true;
+        PrimaryAndSecondaryWeapon weapon = primaryWeaponsHolder.weaponAttached as PrimaryAndSecondaryWeapon;
+        if (behaviourIndex == 0) {
+            primaryWeaponsHolder.animator.SetTrigger("PrimToSec");
+            weapon.currentActiveWeapon = 1;
+        } else {
+            primaryWeaponsHolder.animator.SetTrigger("SecToPrim");
+            weapon.currentActiveWeapon = 0;
+        }
+        yield return new WaitForSeconds(weapon.timeToSwitch);
+        changingBehaviour = false;
+    }
+
+    void PrimaryAndPowerInputCheckAndUse(int mouseInput, WeaponsHolder holder) {
         if (!isAttaching && !isDetaching) {
             if (holder.weaponAttached) {
                 bool buttonPressed = false;
@@ -55,7 +82,7 @@ public class WeaponController : MonoBehaviour {
     int GetBehaviourIndex(Weapon weapon) {
         int index = 0;
         if(weapon.weaponType == WeaponType.Primary) {
-            PrimaryWeapon prim = weapon as PrimaryWeapon;
+            PrimaryAndSecondaryWeapon prim = weapon as PrimaryAndSecondaryWeapon;
             index = prim.currentActiveWeapon;
         }
         return index;

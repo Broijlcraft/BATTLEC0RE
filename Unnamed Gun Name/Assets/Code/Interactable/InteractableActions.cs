@@ -1,4 +1,5 @@
 ﻿using Photon.Pun;
+using System.Collections;
 
 public class InteractableActions : MonoBehaviourPun {
 
@@ -36,6 +37,17 @@ public class InteractableActions : MonoBehaviourPun {
         InteractablesList.single_IaList.interactables[index].interactingController = controller;
         InteractablesList.single_IaList.interactables[index].Interact(controller);
     }
+    
+    public void SwitchWeaponBehaviour(int id, int behaviour) {
+        photonView.RPC("RPC_SwitchWeaponBehaviour", RpcTarget.All, id, behaviour);
+    }
+
+    [PunRPC]
+    void RPC_SwitchWeaponBehaviour(int id, int behaviourIndex) {
+        WeaponController weaponController = PhotonNetwork.GetPhotonView(id).GetComponent<WeaponController>();
+        StartCoroutine(weaponController.SwitchWeaponBehaviour(behaviourIndex));
+    }
+
 
     //public void DisableAllIaColliders(int index, RpcTarget selectedTarget) {
     //    photonView.RPC("RPC_DisableAllIaColliders", selectedTarget, index);

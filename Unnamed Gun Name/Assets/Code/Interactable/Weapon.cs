@@ -40,13 +40,19 @@ public class Weapon : Interactable {
 
 [System.Serializable]
 public class WeaponBehaviour {
-    public Transform[] attackOrigins;
+    public AttackOrigin[] attackOrigins;
     public AttackType attackType;
 
     public float damagePerAttack;
     public int attacksPerSecond;
 
     [HideInInspector] public int ao_Index;
+}
+
+[System.Serializable]
+public class AttackOrigin {
+    public Transform origin;
+    public Animator animator;
 }
 
 public enum AttackType {

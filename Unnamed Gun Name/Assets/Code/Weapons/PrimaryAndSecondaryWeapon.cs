@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PrimaryWeapon : Weapon {
+public class PrimaryAndSecondaryWeapon : Weapon {
     public int currentActiveWeapon;
+    public float timeToSwitch = 1f;
 }

@@ -2,11 +2,13 @@
 using UnityEngine;
 using Photon.Pun;
 
-[RequireComponent(typeof(PlayerView), (typeof(PhotonView)), (typeof(WeaponController)))]
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(PlayerView), (typeof(PhotonView)), (typeof(WeaponController)))] 
 public class Controller : MonoBehaviourPun {
 
     public PlayerView playerView;
     public Camera cam, localLayerCam;
+    public Transform verticalCamHolder;
     public Text text_Nickname;
     public float interactRange;
 
@@ -23,6 +25,7 @@ public class Controller : MonoBehaviourPun {
     
     [HideInInspector] public bool canMove;
     [HideInInspector] public Rigidbody rigid;
+    [HideInInspector] public Animator animator;
     [HideInInspector] public Collider[] colliders;
     [HideInInspector] public Vector3 startPosition;
     [HideInInspector] public Quaternion startRotation;
@@ -39,6 +42,7 @@ public class Controller : MonoBehaviourPun {
         cams = GetComponentsInChildren<Camera>();
         weaponsController = GetComponent<WeaponController>();
         weaponsController.controller = this;
+        animator = GetComponent<Animator>();
         for (int i = 0; i < cams.Length; i++) {
             cams[i].enabled = false;
         }
@@ -133,13 +137,16 @@ public class Controller : MonoBehaviourPun {
         if (xRotationAxisAngle > mouseSettings.maxVerticalTopViewAngle) {
             xRotationAxisAngle = mouseSettings.maxVerticalTopViewAngle;
             mouseY = 0f;
-            ClampXRotationAxisToValue(cam.transform, -mouseSettings.maxVerticalTopViewAngle);
+            //ClampXRotationAxisToValue(cam.transform, -mouseSettings.maxVerticalTopViewAngle);
+            ClampXRotationAxisToValue(verticalCamHolder.transform, -mouseSettings.maxVerticalTopViewAngle);
         } else if (xRotationAxisAngle < -mouseSettings.maxVerticalBottomViewAngle) {
             xRotationAxisAngle = -mouseSettings.maxVerticalBottomViewAngle;
             mouseY = 0f;
-            ClampXRotationAxisToValue(cam.transform, mouseSettings.maxVerticalBottomViewAngle);
+            //ClampXRotationAxisToValue(cam.transform, mouseSettings.maxVerticalBottomViewAngle);
+            ClampXRotationAxisToValue(verticalCamHolder.transform, mouseSettings.maxVerticalBottomViewAngle);
         }
-        cam.transform.Rotate(Vector3.left * mouseY);
+        //cam.transform.Rotate(Vector3.left * mouseY);
+        verticalCamHolder.transform.Rotate(Vector3.left * mouseY);
         transform.Rotate(Vector3.up * mouseX);
     }
 
@@ -186,6 +193,6 @@ public class SpeedSettings {
 public class MouseSettings {
 
     public float mouseSensitivity = 1f;
-    [Range(0, 90)]
+    [Range(-90, 180)]
     public float maxVerticalTopViewAngle = 90, maxVerticalBottomViewAngle = 90;
 }
