@@ -26,7 +26,7 @@ public class FireArms : Weapon {
         behaviour.canNotAttack = true;
         float attackSpeed = 1 / behaviour.attacksPerSecond;
 
-        AttackOrigin attackOrigin = behaviour.attackOrigins[behaviour.currentAo];
+        //AttackOrigin attackOrigin = behaviour.attackOrigins[behaviour.currentAo];
         if (behaviour.currentAo == behaviour.attackOrigins.Length - 1) {
             behaviour.currentAo = 0;
         } else {
