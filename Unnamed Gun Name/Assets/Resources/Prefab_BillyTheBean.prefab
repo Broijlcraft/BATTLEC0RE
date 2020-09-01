@@ -206,10 +206,10 @@ MonoBehaviour:
     timeToDetach: 2
     weaponAttached: {fileID: 0}
     animator: {fileID: 0}
+  controller: {fileID: 0}
   isAttaching: 0
   isDetaching: 0
   isChangingBehaviour: 0
-  controller: {fileID: 0}
 --- !u!114 &3897864014668945774
 MonoBehaviour:
   m_ObjectHideFlags: 0
