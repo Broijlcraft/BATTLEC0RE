@@ -6,12 +6,9 @@ public class WeaponController : MonoBehaviourPun {
 
     public WeaponsHolder primaryWeaponsHolder, powerWeaponsHolder;
 
-    [Header("HideInInspector")]
-    public bool isAttaching;
-    public bool isDetaching;
-    public bool isChangingBehaviour;
     float animationSpeed;
     [HideInInspector] public Controller controller;
+    [HideInInspector] public bool isAttaching, isDetaching, isChangingBehaviour;
 
     private void Awake() {
         primaryWeaponsHolder.Init();
@@ -19,9 +16,11 @@ public class WeaponController : MonoBehaviourPun {
     }
 
     private void Update() {
-        PrimaryAndPowerInputCheckAndUse(1, powerWeaponsHolder);
-        WeaponSwitchCheck();
-        PrimaryAndPowerInputCheckAndUse(0, primaryWeaponsHolder);
+        if (!controller.health.isDead) {
+            PrimaryAndPowerInputCheckAndUse(1, powerWeaponsHolder);
+            WeaponSwitchCheck();
+            PrimaryAndPowerInputCheckAndUse(0, primaryWeaponsHolder);
+        }
     }
 
     void WeaponSwitchCheck() {
@@ -36,17 +35,17 @@ public class WeaponController : MonoBehaviourPun {
 
     public IEnumerator SwitchWeaponBehaviour(int behaviourIndex) {
         isChangingBehaviour = true;
-        PrimaryAndSecondaryWeapon weapon = primaryWeaponsHolder.weaponAttached as PrimaryAndSecondaryWeapon;
+        FireArms weapon = primaryWeaponsHolder.weaponAttached as FireArms;
         if (behaviourIndex == 0) {
             SwitchBehaviour(weapon, "PrimToSec", ActiveWeapon.secondary);
         } else {
             SwitchBehaviour(weapon, "SecToPrim", ActiveWeapon.primary);
         }
-        yield return new WaitForSeconds(weapon.timeToSwitch);
+        yield return new WaitForSeconds(weapon.timeToSwitchBehaviour);
         isChangingBehaviour = false;
     }
 
-    void SwitchBehaviour(PrimaryAndSecondaryWeapon weapon, string triggerString, ActiveWeapon newActiveWeapon) {
+    void SwitchBehaviour(FireArms weapon, string triggerString, ActiveWeapon newActiveWeapon) {
         primaryWeaponsHolder.animator.SetTrigger(triggerString);
         weapon.currentActiveWeapon = newActiveWeapon;
     }
@@ -149,9 +148,8 @@ public class WeaponsHolder {
     public Transform weaponsHolder;
     public float timeToAttach = 2f, timeToDetach = 1f;
 
-    [Header("HideInInspector")]
-    public Weapon weaponAttached;
-    public Animator animator;
+    [HideInInspector] public Weapon weaponAttached;
+    [HideInInspector] public Animator animator;
 
     public void Init() {
         if (weaponsHolder) {

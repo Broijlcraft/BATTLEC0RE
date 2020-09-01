@@ -1,5 +1,4 @@
 ﻿using Photon.Pun;
-using System.Collections;
 
 public class InteractableActions : MonoBehaviourPun {
 
@@ -14,7 +13,7 @@ public class InteractableActions : MonoBehaviourPun {
     public int GetBehaviourIndex(Weapon weapon) {
         int index = 0;
         if (weapon.weaponType == WeaponType.Primary) {
-            PrimaryAndSecondaryWeapon prim = weapon as PrimaryAndSecondaryWeapon;
+            FireArms prim = weapon as FireArms;
             if (prim.currentActiveWeapon == ActiveWeapon.secondary) {
                 index = 1;
             }
@@ -49,8 +48,9 @@ public class InteractableActions : MonoBehaviourPun {
     [PunRPC]
     void RPC_SetInteracting(int index, int id) {
         Controller controller = PhotonNetwork.GetPhotonView(id).GetComponent<Controller>();
-        InteractablesList.single_IaList.interactables[index].interactingController = controller;
-        InteractablesList.single_IaList.interactables[index].Interact(controller);
+        Interactable ia = InteractablesList.single_IaList.interactables[index];
+        ia.interactingController = controller;
+        ia.Interact(controller);
     }
     
     public void SwitchWeaponBehaviour(int id, int behaviour) {
@@ -63,6 +63,18 @@ public class InteractableActions : MonoBehaviourPun {
         StartCoroutine(weaponController.SwitchWeaponBehaviour(behaviourIndex));
     }
 
+    public void PlayFireArmsEffect(int index, int behaviourIndex, int aoIndex, string triggerName) {
+        photonView.RPC("RPC_PlayFireArmEffects", RpcTarget.All, index, behaviourIndex, aoIndex, triggerName);
+    }
+
+    [PunRPC]
+    void RPC_PlayFireArmEffects(int index, int behaviourIndex, int aoIndex, string triggerName) {
+        FireArms ia = InteractablesList.single_IaList.interactables[index] as FireArms;
+        WeaponBehaviour behaviour = ia.weaponBehaviours[behaviourIndex];
+        AttackOrigin origin = behaviour.attackOrigins[aoIndex];
+        origin.animator.speed = behaviour.attacksPerSecond;
+        origin.animator.SetTrigger(triggerName);
+    }
 
     //public void DisableAllIaColliders(int index, RpcTarget selectedTarget) {
     //    photonView.RPC("RPC_DisableAllIaColliders", selectedTarget, index);

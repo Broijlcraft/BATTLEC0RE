@@ -2,14 +2,15 @@
 using UnityEngine;
 using Photon.Pun;
 
-[RequireComponent(typeof(Rigidbody))]
-[RequireComponent(typeof(PlayerView), (typeof(PhotonView)), (typeof(WeaponController)))] 
+[RequireComponent(typeof(Rigidbody), typeof(Health))]
+[RequireComponent(typeof(PlayerView), typeof(PhotonView), typeof(WeaponController))] 
 public class Controller : MonoBehaviourPun {
 
     public PlayerView playerView;
     public Camera cam, localLayerCam;
     public Transform verticalCamHolder;
-    public Text text_Nickname;
+    public Text nicknameText;
+    public Transform uiLookAtHolder;
     public float interactRange;
 
     [Space]
@@ -17,13 +18,14 @@ public class Controller : MonoBehaviourPun {
     public SpeedSettings sidewaysSpeedSettings;
 
     [Space]
-    public MouseSettings mouseSettings;
+    public CameraSettings cameraSettings;
     
     [Header("Local Settings")]
     public MeshRenderer[] meshRenderersToDisableLocally;
     public bool hideCursorOnStart, keepLocalMeshesEnabled;
     
     [HideInInspector] public bool canMove;
+    [HideInInspector] public Health health;
     [HideInInspector] public Rigidbody rigid;
     [HideInInspector] public Animator animator;
     [HideInInspector] public Collider[] colliders;
@@ -42,6 +44,7 @@ public class Controller : MonoBehaviourPun {
         cams = GetComponentsInChildren<Camera>();
         weaponsController = GetComponent<WeaponController>();
         weaponsController.controller = this;
+        health = GetComponent<Health>();
         animator = GetComponent<Animator>();
         for (int i = 0; i < cams.Length; i++) {
             cams[i].enabled = false;
@@ -49,7 +52,7 @@ public class Controller : MonoBehaviourPun {
         audioListeners = GetComponentInChildren<AudioListener>();
         audioListeners.enabled = false;
         if (photonView.IsMine || playerView.devView) {
-            text_Nickname.gameObject.SetActive(false);
+            uiLookAtHolder.gameObject.SetActive(false);
             if (meshRenderersToDisableLocally.Length > 0 && !keepLocalMeshesEnabled) {
                 for (int i = 0; i < meshRenderersToDisableLocally.Length; i++) {
                     meshRenderersToDisableLocally[i].enabled = false;
@@ -86,11 +89,11 @@ public class Controller : MonoBehaviourPun {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
-        Debug.LogWarning("(bool)canMove WAS ACCESSED BY A DEV FUNCTION, CHANGE TO ALTERNATIVE WHEN READY");
+        Debug.LogWarning("(bool)Can Move WAS ACCESSED BY A DEV FUNCTION, CHANGE TO ALTERNATIVE WHEN READY");
     }
 
     private void Update() {
-        if ((photonView.IsMine || playerView.devView) && Input.GetButtonDown("Interact")) {
+        if ((photonView.IsMine || playerView.devView) && Input.GetButtonDown("Interact") /*&& !health.isDead*/) {
             RaycastHit hit;
             if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, interactRange, ~TagsAndLayersManager.single_TLM.localPlayerLayerInfo.layerMask)) {
                 if (hit.transform.CompareTag(TagsAndLayersManager.single_TLM.interactableTag)) {
@@ -101,7 +104,7 @@ public class Controller : MonoBehaviourPun {
     }
 
     private void FixedUpdate() {
-        if ((canMove && photonView.IsMine) || playerView.devView) { 
+        if (((canMove && photonView.IsMine) || playerView.devView) && !health.isDead) { 
             Rotate();
 
             SprintCheck();
@@ -113,8 +116,7 @@ public class Controller : MonoBehaviourPun {
         }
 
         if (nicknameTarget) {
-            text_Nickname.transform.LookAt(nicknameTarget);
-            text_Nickname.transform.Rotate(0, 180, 0);
+            uiLookAtHolder.LookAt(nicknameTarget);
         }
     }
     
@@ -129,23 +131,20 @@ public class Controller : MonoBehaviourPun {
     }
 
     void Rotate() {
-        float mouseX = Input.GetAxis("Mouse X") * mouseSettings.mouseSensitivity;
-        float mouseY = Input.GetAxis("Mouse Y") * mouseSettings.mouseSensitivity;
+        float mouseX = Input.GetAxis("Mouse X") * cameraSettings.mouseSensitivity;
+        float mouseY = Input.GetAxis("Mouse Y") * cameraSettings.mouseSensitivity;
 
         xRotationAxisAngle += mouseY;
 
-        if (xRotationAxisAngle > mouseSettings.maxVerticalTopViewAngle) {
-            xRotationAxisAngle = mouseSettings.maxVerticalTopViewAngle;
+        if (xRotationAxisAngle > cameraSettings.maxVerticalTopViewAngle) {
+            xRotationAxisAngle = cameraSettings.maxVerticalTopViewAngle;
             mouseY = 0f;
-            //ClampXRotationAxisToValue(cam.transform, -mouseSettings.maxVerticalTopViewAngle);
-            ClampXRotationAxisToValue(verticalCamHolder.transform, -mouseSettings.maxVerticalTopViewAngle);
-        } else if (xRotationAxisAngle < -mouseSettings.maxVerticalBottomViewAngle) {
-            xRotationAxisAngle = -mouseSettings.maxVerticalBottomViewAngle;
+            ClampXRotationAxisToValue(verticalCamHolder.transform, -cameraSettings.maxVerticalTopViewAngle);
+        } else if (xRotationAxisAngle < -cameraSettings.maxVerticalBottomViewAngle) {
+            xRotationAxisAngle = -cameraSettings.maxVerticalBottomViewAngle;
             mouseY = 0f;
-            //ClampXRotationAxisToValue(cam.transform, mouseSettings.maxVerticalBottomViewAngle);
-            ClampXRotationAxisToValue(verticalCamHolder.transform, mouseSettings.maxVerticalBottomViewAngle);
+            ClampXRotationAxisToValue(verticalCamHolder.transform, cameraSettings.maxVerticalBottomViewAngle);
         }
-        //cam.transform.Rotate(Vector3.left * mouseY);
         verticalCamHolder.transform.Rotate(Vector3.left * mouseY);
         transform.Rotate(Vector3.up * mouseX);
     }
@@ -177,7 +176,7 @@ public class Controller : MonoBehaviourPun {
             Controller[] controllers = FindObjectsOfType<Controller>();
             for (int i = 0; i < controllers.Length; i++) {
                 controllers[i].nicknameTarget = cam.transform;
-                controllers[i].text_Nickname.text = PhotonRoomCustomMatchMaking.roomSingle.RemoveIdFromNickname(controllers[i].photonView.Owner.NickName);
+                controllers[i].nicknameText.text = PhotonRoomCustomMatchMaking.roomSingle.RemoveIdFromNickname(controllers[i].photonView.Owner.NickName);
             }
         }
     }
@@ -190,7 +189,7 @@ public class SpeedSettings {
 }
 
 [System.Serializable]
-public class MouseSettings {
+public class CameraSettings {
 
     public float mouseSensitivity = 1f;
     [Range(-90, 180)]

@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 114818513455386098}
   - component: {fileID: 9101540060939248263}
   - component: {fileID: 8020140086267906471}
+  - component: {fileID: 3897864014668945774}
   - component: {fileID: 54633012352548232}
   - component: {fileID: 2238505229718217315}
   m_Layer: 9
@@ -153,8 +154,9 @@ MonoBehaviour:
   playerView: {fileID: 1761153458948728927}
   cam: {fileID: 7595647503515677790}
   localLayerCam: {fileID: 690390762019578855}
-  verticalCamHolder: {fileID: 1707630909050774237}
-  text_Nickname: {fileID: 6703715164598437452}
+  verticalCamHolder: {fileID: 5200557320374257036}
+  nicknameText: {fileID: 6703715164598437452}
+  uiLookAtHolder: {fileID: 7728621727011601535}
   interactRange: 5
   forwardsSpeedSettings:
     defaultSpeed: 0.15
@@ -162,16 +164,17 @@ MonoBehaviour:
   sidewaysSpeedSettings:
     defaultSpeed: 0.1
     sprintMultiplier: 1.1
-  mouseSettings:
+  cameraSettings:
     mouseSensitivity: 1
-    maxVerticalTopViewAngle: 90
-    maxVerticalBottomViewAngle: 90
+    maxVerticalTopViewAngle: 50
+    maxVerticalBottomViewAngle: 57
   meshRenderersToDisableLocally:
   - {fileID: 766201534298816339}
   - {fileID: 6305473987242263609}
   hideCursorOnStart: 1
   keepLocalMeshesEnabled: 1
   canMove: 0
+  health: {fileID: 0}
   rigid: {fileID: 0}
   animator: {fileID: 0}
   colliders: []
@@ -207,6 +210,22 @@ MonoBehaviour:
   isDetaching: 0
   isChangingBehaviour: 0
   controller: {fileID: 0}
+--- !u!114 &3897864014668945774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 766201534296875411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f2524addf3981645bea6ff8539003a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 50
+  fillHealthBar: {fileID: 4950929905776705223}
+  isDead: 0
+  currentHealth: 0
 --- !u!54 &54633012352548232
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -262,14 +281,14 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1149552170104444077}
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 481053866589180726}
   m_Father: {fileID: 7728621727011601535}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: -0.375}
@@ -821,7 +840,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 6967
+    m_Bits: 4294967295
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0

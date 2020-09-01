@@ -4,6 +4,7 @@ public class Weapon : Interactable {
 
     public WeaponType weaponType;
     public WeaponBehaviour[] weaponBehaviours = new WeaponBehaviour[1];
+
     //Dev
     Vector3 startPos;
     Quaternion startRot;
@@ -46,18 +47,20 @@ public class Weapon : Interactable {
 
 [System.Serializable]
 public class WeaponBehaviour {
+    [Space]
     public AttackOrigin[] attackOrigins;
+    [Space]
     public AttackType attackType;
 
-    public float damagePerAttack;
-    public int attacksPerSecond;
+    public float damagePerAttack = 1f, range = 1f, attacksPerSecond = 1f;
 
-    [HideInInspector] public int ao_Index;
-    public bool canAttack;
+    [HideInInspector] public int currentAo;
+    [HideInInspector] public bool canNotAttack;
 }
 
 [System.Serializable]
 public class AttackOrigin {
+
     public Transform origin;
     public Animator animator;
 }

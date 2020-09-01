@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
 
-public class Interactable : MonoBehaviour{
+public class Interactable : MonoBehaviour {
+
+    public string interactableName;
 
     [HideInInspector] public int index;
     [HideInInspector] public Controller interactingController;
 
     public virtual void Interact(Controller controller) {
-        if (!interactingController) { 
+        if (!interactingController) {
             InteractableActions.ia_Single.CheckAndSetInteracting(index, controller.photonView.ViewID);
         }
     }

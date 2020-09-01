@@ -47,6 +47,8 @@ MonoBehaviour:
   - RPC_CheckAndSetInteracting
   - RPC_SetInteracting
   - RPC_SwitchWeaponBehaviour
+  - RPC_PlayFireArmEffects
+  - RPC_DoDamage
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0
