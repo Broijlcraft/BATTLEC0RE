@@ -26,7 +26,7 @@ public class WeaponController : MonoBehaviourPun {
 
     void WeaponSwitchCheck() {
         float scroll = Input.GetAxis("Mouse ScrollWheel");
-        if(scroll != 0 && primaryWeaponsHolder.weaponAttached) {
+        if(!isAttaching && !isDetaching && scroll != 0 && primaryWeaponsHolder.weaponAttached) {
             if (!changingBehaviour) {
                 int behaviourIndex = GetBehaviourIndex(primaryWeaponsHolder.weaponAttached);
                 InteractableActions.ia_Single.SwitchWeaponBehaviour(photonView.ViewID, behaviourIndex);
