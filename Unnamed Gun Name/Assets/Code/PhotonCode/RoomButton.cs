@@ -19,6 +19,10 @@ public class RoomButton : MonoBehaviour {
     }
 
     public void JoinRoomOnClick() {
-        PhotonNetwork.JoinRoom(roomName);
+        if (PhotonNetwork.IsConnected) {
+            PhotonNetwork.JoinRoom(roomName);
+        } else {
+            Debug.LogWarning("Please wait, you are still being connected to the PhotonNetwork");
+        }
     }
 }

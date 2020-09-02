@@ -112,8 +112,10 @@ public class PhotonLobbyCustomMatchMaking : MonoBehaviourPunCallbacks, ILobbyCal
     }
 
     public void CreateRoom() {
-        RoomOptions options = new RoomOptions() { IsVisible = true, IsOpen = true, MaxPlayers = (byte)maxPlayers };
-        PhotonNetwork.CreateRoom(roomName, options);
+        if (PhotonNetwork.IsConnected) {
+            RoomOptions options = new RoomOptions() { IsVisible = true, IsOpen = true, MaxPlayers = (byte)maxPlayers };
+            PhotonNetwork.CreateRoom(roomName, options);
+        }
     }
 
     public override void OnCreateRoomFailed(short returnCode, string message) {
