@@ -26,7 +26,6 @@ public class FireArms : Weapon {
         behaviour.canNotAttack = true;
         float attackSpeed = 1 / behaviour.attacksPerSecond;
 
-        //AttackOrigin attackOrigin = behaviour.attackOrigins[behaviour.currentAo];
         if (behaviour.currentAo == behaviour.attackOrigins.Length - 1) {
             behaviour.currentAo = 0;
         } else {
@@ -41,7 +40,7 @@ public class FireArms : Weapon {
                 health.DoDamage(behaviour.damagePerAttack);
             }
         }
-        //InteractableActions.ia_Single.PlayFireArmsEffect(index, behaviourIndex, behaviour.currentAo, "Shoot");
+
         AttackOrigin origin = behaviour.attackOrigins[behaviour.currentAo];
         origin.animator.speed = behaviour.attacksPerSecond;
         origin.animator.SetTrigger("Shoot");

@@ -337,8 +337,8 @@ MonoBehaviour:
     sprintMultiplier: 1.1
   cameraSettings:
     mouseSensitivity: 1
-    maxVerticalTopViewAngle: 90
-    maxVerticalBottomViewAngle: 90
+    maxVerticalTopViewAngle: 50
+    maxVerticalBottomViewAngle: 60
   meshRenderersToDisableLocally: []
   hideCursorOnStart: 1
   keepLocalMeshesEnabled: 1
