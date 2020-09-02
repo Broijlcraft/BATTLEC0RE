@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 8d758640328af0b40bb535b13107e3da
+guid: a2bc350d69452944aad047c1d6935935
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -116,13 +116,14 @@ ModelImporter:
     4300028: Lower arms.002
     7400000: Walk
     7400002: metarig|Falling down
-    7400004: metarig|Jump naar boven
-    7400006: metarig|primary  reload
-    7400008: metarig|primary Shoot
-    7400010: metarig|Secondary shoot
-    7400012: metarig|T-pose
-    7400014: metarig|Walk
-    7400016: metarig|Weapon switch
+    7400004: metarig|FeetAction
+    7400006: metarig|Jump naar boven
+    7400008: metarig|primary  reload
+    7400010: metarig|primary Shoot
+    7400012: metarig|Secondary shoot
+    7400014: metarig|T-pose
+    7400016: metarig|Walk
+    7400018: metarig|Weapon switch
     9500000: //RootNode
     13700000: Bottom chasse
     13700002: Chassis
@@ -200,6 +201,34 @@ ModelImporter:
       takeName: metarig|Falling down
       firstFrame: 0
       lastFrame: 25
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: metarig|FeetAction
+      takeName: metarig|FeetAction
+      firstFrame: 0
+      lastFrame: 1
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

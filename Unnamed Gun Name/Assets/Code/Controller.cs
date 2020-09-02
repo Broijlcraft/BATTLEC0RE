@@ -192,6 +192,6 @@ public class SpeedSettings {
 public class CameraSettings {
 
     public float mouseSensitivity = 1f;
-    [Range(-90, 180)]
+    //[Range(-90, 180)]
     public float maxVerticalTopViewAngle = 90, maxVerticalBottomViewAngle = 90;
 }
