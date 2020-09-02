@@ -966,12 +966,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01f6baa4ac26ff14890caf24b8acbe8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &1069175937 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1644766123493917623, guid: c661c813e14cf87478ba6f722487875d,
-    type: 3}
-  m_PrefabInstance: {fileID: 1291670356}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1154587629
 GameObject:
   m_ObjectHideFlags: 0
@@ -1111,21 +1105,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1644766123501382677, guid: c661c813e14cf87478ba6f722487875d,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: d47f2d3ed9c38e54c97e55989495fb43, type: 2}
     - target: {fileID: 2585566474367771789, guid: c661c813e14cf87478ba6f722487875d,
         type: 3}
       propertyPath: viewIdField
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 4074638269135760533, guid: c661c813e14cf87478ba6f722487875d,
-        type: 3}
-      propertyPath: m_Avatar
-      value: 
-      objectReference: {fileID: 9000000, guid: a2bc350d69452944aad047c1d6935935, type: 3}
     - target: {fileID: 4074638269145039665, guid: c661c813e14cf87478ba6f722487875d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1186,16 +1170,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prefab_RobotBase
       objectReference: {fileID: 0}
-    - target: {fileID: 5596278731523215244, guid: c661c813e14cf87478ba6f722487875d,
+    - target: {fileID: 4074638269145276177, guid: c661c813e14cf87478ba6f722487875d,
         type: 3}
-      propertyPath: devView
-      value: 1
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7871429636867858952, guid: c661c813e14cf87478ba6f722487875d,
-        type: 3}
-      propertyPath: verticalCamHolder
-      value: 
-      objectReference: {fileID: 1069175937}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c661c813e14cf87478ba6f722487875d, type: 3}
 --- !u!1 &1304855305
