@@ -15,6 +15,12 @@ public class WeaponController : MonoBehaviourPun {
         powerWeaponsHolder.Init();
     }
 
+    private void Start() {
+        if (primaryWeaponsHolder.weaponAttached) {
+            primaryWeaponsHolder.weaponAttached.interactingController = controller;
+        }
+    }
+
     private void Update() {
         if (!controller.health.isDead) {
             PrimaryAndPowerInputCheckAndUse(1, powerWeaponsHolder);
@@ -148,7 +154,7 @@ public class WeaponsHolder {
     public Transform weaponsHolder;
     public float timeToAttach = 2f, timeToDetach = 1f;
 
-    [HideInInspector] public Weapon weaponAttached;
+    public Weapon weaponAttached;
     [HideInInspector] public Animator animator;
 
     public void Init() {

@@ -14,7 +14,7 @@ public class InteractableActions : MonoBehaviourPun {
         int index = 0;
         if (weapon.weaponType == WeaponType.Primary) {
             FireArms prim = weapon as FireArms;
-            if (prim.currentActiveWeapon == ActiveWeapon.secondary) {
+            if (prim.weaponBehaviours.Length > 0 && prim.currentActiveWeapon == ActiveWeapon.secondary) {
                 index = 1;
             }
         }

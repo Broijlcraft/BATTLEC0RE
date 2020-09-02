@@ -41,7 +41,10 @@ public class FireArms : Weapon {
                 health.DoDamage(behaviour.damagePerAttack);
             }
         }
-        InteractableActions.ia_Single.PlayFireArmsEffect(index, behaviourIndex, behaviour.currentAo, "Shoot");
+        //InteractableActions.ia_Single.PlayFireArmsEffect(index, behaviourIndex, behaviour.currentAo, "Shoot");
+        AttackOrigin origin = behaviour.attackOrigins[behaviour.currentAo];
+        origin.animator.speed = behaviour.attacksPerSecond;
+        origin.animator.SetTrigger("Shoot");
         yield return new WaitForSeconds(attackSpeed);
         behaviour.canNotAttack = false;
     }
