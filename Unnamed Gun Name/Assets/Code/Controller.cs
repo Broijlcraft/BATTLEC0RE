@@ -18,6 +18,9 @@ public class Controller : MonoBehaviourPun {
     public SpeedSettings sidewaysSpeedSettings;
 
     [Space]
+    public float jumpVelocity;
+
+    [Space]
     public CameraSettings cameraSettings;
     
     [Header("Local Settings")]
@@ -93,15 +96,24 @@ public class Controller : MonoBehaviourPun {
     }
 
     private void Update() {
-        if ((photonView.IsMine || playerView.devView) && Input.GetButtonDown("Interact") /*&& !health.isDead*/) {
-            RaycastHit hit;
-            if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, interactRange, ~TagsAndLayersManager.single_TLM.localPlayerLayerInfo.layerMask)) {
-                if (hit.transform.CompareTag(TagsAndLayersManager.single_TLM.interactableTag)) {
-                    hit.transform.GetComponent<Interactable>().Interact(this);
+        if ((photonView.IsMine || playerView.devView)) {
+            if (Input.GetButtonDown("Interact")) {
+                RaycastHit hit;
+                if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, interactRange, ~TagsAndLayersManager.single_TLM.localPlayerLayerInfo.layerMask)) {
+                    if (hit.transform.CompareTag(TagsAndLayersManager.single_TLM.interactableTag)) {
+                        hit.transform.GetComponent<Interactable>().Interact(this);
+                    }
+                }
+            }
+            if (Input.GetButtonDown("Jump")) {
+                if (isGrounded) {
+                    GetComponent<Rigidbody>().velocity = Vector3.up * jumpVelocity;
                 }
             }
         }
     }
+
+    bool isGrounded;
 
     private void FixedUpdate() {
         if (((canMove && photonView.IsMine) || playerView.devView) && !health.isDead) { 
@@ -179,6 +191,10 @@ public class Controller : MonoBehaviourPun {
                 controllers[i].nicknameText.text = PhotonRoomCustomMatchMaking.roomSingle.RemoveIdFromNickname(controllers[i].photonView.Owner.NickName);
             }
         }
+    }
+
+    private void OnCollisionEnter(Collision collision) {
+        isGrounded = true;        
     }
 }
 
