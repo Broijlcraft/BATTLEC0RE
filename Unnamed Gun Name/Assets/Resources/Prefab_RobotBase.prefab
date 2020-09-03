@@ -335,7 +335,7 @@ MonoBehaviour:
   sidewaysSpeedSettings:
     defaultSpeed: 0.75
     sprintMultiplier: 5
-  jumpVelocity: 0
+  jumpVelocity: 5
   cameraSettings:
     mouseSensitivity: 1
     maxVerticalTopViewAngle: 50
