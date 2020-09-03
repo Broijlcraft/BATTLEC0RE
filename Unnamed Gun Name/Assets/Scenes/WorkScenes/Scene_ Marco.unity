@@ -1273,6 +1273,7 @@ MonoBehaviour:
   - {fileID: 48314915}
   - {fileID: 1602684746}
   - {fileID: 1025014823}
+  - {fileID: 1779343038}
 --- !u!1 &1246222884
 GameObject:
   m_ObjectHideFlags: 0
@@ -1680,6 +1681,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Prefab_RobotBase
+      objectReference: {fileID: 0}
+    - target: {fileID: 4074638269145276177, guid: c661c813e14cf87478ba6f722487875d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4542232726917847339, guid: c661c813e14cf87478ba6f722487875d,
         type: 3}
