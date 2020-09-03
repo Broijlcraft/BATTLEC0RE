@@ -757,7 +757,7 @@ MonoBehaviour:
       animator: {fileID: 7672532433961215267}
     attackType: 0
     damagePerAttack: 1
-    range: 1
+    range: 20
     attacksPerSecond: 10
     currentAo: 0
     canNotAttack: 0
@@ -766,7 +766,7 @@ MonoBehaviour:
       animator: {fileID: 7257749567461019003}
     attackType: 1
     damagePerAttack: 10
-    range: 1
+    range: 20
     attacksPerSecond: 10
     currentAo: 0
     canNotAttack: 0
