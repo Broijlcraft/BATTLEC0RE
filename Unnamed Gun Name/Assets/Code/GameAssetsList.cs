@@ -13,7 +13,7 @@ public class GameAssetsList : MonoBehaviour {
         }
     }
 
-    public GameObject player, devPrim, devPower;
+    //public GameObject player;
 }
 
 public class GameAsset {

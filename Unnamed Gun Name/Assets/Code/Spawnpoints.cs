@@ -13,8 +13,17 @@ public class Spawnpoints : MonoBehaviourPunCallbacks {
     }
 
     public void SetSpPositionAndRotation(Transform modelTransform, int index) {
-        modelTransform.position = spawnpoints[index].position;
-        modelTransform.rotation = spawnpoints[index].rotation;
+        Vector3 newPos = Vector3.zero;
+        Quaternion newRot = Quaternion.identity;
+        if(spawnpoints.Length > 0) {
+            if(index < spawnpoints.Length) {
+                newPos = spawnpoints[index].position;
+                newRot = spawnpoints[index].rotation;
+            }
+            Debug.LogWarning("No spawnpoints set!");
+        }
+        modelTransform.position = newPos;
+        modelTransform.rotation = newRot;
     }
 }
 

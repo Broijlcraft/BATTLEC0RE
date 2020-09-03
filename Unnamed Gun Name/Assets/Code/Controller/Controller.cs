@@ -24,7 +24,6 @@ public class Controller : MonoBehaviourPun {
     public CameraSettings cameraSettings;
     
     [Header("Local Settings")]
-    public MeshRenderer[] meshRenderersToDisableLocally;
     public bool hideCursorOnStart, keepLocalMeshesEnabled;
     
     [HideInInspector] public bool canMove;
@@ -54,16 +53,12 @@ public class Controller : MonoBehaviourPun {
         }
         audioListeners = GetComponentInChildren<AudioListener>();
         audioListeners.enabled = false;
-        if (photonView.IsMine || playerView.devView) {
-            uiLookAtHolder.gameObject.SetActive(false);
-            if (meshRenderersToDisableLocally.Length > 0 && !keepLocalMeshesEnabled) {
-                for (int i = 0; i < meshRenderersToDisableLocally.Length; i++) {
-                    meshRenderersToDisableLocally[i].enabled = false;
-                }
-            }
-        }
+
         if (PhotonNetwork.IsConnected) {
             photonView.RPC("RPC_SetNicknameTargets", RpcTarget.All);
+            if (PhotonNetwork.IsMasterClient) {
+                PhotonNetwork.Instantiate("MasterController", Vector3.zero, Quaternion.identity);
+            }
         }
     }
 

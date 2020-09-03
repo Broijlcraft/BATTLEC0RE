@@ -340,7 +340,6 @@ MonoBehaviour:
     mouseSensitivity: 1
     maxVerticalTopViewAngle: 50
     maxVerticalBottomViewAngle: 60
-  meshRenderersToDisableLocally: []
   hideCursorOnStart: 1
   keepLocalMeshesEnabled: 1
   canMove: 0
@@ -810,7 +809,7 @@ Transform:
   m_Children:
   - {fileID: 11231511}
   m_Father: {fileID: 1644766123493917623}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1944928875608583294
 PrefabInstance:
