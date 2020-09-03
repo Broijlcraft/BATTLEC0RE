@@ -8,8 +8,8 @@ public class SteamTest : MonoBehaviour {
 
     public static SteamTest single_SS;
 
-    [HideInInspector] public bool nameIsSet;
-    [HideInInspector] public string nickname;
+    /*[HideInInspector]*/ public bool nameIsSet;
+    /*[HideInInspector]*/ public string nickname;
 
     public void Awake() {
         single_SS = this;
