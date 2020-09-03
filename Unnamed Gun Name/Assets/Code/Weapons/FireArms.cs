@@ -34,7 +34,6 @@ public class FireArms : Weapon {
 
         RaycastHit hit;
         if (Physics.Raycast(interactingController.cam.transform.position, interactingController.cam.transform.forward, out hit, behaviour.range, ~TagsAndLayersManager.single_TLM.localPlayerLayerInfo.layerMask)) {
-            print(hit.transform.name);
             Health health = hit.transform.GetComponent<Health>();
             if (health) {
                 health.DoDamage(behaviour.damagePerAttack);
