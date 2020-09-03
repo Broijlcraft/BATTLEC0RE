@@ -330,10 +330,10 @@ MonoBehaviour:
   uiLookAtHolder: {fileID: 7600294177372294036}
   interactRange: 5
   forwardsSpeedSettings:
-    defaultSpeed: 0.04
+    defaultSpeed: 1.5
     sprintMultiplier: 5
   sidewaysSpeedSettings:
-    defaultSpeed: 0.02
+    defaultSpeed: 0.75
     sprintMultiplier: 5
   cameraSettings:
     mouseSensitivity: 1
@@ -881,11 +881,6 @@ PrefabInstance:
     - target: {fileID: 877819927736561615, guid: 1be73a1c38e453d49883b0f1c24493bc,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 877819927736561615, guid: 1be73a1c38e453d49883b0f1c24493bc,
-        type: 3}
-      propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 877819927736561615, guid: 1be73a1c38e453d49883b0f1c24493bc,

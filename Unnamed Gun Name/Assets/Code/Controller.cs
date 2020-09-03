@@ -111,7 +111,7 @@ public class Controller : MonoBehaviourPun {
             float vertical = Input.GetAxis("Vertical") * currentForwardSprintValue * forwardsSpeedSettings.defaultSpeed;
             float horizontal = Input.GetAxis("Horizontal") * currentSidewaysSprintValue * sidewaysSpeedSettings.defaultSpeed;            
 
-            Vector3 newPos = new Vector3(horizontal, 0, vertical);
+            Vector3 newPos = new Vector3(horizontal, 0, vertical) * Time.deltaTime;
             transform.Translate(newPos);
         }
 
