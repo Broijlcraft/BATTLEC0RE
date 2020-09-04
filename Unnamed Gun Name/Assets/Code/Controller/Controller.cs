@@ -34,6 +34,7 @@ public class Controller : MonoBehaviourPun {
     [HideInInspector] public Vector3 startPosition;
     [HideInInspector] public Quaternion startRotation;
     [HideInInspector] public Transform nicknameTarget;
+    [HideInInspector] public BodyPartsList robotParts;
     [HideInInspector] public WeaponController weaponsController;
 
     Camera[] cams;
@@ -45,7 +46,7 @@ public class Controller : MonoBehaviourPun {
         rigid = GetComponent<Rigidbody>();
         cams = GetComponentsInChildren<Camera>();
         weaponsController = GetComponent<WeaponController>();
-        weaponsController.controller = this;
+        weaponsController.Init(this);
         health = GetComponent<Health>();
         animator = GetComponent<Animator>();
         for (int i = 0; i < cams.Length; i++) {

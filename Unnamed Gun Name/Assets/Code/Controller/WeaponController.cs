@@ -6,13 +6,16 @@ public class WeaponController : MonoBehaviourPun {
 
     public WeaponsHolder primaryWeaponsHolder, powerWeaponsHolder;
 
+    public WeaponsHolder[] weaponsHolders;
+
     float animationSpeed;
     [HideInInspector] public Controller controller;
     [HideInInspector] public bool isAttaching, isDetaching, isChangingBehaviour;
 
-    private void Awake() {
-        primaryWeaponsHolder.Init();
-        powerWeaponsHolder.Init();
+    public void Init(Controller control) {
+        controller = control;
+        primaryWeaponsHolder.Init(controller);
+        powerWeaponsHolder.Init(controller);
     }
 
     private void Start() {
@@ -23,8 +26,8 @@ public class WeaponController : MonoBehaviourPun {
 
     private void Update() {
         if (!controller.health.isDead) {
-            PrimaryAndPowerInputCheckAndUse(1, powerWeaponsHolder);
             WeaponSwitchCheck();
+            PrimaryAndPowerInputCheckAndUse(1, powerWeaponsHolder);
             PrimaryAndPowerInputCheckAndUse(0, primaryWeaponsHolder);
         }
     }
@@ -151,15 +154,34 @@ public class WeaponController : MonoBehaviourPun {
 [System.Serializable]
 public class WeaponsHolder {
 
-    public Transform weaponsHolder;
+    public WeaponType weaponType;
     public float timeToAttach = 2f, timeToDetach = 1f;
 
+    [Header("HideInInspector")]
     public Weapon weaponAttached;
+    public Transform weaponsHolder;
     [HideInInspector] public Animator animator;
 
-    public void Init() {
+    public void Init(Controller controller) {
+        BodypartType partType = GetHolderBodypart();
+
+        if (controller.robotParts) {
+            int partIndex = controller.robotParts.GetPartIndex(partType);
+            if(partIndex >= 0) {
+                weaponsHolder = controller.robotParts.parts[partIndex].transform;
+            }
+        }
+
         if (weaponsHolder) {
             animator = weaponsHolder.GetComponent<Animator>();
         }
+    }
+
+    BodypartType GetHolderBodypart() {
+        BodypartType partType = BodypartType.PrimaryWeaponHolder;
+        if(weaponType == WeaponType.Power) {
+            partType = BodypartType.PowerWeaponHolder;
+        }
+        return partType;
     }
 }
