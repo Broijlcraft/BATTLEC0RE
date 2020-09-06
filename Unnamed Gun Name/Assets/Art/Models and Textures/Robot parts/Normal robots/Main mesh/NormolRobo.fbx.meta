@@ -1,0 +1,229 @@
+fileFormatVersion: 2
+guid: 0837de2126cabe546a0dc786b22ff7e5
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Bottom chasse.
+    100002: Chassis.
+    100004: Feet.L.
+    100006: Feet.R.
+    100008: Gun flaps.R.
+    100010: Gun vents.
+    100012: Gunflaps.L.
+    100014: Head.
+    100016: Hips.L.
+    100018: Hips.R.
+    100020: Left barrel.
+    100022: Lower arms.
+    100024: Lower arms..
+    100026: Lowerleg.L.
+    100028: Lowerlegs.R.
+    100030: Normal robot Primary.
+    100032: //RootNode
+    100034: Pincer.
+    100036: Right barrel.
+    100038: Secondary barrel\.
+    100040: Shoulder.R.
+    100042: Shoulders.L.
+    100044: Upper arm..L.
+    100046: Upper arm..R.
+    100048: Upper chacce.ROT.
+    100050: UpperLeg.L.
+    100052: Upperleg.R.
+    400000: Bottom chasse.
+    400002: Chassis.
+    400004: Feet.L.
+    400006: Feet.R.
+    400008: Gun flaps.R.
+    400010: Gun vents.
+    400012: Gunflaps.L.
+    400014: Head.
+    400016: Hips.L.
+    400018: Hips.R.
+    400020: Left barrel.
+    400022: Lower arms.
+    400024: Lower arms..
+    400026: Lowerleg.L.
+    400028: Lowerlegs.R.
+    400030: Normal robot Primary.
+    400032: //RootNode
+    400034: Pincer.
+    400036: Right barrel.
+    400038: Secondary barrel\.
+    400040: Shoulder.R.
+    400042: Shoulders.L.
+    400044: Upper arm..L.
+    400046: Upper arm..R.
+    400048: Upper chacce.ROT.
+    400050: UpperLeg.L.
+    400052: Upperleg.R.
+    2100000: Robot_body.002
+    2100002: em.002
+    2100004: Display.002
+    2300000: Bottom chasse.
+    2300002: Chassis.
+    2300004: Feet.L.
+    2300006: Feet.R.
+    2300008: Gun flaps.R.
+    2300010: Gun vents.
+    2300012: Gunflaps.L.
+    2300014: Head.
+    2300016: Hips.L.
+    2300018: Hips.R.
+    2300020: Left barrel.
+    2300022: Lower arms.
+    2300024: Lower arms..
+    2300026: Lowerleg.L.
+    2300028: Lowerlegs.R.
+    2300030: Normal robot Primary.
+    2300032: Pincer.
+    2300034: Right barrel.
+    2300036: Secondary barrel\.
+    2300038: Shoulder.R.
+    2300040: Shoulders.L.
+    2300042: Upper arm..L.
+    2300044: Upper arm..R.
+    2300046: Upper chacce.ROT.
+    2300048: UpperLeg.L.
+    2300050: Upperleg.R.
+    3300000: Bottom chasse.
+    3300002: Chassis.
+    3300004: Feet.L.
+    3300006: Feet.R.
+    3300008: Gun flaps.R.
+    3300010: Gun vents.
+    3300012: Gunflaps.L.
+    3300014: Head.
+    3300016: Hips.L.
+    3300018: Hips.R.
+    3300020: Left barrel.
+    3300022: Lower arms.
+    3300024: Lower arms..
+    3300026: Lowerleg.L.
+    3300028: Lowerlegs.R.
+    3300030: Normal robot Primary.
+    3300032: Pincer.
+    3300034: Right barrel.
+    3300036: Secondary barrel\.
+    3300038: Shoulder.R.
+    3300040: Shoulders.L.
+    3300042: Upper arm..L.
+    3300044: Upper arm..R.
+    3300046: Upper chacce.ROT.
+    3300048: UpperLeg.L.
+    3300050: Upperleg.R.
+    4300000: Bottom chasse.
+    4300002: Chassis.
+    4300004: Feet.L.
+    4300006: Feet.R.
+    4300008: Gun flaps.R.
+    4300010: Gun vents.
+    4300012: Gunflaps.L.
+    4300014: Head.
+    4300016: Hips.L.
+    4300018: Hips.R.
+    4300020: Left barrel.
+    4300022: Lower arms.
+    4300024: Lower arms..
+    4300026: Lowerleg.L.
+    4300028: Lowerlegs.R.
+    4300030: Normal robot Primary.
+    4300032: Pincer.
+    4300034: Right barrel.
+    4300036: Secondary barrel\.
+    4300038: Shoulder.R.
+    4300040: Shoulders.L.
+    4300042: Upper arm..L.
+    4300044: Upper arm..R.
+    4300046: Upper chacce.ROT.
+    4300048: UpperLeg.L.
+    4300050: Upperleg.R.
+    7400000: Normal robot Primary.|Walk
+    9500000: //RootNode
+    2186277476908879412: ImportLogs
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
