@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5382608114341406618}
   - component: {fileID: 9131558230398859261}
   m_Layer: 0
-  m_Name: Upper arm..L.
+  m_Name: Model_LeftUpperArmNormalRobot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40,7 +40,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5382608114339477980}
-  m_Mesh: {fileID: 4300042, guid: 0837de2126cabe546a0dc786b22ff7e5, type: 3}
+  m_Mesh: {fileID: 4300042, guid: 8c82575b9b9e89843b04bac83338a444, type: 3}
 --- !u!23 &5382608114341406618
 MeshRenderer:
   m_ObjectHideFlags: 0

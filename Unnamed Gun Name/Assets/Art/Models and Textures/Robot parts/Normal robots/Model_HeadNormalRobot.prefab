@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8092267900914018177}
   - component: {fileID: 1986254490509390036}
   m_Layer: 0
-  m_Name: Head.
+  m_Name: Model_HeadNormalRobot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40,7 +40,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8092267900915956033}
-  m_Mesh: {fileID: 4300014, guid: 0837de2126cabe546a0dc786b22ff7e5, type: 3}
+  m_Mesh: {fileID: 4300014, guid: 8c82575b9b9e89843b04bac83338a444, type: 3}
 --- !u!23 &8092267900914018177
 MeshRenderer:
   m_ObjectHideFlags: 0

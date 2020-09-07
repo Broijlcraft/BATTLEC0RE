@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0837de2126cabe546a0dc786b22ff7e5
+guid: 8c82575b9b9e89843b04bac83338a444
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -57,9 +57,8 @@ ModelImporter:
     400048: Upper chacce.ROT.
     400050: UpperLeg.L.
     400052: Upperleg.R.
-    2100000: Robot_body.002
-    2100002: em.002
-    2100004: Display.002
+    2100000: Mat_NormalRobotBody
+    2100002: Mat_NormalRobotEM
     2300000: Bottom chasse.
     2300002: Chassis.
     2300004: Feet.L.
@@ -138,7 +137,7 @@ ModelImporter:
     4300046: Upper chacce.ROT.
     4300048: UpperLeg.L.
     4300050: Upperleg.R.
-    7400000: Normal robot Primary.|Walk
+    7400000: Normal robot Primary.|robtrecoil_light
     9500000: //RootNode
     2186277476908879412: ImportLogs
   externalObjects: {}
