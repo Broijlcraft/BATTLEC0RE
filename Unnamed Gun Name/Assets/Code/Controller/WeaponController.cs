@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using Photon.Pun;
 
@@ -126,6 +127,9 @@ public class WeaponController : MonoBehaviourPun {
             weapon.transform.SetParent(holder.weaponsHolder);
             weapon.transform.localPosition = Vector3.zero;
             weapon.transform.localRotation = Quaternion.identity;
+            if (photonView.IsMine) {
+                Tools.SetLocalOrGlobalLayers(weapon.meshObjects.ToArray(), false);
+            }
             if (useAnim) {
                 holder.animator.speed = animationSpeed;
                 holder.animator.SetTrigger("ScrewOn");
@@ -142,6 +146,9 @@ public class WeaponController : MonoBehaviourPun {
             holder.animator.speed = animationSpeed;
             holder.animator.SetTrigger("ScrewOff");
             yield return new WaitForSeconds(holder.timeToDetach);
+        }
+        if (photonView.IsMine) {
+            Tools.SetLocalOrGlobalLayers(holder.weaponAttached.meshObjects.ToArray(), true);
         }
         holder.weaponAttached.transform.SetParent(null);
         holder.weaponAttached.ResetPosAndRot();

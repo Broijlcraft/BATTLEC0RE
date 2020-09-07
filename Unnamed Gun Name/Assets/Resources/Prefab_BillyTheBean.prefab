@@ -113,7 +113,7 @@ MonoBehaviour:
   sidewaysSpeedSettings:
     defaultSpeed: 5
     sprintMultiplier: 1.1
-  jumpVelocity: 0
+  jumpVelocity: 5
   cameraSettings:
     mouseSensitivity: 1
     maxVerticalTopViewAngle: 50
@@ -130,6 +130,8 @@ MonoBehaviour:
   nicknameTarget: {fileID: 0}
   robotParts: {fileID: 0}
   weaponsController: {fileID: 0}
+  gos: []
+  rangeTest: 2
 --- !u!114 &8020140086267906471
 MonoBehaviour:
   m_ObjectHideFlags: 0

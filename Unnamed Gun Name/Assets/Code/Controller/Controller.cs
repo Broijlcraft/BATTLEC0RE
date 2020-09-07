@@ -1,4 +1,5 @@
-﻿using UnityEngine.UI;
+﻿using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 using Photon.Pun;
 
@@ -37,6 +38,9 @@ public class Controller : MonoBehaviourPun {
     [HideInInspector] public BodyPartsList robotParts;
     [HideInInspector] public WeaponController weaponsController;
 
+
+    //replace with bodyparts when ready
+    [HideInInspector] public MeshRenderer[] gos;
     Camera[] cams;
     AudioListener audioListeners;
     float currentForwardSprintValue, currentSidewaysSprintValue, xRotationAxisAngle;
@@ -69,8 +73,8 @@ public class Controller : MonoBehaviourPun {
                 Spawnpoints.sp_Single.SetSpPositionAndRotation(transform, PhotonRoomCustomMatchMaking.roomSingle.myNumberInRoom - 1);
             }
         }
-        TurnCollidersOnOff(true);
         Init();
+        TurnCollidersOnOff(true);
     }
 
     void Init() {
@@ -81,7 +85,11 @@ public class Controller : MonoBehaviourPun {
                 cams[i].enabled = true;
             }
             audioListeners.enabled = true;
-            gameObject.layer = TagsAndLayersManager.single_TLM.localPlayerLayerInfo.index;
+            List<GameObject> meshObjects = new List<GameObject>();
+            for (int i = 0; i < gos.Length; i++) {
+                meshObjects.Add(gos[i].gameObject);
+            }
+            Tools.SetLocalOrGlobalLayers(meshObjects.ToArray(), false);
         }
         canMove = true;
         if (hideCursorOnStart) {
@@ -190,7 +198,15 @@ public class Controller : MonoBehaviourPun {
     }
 
     private void OnCollisionEnter(Collision collision) {
-        isGrounded = true;        
+        if(collision.gameObject.layer != TagsAndLayersManager.single_TLM.localPlayerLayerInfo.layerMask) {
+            isGrounded = true;        
+        }
+    }
+
+    public float rangeTest;
+    private void OnDrawGizmosSelected() {
+        Vector3 test = cam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, rangeTest));
+        Gizmos.DrawLine(cam.transform.position, test);
     }
 }
 

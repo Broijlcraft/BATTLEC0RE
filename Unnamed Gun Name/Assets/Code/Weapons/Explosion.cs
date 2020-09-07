@@ -2,17 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Explosion : MonoBehaviour {
-    public float damage = 5f, range = 2f, force = 10f;
-
-    private void Update() {
-        if (Input.GetButtonDown("Jump")) {
-            Explode();
-        }
+[System.Serializable]
+public class Explosion {
+    [HideInInspector] public Transform origin;
+    [HideInInspector] public float damage, explosionRange, explosionForce;
+    
+    public void Init(Transform _origin, float _damage, float _explosionRange, float _explosionForce) {
+        origin = _origin;
+        damage = _damage;
+        explosionRange = _explosionRange;
+        explosionForce = _explosionForce;
     }
 
     public void Explode() {
-        Collider[] colls = Physics.OverlapSphere(transform.position, range);
+        Debug.Log("Boom");
+        Collider[] colls = Physics.OverlapSphere(origin.position, explosionRange);
         for (int i = 0; i < colls.Length; i++) {
             Controller controller;
             if (colls[i].transform.parent) {
@@ -21,14 +25,9 @@ public class Explosion : MonoBehaviour {
                 controller = colls[i].gameObject.GetComponent<Controller>();
             }
             if (controller) {
-                print("Boom");
                 controller.health.DoDamage(damage);
-                controller.rigid.AddExplosionForce(force, transform.position, range);
+                controller.rigid.AddExplosionForce(explosionForce, origin.position, explosionRange);
             }
         }
-    }
-
-    private void OnDrawGizmosSelected() {
-        Gizmos.DrawWireSphere(transform.position, range);
     }
 }

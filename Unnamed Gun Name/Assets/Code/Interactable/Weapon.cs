@@ -1,14 +1,26 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 public class Weapon : Interactable {
 
     public WeaponType weaponType;
     public WeaponBehaviour[] weaponBehaviours = new WeaponBehaviour[1];
 
+    [HideInInspector] public Collider[] colliders;
+    [HideInInspector] public List<GameObject> meshObjects = new List<GameObject>();
+
     //Dev
     Vector3 startPos;
     Quaternion startRot;
     Transform startParent;
+
+    private void Awake() {
+        colliders = GetComponentsInChildren<Collider>();
+        MeshRenderer[] renderers = GetComponentsInChildren<MeshRenderer>();
+        for (int i = 0; i < renderers.Length; i++) {
+            meshObjects.Add(renderers[i].gameObject);
+        }
+    }
 
     private void Start() {
         startPos = transform.position;

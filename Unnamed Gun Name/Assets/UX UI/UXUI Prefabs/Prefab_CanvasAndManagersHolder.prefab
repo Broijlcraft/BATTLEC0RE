@@ -471,7 +471,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 10, y: 10}
+  m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8723545850926005172
 CanvasRenderer:
@@ -584,6 +584,11 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 2048
     index: 11
+  noPlayerCollision:
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 4096
+    index: 12
 --- !u!114 &1646130675721572480
 MonoBehaviour:
   m_ObjectHideFlags: 0

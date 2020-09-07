@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6841045706504560762}
   - component: {fileID: 6841045706503757914}
   - component: {fileID: 6841045706502791834}
-  - component: {fileID: 2942248647791734624}
+  - component: {fileID: 3861809963196928417}
   - component: {fileID: 8051300718018528033}
   m_Layer: 0
   m_Name: Prefab_DevWeaponPower
@@ -80,7 +80,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &2942248647791734624
+--- !u!114 &3861809963196928417
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -89,7 +89,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6841045706504797274}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01f6baa4ac26ff14890caf24b8acbe8b, type: 3}
+  m_Script: {fileID: 11500000, guid: 60400151e93f49d4788311618032e743, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   interactableName: RPG
@@ -99,16 +99,20 @@ MonoBehaviour:
   weaponBehaviours:
   - attackOrigins:
     - origin: {fileID: 3337787395151661838}
-      animator: {fileID: 3011817543241783032}
+      animator: {fileID: 5152927724662719558}
     attackType: 1
     damagePerAttack: 40
-    range: 1
+    range: 50
     attacksPerSecond: 1
     currentAo: 0
     canNotAttack: 0
+  colliders: []
+  meshObjects: []
   timeToSwitchBehaviour: 1
-  projectile: {fileID: 0}
   currentActiveWeapon: 0
+  projectile: {fileID: 2251921230218651953, guid: 8150f42dcd7282648b07acaa76e1879e,
+    type: 3}
+  projectileSpeed: 1000
 --- !u!64 &8051300718018528033
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -130,10 +134,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6841045706504560762}
     m_Modifications:
+    - target: {fileID: 620675341957523636, guid: fb18a8c299927744d939514833d2e791,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3830514352320227223, guid: fb18a8c299927744d939514833d2e791,
         type: 3}
       propertyPath: m_Name
       value: PowerBarrelHolder
+      objectReference: {fileID: 0}
+    - target: {fileID: 4972214810983073866, guid: fb18a8c299927744d939514833d2e791,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7135138720827895667, guid: fb18a8c299927744d939514833d2e791,
         type: 3}
@@ -198,9 +212,9 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2796496898221040570}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &3011817543241783032 stripped
+--- !u!95 &5152927724662719558 stripped
 Animator:
-  m_CorrespondingSourceObject: {fileID: 1081716057326302530, guid: fb18a8c299927744d939514833d2e791,
+  m_CorrespondingSourceObject: {fileID: 7011479453439813628, guid: fb18a8c299927744d939514833d2e791,
     type: 3}
   m_PrefabInstance: {fileID: 2796496898221040570}
   m_PrefabAsset: {fileID: 0}

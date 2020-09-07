@@ -101,7 +101,7 @@ MonoBehaviour:
   weaponBehaviours:
   - attackOrigins:
     - origin: {fileID: 2180160484014790018}
-      animator: {fileID: 1864331377004398708}
+      animator: {fileID: 8615860996743469770}
     attackType: 1
     damagePerAttack: 10
     range: 20
@@ -110,9 +110,9 @@ MonoBehaviour:
     canNotAttack: 0
   - attackOrigins:
     - origin: {fileID: 9090530222212551384}
-      animator: {fileID: 8770231376798764846}
+      animator: {fileID: 1727375199515221392}
     - origin: {fileID: 2259664962849667191}
-      animator: {fileID: 1785082025635554689}
+      animator: {fileID: 8541959373445855039}
     attackType: 0
     damagePerAttack: 2
     range: 10
@@ -216,9 +216,9 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1647306495378029878}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &1864331377004398708 stripped
+--- !u!95 &8615860996743469770 stripped
 Animator:
-  m_CorrespondingSourceObject: {fileID: 1081716057326302530, guid: fb18a8c299927744d939514833d2e791,
+  m_CorrespondingSourceObject: {fileID: 7011479453439813628, guid: fb18a8c299927744d939514833d2e791,
     type: 3}
   m_PrefabInstance: {fileID: 1647306495378029878}
   m_PrefabAsset: {fileID: 0}
@@ -308,9 +308,9 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1713309187380089027}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &1785082025635554689 stripped
+--- !u!95 &8541959373445855039 stripped
 Animator:
-  m_CorrespondingSourceObject: {fileID: 1081716057326302530, guid: fb18a8c299927744d939514833d2e791,
+  m_CorrespondingSourceObject: {fileID: 7011479453439813628, guid: fb18a8c299927744d939514833d2e791,
     type: 3}
   m_PrefabInstance: {fileID: 1713309187380089027}
   m_PrefabAsset: {fileID: 0}
@@ -400,9 +400,9 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 8553771644174629484}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &8770231376798764846 stripped
+--- !u!95 &1727375199515221392 stripped
 Animator:
-  m_CorrespondingSourceObject: {fileID: 1081716057326302530, guid: fb18a8c299927744d939514833d2e791,
+  m_CorrespondingSourceObject: {fileID: 7011479453439813628, guid: fb18a8c299927744d939514833d2e791,
     type: 3}
   m_PrefabInstance: {fileID: 8553771644174629484}
   m_PrefabAsset: {fileID: 0}
