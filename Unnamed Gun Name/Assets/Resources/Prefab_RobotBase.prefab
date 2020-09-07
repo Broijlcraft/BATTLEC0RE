@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 11231511}
   - component: {fileID: 11231513}
   - component: {fileID: 11231512}
+  - component: {fileID: 5399269100627011768}
   m_Layer: 9
   m_Name: Camera
   m_TagString: Untagged
@@ -83,6 +84,19 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 11231510}
   m_Enabled: 1
+--- !u!114 &5399269100627011768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 11231510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  profile: {fileID: 11400000, guid: ee1f5596e9f26494fb53ded82a0fae25, type: 2}
 --- !u!1 &717306818411255653
 GameObject:
   m_ObjectHideFlags: 0
@@ -350,6 +364,7 @@ MonoBehaviour:
   startPosition: {x: 0, y: 0, z: 0}
   startRotation: {x: 0, y: 0, z: 0, w: 0}
   nicknameTarget: {fileID: 0}
+  robotParts: {fileID: 0}
   weaponsController: {fileID: 0}
 --- !u!114 &7956288965637296573
 MonoBehaviour:
@@ -380,17 +395,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   primaryWeaponsHolder:
-    weaponsHolder: {fileID: 1644766123493917653}
+    weaponType: 0
     timeToAttach: 2
     timeToDetach: 1
     weaponAttached: {fileID: 838934160291277940}
+    weaponsHolder: {fileID: 1644766123493917653}
     animator: {fileID: 0}
   powerWeaponsHolder:
-    weaponsHolder: {fileID: 0}
+    weaponType: 0
     timeToAttach: 2
     timeToDetach: 1
     weaponAttached: {fileID: 0}
+    weaponsHolder: {fileID: 0}
     animator: {fileID: 0}
+  weaponsHolders: []
   controller: {fileID: 0}
   isAttaching: 0
   isDetaching: 0
@@ -407,7 +425,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73e5df2ade1ff8e40b490768ae1cf62b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  devView: 0
+  devView: 1
   ready: 0
   myView: {fileID: 0}
 --- !u!114 &2585566474367771789
@@ -929,6 +947,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 9100000, guid: 24b0e29b1898699488ff7eb26a82b702, type: 2}
     - target: {fileID: 2734958313893213525, guid: 1be73a1c38e453d49883b0f1c24493bc,
+        type: 3}
+      propertyPath: viewIdField
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3116710305100001075, guid: 1be73a1c38e453d49883b0f1c24493bc,
         type: 3}
       propertyPath: viewIdField
       value: 0

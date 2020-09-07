@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5388359330323061178}
   - component: {fileID: 1839739900105303616}
   m_Layer: 0
-  m_Name: Pelvis
+  m_Name: Model_PelvisNormalRobot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
