@@ -78,6 +78,7 @@ public class Controller : MonoBehaviourPun {
     }
 
     void Init() {
+        gos = GetComponentsInChildren<MeshRenderer>();
         startPosition = transform.position;
         startRotation = transform.rotation;
         if (photonView.IsMine || playerView.devView) {
