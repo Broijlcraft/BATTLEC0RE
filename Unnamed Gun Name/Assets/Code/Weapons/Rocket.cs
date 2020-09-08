@@ -6,7 +6,7 @@ public class Rocket : Projectile {
 
     public float explosionForce, explosionRange;
 
-    [HideInInspector] public Explosion explosionInfo;
+    public Explosion explosionInfo;
 
     public override void Launch(Vector3 targetPos, WeaponBehaviour behaviour, float projectileSpeed) {
         explosionInfo.Init(transform, behaviour.damagePerAttack, explosionRange, explosionForce);
@@ -16,6 +16,7 @@ public class Rocket : Projectile {
     public override void OutOfRange() {
         base.OutOfRange();
         explosionInfo.Explode();
+        Destroy(gameObject);
     }
 
     private void OnDrawGizmosSelected() {

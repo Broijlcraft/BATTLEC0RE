@@ -14,4 +14,8 @@ public class MasterController : MonoBehaviour {
             }           
         }
     }
+
+    public Dictionary<int, GameObject> itemLists = new Dictionary<int, GameObject>();
+
+
 }
