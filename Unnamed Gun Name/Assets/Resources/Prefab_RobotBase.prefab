@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 11231511}
   - component: {fileID: 11231513}
   - component: {fileID: 11231512}
-  - component: {fileID: 5399269100627011768}
   m_Layer: 9
   m_Name: Camera
   m_TagString: Untagged
@@ -84,19 +83,6 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 11231510}
   m_Enabled: 1
---- !u!114 &5399269100627011768
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 11231510}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  profile: {fileID: 11400000, guid: ee1f5596e9f26494fb53ded82a0fae25, type: 2}
 --- !u!1 &717306818411255653
 GameObject:
   m_ObjectHideFlags: 0
@@ -366,6 +352,8 @@ MonoBehaviour:
   nicknameTarget: {fileID: 0}
   robotParts: {fileID: 0}
   weaponsController: {fileID: 0}
+  gos: []
+  rangeTest: 0
 --- !u!114 &7956288965637296573
 MonoBehaviour:
   m_ObjectHideFlags: 0
