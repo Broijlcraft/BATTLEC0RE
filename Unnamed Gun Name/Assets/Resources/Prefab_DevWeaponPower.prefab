@@ -110,8 +110,7 @@ MonoBehaviour:
   meshObjects: []
   timeToSwitchBehaviour: 1
   currentActiveWeapon: 0
-  projectile: {fileID: 2251921230218651953, guid: 8150f42dcd7282648b07acaa76e1879e,
-    type: 3}
+  projectileName: Rocket
   projectileSpeed: 1300
 --- !u!64 &8051300718018528033
 MeshCollider:
