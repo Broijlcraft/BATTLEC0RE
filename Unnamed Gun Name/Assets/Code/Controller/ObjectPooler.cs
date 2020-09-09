@@ -11,11 +11,10 @@ public class ObjectPooler : MonoBehaviour {
 
     private void Awake() {
         single_OP = this;
+        poolDictionary = new Dictionary<string, Queue<GameObject>>();
     }
 
     private void Start() {
-        poolDictionary = new Dictionary<string, Queue<GameObject>>();
-
         for (int i = 0; i < pools.Count; i++) {
             Queue<GameObject> objectPool = new Queue<GameObject>();
             if (pools[i].prefab) {

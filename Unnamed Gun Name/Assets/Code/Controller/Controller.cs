@@ -44,10 +44,12 @@ public class Controller : MonoBehaviourPun {
     Camera[] cams;
     AudioListener audioListeners;
     float currentForwardSprintValue, currentSidewaysSprintValue, xRotationAxisAngle;
+    bool isGrounded;
 
     private void Awake() {
         TurnCollidersOnOff(false);
         rigid = GetComponent<Rigidbody>();
+        rigid.useGravity = false;
         cams = GetComponentsInChildren<Camera>();
         weaponsController = GetComponent<WeaponController>();
         weaponsController.Init(this);
@@ -61,9 +63,6 @@ public class Controller : MonoBehaviourPun {
 
         if (PhotonNetwork.IsConnected) {
             photonView.RPC("RPC_SetNicknameTargets", RpcTarget.All);
-            //if (PhotonNetwork.IsMasterClient) {
-            //    PhotonNetwork.Instantiate("MasterController", Vector3.zero, Quaternion.identity);
-            //}
         }
     }
 
@@ -82,6 +81,7 @@ public class Controller : MonoBehaviourPun {
         startPosition = transform.position;
         startRotation = transform.rotation;
         if (photonView.IsMine || playerView.devView) {
+            rigid.useGravity = true;
             for (int i = 0; i < cams.Length; i++) {
                 cams[i].enabled = true;
             }
@@ -112,13 +112,12 @@ public class Controller : MonoBehaviourPun {
             }
             if (Input.GetButtonDown("Jump")) {
                 if (isGrounded) {
-                    GetComponent<Rigidbody>().velocity = Vector3.up * jumpVelocity;
+                    rigid.velocity = Vector3.up * jumpVelocity;
+                    isGrounded = false;
                 }
             }
         }
     }
-
-    bool isGrounded;
 
     private void FixedUpdate() {
         if (((canMove && photonView.IsMine) || playerView.devView) && !health.isDead) { 

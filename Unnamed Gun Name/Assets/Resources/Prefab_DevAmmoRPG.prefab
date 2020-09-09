@@ -127,7 +127,7 @@ MonoBehaviour:
   interactingController: {fileID: 0}
   isAffectedByGravity: 0
   inAir: 0
-  explosionForce: 10
+  explosionForce: 100
   explosionRange: 3
   explosionInfo:
     origin: {fileID: 0}
