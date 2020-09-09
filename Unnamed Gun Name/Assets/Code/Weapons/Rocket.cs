@@ -16,7 +16,7 @@ public class Rocket : Projectile {
     public override void OutOfRange() {
         base.OutOfRange();
         explosionInfo.Explode();
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
     private void OnDrawGizmosSelected() {

@@ -7,8 +7,8 @@ public class Explosion {
     [HideInInspector] public Transform origin;
     [HideInInspector] public float damage, explosionRange, explosionForce;
 
-    public GameObject[] explosionParticles;
     public float particleDestroyTime;
+    public string explosionParticleName;
     
     public void Init(Transform _origin, float _damage, float _explosionRange, float _explosionForce) {
         origin = _origin;
@@ -18,7 +18,6 @@ public class Explosion {
     }
 
     public void Explode() {
-        Debug.Log("Boom");
         PlayParticles();
         Collider[] colls = Physics.OverlapSphere(origin.position, explosionRange);
         for (int i = 0; i < colls.Length; i++) {
@@ -36,10 +35,6 @@ public class Explosion {
     }
 
     void PlayParticles() {
-        for (int i = 0; i < explosionParticles.Length; i++) {
-            GameObject par = GameObject.Instantiate(explosionParticles[i], origin.position, Quaternion.identity);
-            GameObject.Destroy(par.gameObject, particleDestroyTime);
-            //explosionParticles[i].Play();
-        }
+        GameObject parObject = ObjectPooler.single_OP.SpawnFromPool(explosionParticleName, origin.position, origin.rotation);
     }
 }

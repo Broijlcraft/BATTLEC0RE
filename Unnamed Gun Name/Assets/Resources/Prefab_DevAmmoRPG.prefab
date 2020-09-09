@@ -134,6 +134,5 @@ MonoBehaviour:
     damage: 0
     explosionRange: 0
     explosionForce: 0
-    explosionParticles:
-    - {fileID: 2257577598221631115, guid: 6834ed307161e3045951a0a08a52551a, type: 3}
     particleDestroyTime: 0.5
+    explosionParticleName: Explosion

@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class ProjectileWeapon : FireArms {
 
-    public GameObject projectile;
+    public string projectileName;
     public float projectileSpeed;
 
+
     public override void ShootBehaviour(WeaponBehaviour behaviour, Transform attackOrigin) {
-        GameObject projObject = Instantiate(projectile, attackOrigin);
-        Projectile proj = projObject.GetComponent<Projectile>();
         Vector3 attackRotation = GetAttackRotation(attackOrigin, behaviour.range);
+        GameObject projObject = ObjectPooler.single_OP.SpawnFromPool(projectileName, attackOrigin.position, Quaternion.Euler(attackRotation));
+        Projectile proj = projObject.GetComponent<Projectile>();
         proj.Launch(attackRotation, behaviour, projectileSpeed);
     }
 }

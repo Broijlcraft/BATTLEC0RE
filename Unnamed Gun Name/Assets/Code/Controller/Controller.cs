@@ -61,9 +61,9 @@ public class Controller : MonoBehaviourPun {
 
         if (PhotonNetwork.IsConnected) {
             photonView.RPC("RPC_SetNicknameTargets", RpcTarget.All);
-            if (PhotonNetwork.IsMasterClient) {
-                PhotonNetwork.Instantiate("MasterController", Vector3.zero, Quaternion.identity);
-            }
+            //if (PhotonNetwork.IsMasterClient) {
+            //    PhotonNetwork.Instantiate("MasterController", Vector3.zero, Quaternion.identity);
+            //}
         }
     }
 

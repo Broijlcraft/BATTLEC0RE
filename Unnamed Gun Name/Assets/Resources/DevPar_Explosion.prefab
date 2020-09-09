@@ -80,6 +80,7 @@ GameObject:
   - component: {fileID: 2257577598221631126}
   - component: {fileID: 2257577598221631113}
   - component: {fileID: 2257577598221631112}
+  - component: {fileID: 114815187916428746}
   m_Layer: 0
   m_Name: DevPar_Explosion
   m_TagString: Untagged
@@ -116,7 +117,7 @@ ParticleSystem:
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -4826,3 +4827,18 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &114815187916428746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2257577598221631115}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bc591eb837e16a4a87dca26bce8a74a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 0.22
+  particleSystems:
+  - {fileID: 0}

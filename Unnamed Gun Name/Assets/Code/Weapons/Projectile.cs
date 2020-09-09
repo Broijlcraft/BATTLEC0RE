@@ -11,7 +11,7 @@ public class Projectile : Interactable {
     Vector3 startPoint;
     float range;
 
-    void Init() {
+    private void Awake() {
         if (!rigid) {
             rigid = GetComponent<Rigidbody>();
         }
@@ -24,15 +24,13 @@ public class Projectile : Interactable {
     }
 
     public virtual void Launch(Vector3 targetPos, WeaponBehaviour behaviour, float projectileSpeed) {
-        Init();
-        inAir = true;
-        range = behaviour.range;
         startPoint = transform.position;
-
-        transform.SetParent(null);
+        range = behaviour.range;
 
         transform.rotation = Quaternion.LookRotation(targetPos);
         rigid.AddForce(transform.forward * projectileSpeed);
+
+        inAir = true;
 
         if (isAffectedByGravity) {
             rigid.useGravity = true;
@@ -44,7 +42,9 @@ public class Projectile : Interactable {
     }
 
     public virtual void OutOfRange() {
-        rigid.isKinematic = true;
+        rigid.useGravity = false;
+        rigid.velocity = Vector3.zero;
+        rigid.angularVelocity = Vector3.zero;
         inAir = false;
     }
 

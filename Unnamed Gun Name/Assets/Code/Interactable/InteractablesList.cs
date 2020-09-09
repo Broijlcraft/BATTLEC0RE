@@ -22,6 +22,7 @@ public class InteractablesListEditor : Editor {
     public void OnEnable() {
         target_IaList = (InteractablesList)target;
     }
+
     public override void OnInspectorGUI() {
         DrawDefaultInspector();
         if (GUILayout.Button("Set interactable list")) {

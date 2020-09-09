@@ -100,10 +100,10 @@ MonoBehaviour:
   - attackOrigins:
     - origin: {fileID: 3337787395151661838}
       animator: {fileID: 5152927724662719558}
-    attackType: 1
-    damagePerAttack: 40
-    range: 50
-    attacksPerSecond: 1
+    attackType: 0
+    damagePerAttack: 0
+    range: 10
+    attacksPerSecond: 5
     currentAo: 0
     canNotAttack: 0
   colliders: []
@@ -112,7 +112,7 @@ MonoBehaviour:
   currentActiveWeapon: 0
   projectile: {fileID: 2251921230218651953, guid: 8150f42dcd7282648b07acaa76e1879e,
     type: 3}
-  projectileSpeed: 1000
+  projectileSpeed: 1300
 --- !u!64 &8051300718018528033
 MeshCollider:
   m_ObjectHideFlags: 0
