@@ -1,16 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 
+[RequireComponent(typeof(PhotonView))]
 public class ProjectileWeapon : FireArms {
 
-    public string projectileName;
+    public GameObject projectilePrefab;
     public float projectileSpeed;
-    
-    public override void ShootBehaviour(WeaponBehaviour behaviour, Transform attackOrigin) {
-        Vector3 attackRotation = GetAttackRotation(attackOrigin, behaviour.range);
-        GameObject projObject = ObjectPooler.single_OP.SpawnFromPool(projectileName, attackOrigin.position, Quaternion.Euler(attackRotation));
-        Projectile proj = projObject.GetComponent<Projectile>();
-        proj.Launch(attackRotation, behaviour, projectileSpeed);
+    public bool isAffectedByGravity;
+    PhotonView myView;
+
+    private void Awake() {
+        myView = GetComponent<PhotonView>();
+    }
+
+    public override void ShootBehaviour(Transform attackOrigin) {
+        Vector3 attackRotation = GetAttackRotation(attackOrigin, wBehaviour.range);
+        Quaternion actualRotation = Quaternion.LookRotation(attackRotation);
+        Vector3 pos = transform.position;
+        ObjectPooler.single_OP.GlobalSpawnProjectile(projectilePrefab.name, /*attackOrigin.position*/pos, /*Quaternion.Euler(attackRotation)*/actualRotation, wBehaviour.range, projectileSpeed, isAffectedByGravity, myView.ViewID);
     }
 }

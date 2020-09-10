@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1986311703449451496}
   - component: {fileID: 5040157483471319015}
   - component: {fileID: 114597118921062316}
+  - component: {fileID: 114313474564790046}
   m_Layer: 12
   m_Name: Prefab_DevAmmoRPG
   m_TagString: Untagged
@@ -122,17 +123,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fca8a13ebb5397489d01d6e03131826, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactableName: 
+  prefab: {fileID: 2251921230218651953}
   index: 0
   interactingController: {fileID: 0}
   isAffectedByGravity: 0
-  inAir: 0
-  explosionForce: 100
+  wBehaviour:
+    attackOrigins: []
+    attackType: 0
+    damagePerAttack: 1
+    range: 1
+    attacksPerSecond: 1
+    currentAo: 0
+    canNotAttack: 0
+  explosionForce: 0
   explosionRange: 3
   explosionInfo:
-    origin: {fileID: 0}
+    originPosition: {x: 0, y: 0, z: 0}
+    originRotation: {x: 0, y: 0, z: 0, w: 0}
     damage: 0
     explosionRange: 0
     explosionForce: 0
     particleDestroyTime: 0.5
-    explosionParticleName: Explosion
+    explosionPrefab: {fileID: 2257577598221631115, guid: 6834ed307161e3045951a0a08a52551a,
+      type: 3}
+--- !u!114 &114313474564790046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2251921230218651953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 0
+  OwnershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 0}
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0

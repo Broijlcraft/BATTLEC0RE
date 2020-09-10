@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-public class Interactable : MonoBehaviour {
+public class Interactable : MonoBehaviour, IPoolObject {
 
-    public string interactableName;
+    public GameObject prefab;
 
     [HideInInspector] public int index;
     [HideInInspector] public Controller interactingController;
@@ -13,7 +13,7 @@ public class Interactable : MonoBehaviour {
         }
     }
 
-    public virtual void Use() {
+    public virtual void OnObjectSpawn() { }
 
-    }
+    public virtual void Use() { }
 }

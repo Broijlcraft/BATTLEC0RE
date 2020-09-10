@@ -49,6 +49,8 @@ MonoBehaviour:
   - RPC_SwitchWeaponBehaviour
   - RPC_PlayFireArmEffects
   - RPC_DoDamage
+  - RCP_SpawnFromPool
+  - RPC_GlobalSpawnProjectile
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6841045706502791834}
   - component: {fileID: 3861809963196928417}
   - component: {fileID: 8051300718018528033}
+  - component: {fileID: 114482757428926730}
   m_Layer: 0
   m_Name: Prefab_DevWeaponPower
   m_TagString: Interactable
@@ -92,7 +93,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60400151e93f49d4788311618032e743, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactableName: RPG
+  prefab: {fileID: 8453234104650367378, guid: e8ea81d38ba1176479e8c9bf11fb3e6f, type: 3}
   index: 0
   interactingController: {fileID: 0}
   weaponType: 1
@@ -110,8 +111,18 @@ MonoBehaviour:
   meshObjects: []
   timeToSwitchBehaviour: 1
   currentActiveWeapon: 0
-  projectileName: Rocket
+  wBehaviour:
+    attackOrigins: []
+    attackType: 0
+    damagePerAttack: 1
+    range: 1
+    attacksPerSecond: 1
+    currentAo: 0
+    canNotAttack: 0
+  projectilePrefab: {fileID: 2251921230218651953, guid: 8150f42dcd7282648b07acaa76e1879e,
+    type: 3}
   projectileSpeed: 1300
+  isAffectedByGravity: 0
 --- !u!64 &8051300718018528033
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -126,6 +137,27 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 14
   m_Mesh: {fileID: 4300000, guid: 3f64dae1de535c04baf3e0849209bbbe, type: 3}
+--- !u!114 &114482757428926730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6841045706504797274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 0
+  OwnershipTransfer: 0
+  ObservedComponents: []
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1001 &2796496898221040570
 PrefabInstance:
   m_ObjectHideFlags: 0

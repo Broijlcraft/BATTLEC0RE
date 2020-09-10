@@ -94,7 +94,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01f6baa4ac26ff14890caf24b8acbe8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactableName: 
+  prefab: {fileID: 6755920986979199304, guid: 0ae884b44c477664396a66bcbc6a1eea, type: 3}
   index: 0
   interactingController: {fileID: 0}
   weaponType: 0
@@ -119,8 +119,9 @@ MonoBehaviour:
     attacksPerSecond: 10
     currentAo: 0
     canNotAttack: 0
+  colliders: []
+  meshObjects: []
   timeToSwitchBehaviour: 1
-  projectile: {fileID: 0}
   currentActiveWeapon: 0
 --- !u!64 &1415877010834955851
 MeshCollider:

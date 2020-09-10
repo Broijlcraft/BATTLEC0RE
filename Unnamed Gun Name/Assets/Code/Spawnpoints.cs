@@ -20,6 +20,7 @@ public class Spawnpoints : MonoBehaviourPunCallbacks {
                 newPos = spawnpoints[index].position;
                 newRot = spawnpoints[index].rotation;
             }
+        } else {
             Debug.LogWarning("No spawnpoints set!");
         }
         modelTransform.position = newPos;

@@ -1,12 +1,10 @@
 ﻿using UnityEngine;
 using Photon.Pun;
 
-public class Projectile : Interactable {
+public class Projectile : Interactable, IPoolObject {
 
     public bool isAffectedByGravity;
-
-    [Header("HideInInspector")]
-    public bool inAir;
+    bool inAir;
     Rigidbody rigid;
     Vector3 startPoint;
     float range;
@@ -21,20 +19,22 @@ public class Projectile : Interactable {
         if (range < Vector3.Distance(startPoint, transform.position) && inAir) {
             OutOfRange();
         }
+    }    
+
+    public override void OnObjectSpawn() {
+        base.OnObjectSpawn();
     }
 
-    public virtual void Launch(Vector3 targetPos, WeaponBehaviour behaviour, float projectileSpeed) {
+    public virtual void Launch(float _range, float projectileSpeed, bool _isAffectedByGravity) {
         startPoint = transform.position;
-        range = behaviour.range;
+        range = _range;
 
-        transform.rotation = Quaternion.LookRotation(targetPos);
         rigid.AddForce(transform.forward * projectileSpeed);
 
         inAir = true;
 
-        if (isAffectedByGravity) {
-            rigid.useGravity = true;
-        }
+        isAffectedByGravity = _isAffectedByGravity;
+        rigid.useGravity = isAffectedByGravity;
     }
 
     public virtual void Move() {
@@ -48,7 +48,7 @@ public class Projectile : Interactable {
         inAir = false;
     }
 
-    private void OnTriggerEnter(Collider other) {
-        OutOfRange();
-    }
+    //private void OnTriggerEnter(Collider other) {
+    //    OutOfRange();
+    //}
 }

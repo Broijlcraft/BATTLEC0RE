@@ -7,6 +7,7 @@ public class FireArms : Weapon {
     public float timeToSwitchBehaviour = 1f;
         
     [HideInInspector] public ActiveWeapon currentActiveWeapon = ActiveWeapon.primary;
+    [HideInInspector] public WeaponBehaviour wBehaviour;
 
     public override void Use() {
         int behaviourIndex = 0;
@@ -30,7 +31,8 @@ public class FireArms : Weapon {
         }
 
         AttackOrigin origin = behaviour.attackOrigins[behaviour.currentAo];
-        ShootBehaviour(behaviour, origin.origin);
+        wBehaviour = behaviour;
+        ShootBehaviour(origin.origin);
 
         origin.animator.speed = behaviour.attacksPerSecond;
         origin.animator.SetTrigger("Shoot");
@@ -38,14 +40,14 @@ public class FireArms : Weapon {
         behaviour.canNotAttack = false;
     }
 
-    public virtual void ShootBehaviour(WeaponBehaviour behaviour, Transform attackOrigin) {
+    public virtual void ShootBehaviour(Transform attackOrigin) {
         RaycastHit hit;
-        Vector3 attackRot = GetAttackRotation(attackOrigin, behaviour.range);
+        Vector3 attackRot = GetAttackRotation(attackOrigin, wBehaviour.range);
 
-        if (Physics.Raycast(attackOrigin.position, attackRot, out hit, behaviour.range, ~TagsAndLayersManager.single_TLM.localPlayerLayerInfo.layerMask)) {
+        if (Physics.Raycast(attackOrigin.position, attackRot, out hit, wBehaviour.range, ~TagsAndLayersManager.single_TLM.localPlayerLayerInfo.layerMask)) {
             Health health = hit.transform.GetComponent<Health>();
             if (health) {
-                health.DoDamage(behaviour.damagePerAttack);
+                health.DoDamage(wBehaviour.damagePerAttack);
             }
         }
     }
@@ -53,7 +55,7 @@ public class FireArms : Weapon {
     public Vector3 GetAttackRotation(Transform origin, float range) {
         Vector3 attackPos = interactingController.cam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, range));
 
-        //this is to check if something is in front of the camera before the ray reaches the max range
+        //this is to check if something is in front of the camera before the ray reaches the max range and use that as target instead
         RaycastHit hit;
         if (Physics.Raycast(interactingController.cam.transform.position, interactingController.cam.transform.forward, out hit, range)) {
             attackPos = hit.point;

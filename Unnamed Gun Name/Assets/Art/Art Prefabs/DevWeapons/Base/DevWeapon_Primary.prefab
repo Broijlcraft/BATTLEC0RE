@@ -88,25 +88,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 6755920986979199304}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09d3ba7517d6e2f48982e33f1de3310e, type: 3}
+  m_Script: {fileID: 11500000, guid: 3677e8ec6ac48bf428a6c6b60ef6eca0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  prefab: {fileID: 0}
   index: 0
   interactingController: {fileID: 0}
   weaponType: 0
   weaponBehaviours:
   - attackOrigins: []
-    attackType: 1
-    damagePerAttack: 0
-    attacksPerSecond: 0
-    ao_Index: 0
-  - attackOrigins: []
     attackType: 0
-    damagePerAttack: 0
-    attacksPerSecond: 0
-    ao_Index: 0
-  currentActiveWeapon: 0
-  timeToSwitch: 1
+    damagePerAttack: 1
+    range: 1
+    attacksPerSecond: 1
+    currentAo: 0
+    canNotAttack: 0
+  colliders: []
+  meshObjects: []
 --- !u!64 &4236530185807570515
 MeshCollider:
   m_ObjectHideFlags: 0

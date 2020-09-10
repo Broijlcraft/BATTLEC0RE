@@ -91,6 +91,8 @@ public class Controller : MonoBehaviourPun {
                 meshObjects.Add(gos[i].gameObject);
             }
             Tools.SetLocalOrGlobalLayers(meshObjects.ToArray(), false);
+        } else {
+            rigid.isKinematic = false;
         }
         canMove = true;
         if (hideCursorOnStart) {
