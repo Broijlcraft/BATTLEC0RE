@@ -48,7 +48,7 @@ public class Projectile : Interactable, IPoolObject {
         inAir = false;
     }
 
-    //private void OnTriggerEnter(Collider other) {
-    //    OutOfRange();
-    //}
+    private void OnTriggerEnter(Collider other) {
+        OutOfRange();
+    }
 }
