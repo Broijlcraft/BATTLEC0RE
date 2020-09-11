@@ -6,7 +6,7 @@ using UnityEngine;
 public class BodyPartsList : MonoBehaviour {
 
     [HideInInspector] public BodyPartInRig[] parts;
-    
+    public string jump, run, walk;
     public int GetPartIndex(BodypartType bodypartType) {
         int i = -1;
         if(parts.Length > 0) {

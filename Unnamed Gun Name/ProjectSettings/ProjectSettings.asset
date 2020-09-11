@@ -12,7 +12,7 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: DefaultCompany
+  companyName: Cooldutch
   productName: Unnamed Gun Name
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
@@ -634,10 +634,10 @@ PlayerSettings:
   facebookXfbml: 0
   facebookFrictionlessRequests: 1
   apiCompatibilityLevel: 6
-  cloudProjectId: 
+  cloudProjectId: 8036187e-0442-45cc-a9cb-b8db7575f2ba
   framebufferDepthMemorylessMode: 0
-  projectName: 
-  organizationId: 
+  projectName: BATTLEC0RE
+  organizationId: broijlcraft_unity
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0
