@@ -92,6 +92,7 @@ ModelImporter:
     7400010: metarig.|T-pose
     7400012: metarig.|Walk
     7400014: metarig.|Gun flaps.R.Action
+    7400016: metarig.|robtrecoil_Heavy.Local
     9500000: //RootNode
   externalObjects: {}
   materials:
@@ -145,7 +146,7 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 0.01
+    previousCalculatedGlobalScale: 1
     hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
