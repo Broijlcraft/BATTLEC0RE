@@ -46,11 +46,7 @@ public class PhotonLobbyCustomMatchMaking : MonoBehaviourPunCallbacks, ILobbyCal
         PhotonNetwork.ConnectUsingSettings();
         PhotonNetwork.AutomaticallySyncScene = true;
         EnableDisableRelativeButtons();
-        if (SteamTest.single_SS.nameIsSet) {
-            input_Nickname.text = SteamTest.single_SS.nickname;
-        } else {
-            input_Nickname.text = PlayerPrefs.GetString("NickName");
-        }
+        input_Nickname.text = PlayerPrefs.GetString("NickName");
     }
 
     public void LeaveMultiplayer() {
