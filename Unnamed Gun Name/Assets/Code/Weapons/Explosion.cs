@@ -11,14 +11,6 @@ public class Explosion {
     public float particleDestroyTime;
     public GameObject explosionPrefab;
     
-    public void SetValues(Vector3 _originPosition, Quaternion _originRotation, float _damage, float _explosionRange, float _explosionForce) {
-        originPosition = _originPosition;
-        originRotation = _originRotation;
-        damage = _damage;
-        explosionRange = _explosionRange;
-        explosionForce = _explosionForce;
-    }
-
     public void Explode(Vector3 _originPosition, Quaternion _originRotation, float _damage, float _explosionRange, float _explosionForce) {
         SetValues(_originPosition, _originRotation, _damage, _explosionRange, _explosionForce);
         PlayParticles();
@@ -35,6 +27,14 @@ public class Explosion {
                 controller.rigid.AddExplosionForce(explosionForce, originPosition, explosionRange);
             }
         }
+    }
+
+    void SetValues(Vector3 _originPosition, Quaternion _originRotation, float _damage, float _explosionRange, float _explosionForce) {
+        originPosition = _originPosition;
+        originRotation = _originRotation;
+        damage = _damage;
+        explosionRange = _explosionRange;
+        explosionForce = _explosionForce;
     }
 
     void PlayParticles() {

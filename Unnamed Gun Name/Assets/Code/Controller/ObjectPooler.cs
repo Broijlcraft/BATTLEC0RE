@@ -32,20 +32,20 @@ public class ObjectPooler : MonoBehaviourPun {
         }
     }
 
-    public void GlobalSpawnProjectile(string tag, Vector3 pos, Quaternion rot, float range, float projectileSpeed, bool _isAffectedByGravity, int photonViewID) {
+    public void GlobalSpawnProjectile(string tag, Vector3 pos, Quaternion rot, float damage, float range, float projectileSpeed, bool _isAffectedByGravity, int photonViewID) {
         int isAffectedByGravity = 0;
         if (_isAffectedByGravity) {
             isAffectedByGravity = 1;
         }
-        photonView.RPC("RPC_GlobalSpawnProjectile", RpcTarget.All, tag, pos, rot, range, projectileSpeed, isAffectedByGravity, photonViewID);
+        photonView.RPC("RPC_GlobalSpawnProjectile", RpcTarget.All, tag, pos, rot, damage, range, projectileSpeed, isAffectedByGravity, photonViewID);
     }
 
     [PunRPC]
-    void RPC_GlobalSpawnProjectile(string tag, Vector3 pos, Quaternion rot, float range, float projectileSpeed, int _isAffectedByGravity, int photonViewID) {
+    void RPC_GlobalSpawnProjectile(string tag, Vector3 pos, Quaternion rot, float damage, float range, float projectileSpeed, int _isAffectedByGravity, int photonViewID) {
         bool isAffectedByGravity = BoolCheck(_isAffectedByGravity);
         GameObject projObject = SpawnFromPool(tag, pos, rot);
         Projectile proj = projObject.GetComponent<Projectile>();
-        proj.Launch(range, projectileSpeed, isAffectedByGravity);
+        proj.Launch(damage, range, projectileSpeed, isAffectedByGravity);
     }
 
     public void GlobalSpawnFromPool(string tag, Vector3 pos, Quaternion rot) {

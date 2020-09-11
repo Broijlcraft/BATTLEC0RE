@@ -19,6 +19,6 @@ public class ProjectileWeapon : FireArms {
         Vector3 attackRotation = GetAttackRotation(attackOrigin, wBehaviour.range);
         Quaternion actualRotation = Quaternion.LookRotation(attackRotation);
         Vector3 pos = transform.position;
-        ObjectPooler.single_OP.GlobalSpawnProjectile(projectilePrefab.name, /*attackOrigin.position*/pos, /*Quaternion.Euler(attackRotation)*/actualRotation, wBehaviour.range, projectileSpeed, isAffectedByGravity, myView.ViewID);
+        ObjectPooler.single_OP.GlobalSpawnProjectile(projectilePrefab.name, pos, actualRotation, wBehaviour.damagePerAttack, wBehaviour.range, projectileSpeed, isAffectedByGravity, myView.ViewID);
     }
 }

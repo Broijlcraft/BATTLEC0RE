@@ -51,6 +51,7 @@ MonoBehaviour:
   - RPC_DoDamage
   - RCP_SpawnFromPool
   - RPC_GlobalSpawnProjectile
+  - RPC_ChangeHealth
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0

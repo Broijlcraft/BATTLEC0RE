@@ -54,6 +54,7 @@ public class Controller : MonoBehaviourPun {
         weaponsController = GetComponent<WeaponController>();
         weaponsController.Init(this);
         health = GetComponent<Health>();
+        health.controller = this;
         animator = GetComponent<Animator>();
         for (int i = 0; i < cams.Length; i++) {
             cams[i].enabled = false;
@@ -103,7 +104,7 @@ public class Controller : MonoBehaviourPun {
     }
 
     private void Update() {
-        if ((photonView.IsMine || playerView.devView)) {
+        if ((photonView.IsMine || playerView.devView) && !health.isDead) {
             if (Input.GetButtonDown("Interact")) {
                 RaycastHit hit;
                 if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, interactRange, ~TagsAndLayersManager.single_TLM.localPlayerLayerInfo.layerMask)) {
@@ -205,11 +206,18 @@ public class Controller : MonoBehaviourPun {
         }
     }
 
-    public float rangeTest;
-    private void OnDrawGizmosSelected() {
-        Vector3 test = cam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, rangeTest));
-        Gizmos.DrawLine(cam.transform.position, test);
+    public void ResetToStart() {
+        transform.position = startPosition;
+        transform.rotation = startRotation;
+        verticalCamHolder.rotation = Quaternion.identity;
+        cam.transform.rotation = Quaternion.identity;
     }
+
+    //public float rangeTest;
+    //private void OnDrawGizmosSelected() {
+    //    Vector3 test = cam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, rangeTest));
+    //    Gizmos.DrawLine(cam.transform.position, test);
+    //}
 }
 
 [System.Serializable]

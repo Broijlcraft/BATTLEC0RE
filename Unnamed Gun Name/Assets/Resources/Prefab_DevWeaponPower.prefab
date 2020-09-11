@@ -102,7 +102,7 @@ MonoBehaviour:
     - origin: {fileID: 3337787395151661838}
       animator: {fileID: 5152927724662719558}
     attackType: 0
-    damagePerAttack: 0
+    damagePerAttack: 10
     range: 10
     attacksPerSecond: 5
     currentAo: 0
@@ -154,7 +154,8 @@ MonoBehaviour:
   prefixField: -1
   Synchronization: 0
   OwnershipTransfer: 0
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 0}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0

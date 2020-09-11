@@ -25,7 +25,7 @@ public class Projectile : Interactable, IPoolObject {
         base.OnObjectSpawn();
     }
 
-    public virtual void Launch(float _range, float projectileSpeed, bool _isAffectedByGravity) {
+    public virtual void Launch(float _damage, float _range, float projectileSpeed, bool _isAffectedByGravity) {
         startPoint = transform.position;
         range = _range;
 
