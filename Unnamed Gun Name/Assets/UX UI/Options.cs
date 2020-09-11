@@ -5,12 +5,12 @@ using UnityEngine.UI;
 public class Options : MonoBehaviour {
     public Toggle fullscreenToggle;
     public Dropdown resolutionsDropdown;
-    Resolution[] resolutions;
+    public Resolution[] resolutions;
     public Slider[] masterSlider, musicSlider, sfxSlider;
 
     delegate void onValueChanged(float value);
 
-    public void OptionsInit() {
+    public void Start() {
         ApplyMasterListener();
         ApplyMusicListener();
         ApplySFXListener();
