@@ -353,7 +353,6 @@ MonoBehaviour:
   robotParts: {fileID: 0}
   weaponsController: {fileID: 0}
   gos: []
-  rangeTest: 0
 --- !u!114 &7956288965637296573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -368,8 +367,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 50
   fillHealthBar: {fileID: 8192255833223186716}
+  respawnTime: 6
   isDead: 0
+  respawning: 0
   currentHealth: 0
+  controller: {fileID: 0}
 --- !u!114 &3327204899640050877
 MonoBehaviour:
   m_ObjectHideFlags: 0

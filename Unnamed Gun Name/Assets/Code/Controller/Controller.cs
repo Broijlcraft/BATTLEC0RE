@@ -18,14 +18,17 @@ public class Controller : MonoBehaviourPun {
     public SpeedSettings forwardsSpeedSettings;
     public SpeedSettings sidewaysSpeedSettings;
 
-    [Space]
     public float jumpVelocity;
 
     [Space]
     public CameraSettings cameraSettings;
-    
+    [Header("Sway")]
+    public Transform swayHolder;
+    public float swayIntensity, swaySmooth;
+
     [Header("Local Settings")]
-    public bool hideCursorOnStart, keepLocalMeshesEnabled;
+    public bool hideCursorOnStart;
+    public bool keepLocalMeshesEnabled;
     
     [HideInInspector] public bool canMove;
     [HideInInspector] public Health health;
@@ -45,6 +48,7 @@ public class Controller : MonoBehaviourPun {
     AudioListener audioListeners;
     float currentForwardSprintValue, currentSidewaysSprintValue, xRotationAxisAngle;
     bool isGrounded;
+    Vector3 defaultRotation;
 
     private void Awake() {
         TurnCollidersOnOff(false);
@@ -75,6 +79,12 @@ public class Controller : MonoBehaviourPun {
         }
         Init();
         TurnCollidersOnOff(true);
+
+        if (photonView.IsMine) {
+            Vector3 angles = transform.localRotation.eulerAngles;
+            Vector3 camHolderAngles = verticalCamHolder.eulerAngles;
+            defaultRotation = new Vector3(camHolderAngles.x, angles.y, 0);
+        }
     }
 
     void Init() {
@@ -153,6 +163,13 @@ public class Controller : MonoBehaviourPun {
         float mouseX = Input.GetAxis("Mouse X") * cameraSettings.mouseSensitivity;
         float mouseY = Input.GetAxis("Mouse Y") * cameraSettings.mouseSensitivity;
 
+        Quaternion rotX = Quaternion.AngleAxis(-swayIntensity * mouseX, Vector3.up);
+        Quaternion rotY = Quaternion.AngleAxis(swayIntensity * mouseY, Vector3.right);
+
+        Quaternion temp = Quaternion.Euler(defaultRotation);
+        Quaternion targetRotation = temp * rotX * rotY;
+        swayHolder.localRotation = Quaternion.Lerp(swayHolder.transform.localRotation, targetRotation, Time.deltaTime * swaySmooth);
+
         xRotationAxisAngle += mouseY;
 
         if (xRotationAxisAngle > cameraSettings.maxVerticalTopViewAngle) {
@@ -200,17 +217,19 @@ public class Controller : MonoBehaviourPun {
         }
     }
 
-    private void OnCollisionEnter(Collision collision) {
-        if(collision.gameObject.layer != TagsAndLayersManager.single_TLM.localPlayerLayerInfo.layerMask) {
-            isGrounded = true;        
-        }
-    }
-
     public void ResetToStart() {
         transform.position = startPosition;
         transform.rotation = startRotation;
         verticalCamHolder.rotation = Quaternion.identity;
         cam.transform.rotation = Quaternion.identity;
+    }
+
+    private void OnCollisionEnter(Collision collision) {
+        if(collision.gameObject.layer != TagsAndLayersManager.single_TLM.localPlayerLayerInfo.layerMask && photonView.IsMine) {
+            isGrounded = true;
+            if (robotParts) {
+            }
+        }
     }
 
     //public float rangeTest;
