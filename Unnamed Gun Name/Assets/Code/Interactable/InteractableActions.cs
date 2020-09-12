@@ -49,8 +49,10 @@ public class InteractableActions : MonoBehaviourPun {
     void RPC_SetInteracting(int index, int id) {
         Controller controller = PhotonNetwork.GetPhotonView(id).GetComponent<Controller>();
         Interactable ia = InteractablesList.single_IaList.interactables[index];
-        ia.interactingController = controller;
-        ia.Interact(controller);
+        if(!ia.interactingController || ia.interactingController == controller) {
+            ia.interactingController = controller;
+            ia.Interact(controller);
+        }
     }
     
     public void SwitchWeaponBehaviour(int id, int behaviour) {

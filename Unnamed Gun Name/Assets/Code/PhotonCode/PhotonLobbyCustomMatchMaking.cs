@@ -36,9 +36,9 @@ public class PhotonLobbyCustomMatchMaking : MonoBehaviourPunCallbacks, ILobbyCal
     private void Start() {
         if (devLobby.dev) {
             input_Roomname.text = PlayerPrefs.GetString("Roomname");
-            //if (devLobby.devForceOnline) {
-            //    OpenMultiplayer();
-            //}
+            if (devLobby.devForceOnline) {
+                OpenMultiplayer();
+            }
         }
     }
 
