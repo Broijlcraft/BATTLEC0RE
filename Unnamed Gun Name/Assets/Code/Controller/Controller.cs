@@ -6,7 +6,7 @@ using Photon.Pun;
 [RequireComponent(typeof(Rigidbody), typeof(Health))]
 [RequireComponent(typeof(PlayerView), typeof(PhotonView), typeof(WeaponController))] 
 public class Controller : MonoBehaviourPun {
-
+    [Space(20)]
     public PlayerView playerView;
     public Camera cam, localLayerCam;
     public Transform verticalCamHolder;
@@ -48,6 +48,8 @@ public class Controller : MonoBehaviourPun {
     float currentForwardSprintValue, currentSidewaysSprintValue, xRotationAxisAngle;
     bool isGrounded;
 
+    Vector3 defaultSwayRotation;
+
     private void Awake() {
         TurnCollidersOnOff(false);
         rigid = GetComponent<Rigidbody>();
@@ -79,7 +81,7 @@ public class Controller : MonoBehaviourPun {
         TurnCollidersOnOff(true);
 
         if (photonView.IsMine) {
-            swaySettings.overallDefaultRotation = new Vector3(swaySettings.defaultCamHolderRotation.x, swaySettings.defaultParentRotation.y, 0);
+            defaultSwayRotation = new Vector3(swaySettings.defaultCamHolderRotation.x, swaySettings.defaultParentRotation.y, 0);
         }
     }
 
@@ -162,7 +164,7 @@ public class Controller : MonoBehaviourPun {
         Quaternion rotX = Quaternion.AngleAxis(-swaySettings.swayIntensity * mouseX, Vector3.up);
         Quaternion rotY = Quaternion.AngleAxis(swaySettings.swayIntensity * mouseY, Vector3.right);
 
-        Quaternion temp = Quaternion.Euler(swaySettings.overallDefaultRotation);
+        Quaternion temp = Quaternion.Euler(defaultSwayRotation);
         Quaternion targetRotation = temp * rotX * rotY;
         swaySettings.swayHolder.localRotation = Quaternion.Lerp(swaySettings.swayHolder.transform.localRotation, targetRotation, Time.deltaTime * swaySettings.swaySmooth);
 
@@ -255,6 +257,4 @@ public class SwaySettings {
     public float swayIntensity, swaySmooth;
 
     public Vector3 defaultParentRotation, defaultCamHolderRotation;
-
-    [HideInInspector] public Vector3 overallDefaultRotation;
 }

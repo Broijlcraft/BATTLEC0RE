@@ -8,6 +8,7 @@ public class Projectile : Interactable, IPoolObject {
     Rigidbody rigid;
     Vector3 startPoint;
     float range;
+    PhotonView ownerPV;
 
     private void Awake() {
         if (!rigid) {
@@ -25,9 +26,10 @@ public class Projectile : Interactable, IPoolObject {
         base.OnObjectSpawn();
     }
 
-    public virtual void Launch(float _damage, float _range, float projectileSpeed, bool _isAffectedByGravity) {
+    public virtual void Launch(float _damage, float _range, float projectileSpeed, bool _isAffectedByGravity, int id) {
         startPoint = transform.position;
         range = _range;
+        ownerPV = PhotonNetwork.GetPhotonView(id);
 
         rigid.AddForce(transform.forward * projectileSpeed);
 
@@ -49,7 +51,9 @@ public class Projectile : Interactable, IPoolObject {
     }
 
     private void OnTriggerEnter(Collider other) {
-        print(other.gameObject.name);
-        //OutOfRange();
+        if (ownerPV && ownerPV.IsMine){
+            OutOfRange();
+            print(other.gameObject.name);
+        }
     }
 }

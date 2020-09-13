@@ -127,14 +127,6 @@ MonoBehaviour:
   index: 0
   interactingController: {fileID: 0}
   isAffectedByGravity: 0
-  wBehaviour:
-    attackOrigins: []
-    attackType: 0
-    damagePerAttack: 1
-    range: 1
-    attacksPerSecond: 1
-    currentAo: 0
-    canNotAttack: 0
   explosionForce: 0
   explosionRange: 3
   explosionInfo:
@@ -162,7 +154,7 @@ MonoBehaviour:
   Group: 0
   prefixField: -1
   Synchronization: 0
-  OwnershipTransfer: 0
+  OwnershipTransfer: 2
   ObservedComponents:
   - {fileID: 0}
   viewIdField: 0

@@ -7,14 +7,14 @@ public class Weapon : Interactable {
     public WeaponBehaviour[] weaponBehaviours = new WeaponBehaviour[1];
 
     [HideInInspector] public Collider[] colliders;
-    [HideInInspector] public List<GameObject> meshObjects = new List<GameObject>();
+    /*[HideInInspector] */public List<GameObject> meshObjects = new List<GameObject>();
 
     //Dev
     Vector3 startPos;
     Quaternion startRot;
     Transform startParent;
 
-    private void Awake() {
+    public virtual void Awake() {
         colliders = GetComponentsInChildren<Collider>();
         MeshRenderer[] renderers = GetComponentsInChildren<MeshRenderer>();
         for (int i = 0; i < renderers.Length; i++) {

@@ -8,9 +8,9 @@ public class Rocket : Projectile {
     float damage;
     public Explosion explosionInfo;
 
-    public override void Launch(float _damage, float _range, float projectileSpeed, bool _isAffectedByGravity) {
+    public override void Launch(float _damage, float _range, float projectileSpeed, bool _isAffectedByGravity, int id) {
         damage = _damage;
-        base.Launch(_damage, _range, projectileSpeed, _isAffectedByGravity);
+        base.Launch(_damage, _range, projectileSpeed, _isAffectedByGravity, id);
     }
 
     public override void OutOfRange() {

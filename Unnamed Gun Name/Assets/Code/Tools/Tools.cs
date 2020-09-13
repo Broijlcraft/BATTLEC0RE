@@ -23,4 +23,20 @@ public static class Tools {
             go.layer = index;
         }
     }
+
+    public static int BoolToInt(bool b) {
+        int i = 0;
+        if (b) {
+            i = 1;
+        }
+        return i;
+    }
+
+    public static bool IntToBool(int i) {
+        bool b = false;
+        if(i == 1) {
+            b = true;
+        }
+        return b;
+    }
 }

@@ -8,19 +8,19 @@ public class ObjectPooler : MonoBehaviourPun {
 
     public static ObjectPooler single_OP;
 
-    public List<Pool> unSyncedPools = new List<Pool>();
-    public Dictionary<string, Queue<GameObject>> unSyncedPoolDictionary;
+    [SerializeField] private List<Pool> unSyncedPools = new List<Pool>();
+    [SerializeField] private List<Pool> syncedPools = new List<Pool>();
+    public Dictionary<string, Queue<GameObject>> unSyncedPoolDictionary = new Dictionary<string, Queue<GameObject>>();
 
     private void Awake() {
         single_OP = this;
-        unSyncedPoolDictionary = new Dictionary<string, Queue<GameObject>>();
     }
 
     private void Start() {
         for (int i = 0; i < unSyncedPools.Count; i++) {
             Queue<GameObject> objectPool = new Queue<GameObject>();
             if (unSyncedPools[i].prefab) {
-                for (int iB = 0; iB < unSyncedPools[i].poolSize; iB++) {
+                for (int iB = 0; iB < unSyncedPools[i].amountPerPlayer; iB++) {
                     GameObject poolObject = Instantiate(unSyncedPools[i].prefab, Vector3.zero, Quaternion.identity);
                     poolObject.SetActive(false);
                     poolObject.transform.SetParent(transform);
@@ -42,10 +42,12 @@ public class ObjectPooler : MonoBehaviourPun {
 
     [PunRPC]
     void RPC_GlobalSpawnProjectile(string tag, Vector3 pos, Quaternion rot, float damage, float range, float projectileSpeed, int _isAffectedByGravity, int photonViewID) {
-        bool isAffectedByGravity = BoolCheck(_isAffectedByGravity);
+        bool isAffectedByGravity = Tools.IntToBool(_isAffectedByGravity);
         GameObject projObject = SpawnFromPool(tag, pos, rot);
-        Projectile proj = projObject.GetComponent<Projectile>();
-        proj.Launch(damage, range, projectileSpeed, isAffectedByGravity);
+        if (projObject) {
+            Projectile proj = projObject.GetComponent<Projectile>();
+            proj.Launch(damage, range, projectileSpeed, isAffectedByGravity, photonViewID);
+        }
     }
 
     public void GlobalSpawnFromPool(string tag, Vector3 pos, Quaternion rot) {
@@ -80,19 +82,10 @@ public class ObjectPooler : MonoBehaviourPun {
 
         return returnObject;
     }
-
-    bool BoolCheck(int boolState) {
-        bool state = false;
-        if(boolState == 1) {
-            state = true;
-        }
-        return state;
-    }
-
 }
 
 [System.Serializable]
 public class Pool {
     public GameObject prefab;
-    public int poolSize;
+    public int amountPerPlayer;
 }

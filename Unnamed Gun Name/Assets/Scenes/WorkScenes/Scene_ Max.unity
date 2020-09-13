@@ -1982,6 +1982,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1804682115}
   - component: {fileID: 1804682114}
+  - component: {fileID: 1804682117}
   - component: {fileID: 1804682116}
   m_Layer: 0
   m_Name: Pool
@@ -2005,10 +2006,14 @@ MonoBehaviour:
   unSyncedPools:
   - prefab: {fileID: 2257577598221631115, guid: 6834ed307161e3045951a0a08a52551a,
       type: 3}
-    poolSize: 70
+    amountPerPlayer: 20
   - prefab: {fileID: 2251921230218651953, guid: 8150f42dcd7282648b07acaa76e1879e,
       type: 3}
-    poolSize: 70
+    amountPerPlayer: 20
+  syncedPools:
+  - prefab: {fileID: 2251921230218651953, guid: 8150f42dcd7282648b07acaa76e1879e,
+      type: 3}
+    amountPerPlayer: 20
 --- !u!4 &1804682115
 Transform:
   m_ObjectHideFlags: 0
@@ -2045,6 +2050,29 @@ MonoBehaviour:
   viewIdField: 2
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &1804682117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1804682113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e4992a3b2592f84683ec8ae834bb4f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unSyncedPools:
+  - prefab: {fileID: 2257577598221631115, guid: 6834ed307161e3045951a0a08a52551a,
+      type: 3}
+    amountPerPlayer: 20
+  syncedPools:
+  - prefab: {fileID: 2251921230218651953, guid: 8150f42dcd7282648b07acaa76e1879e,
+      type: 3}
+    amountPerPlayer: 20
+  playerPool:
+  - photonviewId: 0
+  maxPlayers: 0
 --- !u!1001 &2022871231
 PrefabInstance:
   m_ObjectHideFlags: 0

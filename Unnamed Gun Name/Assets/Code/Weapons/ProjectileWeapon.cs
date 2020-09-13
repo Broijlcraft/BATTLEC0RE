@@ -11,7 +11,8 @@ public class ProjectileWeapon : FireArms {
     public bool isAffectedByGravity;
     PhotonView myView;
 
-    private void Awake() {
+    public override void Awake() {
+        base.Awake();
         myView = GetComponent<PhotonView>();
     }
 
