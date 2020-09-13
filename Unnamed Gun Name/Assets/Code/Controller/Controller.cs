@@ -22,9 +22,8 @@ public class Controller : MonoBehaviourPun {
 
     [Space]
     public CameraSettings cameraSettings;
-    [Header("Sway")]
-    public Transform swayHolder;
-    public float swayIntensity, swaySmooth;
+    public SwaySettings swaySettings;
+
 
     [Header("Local Settings")]
     public bool hideCursorOnStart;
@@ -48,7 +47,6 @@ public class Controller : MonoBehaviourPun {
     AudioListener audioListeners;
     float currentForwardSprintValue, currentSidewaysSprintValue, xRotationAxisAngle;
     bool isGrounded;
-    Vector3 defaultRotation;
 
     private void Awake() {
         TurnCollidersOnOff(false);
@@ -81,9 +79,7 @@ public class Controller : MonoBehaviourPun {
         TurnCollidersOnOff(true);
 
         if (photonView.IsMine) {
-            Vector3 angles = transform.localRotation.eulerAngles;
-            Vector3 camHolderAngles = verticalCamHolder.eulerAngles;
-            defaultRotation = new Vector3(camHolderAngles.x, angles.y, 0);
+            swaySettings.overallDefaultRotation = new Vector3(swaySettings.defaultCamHolderRotation.x, swaySettings.defaultParentRotation.y, 0);
         }
     }
 
@@ -163,12 +159,12 @@ public class Controller : MonoBehaviourPun {
         float mouseX = Input.GetAxis("Mouse X") * cameraSettings.mouseSensitivity;
         float mouseY = Input.GetAxis("Mouse Y") * cameraSettings.mouseSensitivity;
 
-        Quaternion rotX = Quaternion.AngleAxis(-swayIntensity * mouseX, Vector3.up);
-        Quaternion rotY = Quaternion.AngleAxis(swayIntensity * mouseY, Vector3.right);
+        Quaternion rotX = Quaternion.AngleAxis(-swaySettings.swayIntensity * mouseX, Vector3.up);
+        Quaternion rotY = Quaternion.AngleAxis(swaySettings.swayIntensity * mouseY, Vector3.right);
 
-        Quaternion temp = Quaternion.Euler(defaultRotation);
+        Quaternion temp = Quaternion.Euler(swaySettings.overallDefaultRotation);
         Quaternion targetRotation = temp * rotX * rotY;
-        swayHolder.localRotation = Quaternion.Lerp(swayHolder.transform.localRotation, targetRotation, Time.deltaTime * swaySmooth);
+        swaySettings.swayHolder.localRotation = Quaternion.Lerp(swaySettings.swayHolder.transform.localRotation, targetRotation, Time.deltaTime * swaySettings.swaySmooth);
 
         xRotationAxisAngle += mouseY;
 
@@ -251,4 +247,14 @@ public class CameraSettings {
     public float mouseSensitivity = 1f;
     //[Range(-90, 180)]
     public float maxVerticalTopViewAngle = 90, maxVerticalBottomViewAngle = 90;
+}
+
+[System.Serializable]
+public class SwaySettings {
+    public Transform swayHolder;
+    public float swayIntensity, swaySmooth;
+
+    public Vector3 defaultParentRotation, defaultCamHolderRotation;
+
+    [HideInInspector] public Vector3 overallDefaultRotation;
 }
