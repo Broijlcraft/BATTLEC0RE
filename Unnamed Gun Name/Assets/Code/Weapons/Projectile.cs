@@ -31,6 +31,8 @@ public class Projectile : Interactable, IPoolObject {
         range = _range;
         ownerPV = PhotonNetwork.GetPhotonView(id);
 
+        //print(ownerPV.Owner.NickName);
+
         rigid.AddForce(transform.forward * projectileSpeed);
 
         inAir = true;
@@ -54,6 +56,7 @@ public class Projectile : Interactable, IPoolObject {
         if (ownerPV && ownerPV.IsMine){
             OutOfRange();
             print(other.gameObject.name);
+            ownerPV = null;
         }
     }
 }

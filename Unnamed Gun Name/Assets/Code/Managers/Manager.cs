@@ -15,7 +15,7 @@ public class Manager : MonoBehaviour {
     }
 
     private void Update() {
-        if (Input.GetButtonDown("DevMode")) {
+        if (Input.GetButtonDown("DevMode") && PlayerPrefs.GetString("Developer") == PlayerPrefs.GetString("DevCheck")) {
             dev = !dev;
             EnableDisableDevText();
         }

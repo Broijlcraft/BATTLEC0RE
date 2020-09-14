@@ -15,14 +15,12 @@ public class PoolTest : MonoBehaviourPun {
     public int maxPlayers;
 
     private void Awake() {
-        print("Amount of players = " + PhotonNetwork.PlayerList.Length);
         single_PT = this;
         maxPlayers = MultiplayerSetting.single_MPS.maxPlayers;
         for (int i = 0; i < maxPlayers-1; i++) {
             Dictionary<string, Queue<GameObject>> tempUnSyncedPoolDict= CreatePoolDictFromPoolList(unSyncedPools);
             Dictionary<string, Queue<GameObject>> tempSyncedPoolDict = CreatePoolDictFromPoolList(syncedPools);
             PlayerPool pp = new PlayerPool { unSyncedPoolDictionary = tempUnSyncedPoolDict, syncedPoolDictionary = tempSyncedPoolDict};
-            print(pp.syncedPoolDictionary.Count);
             playerPool.Add(pp);
         }
     }

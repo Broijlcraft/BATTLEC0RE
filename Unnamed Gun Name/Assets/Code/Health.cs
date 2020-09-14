@@ -62,6 +62,8 @@ public class Health : MonoBehaviourPun {
                     StartCoroutine(Countdown());
                 }
             }
+        } else {
+            isDead = false;
         }
         UpdateUiHeath();
     }

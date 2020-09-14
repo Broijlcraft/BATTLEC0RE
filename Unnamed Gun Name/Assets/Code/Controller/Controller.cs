@@ -229,12 +229,6 @@ public class Controller : MonoBehaviourPun {
             }
         }
     }
-
-    //public float rangeTest;
-    //private void OnDrawGizmosSelected() {
-    //    Vector3 test = cam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, rangeTest));
-    //    Gizmos.DrawLine(cam.transform.position, test);
-    //}
 }
 
 [System.Serializable]
