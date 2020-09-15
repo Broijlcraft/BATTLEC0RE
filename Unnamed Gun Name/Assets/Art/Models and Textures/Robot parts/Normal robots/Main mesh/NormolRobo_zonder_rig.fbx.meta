@@ -30,6 +30,27 @@ ModelImporter:
     100048: Upper chacce.ROT.
     100050: UpperLeg.L.
     100052: Upperleg.R.
+    100054: Claw hand
+    100056: Feet.L
+    100058: Feet.R
+    100060: Gun hand
+    100062: Head
+    100064: HeelIK.L
+    100066: HeelIK.R
+    100068: KneeIK.L
+    100070: KneeIK.R
+    100072: L.lower arm
+    100074: L.Upper arm
+    100076: Lower chasse
+    100078: Lowerleg.L
+    100080: Lowerleg.R
+    100082: metarig._Normal robot
+    100084: Mid chacce
+    100086: R.lower arm
+    100088: R.Upper arm
+    100090: Upper chacce.
+    100092: Upperleg.L
+    100094: Upperleg.R
     400000: Bottom chasse.
     400002: Chassis.
     400004: Feet.L.
@@ -57,6 +78,27 @@ ModelImporter:
     400048: Upper chacce.ROT.
     400050: UpperLeg.L.
     400052: Upperleg.R.
+    400054: Claw hand
+    400056: Feet.L
+    400058: Feet.R
+    400060: Gun hand
+    400062: Head
+    400064: HeelIK.L
+    400066: HeelIK.R
+    400068: KneeIK.L
+    400070: KneeIK.R
+    400072: L.lower arm
+    400074: L.Upper arm
+    400076: Lower chasse
+    400078: Lowerleg.L
+    400080: Lowerleg.R
+    400082: metarig._Normal robot
+    400084: Mid chacce
+    400086: R.lower arm
+    400088: R.Upper arm
+    400090: Upper chacce.
+    400092: Upperleg.L
+    400094: Upperleg.R
     2100000: Mat_NormalRobotBody
     2100002: Mat_NormalRobotEM
     2300000: Bottom chasse.
@@ -138,7 +180,36 @@ ModelImporter:
     4300048: UpperLeg.L.
     4300050: Upperleg.R.
     7400000: Normal robot Primary.|robtrecoil_light
+    7400002: Walk
+    7400004: metarig._Normal robot|Run
+    7400006: metarig._Normal robot|T-pose
     9500000: //RootNode
+    13700000: Bottom chasse.
+    13700002: Chassis.
+    13700004: Feet.L.
+    13700006: Feet.R.
+    13700008: Gun flaps.R.
+    13700010: Gun vents.
+    13700012: Gunflaps.L.
+    13700014: Head.
+    13700016: Hips.L.
+    13700018: Hips.R.
+    13700020: Left barrel.
+    13700022: Lower arms.
+    13700024: Lower arms..
+    13700026: Lowerleg.L.
+    13700028: Lowerlegs.R.
+    13700030: Normal robot Primary.
+    13700032: Pincer.
+    13700034: Right barrel.
+    13700036: Secondary barrel\.
+    13700038: Shoulder.R.
+    13700040: Shoulders.L.
+    13700042: Upper arm..L.
+    13700044: Upper arm..R.
+    13700046: Upper chacce.ROT.
+    13700048: UpperLeg.L.
+    13700050: Upperleg.R.
     2186277476908879412: ImportLogs
   externalObjects: {}
   materials:
