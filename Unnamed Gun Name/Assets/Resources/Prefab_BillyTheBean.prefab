@@ -135,6 +135,7 @@ MonoBehaviour:
   playerView: {fileID: 1761153458948728927}
   cam: {fileID: 7595647503515677790}
   localLayerCam: {fileID: 690390762019578855}
+  horizontalCamHolder: {fileID: 0}
   verticalCamHolder: {fileID: 5200557320374257036}
   nicknameText: {fileID: 6703715164598437452}
   uiLookAtHolder: {fileID: 7728621727011601535}
@@ -900,7 +901,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 6967
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0

@@ -5,7 +5,7 @@ using UnityEngine;
 public class BodyPartsList : MonoBehaviour {
 
     public List<BodyPartInRig> parts = new List<BodyPartInRig>();
-    public string jump, run, walk;
+    public string jump, run, walk, idle;
     public int GetPartIndex(BodypartType bodypartType) {
         int i = -1;
         if(parts.Count > 0) {

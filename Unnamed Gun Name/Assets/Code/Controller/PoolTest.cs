@@ -16,12 +16,14 @@ public class PoolTest : MonoBehaviourPun {
 
     private void Awake() {
         single_PT = this;
-        maxPlayers = MultiplayerSetting.single_MPS.maxPlayers;
-        for (int i = 0; i < maxPlayers-1; i++) {
-            Dictionary<string, Queue<GameObject>> tempUnSyncedPoolDict = CreatePoolDictFromPoolList(unSyncedPools);
-            Dictionary<string, Queue<GameObject>> tempSyncedPoolDict = CreatePoolDictFromPoolList(syncedPools);
-            PlayerPool pp = new PlayerPool { unSyncedPoolDictionary = tempUnSyncedPoolDict, syncedPoolDictionary = tempSyncedPoolDict};
-            playerPool.Add(pp);
+        if (MultiplayerSetting.single_MPS) {
+            maxPlayers = MultiplayerSetting.single_MPS.maxPlayers;
+            for (int i = 0; i < maxPlayers-1; i++) {
+                Dictionary<string, Queue<GameObject>> tempUnSyncedPoolDict = CreatePoolDictFromPoolList(unSyncedPools);
+                Dictionary<string, Queue<GameObject>> tempSyncedPoolDict = CreatePoolDictFromPoolList(syncedPools);
+                PlayerPool pp = new PlayerPool { unSyncedPoolDictionary = tempUnSyncedPoolDict, syncedPoolDictionary = tempSyncedPoolDict};
+                playerPool.Add(pp);
+            }
         }
     }
 

@@ -6,10 +6,9 @@ using Photon.Pun;
 [RequireComponent(typeof(Rigidbody), typeof(Health))]
 [RequireComponent(typeof(PlayerView), typeof(PhotonView), typeof(WeaponController))] 
 public class Controller : MonoBehaviourPun {
-    [Space(20)]
     public PlayerView playerView;
     public Camera cam, localLayerCam;
-    public Transform verticalCamHolder;
+    public Transform horizontalCamHolder, verticalHolder;
     public Text nicknameText;
     public Transform uiLookAtHolder;
     public float interactRange;
@@ -32,7 +31,7 @@ public class Controller : MonoBehaviourPun {
     [HideInInspector] public bool canMove;
     [HideInInspector] public Health health;
     [HideInInspector] public Rigidbody rigid;
-    [HideInInspector] public Animator animator;
+   /* [HideInInspector]*/ public Animator animator;
     [HideInInspector] public Collider[] colliders;
     [HideInInspector] public Vector3 startPosition;
     [HideInInspector] public Quaternion startRotation;
@@ -48,7 +47,7 @@ public class Controller : MonoBehaviourPun {
     float currentForwardSprintValue, currentSidewaysSprintValue, xRotationAxisAngle;
     bool isGrounded;
 
-    Vector3 defaultSwayRotation;
+    Vector3 defaultHorizontalSwayRotation, defaultVertitalSwayRotation;
 
     private void Awake() {
         TurnCollidersOnOff(false);
@@ -60,6 +59,7 @@ public class Controller : MonoBehaviourPun {
         health = GetComponent<Health>();
         health.controller = this;
         animator = GetComponent<Animator>();
+        robotParts = GetComponent<BodyPartsList>();
         for (int i = 0; i < cams.Length; i++) {
             cams[i].enabled = false;
         }
@@ -69,6 +69,8 @@ public class Controller : MonoBehaviourPun {
         if (PhotonNetwork.IsConnected) {
             photonView.RPC("RPC_SetNicknameTargets", RpcTarget.All);
         }
+
+        print(animator);
     }
 
     private void Start() {
@@ -87,7 +89,7 @@ public class Controller : MonoBehaviourPun {
         if (photonView.IsMine || playerView.devView) {
             rigid.useGravity = true;
             for (int i = 0; i < cams.Length; i++) {
-                cams[i].enabled = true;
+                //cams[i].enabled = true;
             }
             audioListeners.enabled = true;
             List<GameObject> meshObjects = new List<GameObject>();
@@ -95,7 +97,8 @@ public class Controller : MonoBehaviourPun {
                 meshObjects.Add(gos[i].gameObject);
             }
             Tools.SetLocalOrGlobalLayers(meshObjects.ToArray(), false);
-            defaultSwayRotation = new Vector3(swaySettings.defaultCamHolderRotation.x, swaySettings.defaultParentRotation.y, 0);
+            defaultHorizontalSwayRotation = new Vector3(swaySettings.defaultCamHolderRotation.x, swaySettings.defaultParentRotation.y, 0);
+            defaultVertitalSwayRotation = new Vector3(swaySettings.defaultCamHolderRotation.x, swaySettings.defaultParentRotation.y, 0);
             TurnCollidersOnOff(true);
         } else {
             rigid.isKinematic = false;
@@ -127,7 +130,12 @@ public class Controller : MonoBehaviourPun {
         }
     }
 
+    Vector3 lastPos = Vector3.zero;
+
     private void FixedUpdate() {
+        float speed = Vector3.Distance(transform.position, lastPos) * 50;
+        lastPos = transform.position;
+        animator.SetFloat("MoveSpeed", speed);
         if (((canMove && photonView.IsMine) || playerView.devView) && !health.isDead) { 
             Rotate();
 
@@ -138,7 +146,6 @@ public class Controller : MonoBehaviourPun {
             Vector3 newPos = new Vector3(horizontal, 0, vertical) * Time.deltaTime;
             transform.Translate(newPos);
         }
-
         if (nicknameTarget) {
             uiLookAtHolder.LookAt(nicknameTarget);
         }
@@ -148,35 +155,43 @@ public class Controller : MonoBehaviourPun {
         if (Input.GetButton("Sprint")) {
             currentForwardSprintValue = forwardsSpeedSettings.sprintMultiplier;
             currentSidewaysSprintValue = sidewaysSpeedSettings.sprintMultiplier;
+            animator.SetTrigger(robotParts.run);
+            animator.ResetTrigger(robotParts.walk);
         } else {
             currentForwardSprintValue = 1;
             currentSidewaysSprintValue = 1;
+            animator.ResetTrigger(robotParts.run);
+            animator.SetTrigger(robotParts.walk);
         }
     }
 
     void Rotate() {
-        float mouseX = Input.GetAxis("Mouse X") * cameraSettings.mouseSensitivity;
-        float mouseY = Input.GetAxis("Mouse Y") * cameraSettings.mouseSensitivity;
+        float sense = cameraSettings.mouseSensitivity, invert = GetInvertMultiplier(cameraSettings.invertVerticalCam);
+        float mouseX = Input.GetAxis("Mouse X") * sense * -invert;
+        float mouseY = Input.GetAxis("Mouse Y") * sense * invert;
 
         Quaternion rotX = Quaternion.AngleAxis(-swaySettings.swayIntensity * mouseX, Vector3.up);
         Quaternion rotY = Quaternion.AngleAxis(swaySettings.swayIntensity * mouseY, Vector3.right);
 
-        Quaternion temp = Quaternion.Euler(defaultSwayRotation);
-        Quaternion targetRotation = temp * rotX * rotY;
-        swaySettings.swayHolder.localRotation = Quaternion.Lerp(swaySettings.swayHolder.transform.localRotation, targetRotation, Time.deltaTime * swaySettings.swaySmooth);
+        Quaternion horizontalTemp = Quaternion.Euler(defaultHorizontalSwayRotation);
+        Quaternion verticalTemp = Quaternion.Euler(defaultVertitalSwayRotation);
+        Quaternion horizontalTargetRotation = horizontalTemp * rotX;
+        Quaternion verticalTargetRotation = verticalTemp * rotY;
+        swaySettings.horizontalSwayHolder.localRotation = Quaternion.Lerp(swaySettings.horizontalSwayHolder.transform.localRotation, horizontalTargetRotation, Time.deltaTime * swaySettings.swaySmooth);
+        swaySettings.verticalSwayHolder.localRotation = Quaternion.Lerp(swaySettings.verticalSwayHolder.transform.localRotation, verticalTargetRotation, Time.deltaTime * swaySettings.swaySmooth);
 
         xRotationAxisAngle += mouseY;
 
         if (xRotationAxisAngle > cameraSettings.maxVerticalTopViewAngle) {
             xRotationAxisAngle = cameraSettings.maxVerticalTopViewAngle;
             mouseY = 0f;
-            ClampXRotationAxisToValue(verticalCamHolder.transform, -cameraSettings.maxVerticalTopViewAngle);
+            ClampXRotationAxisToValue(verticalHolder.transform, -cameraSettings.maxVerticalTopViewAngle);
         } else if (xRotationAxisAngle < -cameraSettings.maxVerticalBottomViewAngle) {
             xRotationAxisAngle = -cameraSettings.maxVerticalBottomViewAngle;
             mouseY = 0f;
-            ClampXRotationAxisToValue(verticalCamHolder.transform, cameraSettings.maxVerticalBottomViewAngle);
+            ClampXRotationAxisToValue(verticalHolder.transform, cameraSettings.maxVerticalBottomViewAngle);
         }
-        verticalCamHolder.transform.Rotate(Vector3.left * mouseY);
+        verticalHolder.transform.Rotate(Vector3.left * mouseY);
         transform.Rotate(Vector3.up * mouseX);
     }
 
@@ -197,7 +212,7 @@ public class Controller : MonoBehaviourPun {
         transform.position = startPosition;
         transform.rotation = startRotation;
         transform.rotation = Quaternion.identity;
-        cam.transform.localRotation = Quaternion.identity;
+        verticalHolder.localRotation = Quaternion.identity;
         xRotationAxisAngle = 0;
     }
 
@@ -215,8 +230,16 @@ public class Controller : MonoBehaviourPun {
     public void ResetToStart() {
         transform.position = startPosition;
         transform.rotation = startRotation;
-        verticalCamHolder.rotation = Quaternion.identity;
+        verticalHolder.rotation = Quaternion.identity;
         cam.transform.rotation = Quaternion.identity;
+    }
+
+    int GetInvertMultiplier(bool shouldInvert) {
+        int invert = 1;
+        if (shouldInvert) {
+            invert = -1;
+        }
+        return invert;
     }
 
     private void OnCollisionEnter(Collision collision) {
@@ -237,6 +260,7 @@ public class SpeedSettings {
 [System.Serializable]
 public class CameraSettings {
 
+    public bool invertVerticalCam;
     public float mouseSensitivity = 1f;
     //[Range(-90, 180)]
     public float maxVerticalTopViewAngle = 90, maxVerticalBottomViewAngle = 90;
@@ -244,7 +268,7 @@ public class CameraSettings {
 
 [System.Serializable]
 public class SwaySettings {
-    public Transform swayHolder;
+    public Transform horizontalSwayHolder, verticalSwayHolder;
     public float swayIntensity, swaySmooth;
 
     public Vector3 defaultParentRotation, defaultCamHolderRotation;
