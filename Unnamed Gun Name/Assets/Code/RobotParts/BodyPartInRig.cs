@@ -6,5 +6,5 @@ public class BodyPartInRig : MonoBehaviour {
     public BodypartType bodypartType;
 
     [HideInInspector] public int index;
-    [HideInInspector] public CustomRobotPart robotPartAttached;
+    public CustomRobotPart robotPartAttached;
 }
