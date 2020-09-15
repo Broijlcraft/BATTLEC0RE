@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class BodyPartsList : MonoBehaviour {
 
-    [HideInInspector] public BodyPartInRig[] parts;
+    public List<BodyPartInRig> parts = new List<BodyPartInRig>();
     public string jump, run, walk;
     public int GetPartIndex(BodypartType bodypartType) {
         int i = -1;
-        if(parts.Length > 0) {
-            for (i = 0; i < parts.Length; i++) {
+        if(parts.Count > 0) {
+            for (i = 0; i < parts.Count; i++) {
                 if (parts[i].bodypartType == bodypartType) {
                     break;
                 }
@@ -41,7 +41,7 @@ public class BodyPartsListEditor : Editor {
             bool hasDoubles = false;
 
             if(parts.Length > 0) {
-                if (parts.Length == System.Enum.GetValues(typeof(BodyPart)).Length) {
+                if (parts.Length == System.Enum.GetValues(typeof(BodypartType)).Length) {
                     for (int i = 0; i < parts.Length; i++) {
                         BodyPartInRig part = parts[i];
                         string partname = part.bodypartType.ToString();
@@ -56,7 +56,7 @@ public class BodyPartsListEditor : Editor {
                     }
 
                     if (!hasDoubles) {
-                        target_BpList.parts = robotParts.ToArray();
+                        target_BpList.parts = robotParts;
                     } else {
                         string partnames = GetDoubleNames(doublePartsNameList);
                         endMsg = errStartMsg + $"Detected multiple instances of ({partnames})" + errEndMsg + " only once";
