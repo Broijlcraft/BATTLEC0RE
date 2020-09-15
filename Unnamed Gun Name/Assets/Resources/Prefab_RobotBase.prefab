@@ -340,6 +340,12 @@ MonoBehaviour:
     mouseSensitivity: 1
     maxVerticalTopViewAngle: 50
     maxVerticalBottomViewAngle: 60
+  swaySettings:
+    swayHolder: {fileID: 0}
+    swayIntensity: 0
+    swaySmooth: 0
+    defaultParentRotation: {x: 0, y: 0, z: 0}
+    defaultCamHolderRotation: {x: 0, y: 0, z: 0}
   hideCursorOnStart: 1
   keepLocalMeshesEnabled: 1
   canMove: 0
@@ -415,7 +421,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73e5df2ade1ff8e40b490768ae1cf62b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  devView: 1
+  devView: 0
   ready: 0
   myView: {fileID: 0}
 --- !u!114 &2585566474367771789

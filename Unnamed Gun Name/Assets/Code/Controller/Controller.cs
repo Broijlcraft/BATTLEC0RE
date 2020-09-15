@@ -78,11 +78,6 @@ public class Controller : MonoBehaviourPun {
             }
         }
         Init();
-        TurnCollidersOnOff(true);
-
-        if (photonView.IsMine) {
-            defaultSwayRotation = new Vector3(swaySettings.defaultCamHolderRotation.x, swaySettings.defaultParentRotation.y, 0);
-        }
     }
 
     void Init() {
@@ -100,6 +95,8 @@ public class Controller : MonoBehaviourPun {
                 meshObjects.Add(gos[i].gameObject);
             }
             Tools.SetLocalOrGlobalLayers(meshObjects.ToArray(), false);
+            defaultSwayRotation = new Vector3(swaySettings.defaultCamHolderRotation.x, swaySettings.defaultParentRotation.y, 0);
+            TurnCollidersOnOff(true);
         } else {
             rigid.isKinematic = false;
         }
