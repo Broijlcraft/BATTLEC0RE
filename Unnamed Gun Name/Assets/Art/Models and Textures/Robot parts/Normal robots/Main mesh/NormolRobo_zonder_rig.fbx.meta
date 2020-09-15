@@ -51,6 +51,8 @@ ModelImporter:
     100090: Upper chacce.
     100092: Upperleg.L
     100094: Upperleg.R
+    100096: Model_NormalRobotHead.Alt
+    100098: Model_RocketlaucherPW
     400000: Bottom chasse.
     400002: Chassis.
     400004: Feet.L.
@@ -99,8 +101,12 @@ ModelImporter:
     400090: Upper chacce.
     400092: Upperleg.L
     400094: Upperleg.R
+    400096: Model_NormalRobotHead.Alt
+    400098: Model_RocketlaucherPW
     2100000: Mat_NormalRobotBody
     2100002: Mat_NormalRobotEM
+    2100004: Mat_PowerWeaponRobot
+    2100006: Mat_NormalRobotHeadAlt
     2300000: Bottom chasse.
     2300002: Chassis.
     2300004: Feet.L.
@@ -179,6 +185,8 @@ ModelImporter:
     4300046: Upper chacce.ROT.
     4300048: UpperLeg.L.
     4300050: Upperleg.R.
+    4300052: Model_RocketlaucherPW
+    4300054: Model_NormalRobotHead.Alt
     7400000: Normal robot Primary.|robtrecoil_light
     7400002: Walk
     7400004: metarig._Normal robot|Run
@@ -210,6 +218,8 @@ ModelImporter:
     13700046: Upper chacce.ROT.
     13700048: UpperLeg.L.
     13700050: Upperleg.R.
+    13700052: Model_NormalRobotHead.Alt
+    13700054: Model_RocketlaucherPW
     2186277476908879412: ImportLogs
   externalObjects: {}
   materials:
