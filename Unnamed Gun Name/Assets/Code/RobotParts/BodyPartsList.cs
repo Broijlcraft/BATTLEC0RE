@@ -26,10 +26,6 @@ public class BodyPartsListEditor : Editor {
 
     BodyPartsList target_BpList;
     string endMsg = "All parts accounted for and stored, don't forget to save!", errStartMsg = "STOPPED SAVING LIST: ", errEndMsg = " make sure you set all bodypart holders";
-    BodyPartInRig[] parts;
-    List<BodyPartInRig> robotParts = new List<BodyPartInRig>();
-    List<string> partNamesInList = new List<string>(), doublePartsNameList = new List<string>();
-    bool hasDoubles = false;
 
     public void OnEnable() {
         target_BpList = (BodyPartsList)target;
@@ -38,15 +34,13 @@ public class BodyPartsListEditor : Editor {
     public override void OnInspectorGUI() {
         DrawDefaultInspector();
         if (GUILayout.Button("Set bodypart holders")) {
-            parts = target_BpList.GetComponentsInChildren<BodyPartInRig>();
+            BodyPartInRig[] parts = target_BpList.GetComponentsInChildren<BodyPartInRig>();
 
-            robotParts.Clear();
-            partNamesInList.Clear();
-            doublePartsNameList.Clear();
-            hasDoubles = false;
+            List<BodyPartInRig> robotParts = new List<BodyPartInRig>();
+            List<string> partNamesInList = new List<string>(), doublePartsNameList = new List<string>();
+            bool hasDoubles = false;
 
             if(parts.Length > 0) {
-                Debug.Log(hasDoubles);
                 if (parts.Length == System.Enum.GetValues(typeof(BodyPart)).Length) {
                     for (int i = 0; i < parts.Length; i++) {
                         BodyPartInRig part = parts[i];
