@@ -53,6 +53,35 @@ ModelImporter:
     100094: Upperleg.R
     100096: Model_NormalRobotHead.Alt
     100098: Model_RocketlaucherPW
+    100100: Bottom chasse..002
+    100102: Chassis..002
+    100104: Feet.L..002
+    100106: Feet.R..002
+    100108: Gun flaps.R..002
+    100110: Gun vents..002
+    100112: Gunflaps.L..002
+    100114: Head..002
+    100116: Hips.L..002
+    100118: Hips.R..002
+    100120: Left barrel..002
+    100122: Lower arms...002
+    100124: Lower arms..002
+    100126: Lowerleg.L..002
+    100128: Lowerlegs.R..002
+    100130: metarig._Normal robot.002
+    100132: Model_RocketlaucherPW.001
+    100134: Normal robot Primary..002
+    100136: Pincer..002
+    100138: Right barrel..002
+    100140: Secondary barrel\..002
+    100142: Shoulder.R..002
+    100144: Shoulders.L..002
+    100146: Upper arm..L..002
+    100148: Upper arm..R..002
+    100150: Upper chacce.ROT..002
+    100152: UpperLeg.L..002
+    100154: Upperleg.R..002
+    100156: Model_NormalRobotHead.Alt.001
     400000: Bottom chasse.
     400002: Chassis.
     400004: Feet.L.
@@ -103,6 +132,35 @@ ModelImporter:
     400094: Upperleg.R
     400096: Model_NormalRobotHead.Alt
     400098: Model_RocketlaucherPW
+    400100: Bottom chasse..002
+    400102: Chassis..002
+    400104: Feet.L..002
+    400106: Feet.R..002
+    400108: Gun flaps.R..002
+    400110: Gun vents..002
+    400112: Gunflaps.L..002
+    400114: Head..002
+    400116: Hips.L..002
+    400118: Hips.R..002
+    400120: Left barrel..002
+    400122: Lower arms...002
+    400124: Lower arms..002
+    400126: Lowerleg.L..002
+    400128: Lowerlegs.R..002
+    400130: metarig._Normal robot.002
+    400132: Model_RocketlaucherPW.001
+    400134: Normal robot Primary..002
+    400136: Pincer..002
+    400138: Right barrel..002
+    400140: Secondary barrel\..002
+    400142: Shoulder.R..002
+    400144: Shoulders.L..002
+    400146: Upper arm..L..002
+    400148: Upper arm..R..002
+    400150: Upper chacce.ROT..002
+    400152: UpperLeg.L..002
+    400154: Upperleg.R..002
+    400156: Model_NormalRobotHead.Alt.001
     2100000: Mat_NormalRobotBody
     2100002: Mat_NormalRobotEM
     2100004: Mat_PowerWeaponRobot
@@ -187,6 +245,34 @@ ModelImporter:
     4300050: Upperleg.R.
     4300052: Model_RocketlaucherPW
     4300054: Model_NormalRobotHead.Alt
+    4300056: Bottom chasse..002
+    4300058: Chassis..002
+    4300060: Feet.L..002
+    4300062: Feet.R..002
+    4300064: Gun flaps.R..002
+    4300066: Gun vents..002
+    4300068: Gunflaps.L..002
+    4300070: Head..002
+    4300072: Hips.L..002
+    4300074: Hips.R..002
+    4300076: Left barrel..002
+    4300078: Lower arms...002
+    4300080: Lower arms..002
+    4300082: Lowerleg.L..002
+    4300084: Lowerlegs.R..002
+    4300086: Model_RocketlaucherPW.001
+    4300088: Normal robot Primary..002
+    4300090: Pincer..002
+    4300092: Right barrel..002
+    4300094: Secondary barrel\..002
+    4300096: Shoulder.R..002
+    4300098: Shoulders.L..002
+    4300100: Upper arm..L..002
+    4300102: Upper arm..R..002
+    4300104: Upper chacce.ROT..002
+    4300106: UpperLeg.L..002
+    4300108: Upperleg.R..002
+    4300110: Model_NormalRobotHead.Alt.001
     7400000: Normal robot Primary.|robtrecoil_light
     7400002: Walk
     7400004: metarig._Normal robot|Run
@@ -236,6 +322,34 @@ ModelImporter:
     13700050: Upperleg.R.
     13700052: Model_NormalRobotHead.Alt
     13700054: Model_RocketlaucherPW
+    13700056: Bottom chasse..002
+    13700058: Chassis..002
+    13700060: Feet.L..002
+    13700062: Feet.R..002
+    13700064: Gun flaps.R..002
+    13700066: Gun vents..002
+    13700068: Gunflaps.L..002
+    13700070: Head..002
+    13700072: Hips.L..002
+    13700074: Hips.R..002
+    13700076: Left barrel..002
+    13700078: Lower arms...002
+    13700080: Lower arms..002
+    13700082: Lowerleg.L..002
+    13700084: Lowerlegs.R..002
+    13700086: Model_RocketlaucherPW.001
+    13700088: Normal robot Primary..002
+    13700090: Pincer..002
+    13700092: Right barrel..002
+    13700094: Secondary barrel\..002
+    13700096: Shoulder.R..002
+    13700098: Shoulders.L..002
+    13700100: Upper arm..L..002
+    13700102: Upper arm..R..002
+    13700104: Upper chacce.ROT..002
+    13700106: UpperLeg.L..002
+    13700108: Upperleg.R..002
+    13700110: Model_NormalRobotHead.Alt.001
     2186277476908879412: ImportLogs
   externalObjects: {}
   materials:
