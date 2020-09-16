@@ -107,11 +107,11 @@ public class Controller : MonoBehaviourPun {
             rigid.isKinematic = false;
         }
         canMove = true;
+        Debug.LogWarning("(bool)Can Move WAS ACCESSED BY A DEV FUNCTION, CHANGE TO ALTERNATIVE WHEN READY");
         if (hideCursorOnStart) {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
-        Debug.LogWarning("(bool)Can Move WAS ACCESSED BY A DEV FUNCTION, CHANGE TO ALTERNATIVE WHEN READY");
     }
 
     private void Update() {
@@ -150,15 +150,6 @@ public class Controller : MonoBehaviourPun {
             if(vertical == 0 && horizontal == 0) {
                 animator.SetBool(robotParts.walk, false);
                 animator.SetBool(robotParts.sprint, false);
-            }
-
-            if (vertical != 0 || horizontal != 0) {
-                //animator.SetTrigger(robotParts.walk);
-                //if (isSprinting) {
-                //    animator.SetTrigger(robotParts.run);
-                //} else {
-                //    animator.SetTrigger(robotParts.walk);
-                //}
             }
 
             Vector3 newPos = new Vector3(horizontal, 0, vertical) * Time.deltaTime;
