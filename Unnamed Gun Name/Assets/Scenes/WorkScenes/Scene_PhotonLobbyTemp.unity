@@ -328,7 +328,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec019acac1515ee46bddebe44931898b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 8802822912705204548, guid: 5b6e628c6e8cf2d45ac91e7bf5c4ceb3,
+  playerPrefab: {fileID: 766201534296875411, guid: 7cd21258632805b478b7c73aeda3c465,
     type: 3}
   lobbyGameObject: {fileID: 5729545451686540962}
   roomGameObject: {fileID: 740088728}

@@ -9,13 +9,15 @@ public class Manager : MonoBehaviour {
     public bool dev;
     public Text devText;
 
+    string devCheck = "DevCheck";
+
     private void Awake() {
         single_M = this;
         EnableDisableDevText();
     }
 
     private void Update() {
-        if (Input.GetButtonDown("DevMode") && PlayerPrefs.GetString("Developer") == PlayerPrefs.GetString("DevCheck")) {
+        if (Input.GetButtonDown("DevMode") && PlayerPrefs.GetString("Developer") == devCheck) {
             dev = !dev;
             EnableDisableDevText();
         }

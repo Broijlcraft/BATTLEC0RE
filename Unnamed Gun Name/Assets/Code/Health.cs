@@ -69,8 +69,12 @@ public class Health : MonoBehaviourPun {
     }
 
     void UpdateUiHeath() { 
+        float fill = currentHealth / maxHealth;
         if (fillHealthBar) {
-            fillHealthBar.fillAmount = currentHealth / maxHealth;
+            fillHealthBar.fillAmount = fill;
+        }
+        if (photonView.IsMine) {
+            UiManager.single_UM.ingameHealthBar.fillAmount = fill;
         }
     }
 }

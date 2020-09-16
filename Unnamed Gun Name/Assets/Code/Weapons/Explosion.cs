@@ -11,9 +11,9 @@ public class Explosion {
     public float particleDestroyTime;
     public GameObject explosionPrefab;
     
-    public void Explode(Vector3 _originPosition, Quaternion _originRotation, float _damage, float _explosionRange, float _explosionForce) {
+    public void Explode(int playerID, Vector3 _originPosition, Quaternion _originRotation, float _damage, float _explosionRange, float _explosionForce) {
         SetValues(_originPosition, _originRotation, _damage, _explosionRange, _explosionForce);
-        PlayParticles();
+        PlayParticles(playerID);
         Collider[] colls = Physics.OverlapSphere(originPosition, explosionRange);
         for (int i = 0; i < colls.Length; i++) {
             Controller controller;
@@ -37,7 +37,7 @@ public class Explosion {
         explosionForce = _explosionForce;
     }
 
-    void PlayParticles() {
-        ObjectPooler.single_OP.SpawnFromPool(explosionPrefab.name, originPosition, originRotation);
+    void PlayParticles(int playerID) {
+        ObjectPool.single_PT.SpawnFromPool(playerID, explosionPrefab.name, originPosition, originRotation, SyncType.UnSynced);
     }
 }

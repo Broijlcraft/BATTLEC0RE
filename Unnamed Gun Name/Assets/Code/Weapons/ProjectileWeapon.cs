@@ -9,17 +9,16 @@ public class ProjectileWeapon : FireArms {
     public GameObject projectilePrefab;
     public float projectileSpeed;
     public bool isAffectedByGravity;
-    PhotonView myView;
-
-    public override void Awake() {
-        base.Awake();
-        myView = GetComponent<PhotonView>();
-    }
 
     public override void ShootBehaviour(Transform attackOrigin) {
+
         Vector3 attackRotation = GetAttackRotation(attackOrigin, wBehaviour.range);
         Quaternion actualRotation = Quaternion.LookRotation(attackRotation);
         Vector3 pos = transform.position;
-        ObjectPooler.single_OP.GlobalSpawnProjectile(projectilePrefab.name, pos, actualRotation, wBehaviour.damagePerAttack, wBehaviour.range, projectileSpeed, isAffectedByGravity, interactingController.photonView.ViewID);
+        int myNumber = PhotonRoomCustomMatchMaking.roomSingle.myNumberInRoom;
+        float dmg = wBehaviour.damagePerAttack;
+        float range = wBehaviour.range;
+        int viewID = interactingController.photonView.ViewID;
+        ObjectPool.single_PT.GlobalSpawnProjectile(myNumber, projectilePrefab.name, pos, actualRotation, dmg, range, projectileSpeed, isAffectedByGravity, viewID, SyncType.Synced);
     }
 }

@@ -17,8 +17,10 @@ public class Projectile : Interactable, IPoolObject {
     }
 
     private void Update() {
-        if (range < Vector3.Distance(startPoint, transform.position) && inAir) {
-            OutOfRange();
+        if (Tools.OwnerCheck(ownerPV)) {
+            if (range < Vector3.Distance(startPoint, transform.position) && inAir) {
+                OutOfRange();
+            }
         }
     }    
 
@@ -26,13 +28,11 @@ public class Projectile : Interactable, IPoolObject {
         base.OnObjectSpawn();
     }
 
-    public virtual void Launch(float _damage, float _range, float projectileSpeed, bool _isAffectedByGravity, int id) {
+    public virtual void Launch(int playerID, float _damage, float _range, float projectileSpeed, bool _isAffectedByGravity, int photonViewID) {
         startPoint = transform.position;
         range = _range;
-        ownerPV = PhotonNetwork.GetPhotonView(id);
-
-        //print(ownerPV.Owner.NickName);
-
+        ownerPV = PhotonNetwork.GetPhotonView(photonViewID);
+        
         rigid.AddForce(transform.forward * projectileSpeed);
 
         inAir = true;
@@ -53,10 +53,13 @@ public class Projectile : Interactable, IPoolObject {
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (ownerPV && ownerPV.IsMine){
-            OutOfRange();
             print(other.gameObject.name);
+        if (Tools.OwnerCheck(ownerPV)) {
+            print("Local");
+            OutOfRange();
             ownerPV = null;
+        } else {
+            print("No local");
         }
     }
 }

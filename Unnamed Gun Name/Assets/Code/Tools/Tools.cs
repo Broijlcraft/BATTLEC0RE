@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Photon.Pun;
+using UnityEngine;
 
 public static class Tools {
 
@@ -9,6 +10,7 @@ public static class Tools {
     }
 
     public static void SetLocalOrGlobalLayers(GameObject[] gameObjects, bool global) {
+        Debug.Log("Layers");
         int index = TagsAndLayersManager.single_TLM.localPlayerLayerInfo.index;
         SetLayers(gameObjects, index, global);
     }
@@ -38,5 +40,15 @@ public static class Tools {
             b = true;
         }
         return b;
+    }
+
+    public static bool OwnerCheck(PhotonView view) {
+        bool hasOwnerAndIsLocal = false;
+
+        if (view && view.IsMine) {
+            hasOwnerAndIsLocal = true;
+        }
+
+        return hasOwnerAndIsLocal;
     }
 }

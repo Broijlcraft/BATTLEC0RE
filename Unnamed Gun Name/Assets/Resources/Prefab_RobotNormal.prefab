@@ -1515,7 +1515,9 @@ MonoBehaviour:
   cam: {fileID: 2825815812574806008}
   localLayerCam: {fileID: 3758621412712429151}
   horizontalCamHolder: {fileID: 1590061479344516533}
-  verticalHolder: {fileID: 8802822912704843014}
+  verticalBodyRotationHolder: {fileID: 0}
+  horizontalCamRotationHolder: {fileID: 0}
+  verticalCamRotationHolder: {fileID: 0}
   nicknameText: {fileID: 1423958573008753880}
   uiLookAtHolder: {fileID: 3318020795133759929}
   interactRange: 5

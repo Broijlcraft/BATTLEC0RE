@@ -53,6 +53,7 @@ MonoBehaviour:
   - RPC_GlobalSpawnProjectile
   - RPC_ChangeHealth
   - RPC_SetHealth
+  - TestPrint
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0
