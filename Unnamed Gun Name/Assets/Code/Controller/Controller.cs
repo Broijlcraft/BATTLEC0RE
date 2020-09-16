@@ -12,6 +12,7 @@ public class Controller : MonoBehaviourPun {
     public Text nicknameText;
     public Transform uiLookAtHolder;
     public float interactRange;
+    public Animator animator;
 
     [Space]
     public SpeedSettings forwardsSpeedSettings;
@@ -31,7 +32,6 @@ public class Controller : MonoBehaviourPun {
     [HideInInspector] public bool canMove;
     [HideInInspector] public Health health;
     [HideInInspector] public Rigidbody rigid;
-   /* [HideInInspector]*/ public Animator animator;
     [HideInInspector] public Collider[] colliders;
     [HideInInspector] public Vector3 startPosition;
     [HideInInspector] public Quaternion startRotation;
@@ -45,9 +45,12 @@ public class Controller : MonoBehaviourPun {
     Camera[] cams;
     AudioListener audioListeners;
     float currentForwardSprintValue, currentSidewaysSprintValue, xRotationAxisAngle;
-    bool isGrounded;
+    bool isGrounded, isSprinting = false;
 
     Vector3 defaultHorizontalSwayRotation, defaultVertitalSwayRotation;
+
+    [Header("Testing")]
+    public bool disableCamsOnStart;
 
     private void Awake() {
         TurnCollidersOnOff(false);
@@ -69,8 +72,6 @@ public class Controller : MonoBehaviourPun {
         if (PhotonNetwork.IsConnected) {
             photonView.RPC("RPC_SetNicknameTargets", RpcTarget.All);
         }
-
-        print(animator);
     }
 
     private void Start() {
@@ -88,10 +89,12 @@ public class Controller : MonoBehaviourPun {
         startRotation = transform.rotation;
         if (photonView.IsMine || playerView.devView) {
             rigid.useGravity = true;
-            for (int i = 0; i < cams.Length; i++) {
-                //cams[i].enabled = true;
+            if (!disableCamsOnStart) {
+                for (int i = 0; i < cams.Length; i++) {
+                    cams[i].enabled = true;
+                }
+                audioListeners.enabled = true;
             }
-            audioListeners.enabled = true;
             List<GameObject> meshObjects = new List<GameObject>();
             for (int i = 0; i < gos.Length; i++) {
                 meshObjects.Add(gos[i].gameObject);
@@ -135,13 +138,28 @@ public class Controller : MonoBehaviourPun {
     private void FixedUpdate() {
         float speed = Vector3.Distance(transform.position, lastPos) * 50;
         lastPos = transform.position;
-        animator.SetFloat("MoveSpeed", speed);
-        if (((canMove && photonView.IsMine) || playerView.devView) && !health.isDead) { 
+        print(speed);
+        //animator.SetFloat("MoveSpeed", speed);
+        if (((canMove && photonView.IsMine) || playerView.devView) && !health.isDead) {
             Rotate();
 
             SprintCheck();
             float vertical = Input.GetAxis("Vertical") * currentForwardSprintValue * forwardsSpeedSettings.defaultSpeed;
-            float horizontal = Input.GetAxis("Horizontal") * currentSidewaysSprintValue * sidewaysSpeedSettings.defaultSpeed;            
+            float horizontal = Input.GetAxis("Horizontal") * currentSidewaysSprintValue * sidewaysSpeedSettings.defaultSpeed;
+
+            if(vertical == 0 && horizontal == 0) {
+                animator.SetBool(robotParts.walk, false);
+                animator.SetBool(robotParts.sprint, false);
+            }
+
+            if (vertical != 0 || horizontal != 0) {
+                //animator.SetTrigger(robotParts.walk);
+                //if (isSprinting) {
+                //    animator.SetTrigger(robotParts.run);
+                //} else {
+                //    animator.SetTrigger(robotParts.walk);
+                //}
+            }
 
             Vector3 newPos = new Vector3(horizontal, 0, vertical) * Time.deltaTime;
             transform.Translate(newPos);
@@ -155,13 +173,15 @@ public class Controller : MonoBehaviourPun {
         if (Input.GetButton("Sprint")) {
             currentForwardSprintValue = forwardsSpeedSettings.sprintMultiplier;
             currentSidewaysSprintValue = sidewaysSpeedSettings.sprintMultiplier;
-            animator.SetTrigger(robotParts.run);
-            animator.ResetTrigger(robotParts.walk);
+            animator.SetBool(robotParts.sprint, true);
+            animator.SetBool(robotParts.walk, false);
+            isSprinting = true;
         } else {
             currentForwardSprintValue = 1;
             currentSidewaysSprintValue = 1;
-            animator.ResetTrigger(robotParts.run);
-            animator.SetTrigger(robotParts.walk);
+            animator.SetBool(robotParts.sprint, false);
+            animator.SetBool(robotParts.walk, true);
+            isSprinting = false;
         }
     }
 
