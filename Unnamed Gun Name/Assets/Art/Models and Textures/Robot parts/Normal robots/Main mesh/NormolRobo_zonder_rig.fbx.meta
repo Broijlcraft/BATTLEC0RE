@@ -82,6 +82,7 @@ ModelImporter:
     100152: UpperLeg.L..002
     100154: Upperleg.R..002
     100156: Model_NormalRobotHead.Alt.001
+    100158: PW_bone
     400000: Bottom chasse.
     400002: Chassis.
     400004: Feet.L.
@@ -161,6 +162,7 @@ ModelImporter:
     400152: UpperLeg.L..002
     400154: Upperleg.R..002
     400156: Model_NormalRobotHead.Alt.001
+    400158: PW_bone
     2100000: Mat_NormalRobotBody
     2100002: Mat_NormalRobotEM
     2100004: Mat_PowerWeaponRobot
