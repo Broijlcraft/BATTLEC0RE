@@ -1,0 +1,237 @@
+fileFormatVersion: 2
+guid: 95adbc021a5b82442a9967394d4ab08d
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Bottom chasse..002
+    100002: Chassis..002
+    100004: Feet.L
+    100006: Feet.L..002
+    100008: Feet.R
+    100010: Feet.R..002
+    100012: Gun hand
+    100014: Head
+    100016: Head..002
+    100018: HeelIK.L
+    100020: HeelIK.R
+    100022: Hips.L..002
+    100024: Hips.R..002
+    100026: KneeIK.L
+    100028: KneeIK.R
+    100030: L.lower arm
+    100032: L.Upper arm
+    100034: Lower arms...002
+    100036: Lower arms..002
+    100038: Lower chasse
+    100040: Lowerleg.L
+    100042: Lowerleg.L..002
+    100044: Lowerleg.R
+    100046: Lowerlegs.R..002
+    100048: metarig._Normal robot.002
+    100050: Mid chacce
+    100052: Model_NormalRobotHead.Alt.001
+    100054: //RootNode
+    100056: PW_bone
+    100058: R.lower arm
+    100060: R.Upper arm
+    100062: Shoulder.R..002
+    100064: Shoulders.L..002
+    100066: Upper arm..L..002
+    100068: Upper arm..R..002
+    100070: Upper chacce.
+    100072: Upper chacce.ROT..002
+    100074: Upperleg.L
+    100076: UpperLeg.L..002
+    100078: Upperleg.R
+    100080: Upperleg.R..002
+    400000: Bottom chasse..002
+    400002: Chassis..002
+    400004: Feet.L
+    400006: Feet.L..002
+    400008: Feet.R
+    400010: Feet.R..002
+    400012: Gun hand
+    400014: Head
+    400016: Head..002
+    400018: HeelIK.L
+    400020: HeelIK.R
+    400022: Hips.L..002
+    400024: Hips.R..002
+    400026: KneeIK.L
+    400028: KneeIK.R
+    400030: L.lower arm
+    400032: L.Upper arm
+    400034: Lower arms...002
+    400036: Lower arms..002
+    400038: Lower chasse
+    400040: Lowerleg.L
+    400042: Lowerleg.L..002
+    400044: Lowerleg.R
+    400046: Lowerlegs.R..002
+    400048: metarig._Normal robot.002
+    400050: Mid chacce
+    400052: Model_NormalRobotHead.Alt.001
+    400054: //RootNode
+    400056: PW_bone
+    400058: R.lower arm
+    400060: R.Upper arm
+    400062: Shoulder.R..002
+    400064: Shoulders.L..002
+    400066: Upper arm..L..002
+    400068: Upper arm..R..002
+    400070: Upper chacce.
+    400072: Upper chacce.ROT..002
+    400074: Upperleg.L
+    400076: UpperLeg.L..002
+    400078: Upperleg.R
+    400080: Upperleg.R..002
+    2100000: Mat_NormalRobotBody
+    2100002: Mat_NormalRobotEM
+    2100004: Mat_NormalRobotHeadAlt
+    4300000: Bottom chasse..002
+    4300002: Chassis..002
+    4300004: Feet.L..002
+    4300006: Feet.R..002
+    4300008: Head..002
+    4300010: Hips.L..002
+    4300012: Hips.R..002
+    4300014: Lower arms...002
+    4300016: Lower arms..002
+    4300018: Lowerleg.L..002
+    4300020: Lowerlegs.R..002
+    4300022: Shoulder.R..002
+    4300024: Shoulders.L..002
+    4300026: Upper arm..L..002
+    4300028: Upper arm..R..002
+    4300030: Upper chacce.ROT..002
+    4300032: UpperLeg.L..002
+    4300034: Upperleg.R..002
+    4300036: Model_NormalRobotHead.Alt.001
+    7400000: T-pose
+    7400002: Jump naar boven
+    7400004: Falling down
+    7400006: Run
+    7400008: Jump naar boven.001
+    7400010: Falling down.001
+    7400012: Walk.001
+    7400014: robtrecoil_light
+    7400016: robtrecoil_Heavy
+    7400018: robtrecoil_light.001
+    7400020: Idle
+    7400022: IdLE fixed
+    7400024: metarig._Normal robot.002|Falling down
+    7400026: metarig._Normal robot.002|Idle
+    7400028: metarig._Normal robot.002|IdLE fixed
+    7400030: metarig._Normal robot.002|Jump naar boven
+    7400032: metarig._Normal robot.002|Run
+    7400034: metarig._Normal robot.002|T-pose
+    7400036: metarig._Normal robot.002|Walk
+    7400038: metarig._Normal robot.002|robtrecoil_Heavy
+    7400040: Walk
+    9500000: //RootNode
+    13700000: Bottom chasse..002
+    13700002: Chassis..002
+    13700004: Feet.L..002
+    13700006: Feet.R..002
+    13700008: Head..002
+    13700010: Hips.L..002
+    13700012: Hips.R..002
+    13700014: Lower arms...002
+    13700016: Lower arms..002
+    13700018: Lowerleg.L..002
+    13700020: Lowerlegs.R..002
+    13700022: Model_NormalRobotHead.Alt.001
+    13700024: Shoulder.R..002
+    13700026: Shoulders.L..002
+    13700028: Upper arm..L..002
+    13700030: Upper arm..R..002
+    13700032: Upper chacce.ROT..002
+    13700034: UpperLeg.L..002
+    13700036: Upperleg.R..002
+    2186277476908879412: ImportLogs
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
