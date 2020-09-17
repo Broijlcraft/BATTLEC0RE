@@ -8,11 +8,11 @@ using Photon.Pun;
 public class Controller : MonoBehaviourPun {
     public PlayerView playerView;
     public Camera cam, localLayerCam;
-    public Transform horizontalCamHolder, verticalBodyRotationHolder, horizontalCamRotationHolder, verticalCamRotationHolder;
+    public Transform horizontalBodyRotationHolder, verticalChestRotationHolder, horizontalCamRotationHolder, verticalCamRotationHolder;
     public Text nicknameText;
     public Transform uiLookAtHolder;
-    public float interactRange;
     public Animator animator;
+    public float interactRange;
 
     [Space]
     public SpeedSettings forwardsSpeedSettings;
@@ -222,13 +222,13 @@ public class Controller : MonoBehaviourPun {
         if (xRotationAxisAngle > cameraSettings.maxVerticalTopViewAngle) {
             xRotationAxisAngle = cameraSettings.maxVerticalTopViewAngle;
             mouseY = 0f;
-            ClampXRotationAxisToValue(verticalBodyRotationHolder.transform, -cameraSettings.maxVerticalTopViewAngle);
+            ClampXRotationAxisToValue(verticalChestRotationHolder.transform, -cameraSettings.maxVerticalTopViewAngle);
         } else if (xRotationAxisAngle < -cameraSettings.maxVerticalBottomViewAngle) {
             xRotationAxisAngle = -cameraSettings.maxVerticalBottomViewAngle;
             mouseY = 0f;
-            ClampXRotationAxisToValue(verticalBodyRotationHolder.transform, cameraSettings.maxVerticalBottomViewAngle);
+            ClampXRotationAxisToValue(verticalChestRotationHolder.transform, cameraSettings.maxVerticalBottomViewAngle);
         }
-        verticalBodyRotationHolder.transform.Rotate(Vector3.left * mouseY);
+        verticalChestRotationHolder.transform.Rotate(Vector3.left * mouseY);
         transform.Rotate(Vector3.up * mouseX);
     }
 
@@ -263,8 +263,7 @@ public class Controller : MonoBehaviourPun {
     public void ResetToStart() {
         transform.position = startPosition;
         transform.rotation = startRotation;
-        verticalBodyRotationHolder.rotation = Quaternion.identity;
-        cam.transform.rotation = Quaternion.identity;
+        verticalChestRotationHolder.rotation = Quaternion.identity;
     }
 
     int GetInvertMultiplier(bool shouldInvert) {

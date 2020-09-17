@@ -5,4 +5,6 @@ using UnityEngine;
 //use only for bodyparts not weapons.
 public class CustomRobotPart : MonoBehaviour {
     public BodypartType bodypartType;
+    public MeshFilter meshFilter;
+    public MeshRenderer meshRenderer;
 }

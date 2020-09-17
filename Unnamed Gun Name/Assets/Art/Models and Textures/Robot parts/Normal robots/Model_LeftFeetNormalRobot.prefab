@@ -92,3 +92,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bodypartType: 19
+  meshFilter: {fileID: 150005341537833994}
+  meshRenderer: {fileID: 150005341538965194}

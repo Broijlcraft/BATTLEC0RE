@@ -6,5 +6,13 @@ public class BodyPartInRig : MonoBehaviour {
     public BodypartType bodypartType;
 
     [HideInInspector] public int index;
-    public CustomRobotPart robotPartAttached;
+    public CustomRobotPart robotPart;
+    public SkinnedMeshRenderer skinMeshRenderes;
+
+    void Start() {
+        if (robotPart) {
+            skinMeshRenderes.sharedMesh = robotPart.meshFilter.sharedMesh;
+            skinMeshRenderes.materials = robotPart.meshRenderer.sharedMaterials;
+        }
+    }
 }
