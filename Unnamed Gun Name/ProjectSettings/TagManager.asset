@@ -19,7 +19,7 @@ TagManager:
   - LocalPlayerLayer
   - InteractableLayer
   - NoPlayerCollision
-  - 
+  - Walkable
   - 
   - 
   - 
