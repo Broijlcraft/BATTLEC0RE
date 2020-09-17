@@ -1361,6 +1361,22 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: b524d3f1ee10b664888f684888493e10, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c82575b9b9e89843b04bac83338a444, type: 3}
+--- !u!1 &1008508007
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 7707961530978960639}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7707961530978960640}
+  m_Layer: 0
+  m_Name: Missing Prefab (Dummy)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1016644447
 GameObject:
   m_ObjectHideFlags: 0
@@ -1753,6 +1769,38 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1385921373
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 7707961530978960639}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1385921374}
+  m_Layer: 0
+  m_Name: PrimWeapon_NormalRobot (Missing Prefab)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1385921374
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 7707961530978960639}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1385921373}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 7707961530978960640}
+  - {fileID: 1927674753}
+  m_Father: {fileID: 1063858274925926791}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1432983864
 GameObject:
@@ -2355,6 +2403,37 @@ MonoBehaviour:
     amountPerPlayer: 20
   playerPools: []
   maxPlayers: 0
+--- !u!1 &1927674752
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 7707961530978960639}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1927674753}
+  - component: {fileID: 7707961530978960641}
+  m_Layer: 0
+  m_Name: Missing Prefab (Dummy)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1927674753
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 7707961530978960639}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1927674752}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1385921374}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2036426191
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2976,7 +3055,7 @@ Transform:
   m_LocalPosition: {x: 0.8860503, y: 1.464682, z: -0.15980482}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 7707961530978960640}
+  - {fileID: 1385921374}
   m_Father: {fileID: 1432983865}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6673,23 +6752,34 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 93c7e9bbd08b3f145bda6037d504b682, type: 3}
---- !u!4 &7707961530978960640 stripped
+--- !u!4 &7707961530978960640
 Transform:
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 7707961530978960639}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7707961530978960641 stripped
+  m_GameObject: {fileID: 1008508007}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1385921374}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7707961530978960641
 MonoBehaviour:
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 114857322987773282, guid: 93c7e9bbd08b3f145bda6037d504b682,
     type: 3}
   m_PrefabInstance: {fileID: 7707961530978960639}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1927674752}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4ff580baeba53d24b853829464c0f378, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bodypartType: 0
 --- !u!114 &8024506219280312274
 MonoBehaviour:
   m_ObjectHideFlags: 0

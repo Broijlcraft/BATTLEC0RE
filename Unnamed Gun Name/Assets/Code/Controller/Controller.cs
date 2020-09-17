@@ -90,7 +90,9 @@ public class Controller : MonoBehaviourPun {
         startPosition = transform.position;
         startRotation = transform.rotation;
         if (IsMineCheck()) {
-            ObjectPool.single_PT.SetLocalLayers(PhotonRoomCustomMatchMaking.roomSingle.myNumberInRoom);
+            if (PhotonRoomCustomMatchMaking.roomSingle) {
+                ObjectPool.single_PT.SetLocalLayers(PhotonRoomCustomMatchMaking.roomSingle.myNumberInRoom);
+            }
             rigid.useGravity = true;
             if (!disableCamsOnStart) {
                 for (int i = 0; i < cams.Length; i++) {
