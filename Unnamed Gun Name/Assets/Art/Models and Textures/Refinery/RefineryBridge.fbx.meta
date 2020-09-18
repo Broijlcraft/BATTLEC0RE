@@ -5,8 +5,8 @@ ModelImporter:
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
-    2100000: ExportMat_RefineryBridge
-    2100002: ExportMatEM_RefineryBridge
+    2100000: ExportMatEM_RefineryBridge
+    2100002: ExportMat_RefineryBridge
     2100004: ExportMatOP_RefineryBridge
     2300000: //RootNode
     3300000: //RootNode
