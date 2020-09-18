@@ -14,7 +14,7 @@ public class ProjectileWeapon : FireArms {
 
         Vector3 attackRotation = GetAttackRotation(attackOrigin, wBehaviour.range);
         Quaternion actualRotation = Quaternion.LookRotation(attackRotation);
-        Vector3 pos = transform.position;
+        Vector3 pos = weaponBehaviours[0].attackOrigins[0].origin.position;
         int myNumber = PhotonRoomCustomMatchMaking.roomSingle.myNumberInRoom;
         float dmg = wBehaviour.damagePerAttack;
         float range = wBehaviour.range;

@@ -23,7 +23,7 @@ public class Explosion {
                 controller = colls[i].gameObject.GetComponent<Controller>();
             }
             if (controller) {
-                controller.health.DoDamage(damage);
+                controller.health.DoDamage(damage, PhotonRoomCustomMatchMaking.roomSingle.RemoveIdFromNickname(ObjectPool.single_PT.playerPools[playerID].view.Owner.NickName));
                 controller.rigid.AddExplosionForce(explosionForce, originPosition, explosionRange);
             }
         }

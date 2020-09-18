@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Photon.Pun;
+using UnityEngine;
 
 public class Interactable : MonoBehaviour, IPoolObject {
 
@@ -6,6 +7,11 @@ public class Interactable : MonoBehaviour, IPoolObject {
 
     [HideInInspector] public int index;
     [HideInInspector] public Controller interactingController;
+    [HideInInspector] public PhotonView ownerPV, myView;
+
+    public virtual void PhotonInit() {
+        myView = GetComponent<PhotonView>();
+    }
 
     public virtual void Interact(Controller controller) {
         if (!interactingController) {

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5040157483471319015}
   - component: {fileID: 114597118921062316}
   - component: {fileID: 114313474564790046}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Prefab_DevAmmoRPG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,6 +126,8 @@ MonoBehaviour:
   prefab: {fileID: 2251921230218651953}
   index: 0
   interactingController: {fileID: 0}
+  ownerPV: {fileID: 0}
+  myView: {fileID: 0}
   isAffectedByGravity: 0
   explosionForce: 0
   explosionRange: 3

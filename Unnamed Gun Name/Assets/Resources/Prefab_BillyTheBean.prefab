@@ -89,14 +89,14 @@ MonoBehaviour:
   playerView: {fileID: 1761153458948728927}
   cam: {fileID: 7595647503515677790}
   localLayerCam: {fileID: 690390762019578855}
-  horizontalCamHolder: {fileID: 766201534296391091}
-  verticalBodyRotationHolder: {fileID: 5200557320374257036}
-  horizontalCamRotationHolder: {fileID: 0}
+  horizontalBodyRotationHolder: {fileID: 0}
+  verticalChestRotationHolder: {fileID: 5200557320374257036}
+  horizontalCamRotationHolder: {fileID: 7471538226162531173}
   verticalCamRotationHolder: {fileID: 7471538226162531173}
   nicknameText: {fileID: 6703715164598437452}
   uiLookAtHolder: {fileID: 7728621727011601535}
-  interactRange: 5
   animator: {fileID: 0}
+  interactRange: 5
   forwardsSpeedSettings:
     defaultSpeed: 10
     sprintMultiplier: 1.3
@@ -172,6 +172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0898ec6e5eb0ff14a9f12948d4ab0c16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentRobotPartSet: {fileID: 0}
   parts: []
   jump: 
   sprint: 
@@ -564,7 +565,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 6967
+    m_Bits: 15159
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0

@@ -8,7 +8,7 @@ public class UiManager : MonoBehaviour {
 
     public GameObject respawnUiHolder;
     public Animator respawnAnim;
-    public Text respawnTimer;
+    public Text respawnTimer, killText;
     public Image ingameHealthBar;
 
     private void Awake() {

@@ -8,16 +8,16 @@ public class Projectile : Interactable, IPoolObject {
     Rigidbody rigid;
     Vector3 startPoint;
     float range;
-    PhotonView ownerPV;
 
-    private void Awake() {
-        if (!rigid) {
+    public void Awake() {
+        if (!rigid) {   
             rigid = GetComponent<Rigidbody>();
         }
+        PhotonInit();
     }
 
     private void Update() {
-        if (Tools.OwnerCheck(ownerPV)) {
+        if (true || Tools.OwnerCheck(ownerPV)) {
             if (range < Vector3.Distance(startPoint, transform.position) && inAir) {
                 OutOfRange();
             }
@@ -54,12 +54,13 @@ public class Projectile : Interactable, IPoolObject {
 
     private void OnTriggerEnter(Collider other) {
             print(other.gameObject.name);
-        if (Tools.OwnerCheck(ownerPV)) {
-            print("Local");
+        //if (Tools.OwnerCheck(ownerPV)) {
+        //    print("Local");
+        //    OutOfRange();
+        //    ownerPV = null;
+        //} else {
+        //    print("No local");
+        //}
             OutOfRange();
-            ownerPV = null;
-        } else {
-            print("No local");
-        }
     }
 }

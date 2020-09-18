@@ -54,6 +54,7 @@ MonoBehaviour:
   - RPC_ChangeHealth
   - RPC_SetHealth
   - TestPrint
+  - OutOfRange
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0

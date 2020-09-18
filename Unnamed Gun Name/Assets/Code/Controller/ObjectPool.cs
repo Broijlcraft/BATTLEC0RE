@@ -48,10 +48,8 @@ public class ObjectPool : MonoBehaviourPun {
         return tempPoolDictionary;
     }
 
-    public void SetLocalLayers(int playerID) {
-        PlayerPool pp = playerPools[playerID];
-        int count = pp.syncedPoolDictionary.Count;
-
+    public void SetLocalLayers(int playerID, int photonViewID) {
+        playerPools[playerID].view = PhotonNetwork.GetPhotonView(photonViewID);
     }
 
     #endregion
@@ -128,6 +126,7 @@ public class ObjectPool : MonoBehaviourPun {
 [System.Serializable]
 public class PlayerPool {
 
+    public PhotonView view;
     public Dictionary<string, Queue<GameObject>> unSyncedPoolDictionary = new Dictionary<string, Queue<GameObject>>();
     public Dictionary<string, Queue<GameObject>> syncedPoolDictionary = new Dictionary<string, Queue<GameObject>>();
 }

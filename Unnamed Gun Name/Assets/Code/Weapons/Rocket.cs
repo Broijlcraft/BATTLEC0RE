@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class Rocket : Projectile {
 
@@ -9,10 +10,15 @@ public class Rocket : Projectile {
     public Explosion explosionInfo;
     int playerID;
 
-    public override void Launch(int playerID, float _damage, float _range, float projectileSpeed, bool _isAffectedByGravity, int photonViewID) {
-        damage = _damage;
-        this.playerID = playerID;
-        base.Launch(playerID, _damage, _range, projectileSpeed, _isAffectedByGravity, photonViewID);
+    public override void Launch(int playerID_, float _damage, float _range, float projectileSpeed, bool _isAffectedByGravity, int photonViewID) {
+        playerID = playerID_;
+        base.Launch(playerID_, _damage, _range, projectileSpeed, _isAffectedByGravity, photonViewID);
+
+        if (Tools.OwnerCheck(PhotonNetwork.GetPhotonView(photonViewID))) {
+            damage = _damage;
+        } else {
+            damage = 0;
+        }
     }
 
     public override void OutOfRange() {

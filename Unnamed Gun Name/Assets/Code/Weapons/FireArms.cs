@@ -47,7 +47,7 @@ public class FireArms : Weapon {
         if (Physics.Raycast(attackOrigin.position, attackRot, out hit, wBehaviour.range, ~TagsAndLayersManager.single_TLM.localPlayerLayerInfo.layerMask)) {
             Health health = hit.transform.GetComponent<Health>();
             if (health) {
-                health.DoDamage(wBehaviour.damagePerAttack);
+                health.DoDamage(wBehaviour.damagePerAttack, PhotonRoomCustomMatchMaking.roomSingle.RemoveIdFromNickname(interactingController.photonView.Owner.NickName));
             }
         }
     }

@@ -35,19 +35,19 @@ public class Health : MonoBehaviourPun {
         if (!Manager.single_M.dev) {
             controller.ResetAtStartPosition();
         }
-        photonView.RPC("RPC_ChangeHealth", RpcTarget.All, maxHealth, 1);
+        photonView.RPC("RPC_ChangeHealth", RpcTarget.All, maxHealth, 1, "");
         isDead = false;
         respawning = false;
     }
 
-    public void DoDamage(float value) {
+    public void DoDamage(float value, string killer) {
         if (!isDead) {
-            photonView.RPC("RPC_ChangeHealth", RpcTarget.All, value, 0);
+            photonView.RPC("RPC_ChangeHealth", RpcTarget.All, value, 0, killer);
         }
     }
 
     [PunRPC]
-    void RPC_ChangeHealth(float value, int add) {
+    void RPC_ChangeHealth(float value, int add, string killer) {
         if (add == 1) {
             currentHealth += value;
         } else {
@@ -56,6 +56,8 @@ public class Health : MonoBehaviourPun {
         if (currentHealth <= 0) {
             isDead = true;
             currentHealth = 0;
+            string nickname = photonView.Owner.NickName;
+            KillFeed(PhotonRoomCustomMatchMaking.roomSingle.RemoveIdFromNickname(nickname), killer);
             if (photonView.IsMine) {
                 if (!respawning) {
                     respawning = true;
@@ -63,9 +65,16 @@ public class Health : MonoBehaviourPun {
                 }
             }
         } else {
-            isDead = false;
+            if (!isDead) {
+                isDead = false;
+            }
         }
         UpdateUiHeath();
+    }
+
+    void KillFeed(string victim, string killer) {
+        string time = "["+System.DateTime.Now.Hour+":"+System.DateTime.Now.Minute+":"+System.DateTime.Now.Second+"]";
+        UiManager.single_UM.killText.text = time + killer + " killed " + victim;
     }
 
     void UpdateUiHeath() { 

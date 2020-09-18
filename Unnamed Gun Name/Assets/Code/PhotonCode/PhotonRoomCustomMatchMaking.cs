@@ -14,7 +14,7 @@ public class PhotonRoomCustomMatchMaking : MonoBehaviourPunCallbacks, IInRoomCal
 
     public int currentScene;
     [Space]
-    Player[] photonPlayers;
+    public Player[] photonPlayers;
 
     [Header("HideInInspector")]
     public bool isLoaded;
@@ -51,6 +51,7 @@ public class PhotonRoomCustomMatchMaking : MonoBehaviourPunCallbacks, IInRoomCal
         playersInRoom = photonPlayers.Length;
         ClearPlayerListings();
         myNumberInRoom = playersInRoom;
+        TeamsTest();
         ListPlayers();
         if (lobbyGameObject) {
             lobbyGameObject.SetActive(false);
@@ -83,9 +84,28 @@ public class PhotonRoomCustomMatchMaking : MonoBehaviourPunCallbacks, IInRoomCal
         }
 
         ClearPlayerListings();
+        TeamsTest();
         ListPlayers();
 
         playersInRoom++;
+    }
+
+    void TeamsTest() {
+        if (PhotonNetwork.InRoom) {
+            photonPlayers = PhotonNetwork.PlayerList;
+            TeamManager.single_TM.teams[0].playerNames.Clear();
+            TeamManager.single_TM.teams[1].playerNames.Clear();
+            for (int i = 0; i < photonPlayers.Length; i++) {
+                int index;
+                if (i % 2 == 0) {
+                    index = 0;
+                } else {
+                    index = 1;
+                }
+                TeamManager.single_TM.teams[index].playerNames.Add(photonPlayers[i].NickName);
+                print(photonPlayers[i].NickName);
+            }
+        }
     }
 
     void ClearPlayerListings() {
@@ -101,8 +121,13 @@ public class PhotonRoomCustomMatchMaking : MonoBehaviourPunCallbacks, IInRoomCal
             for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++) {
                 GameObject tempNickNameObject = Instantiate(playerListingPrefab, playersPanel);
                 ScriptPlayerListing spl = tempNickNameObject.GetComponent<ScriptPlayerListing>();
-                string nickname = RemoveIdFromNickname(PhotonNetwork.PlayerList[i].NickName);
-                spl.text_Nickname.text = nickname;
+                string nickname = PhotonNetwork.PlayerList[i].NickName;
+                string cleanedNickname = RemoveIdFromNickname(nickname);
+                spl.text_Nickname.text = cleanedNickname;
+                int index = TeamManager.single_TM.GetTeamIndex(nickname);
+                if(index >= 0) {
+                    spl.img.color = TeamManager.single_TM.teams[index].teamColor;
+                }
             }
         }
     }
@@ -154,6 +179,7 @@ public class PhotonRoomCustomMatchMaking : MonoBehaviourPunCallbacks, IInRoomCal
         playersInRoom--;
         ClearPlayerListings();
         ListPlayers();
+        TeamsTest();
     }
 
     [PunRPC]
