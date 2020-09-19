@@ -11,14 +11,16 @@ public class ProjectileWeapon : FireArms {
     public bool isAffectedByGravity;
 
     public override void ShootBehaviour(Transform attackOrigin) {
-
         Vector3 attackRotation = GetAttackRotation(attackOrigin, wBehaviour.range);
         Quaternion actualRotation = Quaternion.LookRotation(attackRotation);
-        Vector3 pos = weaponBehaviours[0].attackOrigins[0].origin.position;
-        int myNumber = PhotonRoomCustomMatchMaking.roomSingle.myNumberInRoom;
+
+        int behaviourIndex = GetBehaviourIndex(this);
+        WeaponBehaviour behaviour = weaponBehaviours[behaviourIndex];
+
+        Vector3 pos = weaponBehaviours[behaviourIndex].attackOrigins[behaviour.currentAo].origin.position;
+        int playerID = PhotonRoomCustomMatchMaking.roomSingle.myNumberInRoom;
         float dmg = wBehaviour.damagePerAttack;
         float range = wBehaviour.range;
-        int viewID = interactingController.photonView.ViewID;
-        ObjectPool.single_PT.GlobalSpawnProjectile(myNumber, projectilePrefab.name, pos, actualRotation, dmg, range, projectileSpeed, isAffectedByGravity, viewID, SyncType.Synced);
+        ObjectPool.single_PT.GlobalSpawnProjectile(playerID, projectilePrefab.name, pos, actualRotation, dmg, range, projectileSpeed, isAffectedByGravity, SyncType.Synced);
     }
 }

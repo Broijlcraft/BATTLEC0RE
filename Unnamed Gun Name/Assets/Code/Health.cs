@@ -57,7 +57,7 @@ public class Health : MonoBehaviourPun {
             isDead = true;
             currentHealth = 0;
             string nickname = photonView.Owner.NickName;
-            KillFeed(PhotonRoomCustomMatchMaking.roomSingle.RemoveIdFromNickname(nickname), killer);
+            KillFeed(Tools.RemoveIdFromNickname(nickname), killer);
             if (photonView.IsMine) {
                 if (!respawning) {
                     respawning = true;

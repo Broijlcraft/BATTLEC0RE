@@ -37,7 +37,8 @@ public class WeaponController : MonoBehaviourPun {
         float scroll = Input.GetAxis("Mouse ScrollWheel");
         if(!isAttaching && !isDetaching && scroll != 0 && primaryWeaponsHolder.weaponAttached && photonView.IsMine) {
             if (!isChangingBehaviour) {
-                int behaviourIndex = InteractableActions.ia_Single.GetBehaviourIndex(primaryWeaponsHolder.weaponAttached);
+                Weapon weapon = primaryWeaponsHolder.weaponAttached;
+                int behaviourIndex = weapon.GetBehaviourIndex(weapon);
                 InteractableActions.ia_Single.SwitchWeaponBehaviour(photonView.ViewID, behaviourIndex);
             }
         }
@@ -65,7 +66,7 @@ public class WeaponController : MonoBehaviourPun {
             Weapon weapon = holder.weaponAttached;
             if (weapon && (weapon.weaponType != WeaponType.Primary || (weapon.weaponType == WeaponType.Primary && !isChangingBehaviour))) {
                 bool buttonPressed = false;
-                int behaviourIndex = InteractableActions.ia_Single.GetBehaviourIndex(weapon);
+                int behaviourIndex = weapon.GetBehaviourIndex(weapon);
                 switch (weapon.weaponBehaviours[behaviourIndex].attackType) {
                     case AttackType.Automatic:
                     if (Input.GetMouseButton(mouseInput)) {

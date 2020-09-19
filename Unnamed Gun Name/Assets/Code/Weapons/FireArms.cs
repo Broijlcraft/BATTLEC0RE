@@ -47,7 +47,7 @@ public class FireArms : Weapon {
         if (Physics.Raycast(attackOrigin.position, attackRot, out hit, wBehaviour.range, ~TagsAndLayersManager.single_TLM.localPlayerLayerInfo.layerMask)) {
             Health health = hit.transform.GetComponent<Health>();
             if (health) {
-                health.DoDamage(wBehaviour.damagePerAttack, PhotonRoomCustomMatchMaking.roomSingle.RemoveIdFromNickname(interactingController.photonView.Owner.NickName));
+                health.DoDamage(wBehaviour.damagePerAttack, Tools.RemoveIdFromNickname(interactingController.photonView.Owner.NickName));
             }
         }
     }
@@ -63,6 +63,17 @@ public class FireArms : Weapon {
 
         Vector3 dir = attackPos - origin.position;
         return dir;
+    }
+
+    public override int GetBehaviourIndex(Weapon weapon) {
+        int index = 0;
+        if (weapon.weaponType == WeaponType.Primary) {
+            FireArms prim = weapon as FireArms;
+            if (prim.weaponBehaviours.Length > 0 && prim.currentActiveWeapon == ActiveWeapon.secondary) {
+                index = 1;
+            }
+        }
+        return index;
     }
 }
 

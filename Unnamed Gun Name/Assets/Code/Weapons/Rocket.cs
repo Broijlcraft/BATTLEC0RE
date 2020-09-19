@@ -10,11 +10,11 @@ public class Rocket : Projectile {
     public Explosion explosionInfo;
     int playerID;
 
-    public override void Launch(int playerID_, float _damage, float _range, float projectileSpeed, bool _isAffectedByGravity, int photonViewID) {
+    public override void Launch(int playerID_, float _damage, float _range, float projectileSpeed, bool _isAffectedByGravity) {
         playerID = playerID_;
-        base.Launch(playerID_, _damage, _range, projectileSpeed, _isAffectedByGravity, photonViewID);
+        base.Launch(playerID_, _damage, _range, projectileSpeed, _isAffectedByGravity);
 
-        if (Tools.OwnerCheck(PhotonNetwork.GetPhotonView(photonViewID))) {
+        if (Tools.OwnerCheck(ObjectPool.single_PT.GetPhotonView(playerID))) {
             damage = _damage;
         } else {
             damage = 0;

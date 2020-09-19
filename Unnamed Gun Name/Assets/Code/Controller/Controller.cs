@@ -91,7 +91,7 @@ public class Controller : MonoBehaviourPun {
         startRotation = transform.rotation;
         if (IsMineCheck()) {
             if (PhotonRoomCustomMatchMaking.roomSingle) {
-                ObjectPool.single_PT.SetLocalLayers(PhotonRoomCustomMatchMaking.roomSingle.myNumberInRoom, photonView.ViewID);
+                ObjectPool.single_PT.SetPoolOwners(PhotonRoomCustomMatchMaking.roomSingle.myNumberInRoom, photonView.ViewID);
             }
             rigid.useGravity = true;
             if (!disableCamsOnStart) {
@@ -137,7 +137,7 @@ public class Controller : MonoBehaviourPun {
             Controller[] controllers = FindObjectsOfType<Controller>();
             for (int i = 0; i < controllers.Length; i++) {
                 controllers[i].nicknameTarget = cam.transform;
-                controllers[i].nicknameText.text = PhotonRoomCustomMatchMaking.roomSingle.RemoveIdFromNickname(controllers[i].photonView.Owner.NickName);
+                controllers[i].nicknameText.text = Tools.RemoveIdFromNickname(controllers[i].photonView.Owner.NickName);
                 int index = TeamManager.single_TM.GetTeamIndex(controllers[i].photonView.Owner.NickName);
                 if(index >= 0) {
                     controllers[i].nicknameText.color = TeamManager.single_TM.teams[index].teamColor;

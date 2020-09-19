@@ -122,7 +122,7 @@ public class PhotonRoomCustomMatchMaking : MonoBehaviourPunCallbacks, IInRoomCal
                 GameObject tempNickNameObject = Instantiate(playerListingPrefab, playersPanel);
                 ScriptPlayerListing spl = tempNickNameObject.GetComponent<ScriptPlayerListing>();
                 string nickname = PhotonNetwork.PlayerList[i].NickName;
-                string cleanedNickname = RemoveIdFromNickname(nickname);
+                string cleanedNickname = Tools.RemoveIdFromNickname(nickname);
                 spl.text_Nickname.text = cleanedNickname;
                 int index = TeamManager.single_TM.GetTeamIndex(nickname);
                 if(index >= 0) {
@@ -130,29 +130,6 @@ public class PhotonRoomCustomMatchMaking : MonoBehaviourPunCallbacks, IInRoomCal
                 }
             }
         }
-    }
-
-    public string RemoveIdFromNickname(string nickname) {
-        return RemoveIdFromNickname(CharArrayToList(nickname.ToCharArray()));
-    }
-
-    public string RemoveIdFromNickname(List<char> characterList) {
-        string nickName = "";
-        for (int iB = 0; iB < characterList.Count; iB++) {
-            if (characterList[iB].ToString() == "#") {
-                break;
-            }
-            nickName += characterList[iB];
-        }
-        return nickName;
-    }
-
-    List<char> CharArrayToList(char[] chars) {
-        List<char> tempList = new List<char>();
-        for (int i = 0; i < chars.Length; i++) {
-            tempList.Add(chars[i]);
-        }
-        return tempList;
     }
 
     public void StartGame() {

@@ -18,7 +18,9 @@ public class PhotonLobbyCustomMatchMaking : MonoBehaviourPunCallbacks, ILobbyCal
     public Text roomNameText, createRoomFailed;
     public string beforeRoomName;
 
-    bool enteredNickname, enteredRoomName, connectedToMaster = false, roomNameNotAvailable;
+    [HideInInspector] public bool enteredNickname;
+
+    bool enteredRoomName, connectedToMaster = false, roomNameNotAvailable;
 
     public DevLobby devLobby;
 

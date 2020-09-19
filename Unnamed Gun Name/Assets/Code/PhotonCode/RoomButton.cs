@@ -19,10 +19,12 @@ public class RoomButton : MonoBehaviour {
     }
 
     public void JoinRoomOnClick() {
-        if (PhotonNetwork.IsConnected) {
-            PhotonNetwork.JoinRoom(roomName);
-        } else {
-            Debug.LogWarning("Please wait, you are still being connected to the PhotonNetwork");
+        if (PhotonLobbyCustomMatchMaking.lobbySingle.enteredNickname) {
+            if (PhotonNetwork.IsConnected) {
+                PhotonNetwork.JoinRoom(roomName);
+            } else {
+                Debug.LogWarning("Please wait, you are still being connected to the PhotonNetwork");
+            }
         }
     }
 }

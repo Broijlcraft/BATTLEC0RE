@@ -55,6 +55,12 @@ public class Weapon : Interactable {
             transform.SetParent(startParent);
         }
     }
+
+    public virtual int GetBehaviourIndex(Weapon weapon) {
+        int index = 0;
+
+        return index;
+    }
 }
 
 [System.Serializable]

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using Photon.Pun;
 
 public class Manager : MonoBehaviour {
     public static Manager single_M;
@@ -17,7 +18,9 @@ public class Manager : MonoBehaviour {
     }
 
     private void Update() {
-        if (Input.GetButtonDown("DevMode") && PlayerPrefs.GetString("Developer") == devCheck) {
+        string nickname = PhotonNetwork.LocalPlayer.NickName;
+        nickname = Tools.RemoveIdFromNickname(nickname);
+        if (Input.GetButtonDown("DevMode") && Devs.IsDev(nickname)) { 
             dev = !dev;
             EnableDisableDevText();
         }

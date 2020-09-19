@@ -8,19 +8,6 @@ public class InteractableActions : MonoBehaviourPun {
         ia_Single = this;
     }
 
-    //local functions
-
-    public int GetBehaviourIndex(Weapon weapon) {
-        int index = 0;
-        if (weapon.weaponType == WeaponType.Primary) {
-            FireArms prim = weapon as FireArms;
-            if (prim.weaponBehaviours.Length > 0 && prim.currentActiveWeapon == ActiveWeapon.secondary) {
-                index = 1;
-            }
-        }
-        return index;
-    }
-
     //rpc functions
 
     public void DestroyIa(int index, float time, RpcTarget selectedTarget) {

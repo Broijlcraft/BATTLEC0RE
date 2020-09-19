@@ -28,10 +28,10 @@ public class Projectile : Interactable, IPoolObject {
         base.OnObjectSpawn();
     }
 
-    public virtual void Launch(int playerID, float _damage, float _range, float projectileSpeed, bool _isAffectedByGravity, int photonViewID) {
+    public virtual void Launch(int playerID, float _damage, float _range, float projectileSpeed, bool _isAffectedByGravity) {
         startPoint = transform.position;
         range = _range;
-        ownerPV = PhotonNetwork.GetPhotonView(photonViewID);
+        ownerPV = ObjectPool.single_PT.GetPhotonView(playerID);
         
         rigid.AddForce(transform.forward * projectileSpeed);
 

@@ -51,4 +51,17 @@ public static class Tools {
 
         return hasOwnerAndIsLocal;
     }
+
+    public static string RemoveIdFromNickname(string nickname) {
+        char[] characterList = nickname.ToCharArray();
+        string finalNickname = "";
+        for (int iB = 0; iB < characterList.Length; iB++) {
+            if (characterList[iB].ToString() == "#") {
+                break;
+            }
+            finalNickname += characterList[iB];
+        }
+        return finalNickname;
+    }
+
 }

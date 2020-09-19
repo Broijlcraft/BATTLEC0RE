@@ -48,25 +48,25 @@ public class ObjectPool : MonoBehaviourPun {
         return tempPoolDictionary;
     }
 
-    public void SetLocalLayers(int playerID, int photonViewID) {
+    public void SetPoolOwners(int playerID, int photonViewID) {
         playerPools[playerID].view = PhotonNetwork.GetPhotonView(photonViewID);
     }
 
     #endregion
 
-    public void GlobalSpawnProjectile(int playerID, string tag, Vector3 pos, Quaternion rot, float damage, float range, float projectileSpeed, bool _isAffectedByGravity, int photonViewID, SyncType poolSyncType) {
+    public void GlobalSpawnProjectile(int playerID, string tag, Vector3 pos, Quaternion rot, float damage, float range, float projectileSpeed, bool _isAffectedByGravity, SyncType poolSyncType) {
         int isAffectedByGravity = Tools.BoolToInt(_isAffectedByGravity);
         int syncType = (int)poolSyncType;
-        photonView.RPC("RPC_GlobalSpawnProjectile", RpcTarget.All, playerID, tag, pos, rot, damage, range, projectileSpeed, isAffectedByGravity, photonViewID, syncType);
+        photonView.RPC("RPC_GlobalSpawnProjectile", RpcTarget.All, playerID, tag, pos, rot, damage, range, projectileSpeed, isAffectedByGravity, syncType);
     }
 
     [PunRPC]
-    void RPC_GlobalSpawnProjectile(int playerID, string tag, Vector3 pos, Quaternion rot, float damage, float range, float projectileSpeed, int _isAffectedByGravity, int photonViewID, SyncType poolSyncType) {
+    void RPC_GlobalSpawnProjectile(int playerID, string tag, Vector3 pos, Quaternion rot, float damage, float range, float projectileSpeed, int _isAffectedByGravity, SyncType poolSyncType) {
         bool isAffectedByGravity = Tools.IntToBool(_isAffectedByGravity);
         GameObject projObject = SpawnFromPool(playerID, tag, pos, rot, poolSyncType);
         if (projObject) {
             Projectile proj = projObject.GetComponent<Projectile>();
-            proj.Launch(playerID, damage, range, projectileSpeed, isAffectedByGravity, photonViewID);
+            proj.Launch(playerID, damage, range, projectileSpeed, isAffectedByGravity);
         }
     }
 
@@ -97,6 +97,10 @@ public class ObjectPool : MonoBehaviourPun {
             }
         }
         return returnObject;
+    }
+
+    public PhotonView GetPhotonView(int playerID) {
+        return playerPools[playerID].view;
     }
 
     GameObject GetPooledObject(int playerID, string tag, SyncType poolSyncType) {
