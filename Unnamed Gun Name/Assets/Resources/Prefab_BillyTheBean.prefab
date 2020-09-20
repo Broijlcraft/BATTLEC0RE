@@ -192,7 +192,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 50
   fillHealthBar: {fileID: 4950929905776705223}
-  respawnTime: 3
+  respawnTime: 1
   isDead: 0
   respawning: 0
   currentHealth: 0

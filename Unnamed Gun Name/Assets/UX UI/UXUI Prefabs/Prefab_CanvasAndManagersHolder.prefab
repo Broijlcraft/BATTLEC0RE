@@ -227,7 +227,7 @@ RectTransform:
   - {fileID: 3573544093526274457}
   - {fileID: 4397434772228988063}
   - {fileID: 4248278722022606617}
-  - {fileID: 6956389441331998373}
+  - {fileID: 1365735482185308253}
   m_Father: {fileID: 1277910732069287030}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -421,7 +421,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!1 &1798337748391471594
+--- !u!1 &2231951186183440440
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -429,23 +429,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6956389441331998373}
-  - component: {fileID: 2180245776847888416}
-  - component: {fileID: 4382062096215608699}
+  - component: {fileID: 1365735482185308253}
+  - component: {fileID: 3589812775647583188}
   m_Layer: 5
-  m_Name: Text_KillFeed
+  m_Name: Holder_KillFeed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &6956389441331998373
+--- !u!224 &1365735482185308253
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1798337748391471594}
+  m_GameObject: {fileID: 2231951186183440440}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -455,49 +454,32 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -32, y: 1}
-  m_SizeDelta: {x: 180, y: 60}
+  m_AnchoredPosition: {x: -10, y: 54.7}
+  m_SizeDelta: {x: 540, y: 300}
   m_Pivot: {x: 1, y: 0.5}
---- !u!222 &2180245776847888416
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1798337748391471594}
-  m_CullTransparentMesh: 0
---- !u!114 &4382062096215608699
+--- !u!114 &3589812775647583188
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1798337748391471594}
+  m_GameObject: {fileID: 2231951186183440440}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: 1297475563, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 0
-    m_FontStyle: 0
-    m_BestFit: 1
-    m_MinSize: 0
-    m_MaxSize: 40
-    m_Alignment: 5
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 1
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 7
+  m_Spacing: 0
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 0
+  m_ChildControlWidth: 1
+  m_ChildControlHeight: 0
 --- !u!1 &2813908367716892327
 GameObject:
   m_ObjectHideFlags: 0
@@ -942,8 +924,15 @@ MonoBehaviour:
   respawnUiHolder: {fileID: 1249356211877277299}
   respawnAnim: {fileID: 869226483084412224}
   respawnTimer: {fileID: 8823917797271119452}
-  killText: {fileID: 4382062096215608699}
   ingameHealthBar: {fileID: 2752221654220588644}
+  maxKillsInFeed: 5
+  defaultWeaponIconInFeed: {fileID: 21300000, guid: f2415fc32e21e8340a33e72064d582e4,
+    type: 3}
+  defaultHeadshotIconInFeed: {fileID: 21300000, guid: 453ec811ee94a93498dac8bf9a18675e,
+    type: 3}
+  killFeed: {fileID: 1365735482185308253}
+  killfeedListingPrefab: {fileID: 5276165136791431218, guid: 2da4dd93419ce7043a5a9923abb8e063,
+    type: 3}
 --- !u!114 &4240788520195863098
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -53,7 +53,6 @@ public class Projectile : Interactable, IPoolObject {
     }
 
     private void OnTriggerEnter(Collider other) {
-            print(other.gameObject.name);
         //if (Tools.OwnerCheck(ownerPV)) {
         //    print("Local");
         //    OutOfRange();
@@ -61,6 +60,6 @@ public class Projectile : Interactable, IPoolObject {
         //} else {
         //    print("No local");
         //}
-            OutOfRange();
+        OutOfRange();
     }
 }

@@ -671,19 +671,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1249356211877277299, guid: bc245b06311918d48804c641f6413e55,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1277910731342137114, guid: bc245b06311918d48804c641f6413e55,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1277910731342137115, guid: bc245b06311918d48804c641f6413e55,
-        type: 3}
-      propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1277910732069287029, guid: bc245b06311918d48804c641f6413e55,
@@ -729,7 +719,7 @@ PrefabInstance:
     - target: {fileID: 1277910732069287030, guid: bc245b06311918d48804c641f6413e55,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1277910732069287030, guid: bc245b06311918d48804c641f6413e55,
         type: 3}
@@ -2339,7 +2329,7 @@ MonoBehaviour:
   m_LineType: 0
   m_HideMobileInput: 0
   m_CharacterValidation: 4
-  m_CharacterLimit: 0
+  m_CharacterLimit: 20
   m_OnEndEdit:
     m_PersistentCalls:
       m_Calls:
@@ -2523,7 +2513,7 @@ RectTransform:
   - {fileID: 5729545451686540963}
   - {fileID: 740088729}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

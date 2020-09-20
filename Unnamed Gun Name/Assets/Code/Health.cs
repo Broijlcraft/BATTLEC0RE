@@ -73,8 +73,7 @@ public class Health : MonoBehaviourPun {
     }
 
     void KillFeed(string victim, string killer) {
-        string time = "["+System.DateTime.Now.Hour+":"+System.DateTime.Now.Minute+":"+System.DateTime.Now.Second+"]";
-        UiManager.single_UM.killText.text = time + killer + " killed " + victim;
+        UiManager.single_UM.AddKillToFeed(System.DateTime.Now.Second + killer, victim, null, null, true);
     }
 
     void UpdateUiHeath() { 

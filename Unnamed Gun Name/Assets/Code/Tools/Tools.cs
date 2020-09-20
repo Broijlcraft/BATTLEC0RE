@@ -10,7 +10,6 @@ public static class Tools {
     }
 
     public static void SetLocalOrGlobalLayers(GameObject[] gameObjects, bool global) {
-        Debug.Log("Layers");
         int index = TagsAndLayersManager.single_TLM.localPlayerLayerInfo.index;
         SetLayers(gameObjects, index, global);
     }
