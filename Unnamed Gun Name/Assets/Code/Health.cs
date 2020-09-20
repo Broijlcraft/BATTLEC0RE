@@ -27,17 +27,20 @@ public class Health : MonoBehaviourPun {
             yield return new WaitForSeconds(1);
             timer--;
         }
-        Respawn();
+        photonView.RPC("RPC_Respawn", RpcTarget.All);
     }
 
-    void Respawn() {
-        UiManager.single_UM.respawnUiHolder.SetActive(false);
-        if (!Manager.single_M.dev) {
-            controller.ResetAtStartPosition();
-        }
-        photonView.RPC("RPC_ChangeHealth", RpcTarget.All, maxHealth, 1, "");
+    [PunRPC]
+    void RPC_Respawn() {
         isDead = false;
         respawning = false;
+        if (photonView.IsMine) {
+            UiManager.single_UM.respawnUiHolder.SetActive(false);
+            if (!Manager.single_M.dev) {
+                controller.ResetAtStartPosition();
+            }
+        }
+        photonView.RPC("RPC_ChangeHealth", RpcTarget.All, maxHealth, 1, "");
     }
 
     public void DoDamage(float value, string killer) {
@@ -48,7 +51,7 @@ public class Health : MonoBehaviourPun {
 
     [PunRPC]
     void RPC_ChangeHealth(float value, int add, string killer) {
-        if (add == 1) {
+        if (Tools.IntToBool(add)) {
             currentHealth += value;
         } else {
             currentHealth -= value;
@@ -56,23 +59,27 @@ public class Health : MonoBehaviourPun {
         if (currentHealth <= 0) {
             isDead = true;
             currentHealth = 0;
-            string nickname = photonView.Owner.NickName;
-            KillFeed(Tools.RemoveIdFromNickname(nickname), killer);
             if (photonView.IsMine) {
+                string nickname = photonView.Owner.NickName;
+                nickname = Tools.RemoveIdFromNickname(nickname);
+                photonView.RPC("RPC_KillFeed", RpcTarget.All, nickname, killer);
                 if (!respawning) {
                     respawning = true;
                     StartCoroutine(Countdown());
                 }
             }
         } else {
-            if (!isDead) {
-                isDead = false;
+            isDead = false;
+            if(currentHealth > maxHealth) {
+                currentHealth = maxHealth;
             }
         }
         UpdateUiHeath();
     }
 
-    void KillFeed(string victim, string killer) {
+    [PunRPC]
+    void RPC_KillFeed(string victim, string killer) {
+        Debug.LogWarning("Still need to implement weapons icons here!");
         UiManager.single_UM.AddKillToFeed(System.DateTime.Now.Second + killer, victim, null, null, true);
     }
 

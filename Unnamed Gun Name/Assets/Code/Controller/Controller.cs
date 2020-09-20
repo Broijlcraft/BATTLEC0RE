@@ -127,11 +127,6 @@ public class Controller : MonoBehaviourPun {
     }
 
     [PunRPC]
-    void TestPrint() {
-        print("print");
-    }
-
-    [PunRPC]
     void RPC_SetNicknameTargets() {
         if (photonView.IsMine) {
             Controller[] controllers = FindObjectsOfType<Controller>();
@@ -262,12 +257,6 @@ public class Controller : MonoBehaviourPun {
         transform.position = startPosition;
         transform.rotation = startRotation;
         xRotationAxisAngle = 0;
-    }
-
-    public void ResetToStart() {
-        transform.position = startPosition;
-        transform.rotation = startRotation;
-        verticalChestRotationHolder.rotation = Quaternion.identity;
     }
 
     int GetInvertMultiplier(bool shouldInvert) {

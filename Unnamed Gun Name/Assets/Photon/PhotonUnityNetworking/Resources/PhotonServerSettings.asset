@@ -55,6 +55,10 @@ MonoBehaviour:
   - RPC_SetHealth
   - TestPrint
   - OutOfRange
+  - Respawn
+  - RPC_SetPoolOwners
+  - RPC_Respawn
+  - RPC_KillFeed
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0

@@ -10,8 +10,6 @@ public class Manager : MonoBehaviour {
     public bool dev;
     public Text devText;
 
-    string devCheck = "DevCheck";
-
     private void Awake() {
         single_M = this;
         EnableDisableDevText();

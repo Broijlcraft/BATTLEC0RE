@@ -103,7 +103,6 @@ public class PhotonRoomCustomMatchMaking : MonoBehaviourPunCallbacks, IInRoomCal
                     index = 1;
                 }
                 TeamManager.single_TM.teams[index].playerNames.Add(photonPlayers[i].NickName);
-                print(photonPlayers[i].NickName);
             }
         }
     }

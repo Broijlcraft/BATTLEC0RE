@@ -49,6 +49,11 @@ public class ObjectPool : MonoBehaviourPun {
     }
 
     public void SetPoolOwners(int playerID, int photonViewID) {
+        photonView.RPC("RPC_SetPoolOwners", RpcTarget.All, playerID, photonViewID);
+    }
+
+    [PunRPC]
+    void RPC_SetPoolOwners(int playerID, int photonViewID) {
         playerPools[playerID].view = PhotonNetwork.GetPhotonView(photonViewID);
     }
 

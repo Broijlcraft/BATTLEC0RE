@@ -18,7 +18,6 @@ public class KillFeedListing : MonoBehaviour {
             if (timer > timeBeforeFade) {
                 animator.ResetTrigger("Default");
                 animator.SetTrigger("FadeOut");
-                print("fade");
                 timer = 0;
                 isActive = false;
             }
@@ -39,7 +38,6 @@ public class KillFeedListing : MonoBehaviour {
     }
 
     void ResetFadeOut() {
-        print("reset");
         isActive = false;
         timer = 0;
         animator.ResetTrigger("FadeOut");
