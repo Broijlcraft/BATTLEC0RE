@@ -137,6 +137,8 @@ public class Controller : MonoBehaviourPun {
                     controllers[i].nicknameText.color = TeamManager.single_TM.teams[index].teamColor;
                 }
             }
+        } else {
+            nicknameText.gameObject.SetActive(false);
         }
     }
     #endregion
