@@ -49,7 +49,7 @@ public class Controller : MonoBehaviourPun {
     Vector3 defaultHorizontalSwayRotation, defaultVertitalSwayRotation, lastPos;
 
     [Header("Testing")]
-    public bool disableCamsOnStart;
+    public bool disableCamsOnStart, keepLocalNicknameTextEnabled;
 
     #region Initialization
 
@@ -136,9 +136,10 @@ public class Controller : MonoBehaviourPun {
                 if(index >= 0) {
                     controllers[i].nicknameText.color = TeamManager.single_TM.teams[index].teamColor;
                 }
+                if(controllers[i] == this && !keepLocalNicknameTextEnabled) {
+                    controllers[i].uiLookAtHolder.gameObject.SetActive(false);
+                }
             }
-        } else {
-            nicknameText.gameObject.SetActive(false);
         }
     }
     #endregion

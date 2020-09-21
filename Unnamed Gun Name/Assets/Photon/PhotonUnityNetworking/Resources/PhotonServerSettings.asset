@@ -18,7 +18,7 @@ MonoBehaviour:
     AppIdVoice: 
     AppVersion: 
     UseNameServer: 1
-    FixedRegion: eu
+    FixedRegion: 
     Server: 
     Port: 0
     Protocol: 0
@@ -35,30 +35,22 @@ MonoBehaviour:
   - DestroyRpc
   - DestroySpaceship
   - Fire
-  - RespawnSpaceship
-  - RPC_ChangeReadyState
-  - RPC_CreatePlayer
-  - RPC_DestroyInteractable
-  - RPC_EnableRoomLoadingUI
-  - RPC_LoadedGameScene
-  - RPC_DestroyIa
-  - RPC_DisableAllIaColliders
-  - RPC_SetNicknameTargets
-  - RPC_CheckAndSetInteracting
-  - RPC_SetInteracting
-  - RPC_SwitchWeaponBehaviour
-  - RPC_PlayFireArmEffects
-  - RPC_DoDamage
   - RCP_SpawnFromPool
-  - RPC_GlobalSpawnProjectile
+  - RespawnSpaceship
   - RPC_ChangeHealth
-  - RPC_SetHealth
-  - TestPrint
-  - OutOfRange
-  - Respawn
-  - RPC_SetPoolOwners
-  - RPC_Respawn
+  - RPC_CheckAndSetInteracting
+  - RPC_CreatePlayer
+  - RPC_DestroyIa
+  - RPC_EnableRoomLoadingUI
+  - RPC_GlobalSpawnProjectile
   - RPC_KillFeed
+  - RPC_LoadedGameScene
+  - RPC_PlayFireArmEffects
+  - RPC_Respawn
+  - RPC_SetInteracting
+  - RPC_SetNicknameTargets
+  - RPC_SetPoolOwners
+  - RPC_SwitchWeaponBehaviour
   DisableAutoOpenWizard: 1
   ShowSettings: 1
-  DevRegionSetOnce: 0
+  DevRegionSetOnce: 1
