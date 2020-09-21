@@ -5,6 +5,7 @@ using UnityEngine;
 public class TeamManager : MonoBehaviour {
     public static TeamManager single_TM;
     public List<Team> teams = new List<Team>();
+
     private void Awake() {
         single_TM = this;
     }

@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using UnityEngine;
 using Photon.Pun;
 
-[RequireComponent(typeof(Rigidbody), typeof(Health))]
+[RequireComponent(typeof(Health))]
 [RequireComponent(typeof(PlayerView), typeof(PhotonView), typeof(WeaponController))] 
 public class Controller : MonoBehaviourPun {
     public PlayerView playerView;
@@ -56,7 +56,9 @@ public class Controller : MonoBehaviourPun {
     private void Awake() {
         TurnCollidersOnOff(false);
         rigid = GetComponent<Rigidbody>();
-        rigid.useGravity = false;
+        if (!photonView.IsMine) {
+            Destroy(rigid);
+        }
         cams = GetComponentsInChildren<Camera>();
         weaponsController = GetComponent<WeaponController>();
         weaponsController.Init(this);
@@ -93,7 +95,6 @@ public class Controller : MonoBehaviourPun {
             if (PhotonRoomCustomMatchMaking.roomSingle) {
                 ObjectPool.single_PT.SetPoolOwners(PhotonRoomCustomMatchMaking.roomSingle.myNumberInRoom, photonView.ViewID);
             }
-            rigid.useGravity = true;
             if (!disableCamsOnStart) {
                 for (int i = 0; i < cams.Length; i++) {
                     cams[i].enabled = true;
@@ -107,8 +108,6 @@ public class Controller : MonoBehaviourPun {
             Tools.SetLocalOrGlobalLayers(meshObjects.ToArray(), false);
             defaultHorizontalSwayRotation = new Vector3(swaySettings.defaultCamHolderRotation.x, swaySettings.defaultParentRotation.y, 0);
             defaultVertitalSwayRotation = new Vector3(swaySettings.defaultCamHolderRotation.x, swaySettings.defaultParentRotation.y, 0);
-        } else {
-            rigid.isKinematic = false;
         }
         TurnCollidersOnOff(true);
         canMove = true;
@@ -144,7 +143,6 @@ public class Controller : MonoBehaviourPun {
 
     private void Update() {
         if (IsMineAndAliveCheck()) {
-
             if (Input.GetButtonDown("Interact")) {
                 RaycastHit hit;
                 if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, interactRange, ~TagsAndLayersManager.single_TLM.localPlayerLayerInfo.layerMask)) {
