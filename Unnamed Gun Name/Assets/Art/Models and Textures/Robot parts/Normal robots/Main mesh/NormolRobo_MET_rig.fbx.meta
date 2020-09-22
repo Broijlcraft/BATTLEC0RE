@@ -1,157 +1,449 @@
 fileFormatVersion: 2
 guid: 95adbc021a5b82442a9967394d4ab08d
 ModelImporter:
-  serializedVersion: 23
-  fileIDToRecycleName:
-    100000: Bottom chasse..002
-    100002: Chassis..002
-    100004: Feet.L
-    100006: Feet.L..002
-    100008: Feet.R
-    100010: Feet.R..002
-    100012: Gun hand
-    100014: Head
-    100016: Head..002
-    100018: HeelIK.L
-    100020: HeelIK.R
-    100022: Hips.L..002
-    100024: Hips.R..002
-    100026: KneeIK.L
-    100028: KneeIK.R
-    100030: L.lower arm
-    100032: L.Upper arm
-    100034: Lower arms...002
-    100036: Lower arms..002
-    100038: Lower chasse
-    100040: Lowerleg.L
-    100042: Lowerleg.L..002
-    100044: Lowerleg.R
-    100046: Lowerlegs.R..002
-    100048: metarig._Normal robot.002
-    100050: Mid chacce
-    100052: Model_NormalRobotHead.Alt.001
-    100054: //RootNode
-    100056: PW_bone
-    100058: R.lower arm
-    100060: R.Upper arm
-    100062: Shoulder.R..002
-    100064: Shoulders.L..002
-    100066: Upper arm..L..002
-    100068: Upper arm..R..002
-    100070: Upper chacce.
-    100072: Upper chacce.ROT..002
-    100074: Upperleg.L
-    100076: UpperLeg.L..002
-    100078: Upperleg.R
-    100080: Upperleg.R..002
-    400000: Bottom chasse..002
-    400002: Chassis..002
-    400004: Feet.L
-    400006: Feet.L..002
-    400008: Feet.R
-    400010: Feet.R..002
-    400012: Gun hand
-    400014: Head
-    400016: Head..002
-    400018: HeelIK.L
-    400020: HeelIK.R
-    400022: Hips.L..002
-    400024: Hips.R..002
-    400026: KneeIK.L
-    400028: KneeIK.R
-    400030: L.lower arm
-    400032: L.Upper arm
-    400034: Lower arms...002
-    400036: Lower arms..002
-    400038: Lower chasse
-    400040: Lowerleg.L
-    400042: Lowerleg.L..002
-    400044: Lowerleg.R
-    400046: Lowerlegs.R..002
-    400048: metarig._Normal robot.002
-    400050: Mid chacce
-    400052: Model_NormalRobotHead.Alt.001
-    400054: //RootNode
-    400056: PW_bone
-    400058: R.lower arm
-    400060: R.Upper arm
-    400062: Shoulder.R..002
-    400064: Shoulders.L..002
-    400066: Upper arm..L..002
-    400068: Upper arm..R..002
-    400070: Upper chacce.
-    400072: Upper chacce.ROT..002
-    400074: Upperleg.L
-    400076: UpperLeg.L..002
-    400078: Upperleg.R
-    400080: Upperleg.R..002
-    2100000: Mat_NormalRobotBody
-    2100002: Mat_NormalRobotEM
-    2100004: Mat_NormalRobotHeadAlt
-    4300000: Bottom chasse..002
-    4300002: Chassis..002
-    4300004: Feet.L..002
-    4300006: Feet.R..002
-    4300008: Head..002
-    4300010: Hips.L..002
-    4300012: Hips.R..002
-    4300014: Lower arms...002
-    4300016: Lower arms..002
-    4300018: Lowerleg.L..002
-    4300020: Lowerlegs.R..002
-    4300022: Shoulder.R..002
-    4300024: Shoulders.L..002
-    4300026: Upper arm..L..002
-    4300028: Upper arm..R..002
-    4300030: Upper chacce.ROT..002
-    4300032: UpperLeg.L..002
-    4300034: Upperleg.R..002
-    4300036: Model_NormalRobotHead.Alt.001
-    7400000: T-pose
-    7400002: Jump naar boven
-    7400004: Falling down
-    7400006: Run
-    7400008: Jump naar boven.001
-    7400010: Falling down.001
-    7400012: Walk.001
-    7400014: robtrecoil_light
-    7400016: robtrecoil_Heavy
-    7400018: robtrecoil_light.001
-    7400020: Idle
-    7400022: IdLE fixed
-    7400024: metarig._Normal robot.002|Falling down
-    7400026: metarig._Normal robot.002|Idle
-    7400028: metarig._Normal robot.002|IdLE fixed
-    7400030: metarig._Normal robot.002|Jump naar boven
-    7400032: metarig._Normal robot.002|Run
-    7400034: metarig._Normal robot.002|T-pose
-    7400036: metarig._Normal robot.002|Walk
-    7400038: metarig._Normal robot.002|robtrecoil_Heavy
-    7400040: Walk
-    9500000: //RootNode
-    13700000: Bottom chasse..002
-    13700002: Chassis..002
-    13700004: Feet.L..002
-    13700006: Feet.R..002
-    13700008: Head..002
-    13700010: Hips.L..002
-    13700012: Hips.R..002
-    13700014: Lower arms...002
-    13700016: Lower arms..002
-    13700018: Lowerleg.L..002
-    13700020: Lowerlegs.R..002
-    13700022: Model_NormalRobotHead.Alt.001
-    13700024: Shoulder.R..002
-    13700026: Shoulders.L..002
-    13700028: Upper arm..L..002
-    13700030: Upper arm..R..002
-    13700032: Upper chacce.ROT..002
-    13700034: UpperLeg.L..002
-    13700036: Upperleg.R..002
-    2186277476908879412: ImportLogs
+  serializedVersion: 19301
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: Bottom chasse..002
+  - first:
+      1: 100002
+    second: Chassis..002
+  - first:
+      1: 100004
+    second: Feet.L
+  - first:
+      1: 100006
+    second: Feet.L..002
+  - first:
+      1: 100008
+    second: Feet.R
+  - first:
+      1: 100010
+    second: Feet.R..002
+  - first:
+      1: 100012
+    second: Gun hand
+  - first:
+      1: 100014
+    second: Head
+  - first:
+      1: 100016
+    second: Head..002
+  - first:
+      1: 100018
+    second: HeelIK.L
+  - first:
+      1: 100020
+    second: HeelIK.R
+  - first:
+      1: 100022
+    second: Hips.L..002
+  - first:
+      1: 100024
+    second: Hips.R..002
+  - first:
+      1: 100026
+    second: KneeIK.L
+  - first:
+      1: 100028
+    second: KneeIK.R
+  - first:
+      1: 100030
+    second: L.lower arm
+  - first:
+      1: 100032
+    second: L.Upper arm
+  - first:
+      1: 100034
+    second: Lower arms...002
+  - first:
+      1: 100036
+    second: Lower arms..002
+  - first:
+      1: 100038
+    second: Lower chasse
+  - first:
+      1: 100040
+    second: Lowerleg.L
+  - first:
+      1: 100042
+    second: Lowerleg.L..002
+  - first:
+      1: 100044
+    second: Lowerleg.R
+  - first:
+      1: 100046
+    second: Lowerlegs.R..002
+  - first:
+      1: 100048
+    second: metarig._Normal robot.002
+  - first:
+      1: 100050
+    second: Mid chacce
+  - first:
+      1: 100052
+    second: Model_NormalRobotHead.Alt.001
+  - first:
+      1: 100054
+    second: //RootNode
+  - first:
+      1: 100056
+    second: PW_bone
+  - first:
+      1: 100058
+    second: R.lower arm
+  - first:
+      1: 100060
+    second: R.Upper arm
+  - first:
+      1: 100062
+    second: Shoulder.R..002
+  - first:
+      1: 100064
+    second: Shoulders.L..002
+  - first:
+      1: 100066
+    second: Upper arm..L..002
+  - first:
+      1: 100068
+    second: Upper arm..R..002
+  - first:
+      1: 100070
+    second: Upper chacce.
+  - first:
+      1: 100072
+    second: Upper chacce.ROT..002
+  - first:
+      1: 100074
+    second: Upperleg.L
+  - first:
+      1: 100076
+    second: UpperLeg.L..002
+  - first:
+      1: 100078
+    second: Upperleg.R
+  - first:
+      1: 100080
+    second: Upperleg.R..002
+  - first:
+      4: 400000
+    second: Bottom chasse..002
+  - first:
+      4: 400002
+    second: Chassis..002
+  - first:
+      4: 400004
+    second: Feet.L
+  - first:
+      4: 400006
+    second: Feet.L..002
+  - first:
+      4: 400008
+    second: Feet.R
+  - first:
+      4: 400010
+    second: Feet.R..002
+  - first:
+      4: 400012
+    second: Gun hand
+  - first:
+      4: 400014
+    second: Head
+  - first:
+      4: 400016
+    second: Head..002
+  - first:
+      4: 400018
+    second: HeelIK.L
+  - first:
+      4: 400020
+    second: HeelIK.R
+  - first:
+      4: 400022
+    second: Hips.L..002
+  - first:
+      4: 400024
+    second: Hips.R..002
+  - first:
+      4: 400026
+    second: KneeIK.L
+  - first:
+      4: 400028
+    second: KneeIK.R
+  - first:
+      4: 400030
+    second: L.lower arm
+  - first:
+      4: 400032
+    second: L.Upper arm
+  - first:
+      4: 400034
+    second: Lower arms...002
+  - first:
+      4: 400036
+    second: Lower arms..002
+  - first:
+      4: 400038
+    second: Lower chasse
+  - first:
+      4: 400040
+    second: Lowerleg.L
+  - first:
+      4: 400042
+    second: Lowerleg.L..002
+  - first:
+      4: 400044
+    second: Lowerleg.R
+  - first:
+      4: 400046
+    second: Lowerlegs.R..002
+  - first:
+      4: 400048
+    second: metarig._Normal robot.002
+  - first:
+      4: 400050
+    second: Mid chacce
+  - first:
+      4: 400052
+    second: Model_NormalRobotHead.Alt.001
+  - first:
+      4: 400054
+    second: //RootNode
+  - first:
+      4: 400056
+    second: PW_bone
+  - first:
+      4: 400058
+    second: R.lower arm
+  - first:
+      4: 400060
+    second: R.Upper arm
+  - first:
+      4: 400062
+    second: Shoulder.R..002
+  - first:
+      4: 400064
+    second: Shoulders.L..002
+  - first:
+      4: 400066
+    second: Upper arm..L..002
+  - first:
+      4: 400068
+    second: Upper arm..R..002
+  - first:
+      4: 400070
+    second: Upper chacce.
+  - first:
+      4: 400072
+    second: Upper chacce.ROT..002
+  - first:
+      4: 400074
+    second: Upperleg.L
+  - first:
+      4: 400076
+    second: UpperLeg.L..002
+  - first:
+      4: 400078
+    second: Upperleg.R
+  - first:
+      4: 400080
+    second: Upperleg.R..002
+  - first:
+      21: 2100000
+    second: Mat_NormalRobotBody
+  - first:
+      21: 2100002
+    second: Mat_NormalRobotEM
+  - first:
+      21: 2100004
+    second: Mat_NormalRobotHeadAlt
+  - first:
+      43: 4300000
+    second: Bottom chasse..002
+  - first:
+      43: 4300002
+    second: Chassis..002
+  - first:
+      43: 4300004
+    second: Feet.L..002
+  - first:
+      43: 4300006
+    second: Feet.R..002
+  - first:
+      43: 4300008
+    second: Head..002
+  - first:
+      43: 4300010
+    second: Hips.L..002
+  - first:
+      43: 4300012
+    second: Hips.R..002
+  - first:
+      43: 4300014
+    second: Lower arms...002
+  - first:
+      43: 4300016
+    second: Lower arms..002
+  - first:
+      43: 4300018
+    second: Lowerleg.L..002
+  - first:
+      43: 4300020
+    second: Lowerlegs.R..002
+  - first:
+      43: 4300022
+    second: Shoulder.R..002
+  - first:
+      43: 4300024
+    second: Shoulders.L..002
+  - first:
+      43: 4300026
+    second: Upper arm..L..002
+  - first:
+      43: 4300028
+    second: Upper arm..R..002
+  - first:
+      43: 4300030
+    second: Upper chacce.ROT..002
+  - first:
+      43: 4300032
+    second: UpperLeg.L..002
+  - first:
+      43: 4300034
+    second: Upperleg.R..002
+  - first:
+      43: 4300036
+    second: Model_NormalRobotHead.Alt.001
+  - first:
+      74: 7400000
+    second: T-pose
+  - first:
+      74: 7400002
+    second: Jump naar boven
+  - first:
+      74: 7400004
+    second: Falling down
+  - first:
+      74: 7400006
+    second: Run
+  - first:
+      74: 7400008
+    second: Jump naar boven.001
+  - first:
+      74: 7400010
+    second: Falling down.001
+  - first:
+      74: 7400012
+    second: Walk.001
+  - first:
+      74: 7400014
+    second: robtrecoil_light
+  - first:
+      74: 7400016
+    second: robtrecoil_Heavy
+  - first:
+      74: 7400018
+    second: robtrecoil_light.001
+  - first:
+      74: 7400020
+    second: Idle
+  - first:
+      74: 7400022
+    second: IdLE fixed
+  - first:
+      74: 7400024
+    second: metarig._Normal robot.002|Falling down
+  - first:
+      74: 7400026
+    second: metarig._Normal robot.002|Idle
+  - first:
+      74: 7400028
+    second: metarig._Normal robot.002|IdLE fixed
+  - first:
+      74: 7400030
+    second: metarig._Normal robot.002|Jump naar boven
+  - first:
+      74: 7400032
+    second: metarig._Normal robot.002|Run
+  - first:
+      74: 7400034
+    second: metarig._Normal robot.002|T-pose
+  - first:
+      74: 7400036
+    second: metarig._Normal robot.002|Walk
+  - first:
+      74: 7400038
+    second: metarig._Normal robot.002|robtrecoil_Heavy
+  - first:
+      74: 7400040
+    second: Walk
+  - first:
+      95: 9500000
+    second: //RootNode
+  - first:
+      137: 13700000
+    second: Bottom chasse..002
+  - first:
+      137: 13700002
+    second: Chassis..002
+  - first:
+      137: 13700004
+    second: Feet.L..002
+  - first:
+      137: 13700006
+    second: Feet.R..002
+  - first:
+      137: 13700008
+    second: Head..002
+  - first:
+      137: 13700010
+    second: Hips.L..002
+  - first:
+      137: 13700012
+    second: Hips.R..002
+  - first:
+      137: 13700014
+    second: Lower arms...002
+  - first:
+      137: 13700016
+    second: Lower arms..002
+  - first:
+      137: 13700018
+    second: Lowerleg.L..002
+  - first:
+      137: 13700020
+    second: Lowerlegs.R..002
+  - first:
+      137: 13700022
+    second: Model_NormalRobotHead.Alt.001
+  - first:
+      137: 13700024
+    second: Shoulder.R..002
+  - first:
+      137: 13700026
+    second: Shoulders.L..002
+  - first:
+      137: 13700028
+    second: Upper arm..L..002
+  - first:
+      137: 13700030
+    second: Upper arm..R..002
+  - first:
+      137: 13700032
+    second: Upper chacce.ROT..002
+  - first:
+      137: 13700034
+    second: UpperLeg.L..002
+  - first:
+      137: 13700036
+    second: Upperleg.R..002
+  - first:
+      41386430: 2186277476908879412
+    second: ImportLogs
   externalObjects: {}
   materials:
-    importMaterials: 1
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -180,6 +472,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Falling down
       takeName: Falling down
+      internalID: 0
       firstFrame: 0
       lastFrame: 25
       wrapMode: 0
@@ -208,6 +501,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Idle
       takeName: Idle
+      internalID: 0
       firstFrame: 0
       lastFrame: 20
       wrapMode: 0
@@ -236,6 +530,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Jump naar boven
       takeName: Jump naar boven
+      internalID: 0
       firstFrame: 0
       lastFrame: 20
       wrapMode: 0
@@ -264,6 +559,7 @@ ModelImporter:
     - serializedVersion: 16
       name: robtrecoil_light
       takeName: robtrecoil_light
+      internalID: 0
       firstFrame: 0
       lastFrame: 8
       wrapMode: 0
@@ -292,6 +588,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Run
       takeName: Run
+      internalID: 0
       firstFrame: 0
       lastFrame: 26
       wrapMode: 0
@@ -320,6 +617,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Walk
       takeName: Walk
+      internalID: 0
       firstFrame: 0
       lastFrame: 24
       wrapMode: 0
@@ -348,6 +646,7 @@ ModelImporter:
     - serializedVersion: 16
       name: T-pose
       takeName: T-pose
+      internalID: 0
       firstFrame: 0
       lastFrame: 1
       wrapMode: 0
@@ -376,6 +675,7 @@ ModelImporter:
     - serializedVersion: 16
       name: robtrecoil_Heavy
       takeName: robtrecoil_Heavy
+      internalID: 0
       firstFrame: 0
       lastFrame: 8
       wrapMode: 0
@@ -404,6 +704,7 @@ ModelImporter:
     - serializedVersion: 16
       name: metarig._Normal robot.002|Falling down
       takeName: metarig._Normal robot.002|Falling down
+      internalID: 0
       firstFrame: 0
       lastFrame: 25
       wrapMode: 0
@@ -432,6 +733,7 @@ ModelImporter:
     - serializedVersion: 16
       name: metarig._Normal robot.002|Idle
       takeName: metarig._Normal robot.002|Idle
+      internalID: 0
       firstFrame: 0
       lastFrame: 20
       wrapMode: 0
@@ -460,6 +762,7 @@ ModelImporter:
     - serializedVersion: 16
       name: metarig._Normal robot.002|IdLE fixed
       takeName: metarig._Normal robot.002|IdLE fixed
+      internalID: 0
       firstFrame: 0
       lastFrame: 25
       wrapMode: 0
@@ -488,6 +791,7 @@ ModelImporter:
     - serializedVersion: 16
       name: metarig._Normal robot.002|Jump naar boven
       takeName: metarig._Normal robot.002|Jump naar boven
+      internalID: 0
       firstFrame: 0
       lastFrame: 20
       wrapMode: 0
@@ -516,8 +820,9 @@ ModelImporter:
     - serializedVersion: 16
       name: metarig._Normal robot.002|Run
       takeName: metarig._Normal robot.002|Run
-      firstFrame: 0
-      lastFrame: 26
+      internalID: 0
+      firstFrame: 1
+      lastFrame: 23.3
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -544,6 +849,7 @@ ModelImporter:
     - serializedVersion: 16
       name: metarig._Normal robot.002|T-pose
       takeName: metarig._Normal robot.002|T-pose
+      internalID: 0
       firstFrame: 0
       lastFrame: 1
       wrapMode: 0
@@ -572,6 +878,7 @@ ModelImporter:
     - serializedVersion: 16
       name: metarig._Normal robot.002|Walk
       takeName: metarig._Normal robot.002|Walk
+      internalID: 0
       firstFrame: 0
       lastFrame: 24
       wrapMode: 0
@@ -604,25 +911,28 @@ ModelImporter:
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
+    fileIdsGeneration: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
     preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 1
-    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -631,10 +941,10 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 1
-  copyAvatar: 0
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human: []
     skeleton: []
     armTwist: 0.5
@@ -644,13 +954,16 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
+  avatarSetup: 1
   additionalBone: 0
   userData: 
   assetBundleName: 

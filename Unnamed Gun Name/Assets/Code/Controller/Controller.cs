@@ -41,13 +41,12 @@ public class Controller : MonoBehaviourPun {
 
     //replace with bodyparts when ready
     [HideInInspector] public MeshRenderer[] gos;
-    Camera[] cams;
     AudioListener audioListeners;
-    float currentForwardSprintValue, currentSidewaysSprintValue, xRotationAxisAngle;
+    float currentForwardSprintValue, currentSidewaysSprintValue, xRotationAxisAngle, yRotationAxisAngle;
     bool isGrounded, isSprinting = false;
 
     Vector3 defaultHorizontalSwayRotation, defaultVertitalSwayRotation, lastPos;
-
+       
     [Header("Testing")]
     public bool disableCamsOnStart, keepLocalNicknameTextEnabled;
 
@@ -59,15 +58,19 @@ public class Controller : MonoBehaviourPun {
         if (!photonView.IsMine) {
             Destroy(rigid);
         }
-        cams = GetComponentsInChildren<Camera>();
         weaponsController = GetComponent<WeaponController>();
         weaponsController.Init(this);
+        /////////////////
+        weaponsController.enabled = false;
         health = GetComponent<Health>();
         health.controller = this;
         animator = GetComponent<Animator>();
         robotParts = GetComponent<BodyPartsList>();
-        for (int i = 0; i < cams.Length; i++) {
-            cams[i].enabled = false;
+        if (cam) {
+            cam.enabled = false;
+            if (localLayerCam) {
+                localLayerCam.enabled = false;
+            }
         }
         audioListeners = GetComponentInChildren<AudioListener>();
         audioListeners.enabled = false;
@@ -96,8 +99,11 @@ public class Controller : MonoBehaviourPun {
                 ObjectPool.single_PT.SetPoolOwners(PhotonRoomCustomMatchMaking.roomSingle.myNumberInRoom, photonView.ViewID);
             }
             if (!disableCamsOnStart) {
-                for (int i = 0; i < cams.Length; i++) {
-                    cams[i].enabled = true;
+                if (cam) {
+                    cam.enabled = true;
+                    if (localLayerCam) {
+                        localLayerCam.enabled = true;
+                    }
                 }
                 audioListeners.enabled = true;
             }
@@ -216,20 +222,34 @@ public class Controller : MonoBehaviourPun {
         float mouseY = Input.GetAxis("Mouse Y") * sense * invert;
 
         xRotationAxisAngle += mouseY;
+        yRotationAxisAngle += mouseX;
 
         ApplySway(mouseX, mouseY);
 
         if (xRotationAxisAngle > cameraSettings.maxVerticalTopViewAngle) {
             xRotationAxisAngle = cameraSettings.maxVerticalTopViewAngle;
             mouseY = 0f;
-            ClampXRotationAxisToValue(verticalChestRotationHolder.transform, -cameraSettings.maxVerticalTopViewAngle);
+            ClampXRotationAxisToValue(verticalChestRotationHolder, -cameraSettings.maxVerticalTopViewAngle);
         } else if (xRotationAxisAngle < -cameraSettings.maxVerticalBottomViewAngle) {
             xRotationAxisAngle = -cameraSettings.maxVerticalBottomViewAngle;
             mouseY = 0f;
-            ClampXRotationAxisToValue(verticalChestRotationHolder.transform, cameraSettings.maxVerticalBottomViewAngle);
+            ClampXRotationAxisToValue(verticalChestRotationHolder, cameraSettings.maxVerticalBottomViewAngle);
         }
-        verticalChestRotationHolder.transform.Rotate(Vector3.left * mouseY);
-        transform.Rotate(Vector3.up * mouseX);
+        verticalChestRotationHolder.Rotate(Vector3.left * mouseY);
+
+
+        if (yRotationAxisAngle > cameraSettings.maxHorRight) {
+            yRotationAxisAngle = cameraSettings.maxHorRight;
+            mouseX = 0f;
+            ClampYRotationAxisToValue(horizontalBodyRotationHolder, -cameraSettings.maxHorRight);
+        } else if (yRotationAxisAngle < -cameraSettings.maxHorLeft) {
+            yRotationAxisAngle = -cameraSettings.maxHorLeft;
+            mouseX = 0f;
+            ClampYRotationAxisToValue(horizontalBodyRotationHolder, cameraSettings.maxHorLeft);
+        }
+
+
+        horizontalBodyRotationHolder.transform.Rotate(Vector3.up * mouseX);
     }
 
     void ApplySway(float mouseX, float mouseY) {
@@ -242,13 +262,24 @@ public class Controller : MonoBehaviourPun {
         Quaternion verticalTemp = Quaternion.Euler(defaultVertitalSwayRotation);
         Quaternion verticalTargetRotation = verticalTemp * rotY;
 
-        swaySettings.horizontalSwayHolder.localRotation = Quaternion.Lerp(swaySettings.horizontalSwayHolder.transform.localRotation, horizontalTargetRotation, Time.deltaTime * swaySettings.swaySmooth);
-        swaySettings.verticalSwayHolder.localRotation = Quaternion.Lerp(swaySettings.verticalSwayHolder.transform.localRotation, verticalTargetRotation, Time.deltaTime * swaySettings.swaySmooth);
+        if (swaySettings.horizontalSwayHolder) {
+            swaySettings.horizontalSwayHolder.localRotation = Quaternion.Lerp(swaySettings.horizontalSwayHolder.transform.localRotation, horizontalTargetRotation, Time.deltaTime * swaySettings.swaySmooth);
+        }
+
+        if(swaySettings.verticalSwayHolder) {
+            swaySettings.verticalSwayHolder.localRotation = Quaternion.Lerp(swaySettings.verticalSwayHolder.transform.localRotation, verticalTargetRotation, Time.deltaTime * swaySettings.swaySmooth);
+        }
     }
 
     void ClampXRotationAxisToValue(Transform transform_, float value) {
         Vector3 eulerRotation = transform_.localEulerAngles;
         eulerRotation.x = value;
+        transform_.localEulerAngles = eulerRotation;
+    }
+
+    void ClampYRotationAxisToValue(Transform transform_, float value) {
+        Vector3 eulerRotation = transform_.localEulerAngles;
+        eulerRotation.y = value;
         transform_.localEulerAngles = eulerRotation;
     }
 
@@ -305,7 +336,7 @@ public class CameraSettings {
     public bool invertVerticalCam;
     public float mouseSensitivity = 1f;
     //[Range(-90, 180)]
-    public float maxVerticalTopViewAngle = 90, maxVerticalBottomViewAngle = 90;
+    public float maxVerticalTopViewAngle = 90, maxVerticalBottomViewAngle = 90, maxHorLeft = 45, maxHorRight = 45;
 }
 
 [System.Serializable]

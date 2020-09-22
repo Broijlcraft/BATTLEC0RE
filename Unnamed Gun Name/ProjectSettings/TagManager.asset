@@ -20,7 +20,7 @@ TagManager:
   - InteractableLayer
   - NoPlayerCollision
   - Walkable
-  - 
+  - CantBeSeenByPlayer
   - 
   - 
   - 
