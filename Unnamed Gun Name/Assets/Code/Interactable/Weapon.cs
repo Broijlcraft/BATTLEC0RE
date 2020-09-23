@@ -16,10 +16,6 @@ public class Weapon : Interactable {
 
     public virtual void Awake() {
         colliders = GetComponentsInChildren<Collider>();
-        MeshRenderer[] renderers = GetComponentsInChildren<MeshRenderer>();
-        for (int i = 0; i < renderers.Length; i++) {
-            meshObjects.Add(renderers[i].gameObject);
-        }
     }
 
     private void Start() {
@@ -39,7 +35,7 @@ public class Weapon : Interactable {
     void CheckAndAttach(Controller controller) {
         base.Interact(controller);
         if (interactingController == controller) {
-            controller.weaponsController.AttachDetachWeapon(this, true);
+            controller.weaponsController.AttachDetachWeapon(this, true, true);
         }
     }
 

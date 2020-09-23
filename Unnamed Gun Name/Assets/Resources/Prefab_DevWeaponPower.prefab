@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6841045706504797274}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.4, y: 0.97, z: -2.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 9006768965905074534}
@@ -112,7 +112,8 @@ MonoBehaviour:
     currentAo: 0
     canNotAttack: 0
   colliders: []
-  meshObjects: []
+  meshObjects:
+  - {fileID: 9006768965905503558}
   timeToSwitchBehaviour: 1
   currentActiveWeapon: 0
   wBehaviour:
@@ -170,6 +171,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9006768965905074534}
     m_Modifications:
+    - target: {fileID: 264269356732929260, guid: fb18a8c299927744d939514833d2e791,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 620675341957523636, guid: fb18a8c299927744d939514833d2e791,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -328,6 +334,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9ecee05aca2573c4eb9a64ba2e407ffc, type: 3}
+--- !u!1 &9006768965905503558 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3460739696272868470, guid: 9ecee05aca2573c4eb9a64ba2e407ffc,
+    type: 3}
+  m_PrefabInstance: {fileID: 5546601634160660784}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &9006768965905074534 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3460739696273365078, guid: 9ecee05aca2573c4eb9a64ba2e407ffc,

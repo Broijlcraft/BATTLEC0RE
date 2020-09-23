@@ -36,7 +36,7 @@ public class ObjectPool : MonoBehaviourPun {
             if (poolList[poolCount].prefab) {
                 Queue<GameObject> tempPool = new Queue<GameObject>();
                 for (int amount = 0; amount < poolList[poolCount].amountPerPlayer; amount++) {
-                    GameObject poolObject = Instantiate(poolList[poolCount].prefab, Vector3.zero, Quaternion.identity);
+                    GameObject poolObject = Instantiate(poolList[poolCount].prefab, -Vector3.one, Quaternion.identity);
                     poolObject.SetActive(false);
                     poolObject.transform.SetParent(transform);
                     poolObject.name = poolObject.name += amount;

@@ -41,7 +41,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 766201534296391091}
-  - component: {fileID: 9101540060939248263}
+  - component: {fileID: 6452507764140845328}
   - component: {fileID: 8020140086267906471}
   - component: {fileID: 114705787252862770}
   - component: {fileID: 3897864014668945774}
@@ -74,7 +74,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9101540060939248263
+--- !u!114 &6452507764140845328
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -83,41 +83,43 @@ MonoBehaviour:
   m_GameObject: {fileID: 766201534296875411}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df62f48df197be34d94cdcbf915e4e08, type: 3}
+  m_Script: {fileID: 11500000, guid: 146b5601e78f3da48bda989694fed451, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerView: {fileID: 1761153458948728927}
-  cam: {fileID: 7595647503515677790}
-  localLayerCam: {fileID: 690390762019578855}
-  horizontalBodyRotationHolder: {fileID: 0}
-  verticalChestRotationHolder: {fileID: 5200557320374257036}
-  horizontalCamRotationHolder: {fileID: 7471538226162531173}
-  verticalCamRotationHolder: {fileID: 7471538226162531173}
-  nicknameText: {fileID: 6703715164598437452}
-  uiLookAtHolder: {fileID: 7728621727011601535}
+  playerView: {fileID: 0}
+  cam: {fileID: 0}
+  localLayerCam: {fileID: 0}
+  horizontalCamHolder: {fileID: 0}
+  verticalCamHolder: {fileID: 0}
+  nicknameText: {fileID: 0}
+  uiLookAtHolder: {fileID: 0}
   animator: {fileID: 0}
-  interactRange: 5
-  forwardsSpeedSettings:
-    defaultSpeed: 10
-    sprintMultiplier: 1.3
-  sidewaysSpeedSettings:
-    defaultSpeed: 5
-    sprintMultiplier: 1.1
-  jumpVelocity: 5
+  interactRange: 0
+  moveSettings:
+    maxAnimationWalkSpeed: 0
+    forwardSpeed: 0
+    forwardSprintSpeed: 0
+    sidewaysSpeed: 0
+    sidewaysSprintSpeed: 0
+    walkAnimationSpeed: 0
+    sprintAnimationSpeed: 0
+    jumpVelocity: 0
   cameraSettings:
     invertVerticalCam: 0
     mouseSensitivity: 1
-    maxVerticalTopViewAngle: 50
-    maxVerticalBottomViewAngle: 57
+    maxVerticalTopViewAngle: 90
+    maxVerticalBottomViewAngle: 90
+    maxLeftHorizontalViewAngle: 0
+    maxRightHorizontalViewAngle: 0
   swaySettings:
-    horizontalSwayHolder: {fileID: 7891506500012138368}
-    verticalSwayHolder: {fileID: 7891506500012138368}
-    swayIntensity: 1
-    swaySmooth: 10
+    horizontalSwayHolder: {fileID: 0}
+    verticalSwayHolder: {fileID: 0}
+    swayIntensity: 0
+    swaySmooth: 0
     defaultParentRotation: {x: 0, y: 0, z: 0}
     defaultCamHolderRotation: {x: 0, y: 0, z: 0}
-  hideCursorOnStart: 1
-  keepLocalMeshesEnabled: 1
+  hideCursorOnStart: 0
+  keepLocalMeshesEnabled: 0
   canMove: 0
   health: {fileID: 0}
   rigid: {fileID: 0}
@@ -127,9 +129,20 @@ MonoBehaviour:
   nicknameTarget: {fileID: 0}
   robotParts: {fileID: 0}
   weaponsController: {fileID: 0}
-  gos: []
+  isGrounded: 0
+  isSprinting: 0
+  defaultHorizontalSwayRotation: {x: 0, y: 0, z: 0}
+  defaultVertitalSwayRotation: {x: 0, y: 0, z: 0}
   disableCamsOnStart: 0
   keepLocalNicknameTextEnabled: 0
+  camSpeed: 0
+  swayIntensity: 0
+  swaySmooth: 0
+  horizontalSwayHolder: {fileID: 0}
+  verticalSwayHolder: {fileID: 0}
+  meshObjectsToHideLocally: []
+  meshObjectsToSetLocal: []
+  isClamped: 0
 --- !u!114 &8020140086267906471
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -932,30 +945,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 685de5902a2d2814a8f673ac3554ea63, type: 3}
---- !u!224 &2227428757471669392 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 2390863008548668136, guid: 685de5902a2d2814a8f673ac3554ea63,
-    type: 3}
-  m_PrefabInstance: {fileID: 4595755857500499576}
-  m_PrefabAsset: {fileID: 0}
---- !u!224 &7728621727011601535 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 6090822835324359175, guid: 685de5902a2d2814a8f673ac3554ea63,
-    type: 3}
-  m_PrefabInstance: {fileID: 4595755857500499576}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &6703715164598437452 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7119917192849057844, guid: 685de5902a2d2814a8f673ac3554ea63,
-    type: 3}
-  m_PrefabInstance: {fileID: 4595755857500499576}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &4950929905776705223 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8895272401723543743, guid: 685de5902a2d2814a8f673ac3554ea63,
@@ -968,6 +957,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &2227428757471669392 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2390863008548668136, guid: 685de5902a2d2814a8f673ac3554ea63,
+    type: 3}
+  m_PrefabInstance: {fileID: 4595755857500499576}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6305473987244301401
 PrefabInstance:
   m_ObjectHideFlags: 0

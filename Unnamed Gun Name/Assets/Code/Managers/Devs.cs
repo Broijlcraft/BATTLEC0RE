@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public static class Devs {
-    public static string[] devs = new string[] { "Dev", "dev", "Max" };
+    public static string[] devs = new string[] {"dev", "max", "kubi" };
 
     public static bool IsDev(string name) {
         bool isDev = false;

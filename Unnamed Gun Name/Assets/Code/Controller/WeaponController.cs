@@ -22,6 +22,11 @@ public class WeaponController : MonoBehaviourPun {
     private void Start() {
         if (primaryWeaponsHolder.weaponAttached) {
             primaryWeaponsHolder.weaponAttached.interactingController = controller;
+            AttachDetachWeapon(primaryWeaponsHolder.weaponAttached, false, false);
+        }
+        if (powerWeaponsHolder.weaponAttached) {
+            powerWeaponsHolder.weaponAttached.interactingController = controller;
+            AttachDetachWeapon(powerWeaponsHolder.weaponAttached, false, false);
         }
     }
 
@@ -35,7 +40,7 @@ public class WeaponController : MonoBehaviourPun {
 
     void WeaponSwitchCheck() {
         float scroll = Input.GetAxis("Mouse ScrollWheel");
-        if(!isAttaching && !isDetaching && scroll != 0 && primaryWeaponsHolder.weaponAttached && photonView.IsMine) {
+        if(!isAttaching && !isDetaching && scroll != 0 && primaryWeaponsHolder.weaponAttached && controller.IsMineAndAliveCheck()) {
             if (!isChangingBehaviour) {
                 Weapon weapon = primaryWeaponsHolder.weaponAttached;
                 int behaviourIndex = weapon.GetBehaviourIndex(weapon);
@@ -62,7 +67,7 @@ public class WeaponController : MonoBehaviourPun {
     }
 
     void PrimaryAndPowerInputCheckAndUse(int mouseInput, WeaponsHolder holder) {
-        if (!isAttaching && !isDetaching && photonView.IsMine) {
+        if (!isAttaching && !isDetaching && controller.IsMineAndAliveCheck()) {
             Weapon weapon = holder.weaponAttached;
             if (weapon && (weapon.weaponType != WeaponType.Primary || (weapon.weaponType == WeaponType.Primary && !isChangingBehaviour))) {
                 bool buttonPressed = false;
@@ -86,10 +91,10 @@ public class WeaponController : MonoBehaviourPun {
         }
     }
 
-    public void AttachDetachWeapon(Weapon weapon, bool useAnim) {
+    public void AttachDetachWeapon(Weapon weapon, bool useAnim, bool allowDetach) {
         if (!isAttaching && !isDetaching) {
             WeaponsHolder holder = GetHolder(weapon.weaponType);
-            StartCoroutine(CheckForAndSetAttached(holder, weapon, useAnim));
+            StartCoroutine(CheckForAndSetAttached(holder, weapon, useAnim, allowDetach));
         }
     }
 
@@ -106,10 +111,10 @@ public class WeaponController : MonoBehaviourPun {
         return holder;
     }
 
-    IEnumerator CheckForAndSetAttached(WeaponsHolder holder, Weapon weapon, bool useAnim) {
+    IEnumerator CheckForAndSetAttached(WeaponsHolder holder, Weapon weapon, bool useAnim, bool allowDetach) { 
         if (!isAttaching && !isDetaching) {
             float extraAttachWaitTime = 0f;
-            if (holder.weaponAttached) {
+            if (holder.weaponAttached && allowDetach) {
                 extraAttachWaitTime = holder.timeToDetach;
                 animationSpeed = 1 / holder.timeToDetach;
                 StartCoroutine(Detach(holder, useAnim));
@@ -128,7 +133,7 @@ public class WeaponController : MonoBehaviourPun {
             weapon.transform.SetParent(holder.weaponsHolder);
             weapon.transform.localPosition = Vector3.zero;
             weapon.transform.localRotation = Quaternion.identity;
-            if (photonView.IsMine) {
+            if (controller.IsMineCheck()) {
                 Tools.SetLocalOrGlobalLayers(weapon.meshObjects.ToArray(), false);
             }
             if (useAnim) {
@@ -142,13 +147,14 @@ public class WeaponController : MonoBehaviourPun {
     }
 
     IEnumerator Detach(WeaponsHolder holder, bool useAnim) {
+        print("Detach");
         isDetaching = true;
         if (useAnim) {
             holder.animator.speed = animationSpeed;
             holder.animator.SetTrigger("ScrewOff");
             yield return new WaitForSeconds(holder.timeToDetach);
         }
-        if (photonView.IsMine) {
+        if (controller.IsMineCheck()) {
             Tools.SetLocalOrGlobalLayers(holder.weaponAttached.meshObjects.ToArray(), true);
         }
         holder.weaponAttached.transform.SetParent(null);
@@ -168,7 +174,7 @@ public class WeaponsHolder {
     [Header("HideInInspector")]
     public Weapon weaponAttached;
     public Transform weaponsHolder;
-    [HideInInspector] public Animator animator;
+    /*[HideInInspector] */public Animator animator;
 
     public void Init(Controller controller) {
         BodypartType partType = GetHolderBodypart();
