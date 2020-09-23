@@ -55,8 +55,10 @@ public class Controller : MonoBehaviourPun {
     private void Awake() {
         TurnCollidersOnOff(false);
         rigid = GetComponent<Rigidbody>();
-        if (!photonView.IsMine) {
+        if (!IsMineCheck()) {
             Destroy(rigid);
+        } else {
+            rigid.useGravity = true;
         }
         weaponsController = GetComponent<WeaponController>();
         weaponsController.Init(this);
@@ -316,10 +318,8 @@ public class Controller : MonoBehaviourPun {
     }
 
     private void OnCollisionEnter(Collision collision) {
-        if(collision.gameObject.layer != TagsAndLayersManager.single_TLM.localPlayerLayerInfo.layerMask && photonView.IsMine) {
+        if(IsMineAndAliveCheck()) {
             isGrounded = true;
-            if (robotParts) {
-            }
         }
     }
 }

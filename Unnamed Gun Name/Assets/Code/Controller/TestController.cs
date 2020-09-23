@@ -12,11 +12,7 @@ public class TestController : MonoBehaviourPun {
     public Animator animator;
     public float interactRange;
 
-    [Space]
-    public SpeedSettings forwardsSpeedSettings;
-    public SpeedSettings sidewaysSpeedSettings;
-
-    public float jumpVelocity;
+    public MoveSettings moveSettings;
 
     [Space]
     public CameraSettings cameraSettings;
@@ -40,7 +36,7 @@ public class TestController : MonoBehaviourPun {
     //replace with bodyparts when ready
     AudioListener audioListeners;
     float currentForwardSprintValue, currentSidewaysSprintValue, xRotationAxisAngle, yRotationAxisAngle;
-    bool isGrounded, isSprinting = false;
+    public bool isGrounded, isSprinting = false;
 
     public Vector3 defaultHorizontalSwayRotation, defaultVertitalSwayRotation;
     Vector3 lastPos;
@@ -48,7 +44,7 @@ public class TestController : MonoBehaviourPun {
     [Header("Testing")]
     public bool disableCamsOnStart;
     public bool keepLocalNicknameTextEnabled;
-    public float walkSpeed, walkAnimSpeed, sprintSpeed, sprintAnimSpeed , camSpeed, swayIntensity, swaySmooth, maxSpeedAnim;
+    public float camSpeed, swayIntensity, swaySmooth;
     [Range(-90, 90)]
     public float maxLeftHorRot, maxRightHorRot, maxTopVertRot, maxBottomVertRot;
     public Transform horizontalSwayHolder, verticalSwayHolder;
@@ -61,7 +57,7 @@ public class TestController : MonoBehaviourPun {
         yRotationAxisAngle = 0;
         TurnCollidersOnOff(false);
         rigid = GetComponent<Rigidbody>();
-        if (!photonView.IsMine) {
+        if (!IsMineCheck()) {
             Destroy(rigid);
         }
         weaponsController = GetComponent<WeaponController>();
@@ -163,47 +159,56 @@ public class TestController : MonoBehaviourPun {
 
             if (Input.GetButtonDown("Jump")) {
                 if (isGrounded) {
-                    rigid.velocity = Vector3.up * jumpVelocity;
+                    animator.SetTrigger("Jump");
+                    animator.SetTrigger("JumpLand");
+                    Vector3 velocity = rigid.velocity;
+                    velocity.y = moveSettings.jumpVelocity;
+                    rigid.velocity = velocity;
                     isGrounded = false;
                 }
             }
         }
     }
 
+    float multi;
+
     private void FixedUpdate() {
         if (IsMineCheck() && canMove && !health.isDead) {
             Rotate();
 
-            SprintCheck();
-            float vertical = Input.GetAxis("Vertical") * currentForwardSprintValue * walkSpeed;
-            float horizontal = Input.GetAxis("Horizontal") * currentSidewaysSprintValue *walkSpeed;
-
-            if (animator) {
-                if (vertical != 0 || horizontal != 0) {
-                    animator.SetBool("Walk", !isSprinting);
-                    animator.SetBool("Sprint", isSprinting);
-                } else {
-                    animator.SetBool("Walk", false);
-                    animator.SetBool("Sprint", false);
-                }
+            if (isGrounded || true) {
+                SprintCheck();
+                float vertical = Input.GetAxis("Vertical") * currentForwardSprintValue * moveSettings.forwardSpeed;
+                float horizontal = Input.GetAxis("Horizontal") * currentSidewaysSprintValue * moveSettings.sidewaysSpeed;
+                
+                Vector3 newPos = new Vector3(horizontal, 0, vertical) * Time.deltaTime;
+                transform.Translate(newPos);
             }
-
-            Vector3 newPos = new Vector3(horizontal, 0, vertical) * Time.deltaTime;
-            transform.Translate(newPos);
         }
 
         if (animator) {
             float speed = Vector3.Distance(transform.position, lastPos);
             lastPos = transform.position;
-            float multi = walkAnimSpeed;
-            if (isSprinting) {
-                multi = sprintAnimSpeed;
+            if (speed > 0.05f) {
+                //print("sprint");
+                animator.SetBool("Sprint", true);
+                animator.SetBool("Walk", false);
+                multi = moveSettings.sprintAnimationSpeed;
+            } else if (speed > 0.001f) {
+                //print("walk");
+                animator.SetBool("Walk", true);
+                animator.SetBool("Sprint", false);
+                multi = moveSettings.walkAnimationSpeed;
+            } else {
+                animator.SetBool("Walk", false);
+                animator.SetBool("Sprint", false);
+                multi = 1;
             }
+
             speed /= speed / multi;
-            speed = Mathf.Clamp(speed, 0, maxSpeedAnim);
+            speed = Mathf.Clamp(speed, 0, moveSettings.maxAnimationWalkSpeed);
             if (!float.IsNaN(speed)) {
                 animator.SetFloat("MoveSpeed", speed);
-                print(speed);
             }
         }
 
@@ -212,18 +217,12 @@ public class TestController : MonoBehaviourPun {
         }
     }
 
-    private void LateUpdate() {
-        if (IsMineCheck() && canMove && !health.isDead) {
-           // Rotate();
-        }
-    }
-
     void SprintCheck() {
         isSprinting = Input.GetButton("Sprint");
 
         if (isSprinting) {
-            currentForwardSprintValue = sprintSpeed;
-            currentSidewaysSprintValue = sprintSpeed;
+            currentForwardSprintValue = moveSettings.forwardSprintSpeed;
+            currentSidewaysSprintValue = moveSettings.sidewaysSprintSpeed;
         } else {
             currentForwardSprintValue = 1;
             currentSidewaysSprintValue = 1;
@@ -340,10 +339,9 @@ public class TestController : MonoBehaviourPun {
     }
 
     private void OnCollisionEnter(Collision collision) {
-        if (collision.gameObject.layer != TagsAndLayersManager.single_TLM.localPlayerLayerInfo.layerMask && photonView.IsMine) {
+        if (IsMineAndAliveCheck()) {
             isGrounded = true;
-            if (robotParts) {
-            }
+            animator.SetTrigger("JumpLand");
         }
     }
 
@@ -351,4 +349,15 @@ public class TestController : MonoBehaviourPun {
         cam.enabled = !cam.enabled;
         localLayerCam.enabled = !localLayerCam.enabled;
     }
+}
+
+[System.Serializable]
+public class MoveSettings {
+    public float maxAnimationWalkSpeed;
+    public float forwardSpeed, forwardSprintSpeed;
+    public float sidewaysSpeed, sidewaysSprintSpeed;
+    [Range(0,10)]
+    public float walkAnimationSpeed, sprintAnimationSpeed;
+    [Header("Jumping")]
+    public float jumpVelocity;
 }
