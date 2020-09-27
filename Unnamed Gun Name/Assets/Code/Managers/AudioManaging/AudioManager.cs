@@ -5,12 +5,6 @@ public static class AudioManager {
 
     public static AudioMixer audioMixer;
 
-    public enum AudioGroups {
-        None,
-        Music,
-        SFX,
-    }
-
     public static void PlaySound(AudioClip audioClipToPlay, Vector3 position, AudioGroups audioGroups) {
         AudioManager.PlaySound(audioClipToPlay, audioGroups, position);
     }
@@ -25,3 +19,8 @@ public static class AudioManager {
     }
 }
 
+public enum AudioGroups {
+    Master,
+    Music,
+    SFX,
+}

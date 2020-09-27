@@ -19,12 +19,14 @@ public class UiManager : MonoBehaviour {
 
     private void Awake() {
         single_UM = this;
-        respawnUiHolder.SetActive(false);
-        for (int i = 0; i < maxKillsInFeed; i++) {
-            GameObject listing = Instantiate(killfeedListingPrefab, killFeed);
-            KillFeedListing kfl = listing.GetComponent<KillFeedListing>();
-            listing.gameObject.SetActive(false);
-            listings.Enqueue(kfl);
+        if (!MenuManager.single_MM.isMainMenu) {
+            respawnUiHolder.SetActive(false);
+            for (int i = 0; i < maxKillsInFeed; i++) {
+                GameObject listing = Instantiate(killfeedListingPrefab, killFeed);
+                KillFeedListing kfl = listing.GetComponent<KillFeedListing>();
+                listing.gameObject.SetActive(false);
+                listings.Enqueue(kfl);
+            }
         }
     }
 

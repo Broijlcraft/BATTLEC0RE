@@ -888,6 +888,8 @@ GameObject:
   - component: {fileID: 4240788520195863098}
   - component: {fileID: 1646130675721572480}
   - component: {fileID: 4252939358102045352}
+  - component: {fileID: 1734914604624134281}
+  - component: {fileID: 3155089052660804658}
   m_Layer: 0
   m_Name: ManagersAndFunc
   m_TagString: Untagged
@@ -1019,3 +1021,34 @@ MonoBehaviour:
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &1734914604624134281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7747030544216129967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d5e7da86ec37a14d9f0abd2d70ab98e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMainMenu: 0
+  currentMenu: {fileID: 0}
+  currentMenuState: 0
+  menuHolder: {fileID: 0}
+  firstMenu: {fileID: 0}
+--- !u!114 &3155089052660804658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7747030544216129967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8daf1390e612844c8bbff7766ae08f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioMixer: {fileID: 24100000, guid: 10dfd40a0162669499e73aafcf7174c4, type: 2}
+  settingSliders: []
