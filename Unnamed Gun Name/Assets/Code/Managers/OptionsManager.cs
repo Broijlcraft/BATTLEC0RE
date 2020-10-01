@@ -5,56 +5,100 @@ using UnityEngine;
 using System;
 
 public class OptionsManager : MonoBehaviour {
+    public static OptionsManager single_OM;
     public AudioMixer audioMixer;
-    public Toggle fullscreenToggle;
-    public GameObject dropdownHolder;
-    public Dropdown resolutionsDropdown;
-    public SettingSlider[] settingSliders;
 
     Resolution[] resolutions;
 
-    private void Start() {
-        AudioManager.audioMixer = audioMixer;
-        for (int i = 0; i < settingSliders.Length; i++) {
-            settingSliders[i].Init();
+    private void Awake() {
+        if (!OptionsManager.single_OM) {
+            OptionsManager.single_OM = this;
         }
-        SetResolutions();
+    }
+
+    private void Start() {
+        Init();
+    }
+
+    public void Init() {
+        if (CanvasComponents.single_CC) {
+            CanvasComponents cc = CanvasComponents.single_CC;
+
+            AudioManager.audioMixer = audioMixer;
+            for (int i = 0; i < cc.settingSliders.Length; i++) {
+                cc.settingSliders[i].Init();
+            }
+
+            for (int i = 0; i < cc.settingToggles.Length; i++) {
+                cc.settingToggles[i].Init();
+            }
+
+            SetResolutions();
+        }
     }
 
     public void SetResolutions() {
-        dropdownHolder.SetActive(true);
-        int index = 0;
-        resolutions = Screen.resolutions;
-        List<string> resolutionStringList = new List<string>();
-        List<Resolution> tempResolutions = new List<Resolution>();
+        if (CanvasComponents.single_CC) {
+            CanvasComponents cc = CanvasComponents.single_CC;
+            if (CanvasComponents.single_CC.resolutionsDropdown) {
+                int index = 0;
+                resolutions = Screen.resolutions;
+                List<string> resolutionStringList = new List<string>();
+                List<Resolution> tempResolutions = new List<Resolution>();
 
-        for (int i = resolutions.Length - 1; i > 0; i--) {
-            tempResolutions.Add(resolutions[i]);
-            string option = resolutions[i].width + "x" + resolutions[i].height;
-            resolutionStringList.Add(option);
-            if (resolutions[i].width == Screen.width && resolutions[i].height == Screen.height) {
-                index = resolutions.Length - 1 - i;
+                for (int i = resolutions.Length - 1; i > 0; i--) {
+                    tempResolutions.Add(resolutions[i]);
+                    string option = resolutions[i].width + "x" + resolutions[i].height;
+                    resolutionStringList.Add(option);
+                    if (resolutions[i].width == Screen.width && resolutions[i].height == Screen.height) {
+                        index = resolutions.Length - 1 - i;
+                    }
+                }
+
+                resolutions = tempResolutions.ToArray();
+                cc.resolutionsDropdown.ClearOptions();
+                cc.resolutionsDropdown.AddOptions(resolutionStringList);
+                cc.resolutionsDropdown.value = index;
+                cc.resolutionsDropdown.onValueChanged.AddListener(ChangeResolution);
+                cc.resolutionsDropdown.RefreshShownValue();
+            }
+
+            for (int i = 0; i < cc.settingToggles.Length; i++) {
+                cc.settingToggles[i].Init();
+            }
+
+            if (cc.videoSettingsHolder) {
+                cc.videoSettingsHolder.SetActive(true);
+                cc.videoSettingsHolder.SetActive(false);
+            }
+
+            if (cc.quitReturnButton) {
+                cc.quitReturnButton.onClick.RemoveAllListeners();
+                if (MenuManager.single_MM.isMainMenu) {
+                    cc.quitReturnButton.onClick.AddListener(QuitGame);
+                } else {
+                    cc.quitReturnButton.onClick.AddListener(ReturnToMenuFromGame);
+                }
             }
         }
-
-        resolutions = tempResolutions.ToArray();
-        fullscreenToggle.isOn = Screen.fullScreen;
-        resolutionsDropdown.ClearOptions();
-        resolutionsDropdown.AddOptions(resolutionStringList);
-        resolutionsDropdown.value = index;
-        resolutionsDropdown.RefreshShownValue();
-
-        dropdownHolder.SetActive(false);
     }
 
-    public void QuitGame() {
+    void ChangeResolution(int index) {
+        Screen.SetResolution(resolutions[index].width, resolutions[index].height, Screen.fullScreen);
+    }
+
+    void QuitGame() {
         Application.Quit();
+    }
+
+    void ReturnToMenuFromGame() {
+
     }
 }
 
 [Serializable]
 public class Range {
-    public float min, max;
+    public float min = 0.0001f, max = 1f;
 }
 
 public enum SliderType {
@@ -86,13 +130,14 @@ public class SettingSlider {
         slider.onValueChanged.AddListener(OnSliderValueChanged);
         float value = 0.12f;
 
-        //if (sliderType == SliderType.AudioSlider) {
-        //    value = PlayerPrefs.GetFloat(audioGroup.ToString());
-        //} else if (sliderType == SliderType.SensitivitySlider) {
-        //    value = PlayerPrefs.GetFloat(sensitivityType.ToString());
-        //}
+        if (sliderType == SliderType.AudioSlider) {
+            value = PlayerPrefs.GetFloat(audioGroup.ToString());
+        } else if (sliderType == SliderType.SensitivitySlider) {
+            value = PlayerPrefs.GetFloat(sensitivityType.ToString());
+        }
 
         slider.value = value;
+        OnSliderValueChanged(value);
     }
 
     public void OnSliderValueChanged(float value) {
@@ -102,6 +147,40 @@ public class SettingSlider {
             PlayerPrefs.SetFloat(group, value);
         } else {
             PlayerPrefs.SetFloat(sensitivityType.ToString(), value);
+        }
+    }
+}
+
+public enum ToggleType {
+    InvertCam,
+    Fullscreen
+}
+
+[System.Serializable]
+public class SettingToggle {
+
+    public ToggleType toggleType;
+    public Toggle toggle;
+
+    public void Init() {
+        bool isOn = false;
+        if (PlayerPrefs.GetInt("InvertCam") == 1) {
+            isOn = true;
+        }
+        toggle.isOn = isOn;
+        toggle.onValueChanged.AddListener(OnToggleValueChanged);
+    }
+
+    void OnToggleValueChanged(bool value) {
+        if(toggleType == ToggleType.InvertCam) {
+            int intValue = 1;
+            if (value) {
+                intValue = -1;
+            }
+            PlayerPrefs.SetInt("InvertCam", intValue);
+            if (Controller.single_CLocal) {
+                Controller.single_CLocal.InvertCamMovement();
+            }
         }
     }
 }

@@ -7,8 +7,10 @@ public class TagsAndLayersManager : MonoBehaviour {
     public string interactableTag = "Interactable";
     public LayerInfo playerLayerInfo, localPlayerLayerInfo, interactableLayer, noPlayerCollision, cantBeSeenByPlayer;
 
-    private void Awake() {
-        single_TLM = this;
+    public void Awake() {
+        if (!TagsAndLayersManager.single_TLM) {
+            TagsAndLayersManager.single_TLM = this;
+        }
     }
 }
 

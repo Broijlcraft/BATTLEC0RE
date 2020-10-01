@@ -44,7 +44,7 @@ public class WeaponController : MonoBehaviourPun {
             if (!isChangingBehaviour) {
                 Weapon weapon = primaryWeaponsHolder.weaponAttached;
                 int behaviourIndex = weapon.GetBehaviourIndex(weapon);
-                InteractableActions.ia_Single.SwitchWeaponBehaviour(photonView.ViewID, behaviourIndex);
+                InteractableActions.single_IA.SwitchWeaponBehaviour(photonView.ViewID, behaviourIndex);
             }
         }
     }

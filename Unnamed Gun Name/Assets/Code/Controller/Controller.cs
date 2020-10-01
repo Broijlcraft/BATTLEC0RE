@@ -4,6 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 
 public class Controller : MonoBehaviourPun {
+    public static Controller single_CLocal;
     public PlayerView playerView;
     public Camera cam, localLayerCam;
     public Transform horizontalCamHolder, verticalCamHolder;
@@ -36,7 +37,7 @@ public class Controller : MonoBehaviourPun {
     AudioListener audioListeners;
     float currentForwardSprintValue, currentSidewaysSprintValue, xRotationAxisAngle, yRotationAxisAngle;
     public bool isGrounded, isSprinting = false;
-
+    int invertMultiplier;
     public Vector3 defaultHorizontalSwayRotation, defaultVertitalSwayRotation;
     Vector3 lastPos;
 
@@ -53,7 +54,10 @@ public class Controller : MonoBehaviourPun {
         yRotationAxisAngle = 0;
         TurnCollidersOnOff(false);
         rigid = GetComponent<Rigidbody>();
-        if (!IsMineCheck()) {
+        if (IsMineCheck()) {
+            single_CLocal = this;
+            InvertCamMovement();
+        } else {
             Destroy(rigid);
         }
         weaponsController = GetComponent<WeaponController>();
@@ -178,6 +182,10 @@ public class Controller : MonoBehaviourPun {
 
     float multi;
 
+    public void InvertCamMovement() {
+        invertMultiplier = PlayerPrefs.GetInt("InvertCam", 1);
+    }
+
     private void FixedUpdate() {
         if (IsMineCheck() && canMove && !health.isDead) {
             Rotate();
@@ -240,9 +248,10 @@ public class Controller : MonoBehaviourPun {
     public bool isClamped = false;
 
     void Rotate() {
-        float a_mouseX = Input.GetAxis("Mouse X") * cameraSettings.mouseSensitivity;
+        //int multiplier = 0 + Tools.BoolToInt()
+        float a_mouseX = Input.GetAxis("Mouse X") * cameraSettings.mouseSensitivity * invertMultiplier;
         float b_mouseX = a_mouseX;
-        float mouseY = Input.GetAxis("Mouse Y") * cameraSettings.mouseSensitivity;
+        float mouseY = Input.GetAxis("Mouse Y") * cameraSettings.mouseSensitivity * invertMultiplier;
 
         xRotationAxisAngle += mouseY;
         yRotationAxisAngle += a_mouseX;
@@ -351,6 +360,7 @@ public class Controller : MonoBehaviourPun {
             animator.ResetTrigger("JumpLand");
         }
     }
+
     public void EnDisCams() {
         cam.enabled = !cam.enabled;
         localLayerCam.enabled = !localLayerCam.enabled;
@@ -362,7 +372,7 @@ public class MoveSettings {
     public float maxAnimationWalkSpeed;
     public float forwardSpeed, forwardSprintSpeed;
     public float sidewaysSpeed, sidewaysSprintSpeed;
-    [Range(0,10)]
+    [Range(-10,10)]
     public float walkAnimationSpeed, sprintAnimationSpeed;
     [Header("Jumping")]
     public float jumpVelocity;
@@ -372,9 +382,7 @@ public class MoveSettings {
 public class CameraSettings {
 
     public bool invertVerticalCam;
-    public float mouseSensitivity = 1f;
-    //[Range(-90, 180)]
-    public float maxVerticalTopViewAngle = 90, maxVerticalBottomViewAngle = 90, maxLeftHorizontalViewAngle, maxRightHorizontalViewAngle;
+    public float mouseSensitivity, maxVerticalTopViewAngle = 90, maxVerticalBottomViewAngle = 90, maxLeftHorizontalViewAngle, maxRightHorizontalViewAngle;
 }
 
 [System.Serializable]

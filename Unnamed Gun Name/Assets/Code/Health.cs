@@ -5,9 +5,10 @@ using System.Collections;
 
 public class Health : MonoBehaviourPun {
     public float maxHealth = 50f;
-    public Image fillHealthBar;
 
     public int respawnTime = 6;
+
+    public Image fillHealthBar;
 
     [HideInInspector] public bool isDead, respawning;
     [HideInInspector] public float currentHealth;
@@ -18,12 +19,13 @@ public class Health : MonoBehaviourPun {
     }
     
     IEnumerator Countdown() {
-        UiManager.single_UM.respawnUiHolder.SetActive(true);
+        CanvasComponents cc = CanvasComponents.single_CC;
+        cc.respawnUiHolder.SetActive(true);
         int timer = respawnTime;
         while (timer > 0) {
-            if (Manager.single_M.dev) { break; }
-            UiManager.single_UM.respawnAnim.SetTrigger("Respawn");
-            UiManager.single_UM.respawnTimer.text = timer.ToString();
+            if (Manager.single_M.IsDev()) { break; }
+            cc.respawnAnim.SetTrigger("Respawn");
+            cc.respawnTimer.text = timer.ToString();
             yield return new WaitForSeconds(1);
             timer--;
         }
@@ -35,8 +37,8 @@ public class Health : MonoBehaviourPun {
         isDead = false;
         respawning = false;
         if (photonView.IsMine) {
-            UiManager.single_UM.respawnUiHolder.SetActive(false);
-            if (!Manager.single_M.dev) {
+            CanvasComponents.single_CC.respawnUiHolder.SetActive(false);
+            if (!Manager.single_M.IsDev()) {
                 controller.ResetAtStartPosition();
             }
         }
@@ -85,11 +87,9 @@ public class Health : MonoBehaviourPun {
 
     void UpdateUiHeath() { 
         float fill = currentHealth / maxHealth;
-        if (fillHealthBar) {
-            fillHealthBar.fillAmount = fill;
-        }
+        fillHealthBar.fillAmount = fill;
         if (photonView.IsMine) {
-            UiManager.single_UM.ingameHealthBar.fillAmount = fill;
+            CanvasComponents.single_CC.ingameHealthBar.fillAmount = fill;
         }
     }
 }

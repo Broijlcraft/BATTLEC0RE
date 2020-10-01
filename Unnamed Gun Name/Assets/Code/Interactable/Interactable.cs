@@ -15,7 +15,7 @@ public class Interactable : MonoBehaviour, IPoolObject {
 
     public virtual void Interact(Controller controller) {
         if (!interactingController) {
-            InteractableActions.ia_Single.CheckAndSetInteracting(index, controller.photonView.ViewID);
+            InteractableActions.single_IA.CheckAndSetInteracting(index, controller.photonView.ViewID);
         }
     }
 

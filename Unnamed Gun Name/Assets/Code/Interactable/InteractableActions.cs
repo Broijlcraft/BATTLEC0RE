@@ -2,10 +2,12 @@
 
 public class InteractableActions : MonoBehaviourPun {
 
-    public static InteractableActions ia_Single;
+    public static InteractableActions single_IA;
 
     private void Awake() {
-        ia_Single = this;
+        if (!InteractableActions.single_IA) {
+            InteractableActions.single_IA = this;
+        }
     }
 
     //rpc functions

@@ -141,6 +141,7 @@ public class PhotonRoomCustomMatchMaking : MonoBehaviourPunCallbacks, IInRoomCal
         currentScene = scene.buildIndex;
         if(currentScene == MultiplayerSetting.single_MPS.multiplayerScene) {
             isLoaded = true;
+            Manager.single_M.SceneFinishedLoading();
             PV.RPC("RPC_LoadedGameScene", RpcTarget.MasterClient);
         }
     }

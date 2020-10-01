@@ -6,23 +6,25 @@ using UnityEngine;
 public class UiManager : MonoBehaviour {
     public static UiManager single_UM;
 
-    public GameObject respawnUiHolder;
-    public Animator respawnAnim;
-    public Text respawnTimer;
-    public Image ingameHealthBar;
     [Space]
     public int maxKillsInFeed = 5;
     public Sprite defaultWeaponIconInFeed, defaultHeadshotIconInFeed;
-    public Transform killFeed;
     public GameObject killfeedListingPrefab;
     Queue<KillFeedListing> listings = new Queue<KillFeedListing>();
 
     private void Awake() {
-        single_UM = this;
+        if (!UiManager.single_UM) {
+            UiManager.single_UM = this;
+        }
+    }
+
+    public void Init() {
         if (!MenuManager.single_MM.isMainMenu) {
-            respawnUiHolder.SetActive(false);
+            CanvasComponents cc = CanvasComponents.single_CC;
+
+            cc.respawnUiHolder.SetActive(false);
             for (int i = 0; i < maxKillsInFeed; i++) {
-                GameObject listing = Instantiate(killfeedListingPrefab, killFeed);
+                GameObject listing = Instantiate(killfeedListingPrefab, cc.killFeedHolder);
                 KillFeedListing kfl = listing.GetComponent<KillFeedListing>();
                 listing.gameObject.SetActive(false);
                 listings.Enqueue(kfl);

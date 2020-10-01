@@ -13,7 +13,13 @@ public class MenuManager : MonoBehaviour {
     public Menu firstMenu;
 
     private void Awake() {
-        single_MM = this;
+        if (!MenuManager.single_MM) {
+            MenuManager.single_MM = this;
+        }
+    }
+
+    public void Init() {
+        isMainMenu = false;
     }
 
     private void Start() {
@@ -48,7 +54,7 @@ public class MenuManager : MonoBehaviour {
                 menuHolder.SetActive(false);
                 currentMenu = null;
                 currentMenuState = MenuState.Closed;
-                //Movement.m_Single.canMove = true;
+                Controller.single_CLocal.canMove = true;
                 Time.timeScale = 1;
             } else {
                 OpenMenu(currentMenu.previousMenu);
@@ -63,7 +69,7 @@ public class MenuManager : MonoBehaviour {
             currentMenu.gameObject.SetActive(true);
             currentMenuState = menu.menuPosition;
             if (!isMainMenu) {
-                //Movement.m_Single.canMove = false;
+                Controller.single_CLocal.canMove = false;
             }
         }
     }
