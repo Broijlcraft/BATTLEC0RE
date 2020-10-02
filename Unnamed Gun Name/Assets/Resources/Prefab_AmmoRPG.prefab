@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 114597118921062316}
   - component: {fileID: 114313474564790046}
   m_Layer: 0
-  m_Name: Prefab_DevAmmoRPG
+  m_Name: Prefab_AmmoRPG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43,7 +43,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2251921230218651953}
-  m_Mesh: {fileID: 2534964839176971238, guid: c8cc971e9ba80734092f8a67ccf0ed7d, type: 3}
+  m_Mesh: {fileID: 3694651827308400751, guid: c8cc971e9ba80734092f8a67ccf0ed7d, type: 3}
 --- !u!23 &2251921230220589041
 MeshRenderer:
   m_ObjectHideFlags: 0

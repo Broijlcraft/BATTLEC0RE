@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1688111695383644301}
   - component: {fileID: 1575198488678927411}
   - component: {fileID: 1558711856737728799}
+  - component: {fileID: -5151099583745084233}
   m_Layer: 0
   m_Name: Par_Prefab_ExposiveParticle
   m_TagString: Untagged
@@ -4663,6 +4664,20 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &-5151099583745084233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1684584687301021075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bc591eb837e16a4a87dca26bce8a74a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 4
+  particleSystems: []
 --- !u!1 &1684584687302542429
 GameObject:
   m_ObjectHideFlags: 0
