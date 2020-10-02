@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 4872858386828358741}
   - component: {fileID: 8372197719793531888}
   - component: {fileID: 6040719348575768378}
-  - component: {fileID: 5595297644039021406}
+  - component: {fileID: 1279070557193175553}
+  - component: {fileID: 5175239061393191385}
   m_Layer: 0
   m_Name: Prefab_FortressWall
   m_TagString: Untagged
@@ -81,8 +82,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &5595297644039021406
-MeshCollider:
+--- !u!136 &1279070557193175553
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -91,7 +92,20 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 6486474244601027786, guid: be021809d2879c8408b26881b4e7075e, type: 3}
+  m_Radius: 1.58
+  m_Height: 16
+  m_Direction: 1
+  m_Center: {x: 0, y: 6.635083, z: 0}
+--- !u!65 &5175239061393191385
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5247835194922086127}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 16.000002, y: 13.279245, z: 2.1}
+  m_Center: {x: 0, y: 6.635083, z: 0}

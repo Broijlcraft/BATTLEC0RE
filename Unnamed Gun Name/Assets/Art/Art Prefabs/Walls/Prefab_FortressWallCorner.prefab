@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6807455175287074017}
   - component: {fileID: 7626612869759394628}
   - component: {fileID: 5635090236091307918}
-  - component: {fileID: 7047692237077672897}
+  - component: {fileID: 2959864969531751135}
   m_Layer: 0
   m_Name: Prefab_FortressWallCorner
   m_TagString: Untagged
@@ -81,8 +81,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &7047692237077672897
-MeshCollider:
+--- !u!136 &2959864969531751135
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -91,7 +91,7 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -1038798866279972111, guid: 2b420cb59a96a3248bf2e01b3a658807, type: 3}
+  m_Radius: 2.2078109
+  m_Height: 18.63821
+  m_Direction: 1
+  m_Center: {x: 0, y: 9.319105, z: 0}
