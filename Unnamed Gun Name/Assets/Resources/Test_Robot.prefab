@@ -524,9 +524,9 @@ MonoBehaviour:
   moveSettings:
     maxAnimationWalkSpeed: 10
     forwardSpeed: 5
-    forwardSprintSpeed: 2
-    sidewaysSpeed: 1.2
-    sidewaysSprintSpeed: 0.6
+    forwardSprintSpeed: 1.2
+    sidewaysSpeed: 5
+    sidewaysSprintSpeed: 1.2
     walkAnimationSpeed: 2.5
     sprintAnimationSpeed: 2
     jumpVelocity: 5

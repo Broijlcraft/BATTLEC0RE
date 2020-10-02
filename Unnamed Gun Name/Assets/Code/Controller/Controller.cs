@@ -203,7 +203,7 @@ public class Controller : MonoBehaviourPun {
         if (animator && isGrounded && isGrounded) {
             float speed = Vector3.Distance(transform.position, lastPos);
             lastPos = transform.position;
-            if (/*speed > speedToSprintFrom*/speed > 0.001f) {
+            if (/*speed > speedToSprintFrom*/speed > 0.002f) {
                 //print("sprint");
                 animator.SetBool("Sprint", true);
                 animator.SetBool("Walk", false);
@@ -256,7 +256,7 @@ public class Controller : MonoBehaviourPun {
         xRotationAxisAngle += mouseY;
         yRotationAxisAngle += a_mouseX;
 
-        //ApplySway(mouseX, mouseY);
+        ApplySway(a_mouseX, mouseY);
 
         if (xRotationAxisAngle > cameraSettings.maxVerticalTopViewAngle) {
             xRotationAxisAngle = cameraSettings.maxVerticalTopViewAngle;
