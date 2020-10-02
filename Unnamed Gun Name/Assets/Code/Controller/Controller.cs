@@ -142,10 +142,10 @@ public class Controller : MonoBehaviourPun {
             for (int i = 0; i < controllers.Length; i++) {
                 controllers[i].nicknameTarget = cam.transform;
                 controllers[i].nicknameText.text = Tools.RemoveIdFromNickname(controllers[i].photonView.Owner.NickName);
-                int index = TeamManager.single_TM.GetTeamIndex(controllers[i].photonView.Owner.NickName);
-                if (index >= 0) {
-                    controllers[i].nicknameText.color = TeamManager.single_TM.teams[index].teamColor;
-                }
+                //int index = TeamManager.single_TM.GetTeamIndex(controllers[i].photonView.Owner.NickName);
+                //if (index >= 0) {
+                //    controllers[i].nicknameText.color = TeamManager.single_TM.teams[index].teamColor;
+                //}
                 if (controllers[i] == this && !keepLocalNicknameTextEnabled) {
                     controllers[i].uiLookAtHolder.gameObject.SetActive(false);
                 }

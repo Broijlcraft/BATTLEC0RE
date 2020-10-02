@@ -1,4 +1,5 @@
 ﻿using Photon.Pun;
+using Photon.Realtime;
 using UnityEngine;
 
 public static class Tools {
@@ -63,4 +64,12 @@ public static class Tools {
         return finalNickname;
     }
 
+    public static MyPlayer CreatePlayer(Player play, int _teamIndex) {
+        bool isInTeam = false;
+        if (_teamIndex >= 0) {
+            isInTeam = true;
+        }
+        MyPlayer mp = new MyPlayer() { player = play, nickname = play.NickName, teamIndex = _teamIndex, inTeam = isInTeam };
+        return mp;
+    }
 }

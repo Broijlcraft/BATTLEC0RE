@@ -1816,7 +1816,7 @@ Transform:
   - {fileID: 1681659561}
   - {fileID: 798285251}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &275422802
 PrefabInstance:
@@ -2108,7 +2108,6 @@ MonoBehaviour:
   respawnUiHolder: {fileID: 0}
   respawnAnim: {fileID: 0}
   ingameHealthBar: {fileID: 0}
-  fillHealthBar: {fileID: 0}
   quitReturnButton: {fileID: 517552021}
   resolutionsDropdown: {fileID: 2018337729}
   videoSettingsHolder: {fileID: 2104324990}
@@ -2321,12 +2320,6 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!95 &346900426 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 304783625503378211, guid: 7cd21258632805b478b7c73aeda3c465,
-    type: 3}
-  m_PrefabInstance: {fileID: 655325471}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &364143449
 GameObject:
   m_ObjectHideFlags: 0
@@ -3919,105 +3912,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60400151e93f49d4788311618032e743, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1001 &655325471
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 766201534296391091, guid: 7cd21258632805b478b7c73aeda3c465,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -3.096899
-      objectReference: {fileID: 0}
-    - target: {fileID: 766201534296391091, guid: 7cd21258632805b478b7c73aeda3c465,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 766201534296391091, guid: 7cd21258632805b478b7c73aeda3c465,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 4.813177
-      objectReference: {fileID: 0}
-    - target: {fileID: 766201534296391091, guid: 7cd21258632805b478b7c73aeda3c465,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 766201534296391091, guid: 7cd21258632805b478b7c73aeda3c465,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 766201534296391091, guid: 7cd21258632805b478b7c73aeda3c465,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 766201534296391091, guid: 7cd21258632805b478b7c73aeda3c465,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 766201534296391091, guid: 7cd21258632805b478b7c73aeda3c465,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 766201534296391091, guid: 7cd21258632805b478b7c73aeda3c465,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 766201534296391091, guid: 7cd21258632805b478b7c73aeda3c465,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 766201534296391091, guid: 7cd21258632805b478b7c73aeda3c465,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 766201534296875411, guid: 7cd21258632805b478b7c73aeda3c465,
-        type: 3}
-      propertyPath: m_Name
-      value: Prefab_BillyTheBean
-      objectReference: {fileID: 0}
-    - target: {fileID: 766201534296875411, guid: 7cd21258632805b478b7c73aeda3c465,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1761153458948728927, guid: 7cd21258632805b478b7c73aeda3c465,
-        type: 3}
-      propertyPath: devView
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3444772126607971661, guid: 7cd21258632805b478b7c73aeda3c465,
-        type: 3}
-      propertyPath: viewIdField
-      value: 14
-      objectReference: {fileID: 0}
-    - target: {fileID: 4789760830094396840, guid: 7cd21258632805b478b7c73aeda3c465,
-        type: 3}
-      propertyPath: viewIdField
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 9101540060939248263, guid: 7cd21258632805b478b7c73aeda3c465,
-        type: 3}
-      propertyPath: verticalCamRotationHolder
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 9101540060939248263, guid: 7cd21258632805b478b7c73aeda3c465,
-        type: 3}
-      propertyPath: verticalChestRotationHolder
-      value: 
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 7cd21258632805b478b7c73aeda3c465, type: 3}
 --- !u!1 &674441336
 GameObject:
   m_ObjectHideFlags: 0
@@ -4634,7 +4528,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &767058676
 GameObject:
@@ -7296,7 +7190,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1403837921
 GameObject:
@@ -9567,7 +9461,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1804682116
 MonoBehaviour:
@@ -12554,7 +12448,7 @@ PrefabInstance:
         type: 3}
       propertyPath: powerWeaponsHolder.animator
       value: 
-      objectReference: {fileID: 346900426}
+      objectReference: {fileID: 0}
     - target: {fileID: 368377036029992388, guid: fae503e365a52cc44855e6cc77f49f1a,
         type: 3}
       propertyPath: devView
@@ -12579,16 +12473,6 @@ PrefabInstance:
         type: 3}
       propertyPath: hideCursorOnStart
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 368377036029992399, guid: fae503e365a52cc44855e6cc77f49f1a,
-        type: 3}
-      propertyPath: moveSettings.walkAnimationSpeed
-      value: -2.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 368377036029992399, guid: fae503e365a52cc44855e6cc77f49f1a,
-        type: 3}
-      propertyPath: moveSettings.maxAnimationWalkSpeed
-      value: -2.5
       objectReference: {fileID: 0}
     - target: {fileID: 442006569673999194, guid: fae503e365a52cc44855e6cc77f49f1a,
         type: 3}

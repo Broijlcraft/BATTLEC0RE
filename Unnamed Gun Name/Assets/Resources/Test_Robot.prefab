@@ -560,7 +560,7 @@ MonoBehaviour:
   defaultHorizontalSwayRotation: {x: 0, y: 0, z: 0}
   defaultVertitalSwayRotation: {x: 0, y: 0, z: 0}
   disableCamsOnStart: 0
-  keepLocalNicknameTextEnabled: 0
+  keepLocalNicknameTextEnabled: 1
   horizontalSwayHolder: {fileID: 0}
   verticalSwayHolder: {fileID: 0}
   meshObjectsToHideLocally: []
@@ -1104,7 +1104,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:

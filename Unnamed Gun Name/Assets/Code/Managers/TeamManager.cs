@@ -1,36 +1,46 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 
-public class TeamManager : MonoBehaviour {
+public class TeamManager : MonoBehaviourPun {
     public static TeamManager single_TM;
+
+    [Tooltip("this will later be set by what gamemode is picked")]
+    public int maxTeams;
+
+    public Transform teamListingsHolder;
+    public GameObject teamListingPrefab;
+
+    [Header("HideInInspector")]
     public List<Team> teams = new List<Team>();
+    
+    /* to be added:
+     * teams being created from code not editor
+     */
 
     private void Awake() {
         single_TM = this;
-    }
-
-    public int GetTeamIndex(string nickname) {
-        int index = -1;
-        for (int i = 0; i < teams.Count; i++) {
+        DontDestroyOnLoad(gameObject);
+        for (int i = 0; i < maxTeams; i++) {
+            //create new team from script
+            GameObject tlsObj = Instantiate(teamListingPrefab, teamListingsHolder);
+            TeamListingScript tls = tlsObj.GetComponent<TeamListingScript>();
+            tls.Init(i);
             Team team = teams[i];
-            for (int iB = 0; iB < team.playerNames.Count; iB++) {
-                if (team.playerNames[iB].Contains(nickname)) {
-                    index = i;
-                    break;
-                }
-            }
+            team.teamId = i;
+            team.tls = tls;
         }
-        return index;
     }
 }
 
 [System.Serializable]
 public class Team {
-    public string teamName;
-    public Color teamColor;
-    public int minPlayers, maxPlayers;
-
+    public RangeI playersAllowed;
+    public Color emptyColor, filledColor;
+    public int teamId;
     [Space]
-    public List<string> playerNames = new List<string>();
+    public List<MyPlayer> players = new List<MyPlayer>();
+
+    [HideInInspector] public TeamListingScript tls;
 }

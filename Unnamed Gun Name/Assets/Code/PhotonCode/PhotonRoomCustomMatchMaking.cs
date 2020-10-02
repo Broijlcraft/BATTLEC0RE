@@ -1,6 +1,7 @@
 ﻿using Photon.Pun;
 using Photon.Realtime;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,8 +9,7 @@ public class PhotonRoomCustomMatchMaking : MonoBehaviourPunCallbacks, IInRoomCal
 
     public static PhotonRoomCustomMatchMaking roomSingle;
 
-    public GameObject playerPrefab, lobbyGameObject, roomGameObject, playerListingPrefab, startButton, loadingTextObject;
-    public Transform playersPanel;
+    public GameObject playerPrefab, lobbyGameObject, roomGameObject, startButton, loadingTextObject;
     [HideInInspector] public PhotonView PV;
 
     public int currentScene;
@@ -48,11 +48,13 @@ public class PhotonRoomCustomMatchMaking : MonoBehaviourPunCallbacks, IInRoomCal
 
     public override void OnJoinedRoom() {
         photonPlayers = PhotonNetwork.PlayerList;
+        Player play = PhotonNetwork.LocalPlayer;
         playersInRoom = photonPlayers.Length;
-        ClearPlayerListings();
+        //ClearPlayerListings();
         myNumberInRoom = playersInRoom;
-        TeamsTest();
-        ListPlayers();
+        //TeamsTest();
+        //ListPlayers();
+        PlayersManager.single_PM.Init();
         if (lobbyGameObject) {
             lobbyGameObject.SetActive(false);
         }
@@ -83,58 +85,78 @@ public class PhotonRoomCustomMatchMaking : MonoBehaviourPunCallbacks, IInRoomCal
             }
         }
 
-        ClearPlayerListings();
-        TeamsTest();
-        ListPlayers();
-
+        //ClearPlayerListings();
+        //TeamsTest();
+        //ListPlayers();
+        //PlayersManager.single_PM.Init();
         playersInRoom++;
     }
 
     void TeamsTest() {
-        if (PhotonNetwork.InRoom) {
-            photonPlayers = PhotonNetwork.PlayerList;
-            TeamManager.single_TM.teams[0].playerNames.Clear();
-            TeamManager.single_TM.teams[1].playerNames.Clear();
-            for (int i = 0; i < photonPlayers.Length; i++) {
-                int index;
-                if (i % 2 == 0) {
-                    index = 0;
-                } else {
-                    index = 1;
-                }
-                TeamManager.single_TM.teams[index].playerNames.Add(photonPlayers[i].NickName);
+        if (PhotonNetwork.InRoom && PhotonNetwork.IsMasterClient) {
+            PlayersManager pm = PlayersManager.single_PM;
+            for (int i = 0; i < pm.players.Count; i++) {
+
             }
+            //photonPlayers = PhotonNetwork.PlayerList;
+            //TeamManager.single_TM.teams[0].playerNames.Clear();
+            //TeamManager.single_TM.teams[1].playerNames.Clear();
+            //for (int i = 0; i < photonPlayers.Length; i++) {
+            //    int index;
+            //    if (i % 2 == 0) {
+            //        index = 0;
+            //    } else {
+            //        index = 1;
+            //    }
+            //    TeamManager.single_TM.teams[index].playerNames.Add(photonPlayers[i].NickName);
+            //}
         }
     }
 
     void ClearPlayerListings() {
-        if (playersPanel) {
-            for (int i = playersPanel.childCount - 1; i >= 0; i--) {
-                Destroy(playersPanel.GetChild(i).gameObject);
-            }
-        }
+        //if (playersPanel) {
+        //    for (int i = playersPanel.childCount - 1; i >= 0; i--) {
+        //        Destroy(playersPanel.GetChild(i).gameObject);
+        //    }
+        //}
     }
 
     void ListPlayers() {
         if (PhotonNetwork.InRoom) {
-            for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++) {
-                GameObject tempNickNameObject = Instantiate(playerListingPrefab, playersPanel);
-                ScriptPlayerListing spl = tempNickNameObject.GetComponent<ScriptPlayerListing>();
-                string nickname = PhotonNetwork.PlayerList[i].NickName;
-                string cleanedNickname = Tools.RemoveIdFromNickname(nickname);
-                spl.text_Nickname.text = cleanedNickname;
-                int index = TeamManager.single_TM.GetTeamIndex(nickname);
-                if(index >= 0) {
-                    spl.img.color = TeamManager.single_TM.teams[index].teamColor;
-                }
-            }
+            //for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++) {
+            //    GameObject tempNickNameObject = Instantiate(playerListingPrefab, playersPanel);
+            //    ScriptPlayerListing spl = tempNickNameObject.GetComponent<ScriptPlayerListing>();
+            //    string nickname = PhotonNetwork.PlayerList[i].NickName;
+            //    string cleanedNickname = Tools.RemoveIdFromNickname(nickname);
+            //    spl.text_Nickname.text = cleanedNickname;
+            //    int index = TeamManager.single_TM.GetTeamIndex(nickname);
+            //    if(index >= 0) {
+            //        //spl.img.color = TeamManager.single_TM.teams[index].teamColor;
+            //    }
+            //}
         }
     }
 
     public void StartGame() {
-        isLoaded = true;
-        PhotonNetwork.LoadLevel(currentScene + 1);
-        PhotonNetwork.CurrentRoom.IsOpen = false;
+        if (CheckIfAllPlayerHaveTeam()) {
+            EnableRoomLoadingUI();
+            startButton.SetActive(false);
+            isLoaded = true;
+            PhotonNetwork.LoadLevel(currentScene + 1);
+            PhotonNetwork.CurrentRoom.IsOpen = false;
+        }
+    }
+
+    bool CheckIfAllPlayerHaveTeam() {
+        bool allHaveTeam = true;
+        PlayersManager pm = PlayersManager.single_PM;
+        foreach (KeyValuePair<string, MyPlayer> entry in pm.players) {
+            if (!entry.Value.inTeam) {
+                allHaveTeam = false;
+                break;
+            }
+        }
+        return allHaveTeam;
     }
 
     void OnSceneFinishedLoading(Scene scene, LoadSceneMode mode) {

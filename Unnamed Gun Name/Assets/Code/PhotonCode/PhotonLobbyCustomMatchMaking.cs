@@ -11,7 +11,7 @@ public class PhotonLobbyCustomMatchMaking : MonoBehaviourPunCallbacks, ILobbyCal
     public InputField input_Nickname, input_Roomname;
     public Button button_CreateRoom;
 
-    [HideInInspector] public string roomName, nickName;
+    [HideInInspector] public string roomName;
     public int maxPlayers = 4;
     public GameObject roomListingPrefab;
     public Transform roomsPanel;
@@ -127,10 +127,9 @@ public class PhotonLobbyCustomMatchMaking : MonoBehaviourPunCallbacks, ILobbyCal
     public void OnNickNameChange(string name) {
         PhotonNetwork.NickName = name + "#" + Random.Range(0, 1000);
         enteredNickname = !string.IsNullOrEmpty(name);
-        nickName = name;
+        PlayersManager.single_PM.myLocalPlayer.nickname = name;
         PlayerPrefs.SetString("NickName", name);
         EnableDisableRelativeButtons();
-
     }
 
     public void OnRoomNameChange(string name) {
