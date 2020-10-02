@@ -2108,7 +2108,6 @@ MonoBehaviour:
   respawnUiHolder: {fileID: 0}
   respawnAnim: {fileID: 0}
   ingameHealthBar: {fileID: 0}
-  fillHealthBar: {fileID: 0}
   quitReturnButton: {fileID: 517552021}
   resolutionsDropdown: {fileID: 2018337729}
   videoSettingsHolder: {fileID: 2104324990}
@@ -9604,7 +9603,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unSyncedPools:
-  - prefab: {fileID: 2257577598221631115, guid: 6834ed307161e3045951a0a08a52551a,
+  - prefab: {fileID: 1684584687301021075, guid: 52245cf75bc1c1d40b9a935063ac9355,
       type: 3}
     amountPerPlayer: 20
   syncedPools:
