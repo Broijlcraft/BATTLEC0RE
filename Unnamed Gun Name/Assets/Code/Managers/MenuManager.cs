@@ -34,7 +34,6 @@ public class MenuManager : MonoBehaviour {
 
     public void MoveUpOrCloseMenu() {
         if (currentMenuState == MenuState.Closed) {
-            Time.timeScale = 0;
             if (menuHolder && firstMenu) {
                 menuHolder.SetActive(true);
                 OpenMenu(firstMenu);
@@ -55,7 +54,6 @@ public class MenuManager : MonoBehaviour {
                 currentMenu = null;
                 currentMenuState = MenuState.Closed;
                 Controller.single_CLocal.canMove = true;
-                Time.timeScale = 1;
             } else {
                 OpenMenu(currentMenu.previousMenu);
             }
