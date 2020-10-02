@@ -43,7 +43,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2251921230218651953}
-  m_Mesh: {fileID: 4300002, guid: cbea72709ed0a48448eab193e5aea828, type: 3}
+  m_Mesh: {fileID: 2534964839176971238, guid: c8cc971e9ba80734092f8a67ccf0ed7d, type: 3}
 --- !u!23 &2251921230220589041
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -58,10 +58,11 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100002, guid: cbea72709ed0a48448eab193e5aea828, type: 3}
+  - {fileID: 2100000, guid: 552649ed3320c81458b7026a65a141fa, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -69,6 +70,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -123,7 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fca8a13ebb5397489d01d6e03131826, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 2251921230218651953}
+  prefab: {fileID: 5315590019467090109, guid: afe89a826412ea541b75e664ad8bc146, type: 3}
   index: 0
   interactingController: {fileID: 0}
   ownerPV: {fileID: 0}
@@ -138,7 +140,7 @@ MonoBehaviour:
     explosionRange: 0
     explosionForce: 0
     particleDestroyTime: 0.5
-    explosionPrefab: {fileID: 2257577598221631115, guid: 6834ed307161e3045951a0a08a52551a,
+    explosionPrefab: {fileID: 1684584687301021075, guid: 52245cf75bc1c1d40b9a935063ac9355,
       type: 3}
 --- !u!114 &114313474564790046
 MonoBehaviour:
