@@ -97,8 +97,14 @@ public class OptionsManager : MonoBehaviour {
 }
 
 [Serializable]
-public class Range {
+public class RangeF {
     public float min = 0.0001f, max = 1f;
+}
+
+
+[Serializable]
+public class RangeI {
+    public int min = 0, max = 1;
 }
 
 public enum SliderType {
@@ -114,7 +120,7 @@ public enum SensitivitySlider {
 [System.Serializable]
 public class SettingSlider {
     public Slider slider;
-    public Range range;
+    public RangeF range;
 
     public SliderType sliderType;
     [Space]

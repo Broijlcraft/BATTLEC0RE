@@ -90,7 +90,6 @@ public class ObjectPool : MonoBehaviourPun {
         GameObject returnObject = GetPooledObject(playerID, tag, poolSyncType);
 
         if (returnObject) {
-
             returnObject.transform.rotation = rot;
             returnObject.transform.position = pos;
             returnObject.SetActive(true);
