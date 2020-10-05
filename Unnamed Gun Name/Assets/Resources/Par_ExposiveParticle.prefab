@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1558711856737728799}
   - component: {fileID: -5151099583745084233}
   m_Layer: 0
-  m_Name: Par_Prefab_ExposiveParticle
+  m_Name: Par_ExposiveParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,7 +45,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1684584687301021075}
   serializedVersion: 6
-  lengthInSec: 4
+  lengthInSec: 3
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 3
@@ -9382,7 +9382,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1684584687917617651}
   serializedVersion: 6
-  lengthInSec: 4
+  lengthInSec: 3
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 3
@@ -14068,7 +14068,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1684584688896157503}
   serializedVersion: 6
-  lengthInSec: 4
+  lengthInSec: 3
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 1
@@ -23503,7 +23503,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1688111698691229345
 Transform:
   m_ObjectHideFlags: 0
@@ -28165,7 +28165,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1684584691176221617}
   serializedVersion: 6
-  lengthInSec: 4
+  lengthInSec: 3
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 3
