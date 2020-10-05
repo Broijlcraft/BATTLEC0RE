@@ -7,13 +7,11 @@ public class Controller : MonoBehaviourPun {
     public static Controller single_CLocal;
     public PlayerView playerView;
     public Camera cam, localLayerCam;
-    public Transform verticalCamHolder;
+    public Transform verticalCamHolder, uiLookAtHolder;
     public Text nicknameText;
-    public Transform uiLookAtHolder;
     public Animator animator;
-    public float interactRange;
     [Space]
-    public float speedToSprintFrom, speedToWalkFrom;
+    public float interactRange, speedToSprintFrom, speedToWalkFrom;
     [Space]
     public MoveSettings moveSettings;
     public CameraSettings cameraSettings;
@@ -33,20 +31,18 @@ public class Controller : MonoBehaviourPun {
 
     //replace with bodyparts when ready
     AudioListener audioListeners;
-    float currentForwardSprintValue, currentSidewaysSprintValue, xRotationAxisAngle, yRotationAxisAngle;
+    float currentForwardSprintValue, currentSidewaysSprintValue, xRotationAxisAngle;
     public bool isGrounded, isSprinting = false;
     int invertMultiplier;
     Vector3 lastPos;
 
     [Header("Testing")]
     public bool keepLocalNicknameTextEnabled;
-    public GameObject[] meshObjectsToHideLocally, meshObjectsToSetLocal;
+    public GameObject[] meshObjectsToSetLocal;
 
     #region Initialization
-
     private void Awake() {
         xRotationAxisAngle = 0;
-        yRotationAxisAngle = 0;
         TurnCollidersOnOff(false);
         rigid = GetComponent<Rigidbody>();
         if (IsMineCheck()) {
@@ -101,23 +97,15 @@ public class Controller : MonoBehaviourPun {
             }
             audioListeners.enabled = true;
 
-            for (int i = 0; i < meshObjectsToHideLocally.Length; i++) {
-                meshObjectsToHideLocally[i].layer = TagsAndLayersManager.single_TLM.cantBeSeenByPlayer.index;
-            }
             for (int i = 0; i < meshObjectsToSetLocal.Length; i++) {
                 meshObjectsToSetLocal[i].layer = TagsAndLayersManager.single_TLM.localPlayerLayerInfo.index;
             }
         } else {
-            for (int i = 0; i < meshObjectsToHideLocally.Length; i++) {
-                meshObjectsToHideLocally[i].layer = TagsAndLayersManager.single_TLM.playerLayerInfo.index;
-            }
             for (int i = 0; i < meshObjectsToSetLocal.Length; i++) {
                 meshObjectsToSetLocal[i].layer = TagsAndLayersManager.single_TLM.playerLayerInfo.index;
             }
         }
         TurnCollidersOnOff(true);
-        //canMove = true;
-        //Debug.LogWarning("(bool)Can Move WAS ACCESSED BY A DEV FUNCTION, CHANGE TO ALTERNATIVE WHEN READY");
         if (hideCursorOnStart) {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
@@ -163,11 +151,6 @@ public class Controller : MonoBehaviourPun {
 
             if (Input.GetButtonDown("Jump")) {
                 if (isGrounded) {
-                    //isGrounded = false;
-                    //animator.ResetTrigger("JumpLand");
-                    //animator.ResetTrigger("Walk");
-                    //animator.ResetTrigger("Sprint");
-                    //animator.SetTrigger("Jump");
                     Vector3 velocity = rigid.velocity;
                     velocity.y = moveSettings.jumpVelocity;
                     rigid.velocity = velocity;
@@ -197,59 +180,6 @@ public class Controller : MonoBehaviourPun {
         } else if (!IsMineCheck()) {
             rigid.velocity = Vector3.zero;
         }
-
-        //if (animator && isGrounded) {
-        //    float speed = Vector3.Distance(transform.position, lastPos);
-        //    float animSpeed = speed;
-        //    speed *= 100;
-        //    if (!photonView.IsMine) {
-        //        print(speed);
-        //    }
-        //    lastPos = transform.position;
-
-        //    if (speed > speedToWalkFrom && speed < speedToSprintFrom) {
-        //        if (!photonView.IsMine) {
-        //            print("Walk");
-        //        }
-        //        animator.SetBool("Walk", true);
-        //        animator.SetBool("Sprint", false);
-        //        multi = moveSettings.walkAnimationSpeed;
-        //    } else if (speed > speedToSprintFrom) {
-        //        if (!photonView.IsMine) {
-        //            print("Sprint");
-        //        }
-        //        animator.SetBool("Sprint", true);
-        //        animator.SetBool("Walk", false);
-        //        multi = moveSettings.sprintAnimationSpeed;
-        //    } else {
-        //        if (!photonView.IsMine) {
-        //            print("Idle");
-        //        }
-        //        animator.SetBool("Walk", false);
-        //        animator.SetBool("Sprint", false);
-        //        multi = 1;
-        //    }
-
-            //if (speed > speedToSprintFrom) {
-            //    animator.SetBool("Sprint", true);
-            //    animator.SetBool("Walk", false);
-            //    multi = moveSettings.sprintAnimationSpeed;
-            //} else if (speed > speedToWalkFrom) {
-            //    animator.SetBool("Walk", true);
-            //    animator.SetBool("Sprint", false);
-            //    multi = moveSettings.walkAnimationSpeed;
-            //} else {
-            //    animator.SetBool("Walk", false);
-            //    animator.SetBool("Sprint", false);
-            //    multi = 1;
-            //}
-
-        //    animSpeed /= animSpeed / multi;
-        //    animSpeed = Mathf.Clamp(animSpeed, -moveSettings.maxAnimationWalkSpeed, moveSettings.maxAnimationWalkSpeed);
-        //    if (!float.IsNaN(animSpeed)) {
-        //        animator.SetFloat("MoveSpeed", animSpeed );
-        //    }
-        //}
 
         if (nicknameTarget) {
             uiLookAtHolder.LookAt(nicknameTarget);
@@ -289,20 +219,6 @@ public class Controller : MonoBehaviourPun {
                 multi = 1;
             }
 
-            //if (speed > speedToSprintFrom) {
-            //    animator.SetBool("Sprint", true);
-            //    animator.SetBool("Walk", false);
-            //    multi = moveSettings.sprintAnimationSpeed;
-            //} else if (speed > speedToWalkFrom) {
-            //    animator.SetBool("Walk", true);
-            //    animator.SetBool("Sprint", false);
-            //    multi = moveSettings.walkAnimationSpeed;
-            //} else {
-            //    animator.SetBool("Walk", false);
-            //    animator.SetBool("Sprint", false);
-            //    multi = 1;
-            //}
-
             animSpeed /= animSpeed / multi;
             animSpeed = Mathf.Clamp(animSpeed, -moveSettings.maxAnimationWalkSpeed, moveSettings.maxAnimationWalkSpeed);
             if (!float.IsNaN(animSpeed)) {
@@ -324,17 +240,12 @@ public class Controller : MonoBehaviourPun {
     }
 
     #region Rotation
-
-    public bool isClamped = false;
-
     void Rotate() {
         //int multiplier = 0 + Tools.BoolToInt()
         float a_mouseX = Input.GetAxis("Mouse X") * cameraSettings.mouseSensitivity * invertMultiplier;
-        float b_mouseX = a_mouseX;
         float mouseY = Input.GetAxis("Mouse Y") * cameraSettings.mouseSensitivity * invertMultiplier;
 
         xRotationAxisAngle += mouseY;
-        yRotationAxisAngle += a_mouseX;
 
         ApplySway(a_mouseX, mouseY);
 
@@ -349,13 +260,7 @@ public class Controller : MonoBehaviourPun {
         }
 
         verticalCamHolder.Rotate(Vector3.left * mouseY);
-
         transform.Rotate(Vector3.up * a_mouseX);
-
-        if (isClamped) {
-            transform.Rotate(Vector3.up * b_mouseX);
-            isClamped = false;
-        }
     }
 
     void ApplySway(float mouseX, float mouseY) {
@@ -385,13 +290,6 @@ public class Controller : MonoBehaviourPun {
         eulerRotation.x = value;
         transform_.localEulerAngles = eulerRotation;
     }
-
-    void ClampYRotationAxisToValue(Transform transform_, float value) {
-        Vector3 eulerRotation = transform_.localEulerAngles;
-        eulerRotation.y = value;
-        transform_.localEulerAngles = eulerRotation;
-    }
-
     #endregion
 
     public void ResetAtStartPosition() {
@@ -418,19 +316,10 @@ public class Controller : MonoBehaviourPun {
 
     private void OnCollisionEnter(Collision collision) {
         isGrounded = true;
-        animator.SetTrigger("JumpLand");
-        animator.ResetTrigger("Jump");
     }
 
     private void OnCollisionExit(Collision collision) {
-        isGrounded = false;
-        isGrounded = false;
-        animator.ResetTrigger("JumpLand");
-        animator.ResetTrigger("Walk");
-        animator.ResetTrigger("Sprint");
-        animator.SetTrigger("Jump");
-        //animator.SetTrigger("Jump");
-        //animator.ResetTrigger("JumpLand");
+        //isGrounded = false;
     }
 
     public void EnDisCams() {
@@ -452,7 +341,6 @@ public class MoveSettings {
 
 [System.Serializable]
 public class CameraSettings {
-
     public bool invertVerticalCam;
     public float mouseSensitivity, maxVerticalTopViewAngle = 90, maxVerticalBottomViewAngle = 90;
 }

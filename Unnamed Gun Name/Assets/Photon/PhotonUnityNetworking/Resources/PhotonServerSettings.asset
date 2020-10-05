@@ -51,6 +51,7 @@ MonoBehaviour:
   - RPC_SetNicknameTargets
   - RPC_SetPoolOwners
   - RPC_SwitchWeaponBehaviour
+  - RPC_SetAnimation
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1
