@@ -165,18 +165,21 @@ public class Controller : MonoBehaviourPun {
         invertMultiplier = PlayerPrefs.GetInt("InvertCam", 1);
     }
 
+    float vertical = 0, horizontal = 0;
+
     private void FixedUpdate() {
         if (IsMineCheck() && canMove && !health.isDead) {
             Rotate();
 
             if (isGrounded || true) {
                 SprintCheck();
-                float vertical = Input.GetAxis("Vertical") * currentForwardSprintValue * moveSettings.forwardSpeed;
-                float horizontal = Input.GetAxis("Horizontal") * currentSidewaysSprintValue * moveSettings.sidewaysSpeed;
-                
+                vertical = Input.GetAxis("Vertical") * currentForwardSprintValue * moveSettings.forwardSpeed;
+                horizontal = Input.GetAxis("Horizontal") * currentSidewaysSprintValue * moveSettings.sidewaysSpeed;
+
                 Vector3 newPos = new Vector3(horizontal, 0, vertical) * Time.deltaTime;
                 transform.Translate(newPos);
             }
+            AnimTest();
         } else if (!IsMineCheck()) {
             rigid.velocity = Vector3.zero;
         }
@@ -186,43 +189,35 @@ public class Controller : MonoBehaviourPun {
         }
     }
 
-    private void LateUpdate() {
-        if (animator && isGrounded) {
-            float speed = Vector3.Distance(transform.position, lastPos);
-            float animSpeed = speed;
-            speed *= 100;
-            if (!photonView.IsMine) {
-                print(speed);
-            }
-            lastPos = transform.position;
+    private void AnimTest() {
+        if (animator) {
+            if (isGrounded) {
+                float speed = Vector3.Distance(transform.position, lastPos);
+                float animSpeed = speed;
+                speed *= 100;
+                lastPos = transform.position;
 
-            if (speed > speedToWalkFrom && speed < speedToSprintFrom) {
-                if (!photonView.IsMine) {
-                    print("Walk");
+                if (speed > speedToWalkFrom && speed < speedToSprintFrom) {
+                    animator.SetBool("Walk", true);
+                    animator.SetBool("Sprint", false);
+                    multi = moveSettings.walkAnimationSpeed;
+                } else if (speed > speedToSprintFrom) {
+                    animator.SetBool("Sprint", true);
+                    animator.SetBool("Walk", false);
+                    multi = moveSettings.sprintAnimationSpeed;
+                } else {
+                    animator.SetBool("Walk", false);
+                    animator.SetBool("Sprint", false);
+                    multi = 1;
                 }
-                animator.SetBool("Walk", true);
-                animator.SetBool("Sprint", false);
-                multi = moveSettings.walkAnimationSpeed;
-            } else if (speed > speedToSprintFrom) {
-                if (!photonView.IsMine) {
-                    print("Sprint");
+
+                animSpeed /= animSpeed / multi;
+                animSpeed = Mathf.Clamp(animSpeed, -moveSettings.maxAnimationWalkSpeed, moveSettings.maxAnimationWalkSpeed);
+                if (!float.IsNaN(animSpeed)) {
+                    animator.SetFloat("MoveSpeed", animSpeed);
                 }
-                animator.SetBool("Sprint", true);
-                animator.SetBool("Walk", false);
-                multi = moveSettings.sprintAnimationSpeed;
             } else {
-                if (!photonView.IsMine) {
-                    print("Idle");
-                }
-                animator.SetBool("Walk", false);
-                animator.SetBool("Sprint", false);
-                multi = 1;
-            }
-
-            animSpeed /= animSpeed / multi;
-            animSpeed = Mathf.Clamp(animSpeed, -moveSettings.maxAnimationWalkSpeed, moveSettings.maxAnimationWalkSpeed);
-            if (!float.IsNaN(animSpeed)) {
-                animator.SetFloat("MoveSpeed", animSpeed);
+                print("Is not grounded");
             }
         }
     }

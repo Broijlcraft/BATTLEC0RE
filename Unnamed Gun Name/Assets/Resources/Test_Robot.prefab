@@ -533,8 +533,8 @@ MonoBehaviour:
   cam: {fileID: 368377035260526862}
   localLayerCam: {fileID: 368377034728708878}
   verticalCamHolder: {fileID: 368377035880457395}
-  nicknameText: {fileID: 4170172112661170712}
   uiLookAtHolder: {fileID: 622402530890646171}
+  nicknameText: {fileID: 4170172112661170712}
   animator: {fileID: 368377035083181458}
   interactRange: 5
   speedToSprintFrom: 11
@@ -572,13 +572,11 @@ MonoBehaviour:
   isGrounded: 0
   isSprinting: 0
   keepLocalNicknameTextEnabled: 0
-  meshObjectsToHideLocally: []
   meshObjectsToSetLocal:
   - {fileID: 7900402293264325157}
   - {fileID: 5227811406044909864}
   - {fileID: 4045616505223848744}
   - {fileID: 5369252611612772986}
-  isClamped: 0
 --- !u!114 &368377036029992386
 MonoBehaviour:
   m_ObjectHideFlags: 0
