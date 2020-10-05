@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 4043650086475166125}
   - component: {fileID: 5551817921317382994}
   - component: {fileID: 4926153979790087677}
+  - component: {fileID: 38715809970658956}
   m_Layer: 0
   m_Name: RefineryBridgeMesh.004
   m_TagString: Untagged
@@ -112,3 +113,17 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &38715809970658956
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3842411577831357006}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 1485726533421437005, guid: f1a7e18935808ca42af0e91d8a241e51, type: 3}
