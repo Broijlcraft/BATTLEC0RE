@@ -32,9 +32,10 @@ public class Controller : MonoBehaviourPun {
     //replace with bodyparts when ready
     AudioListener audioListeners;
     float currentForwardSprintValue, currentSidewaysSprintValue, xRotationAxisAngle;
-    public bool isGrounded, isSprinting = false;
+    public bool isGrounded, canJump, isSprinting = false, wasNotGrounded = false;
     int invertMultiplier;
     Vector3 lastPos;
+    float vertical = 0, horizontal = 0;
 
     [Header("Testing")]
     public bool keepLocalNicknameTextEnabled;
@@ -80,6 +81,10 @@ public class Controller : MonoBehaviourPun {
         Init();
     }
 
+    void ResetAllAnims() {
+        animator.ResetTrigger("JumpLand");
+    }
+
     void Init() {
         startPosition = transform.position;
         startRotation = transform.rotation;
@@ -88,6 +93,8 @@ public class Controller : MonoBehaviourPun {
             if (PhotonRoomCustomMatchMaking.roomSingle) {
                 ObjectPool.single_PT.SetPoolOwners(PhotonRoomCustomMatchMaking.roomSingle.myNumberInRoom, photonView.ViewID);
             }
+            isGrounded = true;
+            Invoke("ResetAllAnims", 1f);
 
             if (cam) {
                 cam.enabled = true;
@@ -151,9 +158,14 @@ public class Controller : MonoBehaviourPun {
 
             if (Input.GetButtonDown("Jump")) {
                 if (isGrounded) {
+                    isGrounded = false;
                     Vector3 velocity = rigid.velocity;
                     velocity.y = moveSettings.jumpVelocity;
                     rigid.velocity = velocity;
+
+                    animator.SetBool("Walk", false);
+                    animator.SetBool("Sprint", false);
+                    animator.SetTrigger("Jump");
                 }
             }
         }
@@ -164,8 +176,6 @@ public class Controller : MonoBehaviourPun {
     public void InvertCamMovement() {
         invertMultiplier = PlayerPrefs.GetInt("InvertCam", 1);
     }
-
-    float vertical = 0, horizontal = 0;
 
     private void FixedUpdate() {
         if (IsMineCheck() && canMove && !health.isDead) {
@@ -179,7 +189,13 @@ public class Controller : MonoBehaviourPun {
                 Vector3 newPos = new Vector3(horizontal, 0, vertical) * Time.deltaTime;
                 transform.Translate(newPos);
             }
+
+            if (wasNotGrounded) {
+                lastPos = transform.position;
+            }
+
             AnimTest();
+            wasNotGrounded = !isGrounded;
         } else if (!IsMineCheck()) {
             rigid.velocity = Vector3.zero;
         }
@@ -217,7 +233,7 @@ public class Controller : MonoBehaviourPun {
                     animator.SetFloat("MoveSpeed", animSpeed);
                 }
             } else {
-                print("Is not grounded");
+                lastPos = transform.position;
             }
         }
     }
@@ -311,15 +327,12 @@ public class Controller : MonoBehaviourPun {
 
     private void OnCollisionEnter(Collision collision) {
         isGrounded = true;
+        animator.ResetTrigger("Jump");
+        animator.SetTrigger("JumpLand");
     }
 
     private void OnCollisionExit(Collision collision) {
-        //isGrounded = false;
-    }
-
-    public void EnDisCams() {
-        cam.enabled = !cam.enabled;
-        localLayerCam.enabled = !localLayerCam.enabled;
+        isGrounded = false;
     }
 }
 

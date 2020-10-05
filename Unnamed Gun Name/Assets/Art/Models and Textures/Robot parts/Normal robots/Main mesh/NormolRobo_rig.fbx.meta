@@ -668,7 +668,7 @@ ModelImporter:
       takeName: Jump naar boven.002
       internalID: 0
       firstFrame: 2
-      lastFrame: 25
+      lastFrame: 19
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -754,7 +754,7 @@ ModelImporter:
       name: Falling down.002
       takeName: Falling down.002
       internalID: 0
-      firstFrame: 0
+      firstFrame: 6
       lastFrame: 25
       wrapMode: 0
       orientationOffsetY: 0
