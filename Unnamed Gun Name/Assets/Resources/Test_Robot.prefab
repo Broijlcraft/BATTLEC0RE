@@ -532,13 +532,13 @@ MonoBehaviour:
   playerView: {fileID: 368377036029992388}
   cam: {fileID: 368377035260526862}
   localLayerCam: {fileID: 368377034728708878}
-  horizontalCamHolder: {fileID: 368377035722197808}
   verticalCamHolder: {fileID: 368377035880457395}
   nicknameText: {fileID: 4170172112661170712}
   uiLookAtHolder: {fileID: 622402530890646171}
   animator: {fileID: 368377035083181458}
   interactRange: 5
-  speedToSprintFrom: 0
+  speedToSprintFrom: 11
+  speedToWalkFrom: 2
   moveSettings:
     maxAnimationWalkSpeed: 10
     forwardSpeed: 5
@@ -553,17 +553,14 @@ MonoBehaviour:
     mouseSensitivity: 1.2
     maxVerticalTopViewAngle: 90
     maxVerticalBottomViewAngle: 90
-    maxLeftHorizontalViewAngle: 0
-    maxRightHorizontalViewAngle: 0
   swaySettings:
     horizontalSwayHolder: {fileID: 0}
     verticalSwayHolder: {fileID: 0}
     swayIntensity: 0
     swaySmooth: 0
-    defaultParentRotation: {x: 0, y: 0, z: 0}
-    defaultCamHolderRotation: {x: 0, y: 0, z: 0}
+    defaultHorizontalSwayRotation: {x: 0, y: 0, z: 0}
+    defaultVertitalSwayRotation: {x: 0, y: 0, z: 0}
   hideCursorOnStart: 1
-  keepLocalMeshesEnabled: 0
   canMove: 1
   health: {fileID: 0}
   rigid: {fileID: 0}
@@ -571,16 +568,10 @@ MonoBehaviour:
   startPosition: {x: 0, y: 0, z: 0}
   startRotation: {x: 0, y: 0, z: 0, w: 0}
   nicknameTarget: {fileID: 0}
-  robotParts: {fileID: 0}
   weaponsController: {fileID: 0}
-  isGrounded: 1
+  isGrounded: 0
   isSprinting: 0
-  defaultHorizontalSwayRotation: {x: 0, y: 0, z: 0}
-  defaultVertitalSwayRotation: {x: 0, y: 0, z: 0}
-  disableCamsOnStart: 0
   keepLocalNicknameTextEnabled: 0
-  horizontalSwayHolder: {fileID: 0}
-  verticalSwayHolder: {fileID: 0}
   meshObjectsToHideLocally: []
   meshObjectsToSetLocal:
   - {fileID: 7900402293264325157}

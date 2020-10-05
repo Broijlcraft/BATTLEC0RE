@@ -7,13 +7,13 @@ public class Controller : MonoBehaviourPun {
     public static Controller single_CLocal;
     public PlayerView playerView;
     public Camera cam, localLayerCam;
-    public Transform horizontalCamHolder, verticalCamHolder;
+    public Transform verticalCamHolder;
     public Text nicknameText;
     public Transform uiLookAtHolder;
     public Animator animator;
     public float interactRange;
     [Space]
-    public float speedToSprintFrom;
+    public float speedToSprintFrom, speedToWalkFrom;
     [Space]
     public MoveSettings moveSettings;
     public CameraSettings cameraSettings;
@@ -21,16 +21,14 @@ public class Controller : MonoBehaviourPun {
 
     [Header("Local Settings")]
     public bool hideCursorOnStart;
-    public bool keepLocalMeshesEnabled;
 
-    /*[HideInInspector] */public bool canMove;
+    [HideInInspector] public bool canMove;
     [HideInInspector] public Health health;
     [HideInInspector] public Rigidbody rigid;
-    /*[HideInInspector]*/ public Collider[] colliders;
+    [HideInInspector] public Collider[] colliders;
     [HideInInspector] public Vector3 startPosition;
     [HideInInspector] public Quaternion startRotation;
     [HideInInspector] public Transform nicknameTarget;
-    /*[HideInInspector] */public BodyPartsList robotParts;
     [HideInInspector] public WeaponController weaponsController;
 
     //replace with bodyparts when ready
@@ -38,13 +36,10 @@ public class Controller : MonoBehaviourPun {
     float currentForwardSprintValue, currentSidewaysSprintValue, xRotationAxisAngle, yRotationAxisAngle;
     public bool isGrounded, isSprinting = false;
     int invertMultiplier;
-    public Vector3 defaultHorizontalSwayRotation, defaultVertitalSwayRotation;
     Vector3 lastPos;
 
     [Header("Testing")]
-    public bool disableCamsOnStart;
     public bool keepLocalNicknameTextEnabled;
-    public Transform horizontalSwayHolder, verticalSwayHolder;
     public GameObject[] meshObjectsToHideLocally, meshObjectsToSetLocal;
 
     #region Initialization
@@ -58,13 +53,14 @@ public class Controller : MonoBehaviourPun {
             single_CLocal = this;
             InvertCamMovement();
         } else {
-            Destroy(rigid);
+            rigid.useGravity = false;
         }
+
         weaponsController = GetComponent<WeaponController>();
         weaponsController.Init(this);
         health = GetComponent<Health>();
         health.controller = this;
-        robotParts = GetComponent<BodyPartsList>();
+
         if (cam) {
             cam.enabled = false;
             if (localLayerCam) {
@@ -96,15 +92,15 @@ public class Controller : MonoBehaviourPun {
             if (PhotonRoomCustomMatchMaking.roomSingle) {
                 ObjectPool.single_PT.SetPoolOwners(PhotonRoomCustomMatchMaking.roomSingle.myNumberInRoom, photonView.ViewID);
             }
-            if (!disableCamsOnStart) {
-                if (cam) {
-                    cam.enabled = true;
-                    if (localLayerCam) {
-                        localLayerCam.enabled = true;
-                    }
+
+            if (cam) {
+                cam.enabled = true;
+                if (localLayerCam) {
+                    localLayerCam.enabled = true;
                 }
-                audioListeners.enabled = true;
             }
+            audioListeners.enabled = true;
+
             for (int i = 0; i < meshObjectsToHideLocally.Length; i++) {
                 meshObjectsToHideLocally[i].layer = TagsAndLayersManager.single_TLM.cantBeSeenByPlayer.index;
             }
@@ -167,6 +163,7 @@ public class Controller : MonoBehaviourPun {
 
             if (Input.GetButtonDown("Jump")) {
                 if (isGrounded) {
+                    //isGrounded = false;
                     //animator.ResetTrigger("JumpLand");
                     //animator.ResetTrigger("Walk");
                     //animator.ResetTrigger("Sprint");
@@ -174,7 +171,6 @@ public class Controller : MonoBehaviourPun {
                     Vector3 velocity = rigid.velocity;
                     velocity.y = moveSettings.jumpVelocity;
                     rigid.velocity = velocity;
-                    //isGrounded = false;
                 }
             }
         }
@@ -198,36 +194,120 @@ public class Controller : MonoBehaviourPun {
                 Vector3 newPos = new Vector3(horizontal, 0, vertical) * Time.deltaTime;
                 transform.Translate(newPos);
             }
+        } else if (!IsMineCheck()) {
+            rigid.velocity = Vector3.zero;
         }
 
-        if (animator && isGrounded && isGrounded) {
+        //if (animator && isGrounded) {
+        //    float speed = Vector3.Distance(transform.position, lastPos);
+        //    float animSpeed = speed;
+        //    speed *= 100;
+        //    if (!photonView.IsMine) {
+        //        print(speed);
+        //    }
+        //    lastPos = transform.position;
+
+        //    if (speed > speedToWalkFrom && speed < speedToSprintFrom) {
+        //        if (!photonView.IsMine) {
+        //            print("Walk");
+        //        }
+        //        animator.SetBool("Walk", true);
+        //        animator.SetBool("Sprint", false);
+        //        multi = moveSettings.walkAnimationSpeed;
+        //    } else if (speed > speedToSprintFrom) {
+        //        if (!photonView.IsMine) {
+        //            print("Sprint");
+        //        }
+        //        animator.SetBool("Sprint", true);
+        //        animator.SetBool("Walk", false);
+        //        multi = moveSettings.sprintAnimationSpeed;
+        //    } else {
+        //        if (!photonView.IsMine) {
+        //            print("Idle");
+        //        }
+        //        animator.SetBool("Walk", false);
+        //        animator.SetBool("Sprint", false);
+        //        multi = 1;
+        //    }
+
+            //if (speed > speedToSprintFrom) {
+            //    animator.SetBool("Sprint", true);
+            //    animator.SetBool("Walk", false);
+            //    multi = moveSettings.sprintAnimationSpeed;
+            //} else if (speed > speedToWalkFrom) {
+            //    animator.SetBool("Walk", true);
+            //    animator.SetBool("Sprint", false);
+            //    multi = moveSettings.walkAnimationSpeed;
+            //} else {
+            //    animator.SetBool("Walk", false);
+            //    animator.SetBool("Sprint", false);
+            //    multi = 1;
+            //}
+
+        //    animSpeed /= animSpeed / multi;
+        //    animSpeed = Mathf.Clamp(animSpeed, -moveSettings.maxAnimationWalkSpeed, moveSettings.maxAnimationWalkSpeed);
+        //    if (!float.IsNaN(animSpeed)) {
+        //        animator.SetFloat("MoveSpeed", animSpeed );
+        //    }
+        //}
+
+        if (nicknameTarget) {
+            uiLookAtHolder.LookAt(nicknameTarget);
+        }
+    }
+
+    private void LateUpdate() {
+        if (animator && isGrounded) {
             float speed = Vector3.Distance(transform.position, lastPos);
+            float animSpeed = speed;
+            speed *= 100;
+            if (!photonView.IsMine) {
+                print(speed);
+            }
             lastPos = transform.position;
-            if (/*speed > speedToSprintFrom*/speed > 0.002f) {
-                //print("sprint");
-                animator.SetBool("Sprint", true);
-                animator.SetBool("Walk", false);
-                multi = moveSettings.sprintAnimationSpeed;
-            }/* else if (speed > 0.001f) {
-                //print("walk");
+
+            if (speed > speedToWalkFrom && speed < speedToSprintFrom) {
+                if (!photonView.IsMine) {
+                    print("Walk");
+                }
                 animator.SetBool("Walk", true);
                 animator.SetBool("Sprint", false);
                 multi = moveSettings.walkAnimationSpeed;
-            }*/ else {
+            } else if (speed > speedToSprintFrom) {
+                if (!photonView.IsMine) {
+                    print("Sprint");
+                }
+                animator.SetBool("Sprint", true);
+                animator.SetBool("Walk", false);
+                multi = moveSettings.sprintAnimationSpeed;
+            } else {
+                if (!photonView.IsMine) {
+                    print("Idle");
+                }
                 animator.SetBool("Walk", false);
                 animator.SetBool("Sprint", false);
                 multi = 1;
             }
 
-            speed /= speed / multi;
-            speed = Mathf.Clamp(speed, 0, moveSettings.maxAnimationWalkSpeed);
-            if (!float.IsNaN(speed)) {
-                animator.SetFloat("MoveSpeed", speed);
-            }
-        }
+            //if (speed > speedToSprintFrom) {
+            //    animator.SetBool("Sprint", true);
+            //    animator.SetBool("Walk", false);
+            //    multi = moveSettings.sprintAnimationSpeed;
+            //} else if (speed > speedToWalkFrom) {
+            //    animator.SetBool("Walk", true);
+            //    animator.SetBool("Sprint", false);
+            //    multi = moveSettings.walkAnimationSpeed;
+            //} else {
+            //    animator.SetBool("Walk", false);
+            //    animator.SetBool("Sprint", false);
+            //    multi = 1;
+            //}
 
-        if (nicknameTarget) {
-            uiLookAtHolder.LookAt(nicknameTarget);
+            animSpeed /= animSpeed / multi;
+            animSpeed = Mathf.Clamp(animSpeed, -moveSettings.maxAnimationWalkSpeed, moveSettings.maxAnimationWalkSpeed);
+            if (!float.IsNaN(animSpeed)) {
+                animator.SetFloat("MoveSpeed", animSpeed);
+            }
         }
     }
 
@@ -270,19 +350,7 @@ public class Controller : MonoBehaviourPun {
 
         verticalCamHolder.Rotate(Vector3.left * mouseY);
 
-        if (yRotationAxisAngle > cameraSettings.maxRightHorizontalViewAngle) {
-            yRotationAxisAngle = cameraSettings.maxRightHorizontalViewAngle;
-            a_mouseX = 0f;
-            isClamped = true;
-            ClampYRotationAxisToValue(horizontalCamHolder, cameraSettings.maxRightHorizontalViewAngle);
-        } else if (yRotationAxisAngle < -cameraSettings.maxLeftHorizontalViewAngle) {
-            yRotationAxisAngle = -cameraSettings.maxLeftHorizontalViewAngle;
-            isClamped = true;
-            a_mouseX = 0f;
-            ClampYRotationAxisToValue(horizontalCamHolder, -cameraSettings.maxLeftHorizontalViewAngle);
-        }
-
-        horizontalCamHolder.transform.Rotate(Vector3.up * a_mouseX);
+        transform.Rotate(Vector3.up * a_mouseX);
 
         if (isClamped) {
             transform.Rotate(Vector3.up * b_mouseX);
@@ -294,18 +362,21 @@ public class Controller : MonoBehaviourPun {
         Quaternion rotX = Quaternion.AngleAxis(-swaySettings.swayIntensity * mouseX, Vector3.up);
         Quaternion rotY = Quaternion.AngleAxis(swaySettings.swayIntensity * mouseY, Vector3.right);
 
-        Quaternion horizontalTemp = Quaternion.Euler(defaultHorizontalSwayRotation);
+        Quaternion horizontalTemp = Quaternion.Euler(swaySettings.defaultHorizontalSwayRotation);
         Quaternion horizontalTargetRotation = horizontalTemp * rotX;
 
-        Quaternion verticalTemp = Quaternion.Euler(defaultVertitalSwayRotation);
+        Quaternion verticalTemp = Quaternion.Euler(swaySettings.defaultVertitalSwayRotation);
         Quaternion verticalTargetRotation = verticalTemp * rotY;
 
+        Transform horizontalSwayHolder = swaySettings.horizontalSwayHolder;
+        Transform verticalSwayHolder = swaySettings.verticalSwayHolder;
+
         if (horizontalSwayHolder) {
-            horizontalSwayHolder.localRotation = Quaternion.Lerp(horizontalSwayHolder.transform.localRotation, horizontalTargetRotation, Time.deltaTime * swaySettings.swaySmooth);
+            horizontalSwayHolder.localRotation = Quaternion.Lerp(horizontalSwayHolder.localRotation, horizontalTargetRotation, Time.deltaTime * swaySettings.swaySmooth);
         }
 
         if (verticalSwayHolder) {
-            verticalSwayHolder.localRotation = Quaternion.Lerp(verticalSwayHolder.transform.localRotation, verticalTargetRotation, Time.deltaTime * swaySettings.swaySmooth);
+            verticalSwayHolder.localRotation = Quaternion.Lerp(verticalSwayHolder.localRotation, verticalTargetRotation, Time.deltaTime * swaySettings.swaySmooth);
         }
     }
 
@@ -346,19 +417,20 @@ public class Controller : MonoBehaviourPun {
     }
 
     private void OnCollisionEnter(Collision collision) {
-        if (!isGrounded) {
-            isGrounded = true;
-            animator.SetTrigger("JumpLand");
-            animator.ResetTrigger("Jump");
-        }
+        isGrounded = true;
+        animator.SetTrigger("JumpLand");
+        animator.ResetTrigger("Jump");
     }
 
     private void OnCollisionExit(Collision collision) {
-        if (isGrounded) {
-            isGrounded = false;
-            animator.SetTrigger("Jump");
-            animator.ResetTrigger("JumpLand");
-        }
+        isGrounded = false;
+        isGrounded = false;
+        animator.ResetTrigger("JumpLand");
+        animator.ResetTrigger("Walk");
+        animator.ResetTrigger("Sprint");
+        animator.SetTrigger("Jump");
+        //animator.SetTrigger("Jump");
+        //animator.ResetTrigger("JumpLand");
     }
 
     public void EnDisCams() {
@@ -382,7 +454,7 @@ public class MoveSettings {
 public class CameraSettings {
 
     public bool invertVerticalCam;
-    public float mouseSensitivity, maxVerticalTopViewAngle = 90, maxVerticalBottomViewAngle = 90, maxLeftHorizontalViewAngle, maxRightHorizontalViewAngle;
+    public float mouseSensitivity, maxVerticalTopViewAngle = 90, maxVerticalBottomViewAngle = 90;
 }
 
 [System.Serializable]
@@ -390,5 +462,5 @@ public class SwaySettings {
     public Transform horizontalSwayHolder, verticalSwayHolder;
     public float swayIntensity, swaySmooth;
 
-    public Vector3 defaultParentRotation, defaultCamHolderRotation;
+    public Vector3 defaultHorizontalSwayRotation, defaultVertitalSwayRotation;
 }

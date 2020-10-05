@@ -31,7 +31,7 @@ public class WeaponController : MonoBehaviourPun {
     }
 
     private void Update() {
-        if (!controller.health.isDead) {
+        if (!controller.health.isDead && PhotonNetwork.IsConnected) {
             WeaponSwitchCheck();
             PrimaryAndPowerInputCheckAndUse(1, powerWeaponsHolder);
             PrimaryAndPowerInputCheckAndUse(0, primaryWeaponsHolder);
@@ -178,13 +178,6 @@ public class WeaponsHolder {
 
     public void Init(Controller controller) {
         BodypartType partType = GetHolderBodypart();
-
-        if (controller.robotParts) {
-            int partIndex = controller.robotParts.GetPartIndex(partType);
-            if(partIndex >= 0) {
-                weaponsHolder = controller.robotParts.parts[partIndex].transform;
-            }
-        }
 
         if (weaponsHolder) {
             animator = weaponsHolder.GetComponent<Animator>();
