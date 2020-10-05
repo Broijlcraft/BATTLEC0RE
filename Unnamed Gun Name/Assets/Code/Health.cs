@@ -36,6 +36,7 @@ public class Health : MonoBehaviourPun {
     void RPC_Respawn() {
         isDead = false;
         respawning = false;
+        controller.animator.enabled = true;
         if (photonView.IsMine) {
             CanvasComponents.single_CC.respawnUiHolder.SetActive(false);
             if (!Manager.single_M.IsDev()) {
@@ -61,6 +62,7 @@ public class Health : MonoBehaviourPun {
         if (currentHealth <= 0) {
             isDead = true;
             currentHealth = 0;
+            controller.animator.enabled = false;
             if (photonView.IsMine) {
                 string nickname = photonView.Owner.NickName;
                 nickname = Tools.RemoveIdFromNickname(nickname);

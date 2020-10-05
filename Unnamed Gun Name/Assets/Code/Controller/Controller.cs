@@ -31,7 +31,7 @@ public class Controller : MonoBehaviourPun {
 
     //replace with bodyparts when ready
     AudioListener audioListeners;
-    float currentForwardSprintValue, currentSidewaysSprintValue, xRotationAxisAngle;
+    float currentStraightSpeed, currentStraightSprintValue, currentStraightAnimSpeed, currentSidewaysSprintValue, xRotationAxisAngle;
     public bool isGrounded, canJump, isSprinting = false, wasNotGrounded = false;
     int invertMultiplier;
     Vector3 lastPos;
@@ -171,19 +171,19 @@ public class Controller : MonoBehaviourPun {
         }
     }
 
-    float multi;
-
     public void InvertCamMovement() {
         invertMultiplier = PlayerPrefs.GetInt("InvertCam", 1);
     }
 
     private void FixedUpdate() {
         if (IsMineCheck() && canMove && !health.isDead) {
+            SprintCheck();
             Rotate();
+            AnimTest();
 
             if (isGrounded || true) {
-                SprintCheck();
-                vertical = Input.GetAxis("Vertical") * currentForwardSprintValue * moveSettings.forwardSpeed;
+
+                vertical = Input.GetAxis("Vertical") * currentStraightSprintValue * currentStraightSpeed;
                 horizontal = Input.GetAxis("Horizontal") * currentSidewaysSprintValue * moveSettings.sidewaysSpeed;
 
                 Vector3 newPos = new Vector3(horizontal, 0, vertical) * Time.deltaTime;
@@ -194,7 +194,6 @@ public class Controller : MonoBehaviourPun {
                 lastPos = transform.position;
             }
 
-            AnimTest();
             wasNotGrounded = !isGrounded;
         } else if (!IsMineCheck()) {
             rigid.velocity = Vector3.zero;
@@ -202,6 +201,16 @@ public class Controller : MonoBehaviourPun {
 
         if (nicknameTarget) {
             uiLookAtHolder.LookAt(nicknameTarget);
+        }
+    }
+
+    void DirtyBackwardsWalkCheck() {
+        if (Input.GetButton("Backwards")) {
+            currentStraightAnimSpeed = moveSettings.backwardsWalkAnimationSpeed;
+            currentStraightSpeed = moveSettings.backwardsSpeed;
+            currentStraightSprintValue = 1;
+        } else {
+            currentStraightSpeed = moveSettings.forwardSpeed;
         }
     }
 
@@ -216,18 +225,20 @@ public class Controller : MonoBehaviourPun {
                 if (speed > speedToWalkFrom && speed < speedToSprintFrom) {
                     animator.SetBool("Walk", true);
                     animator.SetBool("Sprint", false);
-                    multi = moveSettings.walkAnimationSpeed;
+                    currentStraightAnimSpeed = moveSettings.forwardsWalkAnimationSpeed;
                 } else if (speed > speedToSprintFrom) {
                     animator.SetBool("Sprint", true);
                     animator.SetBool("Walk", false);
-                    multi = moveSettings.sprintAnimationSpeed;
+                    currentStraightAnimSpeed = moveSettings.sprintAnimationSpeed;
                 } else {
                     animator.SetBool("Walk", false);
                     animator.SetBool("Sprint", false);
-                    multi = 1;
+                    currentStraightAnimSpeed = 1;
                 }
 
-                animSpeed /= animSpeed / multi;
+                DirtyBackwardsWalkCheck();
+
+                animSpeed /= animSpeed / currentStraightAnimSpeed;
                 animSpeed = Mathf.Clamp(animSpeed, -moveSettings.maxAnimationWalkSpeed, moveSettings.maxAnimationWalkSpeed);
                 if (!float.IsNaN(animSpeed)) {
                     animator.SetFloat("MoveSpeed", animSpeed);
@@ -242,10 +253,10 @@ public class Controller : MonoBehaviourPun {
         isSprinting = Input.GetButton("Sprint");
 
         if (isSprinting) {
-            currentForwardSprintValue = moveSettings.forwardSprintSpeed;
+            currentStraightSprintValue = moveSettings.forwardSprintSpeed;
             currentSidewaysSprintValue = moveSettings.sidewaysSprintSpeed;
         } else {
-            currentForwardSprintValue = 1;
+            currentStraightSprintValue = 1;
             currentSidewaysSprintValue = 1;
         }
     }
@@ -339,10 +350,10 @@ public class Controller : MonoBehaviourPun {
 [System.Serializable]
 public class MoveSettings {
     public float maxAnimationWalkSpeed;
-    public float forwardSpeed, forwardSprintSpeed;
+    public float forwardSpeed, backwardsSpeed, forwardSprintSpeed;
     public float sidewaysSpeed, sidewaysSprintSpeed;
     [Range(-10,10)]
-    public float walkAnimationSpeed, sprintAnimationSpeed;
+    public float forwardsWalkAnimationSpeed, backwardsWalkAnimationSpeed, sprintAnimationSpeed;
     [Header("Jumping")]
     public float jumpVelocity;
 }

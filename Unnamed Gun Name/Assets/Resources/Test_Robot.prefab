@@ -542,10 +542,12 @@ MonoBehaviour:
   moveSettings:
     maxAnimationWalkSpeed: 10
     forwardSpeed: 5
+    backwardsSpeed: 2.5
     forwardSprintSpeed: 1.2
     sidewaysSpeed: 5
     sidewaysSprintSpeed: 1.2
-    walkAnimationSpeed: 1.5
+    forwardsWalkAnimationSpeed: 1.5
+    backwardsWalkAnimationSpeed: -1.5
     sprintAnimationSpeed: 1.3
     jumpVelocity: 5
   cameraSettings:
