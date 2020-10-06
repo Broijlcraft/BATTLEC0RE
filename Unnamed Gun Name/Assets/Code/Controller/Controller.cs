@@ -20,7 +20,7 @@ public class Controller : MonoBehaviourPun {
     [Header("Local Settings")]
     public bool hideCursorOnStart;
 
-    [HideInInspector] public bool canMove;
+    /*[HideInInspector]*/ public bool canMove;
     [HideInInspector] public Health health;
     [HideInInspector] public Rigidbody rigid;
     [HideInInspector] public Collider[] colliders;

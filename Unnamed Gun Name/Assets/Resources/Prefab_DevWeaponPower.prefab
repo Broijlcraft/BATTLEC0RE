@@ -58,7 +58,7 @@ MonoBehaviour:
       animator: {fileID: 5152927724662719558}
     attackType: 0
     damagePerAttack: 50
-    range: 10
+    range: 100
     attacksPerSecond: 5
     currentAo: 0
     canNotAttack: 0
@@ -77,7 +77,7 @@ MonoBehaviour:
     canNotAttack: 0
   projectilePrefab: {fileID: 2251921230218651953, guid: 8150f42dcd7282648b07acaa76e1879e,
     type: 3}
-  projectileSpeed: 1300
+  projectileSpeed: 1000
   isAffectedByGravity: 0
 --- !u!64 &8051300718018528033
 MeshCollider:

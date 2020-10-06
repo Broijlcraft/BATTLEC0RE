@@ -541,9 +541,9 @@ MonoBehaviour:
   speedToWalkFrom: 0.2
   moveSettings:
     maxAnimationWalkSpeed: 10
-    forwardSpeed: 5
+    forwardSpeed: 4
     backwardsSpeed: 2.5
-    forwardSprintSpeed: 1.2
+    forwardSprintSpeed: 1.5
     sidewaysSpeed: 5
     sidewaysSprintSpeed: 1.2
     forwardsWalkAnimationSpeed: 1.5
@@ -1810,6 +1810,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3463437583216229512}
     m_Modifications:
+    - target: {fileID: 3337787395151661838, guid: f01ee2d56842d1f49b1fa74dae38af2b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.435
+      objectReference: {fileID: 0}
     - target: {fileID: 6841045706504560762, guid: f01ee2d56842d1f49b1fa74dae38af2b,
         type: 3}
       propertyPath: m_LocalPosition.x

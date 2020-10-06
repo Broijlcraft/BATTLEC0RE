@@ -15,12 +15,12 @@ public class PhotonLobbyCustomMatchMaking : MonoBehaviourPunCallbacks, ILobbyCal
     public int maxPlayers = 4;
     public GameObject roomListingPrefab;
     public Transform roomsPanel;
-    public Text roomNameText, createRoomFailed;
+    public Text roomNameText;
     public string beforeRoomName;
 
     [HideInInspector] public bool enteredNickname;
 
-    bool enteredRoomName, connectedToMaster = false, roomNameNotAvailable;
+    bool enteredRoomName, connectedToMaster = false;
 
     public DevLobby devLobby;
 
@@ -143,7 +143,7 @@ public class PhotonLobbyCustomMatchMaking : MonoBehaviourPunCallbacks, ILobbyCal
     void EnableDisableRelativeButtons() {
         button_CreateRoom.interactable = false;
         if (connectedToMaster && enteredNickname) {
-            if (enteredRoomName && !roomNameNotAvailable) {
+            if (enteredRoomName) {
                 button_CreateRoom.interactable = true;
             }
         }
