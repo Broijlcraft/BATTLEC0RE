@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using UnityEngine;
 using Photon.Pun;
+using System.Collections;
 
 public class Controller : MonoBehaviourPun {
     public static Controller single_CLocal;
@@ -11,11 +12,12 @@ public class Controller : MonoBehaviourPun {
     public Text nicknameText;
     public Animator animator;
     [Space]
-    public float interactRange, speedToSprintFrom, speedToWalkFrom;
+    public float interactRange;
     [Space]
     public MoveSettings moveSettings;
     public CameraSettings cameraSettings;
     public SwaySettings swaySettings;
+    public GameObject[] meshObjectsToSetLocal;
 
     [Header("Local Settings")]
     public bool hideCursorOnStart;
@@ -29,17 +31,16 @@ public class Controller : MonoBehaviourPun {
     [HideInInspector] public Transform nicknameTarget;
     [HideInInspector] public WeaponController weaponsController;
 
+
     //replace with bodyparts when ready
-    AudioListener audioListeners;
-    float currentStraightSpeed, currentStraightSprintValue, currentStraightAnimSpeed, currentSidewaysSprintValue, xRotationAxisAngle;
-    public bool isGrounded, canJump, isSprinting = false, wasNotGrounded = false;
+    bool isGrounded;
     int invertMultiplier;
-    Vector3 lastPos;
+    AudioListener audioListeners;
+    float currentSpeed, xRotationAxisAngle;
     float vertical = 0, horizontal = 0;
 
     [Header("Testing")]
     public bool keepLocalNicknameTextEnabled;
-    public GameObject[] meshObjectsToSetLocal;
 
     #region Initialization
     private void Awake() {
@@ -64,6 +65,7 @@ public class Controller : MonoBehaviourPun {
                 localLayerCam.enabled = false;
             }
         }
+
         audioListeners = GetComponentInChildren<AudioListener>();
         audioListeners.enabled = false;
 
@@ -81,10 +83,6 @@ public class Controller : MonoBehaviourPun {
         Init();
     }
 
-    void ResetAllAnims() {
-        animator.ResetTrigger("JumpLand");
-    }
-
     void Init() {
         startPosition = transform.position;
         startRotation = transform.rotation;
@@ -94,7 +92,6 @@ public class Controller : MonoBehaviourPun {
                 ObjectPool.single_PT.SetPoolOwners(PhotonRoomCustomMatchMaking.roomSingle.myNumberInRoom, photonView.ViewID);
             }
             isGrounded = true;
-            Invoke("ResetAllAnims", 1f);
 
             if (cam) {
                 cam.enabled = true;
@@ -156,16 +153,14 @@ public class Controller : MonoBehaviourPun {
                 }
             }
 
-            if (Input.GetButtonDown("Jump")) {
-                if (isGrounded) {
-                    isGrounded = false;
-                    Vector3 velocity = rigid.velocity;
-                    velocity.y = moveSettings.jumpVelocity;
-                    rigid.velocity = velocity;
-
-                    animator.SetBool("Walk", false);
-                    animator.SetBool("Sprint", false);
+            if (isGrounded) {
+                if (Input.GetButtonDown("Jump")) {
+                    rigid.velocity = new Vector3(0f, 5f, 0f);
                     animator.SetTrigger("Jump");
+                }
+
+                if (!Physics.Raycast(transform.position + moveSettings.jumpOffsetCheck, Vector3.down, moveSettings.distanceCheck, moveSettings.walkableLayers)) {
+                    isGrounded = false;
                 }
             }
         }
@@ -175,26 +170,30 @@ public class Controller : MonoBehaviourPun {
         invertMultiplier = PlayerPrefs.GetInt("InvertCam", 1);
     }
 
+    float horSpeed = 0, verSpeed = 0;
+
     private void FixedUpdate() {
         if (IsMineCheck() && canMove && !health.isDead) {
+            horSpeed = Input.GetAxis("Horizontal");
+            verSpeed = Input.GetAxis("Vertical");
             SprintCheck();
             Rotate();
-            AnimTest();
+
+            float animSpeed = currentSpeed / moveSettings.sprintSpeed;
+
+            animator.SetFloat("MoveSpeed", animSpeed);
 
             if (isGrounded || true) {
+                animator.SetFloat("HorizontalInput", horSpeed);
+                animator.SetFloat("VerticalInput", verSpeed);
 
-                vertical = Input.GetAxis("Vertical") * currentStraightSprintValue * currentStraightSpeed;
-                horizontal = Input.GetAxis("Horizontal") * currentSidewaysSprintValue * moveSettings.sidewaysSpeed;
+                horizontal = horSpeed * currentSpeed;
+                vertical = verSpeed * currentSpeed;
 
                 Vector3 newPos = new Vector3(horizontal, 0, vertical) * Time.deltaTime;
                 transform.Translate(newPos);
             }
 
-            if (wasNotGrounded) {
-                lastPos = transform.position;
-            }
-
-            wasNotGrounded = !isGrounded;
         } else if (!IsMineCheck()) {
             rigid.velocity = Vector3.zero;
         }
@@ -204,60 +203,28 @@ public class Controller : MonoBehaviourPun {
         }
     }
 
-    void DirtyBackwardsWalkCheck() {
-        if (Input.GetButton("Backwards")) {
-            currentStraightAnimSpeed = moveSettings.backwardsWalkAnimationSpeed;
-            currentStraightSpeed = moveSettings.backwardsSpeed;
-            currentStraightSprintValue = 1;
-        } else {
-            currentStraightSpeed = moveSettings.forwardSpeed;
-        }
-    }
-
-    private void AnimTest() {
-        if (animator) {
-            if (isGrounded) {
-                float speed = Vector3.Distance(transform.position, lastPos);
-                float animSpeed = speed;
-                speed *= 100;
-                lastPos = transform.position;
-
-                if (speed > speedToWalkFrom && speed < speedToSprintFrom) {
-                    animator.SetBool("Walk", true);
-                    animator.SetBool("Sprint", false);
-                    currentStraightAnimSpeed = moveSettings.forwardsWalkAnimationSpeed;
-                } else if (speed > speedToSprintFrom) {
-                    animator.SetBool("Sprint", true);
-                    animator.SetBool("Walk", false);
-                    currentStraightAnimSpeed = moveSettings.sprintAnimationSpeed;
-                } else {
-                    animator.SetBool("Walk", false);
-                    animator.SetBool("Sprint", false);
-                    currentStraightAnimSpeed = 1;
-                }
-
-                DirtyBackwardsWalkCheck();
-
-                animSpeed /= animSpeed / currentStraightAnimSpeed;
-                animSpeed = Mathf.Clamp(animSpeed, -moveSettings.maxAnimationWalkSpeed, moveSettings.maxAnimationWalkSpeed);
-                if (!float.IsNaN(animSpeed)) {
-                    animator.SetFloat("MoveSpeed", animSpeed);
+    void SprintCheck() {
+        if ((horSpeed > 0 || horSpeed < 0) || (verSpeed > 0 || verSpeed < 0)) {
+            if (Input.GetButton("Sprint")) {
+                if (currentSpeed < moveSettings.sprintSpeed) {
+                    currentSpeed += moveSettings.sprintAccelerate * Time.deltaTime;
                 }
             } else {
-                lastPos = transform.position;
+                if (currentSpeed < moveSettings.walkingSpeed) {
+                    currentSpeed += moveSettings.walkAccelerate * Time.deltaTime;
+                } else if (currentSpeed > moveSettings.walkingSpeed) {
+                    currentSpeed -= moveSettings.walkAccelerate * Time.deltaTime;
+                } else {
+                    currentSpeed = moveSettings.walkingSpeed;
+                }
             }
-        }
-    }
-
-    void SprintCheck() {
-        isSprinting = Input.GetButton("Sprint");
-
-        if (isSprinting) {
-            currentStraightSprintValue = moveSettings.forwardSprintSpeed;
-            currentSidewaysSprintValue = moveSettings.sidewaysSprintSpeed;
         } else {
-            currentStraightSprintValue = 1;
-            currentSidewaysSprintValue = 1;
+            if (currentSpeed > 0) {
+                currentSpeed -= moveSettings.walkAccelerate * Time.deltaTime;
+            }
+            if (currentSpeed < 0) {
+                currentSpeed = 0;
+            }
         }
     }
 
@@ -337,25 +304,37 @@ public class Controller : MonoBehaviourPun {
     }
 
     private void OnCollisionEnter(Collision collision) {
-        isGrounded = true;
-        animator.ResetTrigger("Jump");
-        animator.SetTrigger("JumpLand");
+        if (!isGrounded) {
+            animator.ResetTrigger("Jump");
+            animator.SetTrigger("JumpLand");
+            isGrounded = true;
+            StopCoroutine(CheckLanding());
+            StartCoroutine(CheckLanding());
+        }
     }
 
-    private void OnCollisionExit(Collision collision) {
-        isGrounded = false;
+    IEnumerator CheckLanding() {
+        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+        canMove = true;
+    }
+
+    private void OnDrawGizmosSelected() {
+        Debug.DrawRay(transform.position + moveSettings.jumpOffsetCheck, Vector3.down * moveSettings.distanceCheck, Color.cyan);
     }
 }
 
 [System.Serializable]
 public class MoveSettings {
-    public float maxAnimationWalkSpeed;
-    public float forwardSpeed, backwardsSpeed, forwardSprintSpeed;
-    public float sidewaysSpeed, sidewaysSprintSpeed;
-    [Range(-10,10)]
-    public float forwardsWalkAnimationSpeed, backwardsWalkAnimationSpeed, sprintAnimationSpeed;
+    public float walkingSpeed;
+    public float walkAccelerate;
+    [Space]
+    public float sprintSpeed;
+    public float sprintAccelerate;
     [Header("Jumping")]
     public float jumpVelocity;
+    public float distanceCheck;
+    public Vector3 jumpOffsetCheck;
+    public LayerMask walkableLayers;
 }
 
 [System.Serializable]
