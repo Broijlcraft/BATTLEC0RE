@@ -607,7 +607,7 @@ MonoBehaviour:
     jumpOffsetCheck: {x: 0, y: 0.12, z: 0}
     walkableLayers:
       serializedVersion: 2
-      m_Bits: 8192
+      m_Bits: 8193
   cameraSettings:
     invertVerticalCam: 0
     mouseSensitivity: 1.2
