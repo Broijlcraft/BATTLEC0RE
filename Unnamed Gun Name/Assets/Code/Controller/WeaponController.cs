@@ -119,6 +119,9 @@ public class WeaponController : MonoBehaviourPun {
                 animationSpeed = 1 / holder.timeToDetach;
                 StartCoroutine(Detach(holder, useAnim));
             }
+            if (controller.IsMineCheck()) {
+                Tools.SetLocalOrGlobalLayers(weapon.meshObjects.ToArray(), false);
+            }
             if (useAnim) {
                 yield return new WaitForSeconds(extraAttachWaitTime);
             }
@@ -133,9 +136,6 @@ public class WeaponController : MonoBehaviourPun {
             weapon.transform.SetParent(holder.weaponsHolder);
             weapon.transform.localPosition = Vector3.zero;
             weapon.transform.localRotation = Quaternion.identity;
-            if (controller.IsMineCheck()) {
-                Tools.SetLocalOrGlobalLayers(weapon.meshObjects.ToArray(), false);
-            }
             if (useAnim) {
                 holder.animator.speed = animationSpeed;
                 holder.animator.SetTrigger("ScrewOn");
