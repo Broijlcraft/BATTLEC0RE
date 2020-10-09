@@ -101,12 +101,16 @@ public class Controller : MonoBehaviourPun {
             }
             audioListeners.enabled = true;
 
-            for (int i = 0; i < meshObjectsToSetLocal.Length; i++) {
-                meshObjectsToSetLocal[i].layer = TagsAndLayersManager.single_TLM.localPlayerLayerInfo.index;
+            if (TagsAndLayersManager.single_TLM) {
+                for (int i = 0; i < meshObjectsToSetLocal.Length; i++) {
+                    meshObjectsToSetLocal[i].layer = TagsAndLayersManager.single_TLM.localPlayerLayerInfo.index;
+                }
             }
         } else {
-            for (int i = 0; i < meshObjectsToSetLocal.Length; i++) {
-                meshObjectsToSetLocal[i].layer = TagsAndLayersManager.single_TLM.playerLayerInfo.index;
+            if (TagsAndLayersManager.single_TLM) {
+                for (int i = 0; i < meshObjectsToSetLocal.Length; i++) {
+                    meshObjectsToSetLocal[i].layer = TagsAndLayersManager.single_TLM.playerLayerInfo.index;
+                }
             }
         }
         TurnCollidersOnOff(true);

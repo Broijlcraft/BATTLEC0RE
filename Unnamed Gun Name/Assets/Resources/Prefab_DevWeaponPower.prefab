@@ -57,9 +57,11 @@ MonoBehaviour:
     - origin: {fileID: 3337787395151661838}
       animator: {fileID: 5152927724662719558}
     attackType: 0
-    damagePerAttack: 50
+    impactEffect: {fileID: 0}
+    damagePerAttack: 48
     range: 100
     attacksPerSecond: 5
+    bulletSpread: {x: 0, y: 0}
     currentAo: 0
     canNotAttack: 0
   colliders: []
@@ -70,9 +72,11 @@ MonoBehaviour:
   wBehaviour:
     attackOrigins: []
     attackType: 0
+    impactEffect: {fileID: 0}
     damagePerAttack: 1
     range: 1
     attacksPerSecond: 1
+    bulletSpread: {x: 0, y: 0}
     currentAo: 0
     canNotAttack: 0
   projectilePrefab: {fileID: 2251921230218651953, guid: 8150f42dcd7282648b07acaa76e1879e,

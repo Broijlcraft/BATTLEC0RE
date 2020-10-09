@@ -65,8 +65,13 @@ public class WeaponBehaviour {
     public AttackOrigin[] attackOrigins;
     [Space]
     public AttackType attackType;
-
-    public float damagePerAttack = 1f, range = 1f, attacksPerSecond = 1f;
+    public GameObject impactEffect;
+    [Space]
+    public float damagePerAttack = 1f;
+    public float range = 1f;
+    public float attacksPerSecond = 1f;
+    
+    public Vector2 bulletSpread;
 
     [HideInInspector] public int currentAo;
     [HideInInspector] public bool canNotAttack;
@@ -77,6 +82,12 @@ public class AttackOrigin {
 
     public Transform origin;
     public Animator animator;
+    public AttackEffect attackEffect;
+}
+
+[System.Serializable]
+public class AttackEffect {
+    public ParticleSystem attackParticle;
 }
 
 public enum AttackType {

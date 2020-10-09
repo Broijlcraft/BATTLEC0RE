@@ -7,8 +7,6 @@ public class WeaponController : MonoBehaviourPun {
 
     public WeaponsHolder primaryWeaponsHolder, powerWeaponsHolder;
 
-    public WeaponsHolder[] weaponsHolders;
-
     float animationSpeed;
     [HideInInspector] public Controller controller;
     [HideInInspector] public bool isAttaching, isDetaching, isChangingBehaviour;

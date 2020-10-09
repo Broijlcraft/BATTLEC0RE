@@ -6,6 +6,7 @@ public class PooledParticleScript : MonoBehaviour, IPoolObject {
 
     public float duration;
     [HideInInspector] public ParticleSystem[] particleSystems;
+    float timer;
 
     private void Awake() {
         particleSystems = GetComponentsInChildren<ParticleSystem>();
@@ -17,17 +18,19 @@ public class PooledParticleScript : MonoBehaviour, IPoolObject {
                 particleSystems[i].Play();
             }
         }
-        StartCoroutine(Disable());
+        timer = 0;
     }
-
-
-    IEnumerator Disable() {
-        yield return new WaitForSeconds(duration);
-        if (particleSystems.Length > 0) {
-            for (int i = 0; i < particleSystems.Length; i++) {
-                particleSystems[i].Stop();
+    
+    private void Update() {
+        if (timer < duration) {
+            timer += Time.deltaTime;
+        } else {
+            if (particleSystems.Length > 0) {
+                for (int i = 0; i < particleSystems.Length; i++) {
+                    particleSystems[i].Stop();
+                }
             }
+            gameObject.SetActive(false);
         }
-        gameObject.SetActive(false);
     }
 }

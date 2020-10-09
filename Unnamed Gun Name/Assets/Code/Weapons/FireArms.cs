@@ -6,7 +6,7 @@ public class FireArms : Weapon {
 
     [Space]
     public float timeToSwitchBehaviour = 1f;
-        
+
     [HideInInspector] public ActiveWeapon currentActiveWeapon = ActiveWeapon.primary;
     [HideInInspector] public WeaponBehaviour wBehaviour;
 
@@ -33,22 +33,29 @@ public class FireArms : Weapon {
 
         AttackOrigin origin = behaviour.attackOrigins[behaviour.currentAo];
         wBehaviour = behaviour;
-        ShootBehaviour(origin.origin);
 
-        origin.animator.speed = behaviour.attacksPerSecond;
-        origin.animator.SetTrigger("Shoot");
+        InteractableActions.single_IA.PlayFireArmsEffect(index, behaviourIndex, behaviour.currentAo, "Shoot");
+        ShootBehaviour(origin.origin, behaviour.bulletSpread, behaviour.impactEffect);
+
+        //origin.animator.speed = behaviour.attacksPerSecond;
+        //origin.animator.SetTrigger("Shoot");
         yield return new WaitForSeconds(attackSpeed);
         behaviour.canNotAttack = false;
     }
 
-    public virtual void ShootBehaviour(Transform attackOrigin) {
+    public virtual void ShootBehaviour(Transform attackOrigin, Vector2 bulletSpread, GameObject impactEffect) {
         RaycastHit hit;
         Vector3 attackRot = GetAttackRotation(attackOrigin, wBehaviour.range);
-
+        attackRot.x += Random.Range(-bulletSpread.x, bulletSpread.x);
+        attackRot.y += Random.Range(-bulletSpread.y, bulletSpread.y);
         if (Physics.Raycast(attackOrigin.position, attackRot, out hit, wBehaviour.range, ~TagsAndLayersManager.single_TLM.localPlayerLayerInfo.layerMask)) {
             Health health = hit.transform.GetComponent<Health>();
             if (health) {
                 health.DoDamage(wBehaviour.damagePerAttack, Tools.RemoveIdFromNickname(interactingController.photonView.Owner.NickName));
+            } else {
+                Vector3 pos = hit.point;
+                Quaternion rot = Quaternion.FromToRotation(Vector3.up, hit.normal);
+                ObjectPool.single_PT.GlobalSpawnFromPool(PhotonRoomCustomMatchMaking.roomSingle.myNumberInRoom, impactEffect.name, pos, rot, SyncType.UnSynced);
             }
         }
     }

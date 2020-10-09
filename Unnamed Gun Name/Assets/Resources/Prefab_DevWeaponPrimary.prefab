@@ -144,7 +144,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8088054365374581691}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2207636618924791862
 MeshFilter:
@@ -224,7 +224,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1177686826225634529}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4084113724190705423
 MeshFilter:
@@ -462,7 +462,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1246783284907696404}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8261410002387881246
 MeshFilter:
@@ -680,21 +680,33 @@ MonoBehaviour:
   - attackOrigins:
     - origin: {fileID: 2180160484014790018}
       animator: {fileID: 8615860996743469770}
+      attackEffect:
+        attackParticle: {fileID: 6246400880127868597}
     attackType: 1
+    impactEffect: {fileID: 2190223931602768287, guid: 9a5663ba8b7f2144d90ad73114869b0f,
+      type: 3}
     damagePerAttack: 10
     range: 20
     attacksPerSecond: 8
+    bulletSpread: {x: 0.05, y: 0.05}
     currentAo: 0
     canNotAttack: 0
   - attackOrigins:
     - origin: {fileID: 9090530222212551384}
       animator: {fileID: 1727375199515221392}
+      attackEffect:
+        attackParticle: {fileID: 3947086195578665455}
     - origin: {fileID: 2259664962849667191}
       animator: {fileID: 8541959373445855039}
+      attackEffect:
+        attackParticle: {fileID: 6319994649162421056}
     attackType: 0
+    impactEffect: {fileID: 2190223931602768287, guid: 9a5663ba8b7f2144d90ad73114869b0f,
+      type: 3}
     damagePerAttack: 2
     range: 10
     attacksPerSecond: 10
+    bulletSpread: {x: 0.05, y: 0.05}
     currentAo: 0
     canNotAttack: 0
   colliders: []
@@ -711,9 +723,11 @@ MonoBehaviour:
   wBehaviour:
     attackOrigins: []
     attackType: 0
+    impactEffect: {fileID: 0}
     damagePerAttack: 1
     range: 1
     attacksPerSecond: 1
+    bulletSpread: {x: 0, y: 0}
     currentAo: 0
     canNotAttack: 0
 --- !u!64 &1415877010834955851
@@ -819,15 +833,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb18a8c299927744d939514833d2e791, type: 3}
+--- !u!198 &6246400880127868597 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 4644271174782944131, guid: fb18a8c299927744d939514833d2e791,
+    type: 3}
+  m_PrefabInstance: {fileID: 1647306495378029878}
+  m_PrefabAsset: {fileID: 0}
 --- !u!95 &8615860996743469770 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 7011479453439813628, guid: fb18a8c299927744d939514833d2e791,
     type: 3}
   m_PrefabInstance: {fileID: 1647306495378029878}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &2180160484014790018 stripped
+--- !u!4 &1177686826225634529 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 620675341957523636, guid: fb18a8c299927744d939514833d2e791,
+  m_CorrespondingSourceObject: {fileID: 471632670957597143, guid: fb18a8c299927744d939514833d2e791,
     type: 3}
   m_PrefabInstance: {fileID: 1647306495378029878}
   m_PrefabAsset: {fileID: 0}
@@ -837,9 +857,9 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1647306495378029878}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &1177686826225634529 stripped
+--- !u!4 &2180160484014790018 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 471632670957597143, guid: fb18a8c299927744d939514833d2e791,
+  m_CorrespondingSourceObject: {fileID: 620675341957523636, guid: fb18a8c299927744d939514833d2e791,
     type: 3}
   m_PrefabInstance: {fileID: 1647306495378029878}
   m_PrefabAsset: {fileID: 0}
@@ -869,6 +889,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SecBarrelHolder (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4810581133490016905, guid: fb18a8c299927744d939514833d2e791,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5017638587084355020, guid: fb18a8c299927744d939514833d2e791,
         type: 3}
@@ -956,6 +981,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1713309187380089027}
   m_PrefabAsset: {fileID: 0}
+--- !u!198 &6319994649162421056 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 4644271174782944131, guid: fb18a8c299927744d939514833d2e791,
+    type: 3}
+  m_PrefabInstance: {fileID: 1713309187380089027}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8553771644174629484
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -982,6 +1013,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SecBarrelHolder
+      objectReference: {fileID: 0}
+    - target: {fileID: 4810581133490016905, guid: fb18a8c299927744d939514833d2e791,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5017638587084355020, guid: fb18a8c299927744d939514833d2e791,
         type: 3}
@@ -1066,6 +1102,12 @@ Animator:
 --- !u!4 &9090530222212551384 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 620675341957523636, guid: fb18a8c299927744d939514833d2e791,
+    type: 3}
+  m_PrefabInstance: {fileID: 8553771644174629484}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &3947086195578665455 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 4644271174782944131, guid: fb18a8c299927744d939514833d2e791,
     type: 3}
   m_PrefabInstance: {fileID: 8553771644174629484}
   m_PrefabAsset: {fileID: 0}

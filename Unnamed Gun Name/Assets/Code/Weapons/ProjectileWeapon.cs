@@ -10,7 +10,7 @@ public class ProjectileWeapon : FireArms {
     public float projectileSpeed;
     public bool isAffectedByGravity;
 
-    public override void ShootBehaviour(Transform attackOrigin) {
+    public override void ShootBehaviour(Transform attackOrigin, Vector2 spreadOffset, GameObject impactEffect) {
         Vector3 attackRotation = GetAttackRotation(attackOrigin, wBehaviour.range);
         Quaternion actualRotation = Quaternion.LookRotation(attackRotation);
 
