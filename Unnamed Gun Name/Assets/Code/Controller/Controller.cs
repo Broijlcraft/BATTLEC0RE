@@ -163,6 +163,8 @@ public class Controller : MonoBehaviourPun {
                     isGrounded = false;
                 }
             }
+            horSpeed = Input.GetAxis("Horizontal");
+            verSpeed = Input.GetAxis("Vertical");
         }
     }
 
@@ -171,16 +173,13 @@ public class Controller : MonoBehaviourPun {
     }
 
     float horSpeed = 0, verSpeed = 0;
-
     private void FixedUpdate() {
         if (IsMineCheck() && canMove && !health.isDead) {
-            horSpeed = Input.GetAxis("Horizontal");
-            verSpeed = Input.GetAxis("Vertical");
             SprintCheck();
             Rotate();
 
             float animSpeed = currentSpeed / moveSettings.sprintSpeed;
-
+            animSpeed = Mathf.Clamp(animSpeed, 0, 1);
             animator.SetFloat("MoveSpeed", animSpeed);
 
             if (isGrounded || true) {
@@ -210,11 +209,11 @@ public class Controller : MonoBehaviourPun {
                     currentSpeed += moveSettings.sprintAccelerate * Time.deltaTime;
                 }
             } else {
-                if (currentSpeed < moveSettings.walkingSpeed) {
+                if (currentSpeed < moveSettings.walkingSpeed - moveSettings.walkAccelerate * Time.deltaTime) {
                     currentSpeed += moveSettings.walkAccelerate * Time.deltaTime;
-                } else if (currentSpeed > moveSettings.walkingSpeed) {
-                    currentSpeed -= moveSettings.walkAccelerate * Time.deltaTime;
-                } else {
+                } else if (currentSpeed > moveSettings.walkingSpeed + moveSettings.sprintAccelerate * Time.deltaTime) {
+                    currentSpeed -= moveSettings.sprintSpeed * Time.deltaTime;
+                } else if (currentSpeed > moveSettings.walkingSpeed - moveSettings.walkAccelerate * Time.deltaTime && currentSpeed < moveSettings.walkingSpeed + moveSettings.sprintAccelerate * Time.deltaTime) {
                     currentSpeed = moveSettings.walkingSpeed;
                 }
             }
@@ -304,9 +303,9 @@ public class Controller : MonoBehaviourPun {
     }
 
     private void OnCollisionEnter(Collision collision) {
-        if (!isGrounded) {
+        if (IsMineAndAliveCheck() && !isGrounded) {
             animator.ResetTrigger("Jump");
-            animator.SetTrigger("JumpLand");
+            animator.SetBool("JumpLand", true);
             isGrounded = true;
             StopCoroutine(CheckLanding());
             StartCoroutine(CheckLanding());
@@ -314,8 +313,9 @@ public class Controller : MonoBehaviourPun {
     }
 
     IEnumerator CheckLanding() {
-        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+        yield return new WaitForSeconds(0.1f);
         canMove = true;
+        animator.SetBool("JumpLand", false);
     }
 
     private void OnDrawGizmosSelected() {
