@@ -4816,7 +4816,7 @@ GameObject:
   - component: {fileID: 199000011890003862}
   - component: {fileID: 1069603124}
   m_Layer: 0
-  m_Name: RocketTrailEffect
+  m_Name: par_RocketTrailEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
