@@ -55,7 +55,7 @@ public class InteractableActions : MonoBehaviourPun {
     }
 
     public void PlayFireArmsEffect(int index, int behaviourIndex, int aoIndex, string triggerName) {
-        photonView.RPC("RPC_PlayFireArmEffects", RpcTarget.All, index, behaviourIndex, aoIndex, triggerName);
+        //photonView.RPC("RPC_PlayFireArmEffects", RpcTarget.All, index, behaviourIndex, aoIndex, triggerName);
     }
 
     [PunRPC]

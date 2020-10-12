@@ -7,7 +7,8 @@ public class Weapon : Interactable {
     public WeaponBehaviour[] weaponBehaviours = new WeaponBehaviour[1];
 
     [HideInInspector] public Collider[] colliders;
-    /*[HideInInspector] */public List<GameObject> meshObjects = new List<GameObject>();
+    /*[HideInInspector] */
+    public List<GameObject> meshObjects = new List<GameObject>();
 
     //Dev
     Vector3 startPos;
@@ -25,7 +26,7 @@ public class Weapon : Interactable {
     }
 
     public override void Interact(Controller controller) {
-        if(weaponType != WeaponType.Primary) {
+        if (weaponType != WeaponType.Primary) {
             CheckAndAttach(controller);
         } else if (weaponType == WeaponType.Primary && !controller.weaponsController.primaryWeaponsHolder.weaponAttached) {
             CheckAndAttach(controller);
@@ -41,6 +42,12 @@ public class Weapon : Interactable {
 
     public override void Use() {
 
+    }
+
+    public virtual void Attach(Transform newParent) {
+        transform.SetParent(newParent);
+        transform.localPosition = Vector3.zero;
+        transform.localRotation = Quaternion.identity;
     }
 
     //Dev

@@ -55,6 +55,7 @@ public class WeaponController : MonoBehaviourPun {
         } else {
             SwitchBehaviour(weapon, "SecToPrim", ActiveWeapon.primary);
         }
+        primaryWeaponsHolder.animator.speed = weapon.timeToSwitchBehaviour;
         yield return new WaitForSeconds(weapon.timeToSwitchBehaviour);
         isChangingBehaviour = false;
     }
@@ -131,9 +132,10 @@ public class WeaponController : MonoBehaviourPun {
     IEnumerator Attach(WeaponsHolder holder, Weapon weapon, bool useAnim) {
         if (weapon) {
             isAttaching = true;
-            weapon.transform.SetParent(holder.weaponsHolder);
-            weapon.transform.localPosition = Vector3.zero;
-            weapon.transform.localRotation = Quaternion.identity;
+            weapon.Attach(holder.weaponsHolder);
+            //weapon.transform.SetParent(holder.weaponsHolder);
+            //weapon.transform.localPosition = Vector3.zero;
+            //weapon.transform.localRotation = Quaternion.identity;
             if (useAnim) {
                 holder.animator.speed = animationSpeed;
                 holder.animator.SetTrigger("ScrewOn");
