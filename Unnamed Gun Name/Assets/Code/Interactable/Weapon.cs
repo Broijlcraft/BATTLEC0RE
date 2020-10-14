@@ -74,7 +74,7 @@ public class WeaponBehaviour {
     public AttackType attackType;
     public GameObject impactEffect;
     [Space]
-    public float damagePerAttack = 1f;
+    public int damagePerAttack = 1;
     public float range = 1f;
     public float attacksPerSecond = 1f;
     

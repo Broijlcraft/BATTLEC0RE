@@ -6,12 +6,13 @@ using UnityEngine;
 public class Explosion {
     [HideInInspector] public Vector3 originPosition;
     [HideInInspector] public Quaternion originRotation;
-    [HideInInspector] public float damage, explosionRange, explosionForce;
+    [HideInInspector] public int damage;
+    [HideInInspector] public float explosionRange, explosionForce;
 
     public float particleDestroyTime;
     public GameObject explosionPrefab;
     
-    public void Explode(int playerID, Vector3 _originPosition, Quaternion _originRotation, float _damage, float _explosionRange, float _explosionForce) {
+    public void Explode(int playerID, Vector3 _originPosition, Quaternion _originRotation, int _damage, float _explosionRange, float _explosionForce) {
         SetValues(_originPosition, _originRotation, _damage, _explosionRange, _explosionForce);
         PlayParticles(playerID);
         Collider[] colls = Physics.OverlapSphere(originPosition, explosionRange);
@@ -29,7 +30,7 @@ public class Explosion {
         }
     }
 
-    void SetValues(Vector3 _originPosition, Quaternion _originRotation, float _damage, float _explosionRange, float _explosionForce) {
+    void SetValues(Vector3 _originPosition, Quaternion _originRotation, int _damage, float _explosionRange, float _explosionForce) {
         originPosition = _originPosition;
         originRotation = _originRotation;
         damage = _damage;

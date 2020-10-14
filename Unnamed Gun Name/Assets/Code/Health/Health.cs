@@ -4,56 +4,48 @@ using Photon.Pun;
 using System.Collections;
 
 public class Health : MonoBehaviourPun {
-    public float maxHealth = 50f;
+    public int maxHealth = 100;
 
-    public int respawnTime = 6;
+    public int respawnTime = 2;
 
     public Image fillHealthBar;
+    public HealthBarScript healthBar;
 
     [HideInInspector] public bool isDead, respawning;
-    [HideInInspector] public float currentHealth;
+    [HideInInspector] public int currentHealth;
     [HideInInspector] public Controller controller;
-
+    CanvasComponents cc;
+    
     private void Awake() {
         currentHealth = maxHealth;
     }
-    
-    IEnumerator Countdown() {
-        CanvasComponents cc = CanvasComponents.single_CC;
-        cc.respawnUiHolder.SetActive(true);
-        int timer = respawnTime;
-        while (timer > 0) {
-            if (Manager.single_M.IsDev()) { break; }
-            cc.respawnAnim.SetTrigger("Respawn");
-            cc.respawnTimer.text = timer.ToString();
-            yield return new WaitForSeconds(1);
-            timer--;
-        }
-        photonView.RPC("RPC_Respawn", RpcTarget.All);
+
+    private void Start() {
+        cc = CanvasComponents.single_CC;
+        healthBar = cc.healthBar;
     }
 
-    [PunRPC]
-    void RPC_Respawn() {
-        isDead = false;
-        respawning = false;
-        controller.animator.enabled = true;
-        if (photonView.IsMine) {
-            CanvasComponents.single_CC.respawnUiHolder.SetActive(false);
-            if (!Manager.single_M.IsDev()) {
-                controller.ResetAtStartPosition();
-            }
+    private void Update() {
+        if (Input.GetButtonDown("1")) {
+            DoDamage(20, "Darth Max");
+            //if (healthBar) {
+            //    currentHealth -= Random.Range(1, 1);
+            //    if(currentHealth <= 0) {
+            //        currentHealth = maxHealth;
+            //    }
+            //    healthBar.ChangeHealth(currentHealth, maxHealth);
+            //}
         }
-        photonView.RPC("RPC_ChangeHealth", RpcTarget.All, maxHealth, 1, "");
     }
 
-    public void DoDamage(float value, string killer) {
+    public void DoDamage(int value, string killer) {
         if (!isDead) {
             photonView.RPC("RPC_ChangeHealth", RpcTarget.All, value, 0, killer);
         }
     }
 
     [PunRPC]
-    void RPC_ChangeHealth(float value, int add, string killer) {
+    void RPC_ChangeHealth(int value, int add, string killer) {
         if (Tools.IntToBool(add)) {
             currentHealth += value;
         } else {
@@ -81,6 +73,33 @@ public class Health : MonoBehaviourPun {
         UpdateUiHeath();
     }
 
+    IEnumerator Countdown() {
+        cc.respawnUiHolder.SetActive(true);
+        int timer = respawnTime;
+        while (timer > 0) {
+            if (Manager.single_M.IsDev()) { break; }
+            cc.respawnAnim.SetTrigger("Respawn");
+            cc.respawnTimer.text = timer.ToString();
+            yield return new WaitForSeconds(1);
+            timer--;
+        }
+        photonView.RPC("RPC_Respawn", RpcTarget.All);
+    }
+
+    [PunRPC]
+    void RPC_Respawn() {
+        isDead = false;
+        respawning = false;
+        controller.animator.enabled = true;
+        if (photonView.IsMine) {
+            cc.respawnUiHolder.SetActive(false);
+            if (!Manager.single_M.IsDev()) {
+                controller.ResetAtStartPosition();
+            }
+        }
+        photonView.RPC("RPC_ChangeHealth", RpcTarget.All, maxHealth, 1, "");
+    }
+
     [PunRPC]
     void RPC_KillFeed(string victim, string killer) {
         Debug.LogWarning("Still need to implement weapons icons here!");
@@ -91,7 +110,7 @@ public class Health : MonoBehaviourPun {
         float fill = currentHealth / maxHealth;
         fillHealthBar.fillAmount = fill;
         if (photonView.IsMine) {
-            CanvasComponents.single_CC.ingameHealthBar.fillAmount = fill;
+            healthBar.ChangeHealth(currentHealth, maxHealth);
         }
     }
 }

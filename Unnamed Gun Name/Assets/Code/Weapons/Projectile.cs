@@ -28,7 +28,7 @@ public class Projectile : Interactable, IPoolObject {
         base.OnObjectSpawn();
     }
 
-    public virtual void Launch(int playerID, float _damage, float _range, float projectileSpeed, bool _isAffectedByGravity) {
+    public virtual void Launch(int playerID, int _damage, float _range, float projectileSpeed, bool _isAffectedByGravity) {
         startPoint = transform.position;
         range = _range;
         ownerPV = ObjectPool.single_PT.GetPhotonView(playerID);

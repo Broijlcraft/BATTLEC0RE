@@ -6,11 +6,11 @@ using Photon.Pun;
 public class Rocket : Projectile {
 
     public float explosionForce, explosionRange;
-    float damage;
+    int damage;
     public Explosion explosionInfo;
     int playerID;
 
-    public override void Launch(int playerID_, float _damage, float _range, float projectileSpeed, bool _isAffectedByGravity) {
+    public override void Launch(int playerID_, int _damage, float _range, float projectileSpeed, bool _isAffectedByGravity) {
         playerID = playerID_;
         base.Launch(playerID_, _damage, _range, projectileSpeed, _isAffectedByGravity);
 

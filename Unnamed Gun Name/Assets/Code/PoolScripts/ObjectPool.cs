@@ -66,7 +66,7 @@ public class ObjectPool : MonoBehaviourPun {
     }
 
     [PunRPC]
-    void RPC_GlobalSpawnProjectile(int playerID, string tag, Vector3 pos, Quaternion rot, float damage, float range, float projectileSpeed, int _isAffectedByGravity, SyncType poolSyncType) {
+    void RPC_GlobalSpawnProjectile(int playerID, string tag, Vector3 pos, Quaternion rot, int damage, float range, float projectileSpeed, int _isAffectedByGravity, SyncType poolSyncType) {
         bool isAffectedByGravity = Tools.IntToBool(_isAffectedByGravity);
         GameObject projObject = SpawnFromPool(playerID, tag, pos, rot, poolSyncType);
         if (projObject) {
@@ -133,7 +133,6 @@ public class ObjectPool : MonoBehaviourPun {
 
 [System.Serializable]
 public class PlayerPool {
-
     public PhotonView view;
     public Dictionary<string, Queue<GameObject>> unSyncedPoolDictionary = new Dictionary<string, Queue<GameObject>>();
     public Dictionary<string, Queue<GameObject>> syncedPoolDictionary = new Dictionary<string, Queue<GameObject>>();

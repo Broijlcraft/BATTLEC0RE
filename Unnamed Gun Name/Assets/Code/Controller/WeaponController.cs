@@ -133,9 +133,6 @@ public class WeaponController : MonoBehaviourPun {
         if (weapon) {
             isAttaching = true;
             weapon.Attach(holder.weaponsHolder);
-            //weapon.transform.SetParent(holder.weaponsHolder);
-            //weapon.transform.localPosition = Vector3.zero;
-            //weapon.transform.localRotation = Quaternion.identity;
             if (useAnim) {
                 holder.animator.speed = animationSpeed;
                 holder.animator.SetTrigger("ScrewOn");
