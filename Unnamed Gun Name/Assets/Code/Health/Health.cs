@@ -9,12 +9,12 @@ public class Health : MonoBehaviourPun {
     public int respawnTime = 2;
 
     public Image fillHealthBar;
-    public HealthBarScript healthBar;
 
     [HideInInspector] public bool isDead, respawning;
     [HideInInspector] public int currentHealth;
     [HideInInspector] public Controller controller;
     CanvasComponents cc;
+    HealthBarScript healthBar;
     
     private void Awake() {
         currentHealth = maxHealth;
@@ -28,13 +28,6 @@ public class Health : MonoBehaviourPun {
     private void Update() {
         if (Input.GetButtonDown("1")) {
             DoDamage(20, "Darth Max");
-            //if (healthBar) {
-            //    currentHealth -= Random.Range(1, 1);
-            //    if(currentHealth <= 0) {
-            //        currentHealth = maxHealth;
-            //    }
-            //    healthBar.ChangeHealth(currentHealth, maxHealth);
-            //}
         }
     }
 

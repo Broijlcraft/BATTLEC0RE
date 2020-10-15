@@ -19,7 +19,7 @@ public class ProjectileWeapon : FireArms {
 
         Vector3 pos = weaponBehaviours[behaviourIndex].attackOrigins[behaviour.currentAo].origin.position;
         int playerID = PhotonRoomCustomMatchMaking.roomSingle.myNumberInRoom;
-        float dmg = wBehaviour.damagePerAttack;
+        int dmg = wBehaviour.damagePerAttack;
         float range = wBehaviour.range;
         ObjectPool.single_PT.GlobalSpawnProjectile(playerID, projectilePrefab.name, pos, actualRotation, dmg, range, projectileSpeed, isAffectedByGravity, SyncType.Synced);
     }

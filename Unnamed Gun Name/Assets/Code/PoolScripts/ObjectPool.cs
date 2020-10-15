@@ -59,7 +59,7 @@ public class ObjectPool : MonoBehaviourPun {
 
     #endregion
 
-    public void GlobalSpawnProjectile(int playerID, string tag, Vector3 pos, Quaternion rot, float damage, float range, float projectileSpeed, bool _isAffectedByGravity, SyncType poolSyncType) {
+    public void GlobalSpawnProjectile(int playerID, string tag, Vector3 pos, Quaternion rot, int damage, float range, float projectileSpeed, bool _isAffectedByGravity, SyncType poolSyncType) {
         int isAffectedByGravity = Tools.BoolToInt(_isAffectedByGravity);
         int syncType = (int)poolSyncType;
         photonView.RPC("RPC_GlobalSpawnProjectile", RpcTarget.All, playerID, tag, pos, rot, damage, range, projectileSpeed, isAffectedByGravity, syncType);

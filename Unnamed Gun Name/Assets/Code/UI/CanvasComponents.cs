@@ -9,8 +9,7 @@ public class CanvasComponents : MonoBehaviour {
     public Text devText, respawnTimer;
     public Transform killFeedHolder;
     public GameObject respawnUiHolder;
-    public Animator respawnAnim;
-    public Image ingameHealthBar;
+    public Animator respawnAnim, chargeBar;
     public HealthBarScript healthBar;
 
      [Header("Settings")]

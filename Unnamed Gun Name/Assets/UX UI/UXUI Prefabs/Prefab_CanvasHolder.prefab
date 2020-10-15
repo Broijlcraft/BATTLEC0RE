@@ -178,7 +178,7 @@ GameObject:
   - component: {fileID: 2371521414667428692}
   - component: {fileID: 2881120016626402801}
   m_Layer: 5
-  m_Name: Img_HealthBar
+  m_Name: Img_ChargeBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -199,11 +199,11 @@ RectTransform:
   m_Father: {fileID: 1277910731342137115}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -450}
-  m_SizeDelta: {x: 500, y: 50}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 20, y: 150}
+  m_SizeDelta: {x: 460.00653, y: 46.000664}
+  m_Pivot: {x: 0, y: 0}
 --- !u!222 &2235898795429359668
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -502,8 +502,8 @@ MonoBehaviour:
   killFeedHolder: {fileID: 1365735482185308253}
   respawnUiHolder: {fileID: 1249356211877277299}
   respawnAnim: {fileID: 869226483084412224}
-  ingameHealthBar: {fileID: 2752221654220588644}
-  healthBar: {fileID: 0}
+  chargeBar: {fileID: 0}
+  healthBar: {fileID: 5825140583493249316}
   quitReturnButton: {fileID: 0}
   resolutionsDropdown: {fileID: 0}
   videoSettingsHolder: {fileID: 0}
@@ -896,7 +896,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 1316ab8b22158d1429e8c39e9c13a355, type: 3}
     m_FontSize: 0
     m_FontStyle: 0
     m_BestFit: 1
@@ -1200,8 +1200,9 @@ GameObject:
   - component: {fileID: 6845317000252294474}
   - component: {fileID: 2752221654220588644}
   - component: {fileID: 8900497531682649969}
+  - component: {fileID: 536782498556825922}
   m_Layer: 5
-  m_Name: FillImg_HealthBar
+  m_Name: FillImg_ChargeBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1247,14 +1248,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.15917587, g: 0.6886792, b: 0.6886792, a: 0.7529412}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: f4ce864131543f145acad3d09748ce41, type: 3}
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
@@ -1276,8 +1277,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EffectColor: {r: 0.22160912, g: 0.5660378, b: 0.5660378, a: 1}
-  m_EffectDistance: {x: 2, y: -2}
+  m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1
+--- !u!95 &536782498556825922
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5318649292795715975}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e4f188777819b3044ac3f435f002ca91, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &5537235538188112718
 GameObject:
   m_ObjectHideFlags: 0
@@ -1384,11 +1404,11 @@ RectTransform:
   m_Father: {fileID: 7417115648769930112}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 109.7, y: -26.32}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 109.99997, y: -34}
   m_SizeDelta: {x: 136.23096, y: 29.800522}
-  m_Pivot: {x: 0.5, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8744860639203585760
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1417,7 +1437,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: d6af68b904d612842832ae1d3dd503c9, type: 3}
+    m_Font: {fileID: 12800000, guid: 1316ab8b22158d1429e8c39e9c13a355, type: 3}
     m_FontSize: 0
     m_FontStyle: 0
     m_BestFit: 1
@@ -1570,7 +1590,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 1316ab8b22158d1429e8c39e9c13a355, type: 3}
     m_FontSize: 0
     m_FontStyle: 0
     m_BestFit: 1
@@ -2000,11 +2020,11 @@ RectTransform:
   m_Father: {fileID: 8314032780707929732}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: -35.2}
-  m_SizeDelta: {x: 160, y: 35}
-  m_Pivot: {x: 0.5, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -109.99997, y: -34.8}
+  m_SizeDelta: {x: 136.231, y: 29.80052}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5661481990884547380
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2033,7 +2053,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 1316ab8b22158d1429e8c39e9c13a355, type: 3}
     m_FontSize: 0
     m_FontStyle: 0
     m_BestFit: 1
