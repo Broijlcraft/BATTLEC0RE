@@ -27,7 +27,15 @@ public class Health : MonoBehaviourPun {
 
     private void Update() {
         if (Input.GetButtonDown("1")) {
-            DoDamage(20, "Darth Max");
+            if (PhotonNetwork.IsConnected) {
+                DoDamage(20, "Darth Max");
+            } else {
+                currentHealth -= 1;
+                if(currentHealth <= 0) {
+                    currentHealth = maxHealth;
+                }
+                healthBar.ChangeHealth(currentHealth, maxHealth);
+            }
         }
     }
 

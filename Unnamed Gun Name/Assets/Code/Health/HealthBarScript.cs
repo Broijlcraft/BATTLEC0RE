@@ -9,7 +9,7 @@ public class HealthBarScript : MonoBehaviour {
     public Transform partsHolder;
 
     [Header("HideInInspector")]
-    public List<Image> healthPart = new List<Image>();
+    public List<HealthPartScript> healthParts = new List<HealthPartScript>();
 
     void Start() {
         if (!partsHolder) {
@@ -18,30 +18,38 @@ public class HealthBarScript : MonoBehaviour {
 
         for (int i = 0; i < healthPartsInBar; i++) {
             GameObject part = Instantiate(healthPartPrefab, partsHolder);
-            Image partImg = part.GetComponent<Image>();
-            healthPart.Add(partImg);
+            HealthPartScript hps = part.GetComponent<HealthPartScript>();
+            healthParts.Add(hps);
         }
     }
+
     public void ChangeHealth(int currentHealth, int maxHealth) {
         int partAmount = currentHealth / healthPartsInBar;
         int remain = currentHealth % healthPartsInBar;
+        float H, S, V;
 
-        for (int i = 0; i < healthPart.Count; i++) {
+        for (int i = 0; i < healthParts.Count; i++) {
+            HealthPartScript hp = healthParts[i];
             float fill;
-            Color color = Color.white;
+            Color imgColor = Color.white;
+            Color outlineColor = hp.outlineColor;
             if (i < partAmount) {
                 fill = 1f;
             } else {
                 if(i == partAmount) {
                     fill = (float)remain/healthPartsInBar;
-                    color = Color.HSVToRGB(0, 1-fill, 1);
-                    color.a = 1;
+                    imgColor = Color.HSVToRGB(0, 1-fill, 1);
+                    imgColor.a = 1;
+                    Color.RGBToHSV(outlineColor, out H, out S, out V);
+                    outlineColor = Color.HSVToRGB(0, 1-fill, V);
                 } else {
                     fill = 0;
                 }
             }
-            healthPart[i].fillAmount = fill;
-            healthPart[i].color = color;
+            Image image = healthParts[i].img;
+            image.fillAmount = fill;
+            image.color = imgColor;
+            hp.outline.effectColor = outlineColor;
         }
     }
 }

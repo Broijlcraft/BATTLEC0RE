@@ -17,6 +17,11 @@ public class ProjectileWeapon : FireArms {
         int behaviourIndex = GetBehaviourIndex(this);
         WeaponBehaviour behaviour = weaponBehaviours[behaviourIndex];
 
+        CanvasComponents cc = CanvasComponents.single_CC;
+
+        cc.chargeBar.SetTrigger("Charge");
+        cc.chargeBar.speed = behaviour.attacksPerSecond;
+
         Vector3 pos = weaponBehaviours[behaviourIndex].attackOrigins[behaviour.currentAo].origin.position;
         int playerID = PhotonRoomCustomMatchMaking.roomSingle.myNumberInRoom;
         int dmg = wBehaviour.damagePerAttack;

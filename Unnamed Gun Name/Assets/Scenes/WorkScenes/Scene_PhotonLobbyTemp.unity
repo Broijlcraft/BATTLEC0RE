@@ -1616,6 +1616,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 707714785}
     m_Modifications:
+    - target: {fileID: 2192905339571278375, guid: f280e0223b728eb45b8923e8c984d4f8,
+        type: 3}
+      propertyPath: viewIdField
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2266523300109975506, guid: f280e0223b728eb45b8923e8c984d4f8,
+        type: 3}
+      propertyPath: viewIdField
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 8407309241602330512, guid: f280e0223b728eb45b8923e8c984d4f8,
         type: 3}
       propertyPath: m_Enabled
@@ -1700,6 +1710,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 4.755107
+      objectReference: {fileID: 0}
+    - target: {fileID: 9159547125717432456, guid: f280e0223b728eb45b8923e8c984d4f8,
+        type: 3}
+      propertyPath: viewIdField
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3568827078860700597, guid: f280e0223b728eb45b8923e8c984d4f8, type: 3}
@@ -4003,6 +4018,26 @@ PrefabInstance:
       propertyPath: viewIdField
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 259414706756858351, guid: f01ee2d56842d1f49b1fa74dae38af2b,
+        type: 3}
+      propertyPath: viewIdField
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3415700446670643550, guid: f01ee2d56842d1f49b1fa74dae38af2b,
+        type: 3}
+      propertyPath: viewIdField
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5236684312917867119, guid: f01ee2d56842d1f49b1fa74dae38af2b,
+        type: 3}
+      propertyPath: viewIdField
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5887990826821157581, guid: f01ee2d56842d1f49b1fa74dae38af2b,
+        type: 3}
+      propertyPath: viewIdField
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 6841045706504560762, guid: f01ee2d56842d1f49b1fa74dae38af2b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4411,7 +4446,7 @@ MonoBehaviour:
   killFeedHolder: {fileID: 0}
   respawnUiHolder: {fileID: 0}
   respawnAnim: {fileID: 0}
-  ingameHealthBar: {fileID: 0}
+  chargeBar: {fileID: 0}
   healthBar: {fileID: 0}
   quitReturnButton: {fileID: 586734428}
   resolutionsDropdown: {fileID: 3073455486624746427}

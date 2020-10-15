@@ -37,8 +37,8 @@ public class FireArms : Weapon {
         InteractableActions.single_IA.PlayFireArmsEffect(index, behaviourIndex, behaviour.currentAo, "Shoot");
         ShootBehaviour(origin.origin, behaviour.bulletSpread, behaviour.impactEffect);
 
-        //origin.animator.speed = behaviour.attacksPerSecond;
-        //origin.animator.SetTrigger("Shoot");
+        origin.animator.speed = behaviour.attacksPerSecond;
+        origin.animator.SetTrigger("Shoot");
         yield return new WaitForSeconds(attackSpeed);
         behaviour.canNotAttack = false;
     }
