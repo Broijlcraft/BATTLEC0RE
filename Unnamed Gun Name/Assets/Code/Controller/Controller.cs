@@ -36,14 +36,17 @@ public class Controller : MonoBehaviourPun {
     bool isGrounded;
     int invertMultiplier;
     AudioListener audioListeners;
-    float currentSpeed, xRotationAxisAngle;
-    float vertical = 0, horizontal = 0;
+    float currentSpeed, xRotationAxisAngle, vertical = 0, horizontal = 0;
 
     [Header("Testing")]
     public bool keepLocalNicknameTextEnabled;
 
     #region Initialization
     private void Awake() {
+        if (!playerView.devView) {
+            canMove = false;
+            isGrounded = true;
+        }
         xRotationAxisAngle = 0;
         TurnCollidersOnOff(false);
         rigid = GetComponent<Rigidbody>();
@@ -167,9 +170,9 @@ public class Controller : MonoBehaviourPun {
                     isGrounded = false;
                 }
             }
-            horSpeed = Input.GetAxis("Horizontal");
-            verSpeed = Input.GetAxis("Vertical");
         }
+        horSpeed = Input.GetAxis("Horizontal");
+        verSpeed = Input.GetAxis("Vertical");
     }
 
     public void InvertCamMovement() {
@@ -178,24 +181,28 @@ public class Controller : MonoBehaviourPun {
 
     float horSpeed = 0, verSpeed = 0;
     private void FixedUpdate() {
-        if (IsMineCheck() && canMove && !health.isDead) {
+        if (IsMineCheck() && !health.isDead) {
             SprintCheck();
-            Rotate();
 
             float animSpeed = currentSpeed / moveSettings.sprintSpeed;
             animSpeed = Mathf.Clamp(animSpeed, 0, 1);
-            animator.SetFloat("MoveSpeed", animSpeed);
 
-            if (isGrounded || true) {
-                animator.SetFloat("HorizontalInput", horSpeed);
-                animator.SetFloat("VerticalInput", verSpeed);
+            if (canMove) {
+                Rotate();
+                if (isGrounded || true) {
+                    animator.SetFloat("HorizontalInput", horSpeed);
+                    animator.SetFloat("VerticalInput", verSpeed);
 
-                horizontal = horSpeed * currentSpeed;
-                vertical = verSpeed * currentSpeed;
+                    horizontal = horSpeed * currentSpeed;
+                    vertical = verSpeed * currentSpeed;
 
-                Vector3 newPos = new Vector3(horizontal, 0, vertical) * Time.deltaTime;
-                transform.Translate(newPos);
+                    Vector3 newPos = new Vector3(horizontal, 0, vertical) * Time.deltaTime;
+                    transform.Translate(newPos);
+                }
+            } else {
+                animSpeed = 0;
             }
+            animator.SetFloat("MoveSpeed", animSpeed);
 
         } else if (!IsMineCheck()) {
             rigid.velocity = Vector3.zero;
@@ -287,6 +294,7 @@ public class Controller : MonoBehaviourPun {
     public void ResetAtStartPosition() {
         transform.position = startPosition;
         transform.rotation = startRotation;
+        verticalCamHolder.localRotation = Quaternion.identity;
         xRotationAxisAngle = 0;
     }
 

@@ -8,10 +8,14 @@ public class HealthBarScript : MonoBehaviour {
     public GameObject healthPartPrefab;
     public Transform partsHolder;
 
+    public float partSpawnTimer = 0.1f;
+
     [Header("HideInInspector")]
     public List<HealthPartScript> healthParts = new List<HealthPartScript>();
+    Controller cl;
 
     void Start() {
+        cl = Controller.single_CLocal;
         if (!partsHolder) {
             partsHolder = transform;
         }
@@ -19,7 +23,30 @@ public class HealthBarScript : MonoBehaviour {
         for (int i = 0; i < healthPartsInBar; i++) {
             GameObject part = Instantiate(healthPartPrefab, partsHolder);
             HealthPartScript hps = part.GetComponent<HealthPartScript>();
+            hps.img.gameObject.SetActive(false);
             healthParts.Add(hps);
+        }
+        StartCoroutine(ShowPartsOverTime());
+    }
+
+    public IEnumerator ShowPartsOverTime() {
+        bool dev = Controller.single_CLocal.playerView.devView;
+        if (!dev) {
+            cl.canMove = false;
+        }
+
+        for (int i = 0; i < healthParts.Count; i++) {
+            yield return new WaitForSeconds(partSpawnTimer);
+            HealthPartScript hp = healthParts[i];
+            Image img = hp.img;
+            img.gameObject.SetActive(true);
+            img.color = Color.white;
+            img.fillAmount = 1f;
+            hp.outline.effectColor = hp.outlineColor;
+        }
+
+        if (!dev) {
+            cl.canMove = true;
         }
     }
 

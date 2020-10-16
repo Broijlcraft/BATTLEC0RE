@@ -4,6 +4,7 @@ using UnityEngine;
 public class MenuButton : MonoBehaviour {
 
     public Menu nextMenu;
+    public GameObject[] additionalObjectsToDisableSeperateFromMenus;
     Menu menu;
     [HideInInspector] public Button button;
 
@@ -21,6 +22,9 @@ public class MenuButton : MonoBehaviour {
         MenuManager.single_MM.OpenMenu(nextMenu);
         if (menu) {
             menu.gameObject.SetActive(false);
+        }
+        for (int i = 0; i < additionalObjectsToDisableSeperateFromMenus.Length; i++) {
+            additionalObjectsToDisableSeperateFromMenus[i].SetActive(false);
         }
     }
 }

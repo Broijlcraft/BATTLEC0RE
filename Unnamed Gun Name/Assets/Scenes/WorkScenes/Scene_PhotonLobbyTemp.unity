@@ -896,7 +896,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 429efceb5faf3d043acc10686f387da4,
         type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 429efceb5faf3d043acc10686f387da4,
         type: 3}
@@ -1359,7 +1359,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &586734425
 GameObject:
@@ -2357,60 +2357,6 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1172073885}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 10
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1190867005
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1190867007}
-  - component: {fileID: 1190867006}
-  m_Layer: 0
-  m_Name: TeamManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1190867006
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1190867005}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02dd820958b944e48b970e2b101a3b8e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  teams:
-  - teamName: Red
-    teamColor: {r: 1, g: 0, b: 0, a: 1}
-    minPlayers: 0
-    maxPlayers: 4
-    playerNames: []
-  - teamName: Blue
-    teamColor: {r: 0, g: 0, b: 1, a: 1}
-    minPlayers: 0
-    maxPlayers: 4
-    playerNames: []
---- !u!4 &1190867007
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1190867005}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -4230,7 +4176,7 @@ Transform:
   - {fileID: 4807261197013081093}
   - {fileID: 1261073717063958107}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &592923204820408560
 MeshFilter:
@@ -4342,7 +4288,7 @@ RectTransform:
   - {fileID: 740088729}
   - {fileID: 1970476616}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -6058,6 +6004,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextMenu: {fileID: 3073455486735291459}
+  additionalObjectsToDisableSeperateFromMenus: []
   button: {fileID: 0}
 --- !u!114 &3073455486529092939
 MonoBehaviour:
@@ -6407,6 +6354,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextMenu: {fileID: 3073455486973510626}
+  additionalObjectsToDisableSeperateFromMenus: []
   button: {fileID: 0}
 --- !u!1 &3073455486605755099
 GameObject:
@@ -7230,6 +7178,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextMenu: {fileID: 5729545451686540964}
+  additionalObjectsToDisableSeperateFromMenus:
+  - {fileID: 3073455487193810563}
   button: {fileID: 0}
 --- !u!114 &3073455486817700230
 MonoBehaviour:
@@ -9041,6 +8991,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextMenu: {fileID: 3073455486596973123}
+  additionalObjectsToDisableSeperateFromMenus: []
   button: {fileID: 0}
 --- !u!114 &3073455487280902937
 MonoBehaviour:
@@ -10162,6 +10113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextMenu: {fileID: 3073455487109734060}
+  additionalObjectsToDisableSeperateFromMenus: []
   button: {fileID: 0}
 --- !u!114 &3073455487820704855
 MonoBehaviour:
@@ -10572,7 +10524,7 @@ PrefabInstance:
     - target: {fileID: 3402750428822526937, guid: 79992f1a6b651d04d9ca1a1d60691ad2,
         type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 3402750428822526937, guid: 79992f1a6b651d04d9ca1a1d60691ad2,
         type: 3}
@@ -10589,31 +10541,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3840014127944809249, guid: 79992f1a6b651d04d9ca1a1d60691ad2,
+    - target: {fileID: 4105430032882531012, guid: 79992f1a6b651d04d9ca1a1d60691ad2,
         type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 2a0f9eff877994b42afb21873fafc7ef, type: 2}
-    - target: {fileID: 3840014129077936833, guid: 79992f1a6b651d04d9ca1a1d60691ad2,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 2a0f9eff877994b42afb21873fafc7ef, type: 2}
-    - target: {fileID: 3840014129401765695, guid: 79992f1a6b651d04d9ca1a1d60691ad2,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 2a0f9eff877994b42afb21873fafc7ef, type: 2}
-    - target: {fileID: 3840014129858998215, guid: 79992f1a6b651d04d9ca1a1d60691ad2,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 2a0f9eff877994b42afb21873fafc7ef, type: 2}
-    - target: {fileID: 4813645223454983989, guid: 79992f1a6b651d04d9ca1a1d60691ad2,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 2a0f9eff877994b42afb21873fafc7ef, type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 79992f1a6b651d04d9ca1a1d60691ad2, type: 3}
 --- !u!33 &3434532241469359735

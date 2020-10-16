@@ -1092,6 +1092,7 @@ MonoBehaviour:
   healthPartPrefab: {fileID: 4308176537518956899, guid: 54b52b5c6f0b9d14682cc4c9aff86649,
     type: 3}
   partsHolder: {fileID: 3253890431550729916}
+  partSpawnTimer: 0.1
   healthParts: []
 --- !u!1 &4794986687610302632
 GameObject:

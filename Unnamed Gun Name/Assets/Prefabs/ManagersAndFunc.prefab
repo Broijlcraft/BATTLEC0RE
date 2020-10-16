@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 5822782393773722959}
   - component: {fileID: 5822782393773722958}
   - component: {fileID: 5822782393773722956}
+  - component: {fileID: 5496187443381444505}
   m_Layer: 0
   m_Name: ManagersAndFunc
   m_TagString: Untagged
@@ -61,16 +62,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d48a3b73cb6c3641821807480d310d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  respawnUiHolder: {fileID: 0}
-  respawnAnim: {fileID: 0}
-  respawnTimer: {fileID: 0}
-  ingameHealthBar: {fileID: 0}
   maxKillsInFeed: 5
   defaultWeaponIconInFeed: {fileID: 21300000, guid: f2415fc32e21e8340a33e72064d582e4,
     type: 3}
   defaultHeadshotIconInFeed: {fileID: 21300000, guid: 453ec811ee94a93498dac8bf9a18675e,
     type: 3}
-  killFeed: {fileID: 0}
   killfeedListingPrefab: {fileID: 5276165136791431218, guid: 2da4dd93419ce7043a5a9923abb8e063,
     type: 3}
 --- !u!114 &5822782393773722962
@@ -175,3 +171,26 @@ MonoBehaviour:
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &5496187443381444505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5822782393773722953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02dd820958b944e48b970e2b101a3b8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  teams:
+  - teamName: Red
+    teamColor: {r: 1, g: 0, b: 0, a: 1}
+    minPlayers: 0
+    maxPlayers: 4
+    playerNames: []
+  - teamName: Blue
+    teamColor: {r: 0, g: 0, b: 1, a: 1}
+    minPlayers: 0
+    maxPlayers: 4
+    playerNames: []

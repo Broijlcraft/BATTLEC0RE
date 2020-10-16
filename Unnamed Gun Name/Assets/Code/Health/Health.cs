@@ -41,17 +41,20 @@ public class Health : MonoBehaviourPun {
 
     public void DoDamage(int value, string killer) {
         if (!isDead) {
-            photonView.RPC("RPC_ChangeHealth", RpcTarget.All, value, 0, killer);
+            photonView.RPC("RPC_ChangeHealth", RpcTarget.All, value, 0, 1, killer);
         }
     }
 
     [PunRPC]
-    void RPC_ChangeHealth(int value, int add, string killer) {
-        if (Tools.IntToBool(add)) {
-            currentHealth += value;
-        } else {
-            currentHealth -= value;
+    void RPC_ChangeHealth(int value, int add, int instant, string killer) {
+        if (!Tools.IntToBool(add)) {
+            value *= -1;
         }
+
+        if (Manager.single_M.IsDev() && value < 0) { return; }
+        
+        currentHealth += value;
+        
         if (currentHealth <= 0) {
             isDead = true;
             currentHealth = 0;
@@ -71,7 +74,9 @@ public class Health : MonoBehaviourPun {
                 currentHealth = maxHealth;
             }
         }
-        UpdateUiHeath();
+
+        bool _Instant = Tools.IntToBool(instant);
+        UpdateUiHeath(_Instant);
     }
 
     IEnumerator Countdown() {
@@ -89,6 +94,7 @@ public class Health : MonoBehaviourPun {
 
     [PunRPC]
     void RPC_Respawn() {
+        UpdateUiHeath(false);
         isDead = false;
         respawning = false;
         controller.animator.enabled = true;
@@ -98,20 +104,24 @@ public class Health : MonoBehaviourPun {
                 controller.ResetAtStartPosition();
             }
         }
-        photonView.RPC("RPC_ChangeHealth", RpcTarget.All, maxHealth, 1, "");
+        photonView.RPC("RPC_ChangeHealth", RpcTarget.All, maxHealth, 1, 0, "");
     }
 
     [PunRPC]
     void RPC_KillFeed(string victim, string killer) {
         Debug.LogWarning("Still need to implement weapons icons here!");
-        UiManager.single_UM.AddKillToFeed(System.DateTime.Now.Second + killer, victim, null, null, true);
+        UiManager.single_UM.AddKillToFeed(killer, victim, null, null, true);
     }
 
-    void UpdateUiHeath() { 
+    void UpdateUiHeath(bool instant) { 
         float fill = currentHealth / maxHealth;
         fillHealthBar.fillAmount = fill;
         if (photonView.IsMine) {
-            healthBar.ChangeHealth(currentHealth, maxHealth);
+            if (instant) {
+                healthBar.ChangeHealth(currentHealth, maxHealth);
+            } else {
+                StartCoroutine(healthBar.ShowPartsOverTime());
+            }
         }
     }
 }
