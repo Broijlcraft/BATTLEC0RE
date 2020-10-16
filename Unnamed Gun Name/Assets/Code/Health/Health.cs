@@ -26,7 +26,7 @@ public class Health : MonoBehaviourPun {
     }
 
     private void Update() {
-        if (Input.GetButtonDown("1")) {
+        if (Input.GetButtonDown("1") && controller.IsMineAndAlive()) {
             if (PhotonNetwork.IsConnected) {
                 DoDamage(20, "Darth Max");
             } else {

@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.47058824, g: 0.47058824, b: 0.47058824, a: 1}
+  m_Color: {r: 0.15686275, g: 0.15686275, b: 0.8666667, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -504,6 +504,7 @@ MonoBehaviour:
   respawnAnim: {fileID: 869226483084412224}
   chargeBar: {fileID: 536782498556825922}
   healthBar: {fileID: 5825140583493249316}
+  scoreScript: {fileID: 3252301043802794885}
   quitReturnButton: {fileID: 0}
   resolutionsDropdown: {fileID: 0}
   videoSettingsHolder: {fileID: 0}
@@ -585,7 +586,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.47058824, g: 0.47058824, b: 0.47058824, a: 1}
+  m_Color: {r: 0.8679245, g: 0.15686275, b: 0.15686275, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:

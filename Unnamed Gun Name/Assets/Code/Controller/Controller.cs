@@ -50,8 +50,9 @@ public class Controller : MonoBehaviourPun {
         xRotationAxisAngle = 0;
         TurnCollidersOnOff(false);
         rigid = GetComponent<Rigidbody>();
+
         if (IsMineCheck()) {
-            single_CLocal = this;
+            Controller.single_CLocal = this;
             InvertCamMovement();
         } else {
             rigid.useGravity = false;
@@ -78,9 +79,12 @@ public class Controller : MonoBehaviourPun {
     }
 
     private void Start() {
-        if (photonView.IsMine && Spawnpoints.sp_Single && PhotonRoomCustomMatchMaking.roomSingle) {
-            if (Spawnpoints.sp_Single.spawnpoints.Length > 0) {
-                Spawnpoints.sp_Single.SetSpPositionAndRotation(transform, PhotonRoomCustomMatchMaking.roomSingle.myNumberInRoom - 1);
+        if (photonView.IsMine) {
+            CanvasComponents.single_CC.healthBar.Init(this);
+            if (Spawnpoints.sp_Single && PhotonRoomCustomMatchMaking.roomSingle) {
+                if (Spawnpoints.sp_Single.spawnpoints.Length > 0) {
+                    Spawnpoints.sp_Single.SetSpPositionAndRotation(transform, PhotonRoomCustomMatchMaking.roomSingle.myNumberInRoom - 1);
+                }
             }
         }
         Init();
@@ -150,7 +154,7 @@ public class Controller : MonoBehaviourPun {
     #endregion
 
     private void Update() {
-        if (IsMineAndAliveCheck()) {
+        if (IsMineAndAlive()) {
             if (Input.GetButtonDown("Interact")) {
                 RaycastHit hit;
                 if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, interactRange, ~TagsAndLayersManager.single_TLM.localPlayerLayerInfo.layerMask)) {
@@ -298,7 +302,7 @@ public class Controller : MonoBehaviourPun {
         xRotationAxisAngle = 0;
     }
 
-    public bool IsMineAndAliveCheck() {
+    public bool IsMineAndAlive() {
         bool isMine = false;
         if (IsMineCheck() && !health.isDead) {
             isMine = true;
@@ -315,7 +319,7 @@ public class Controller : MonoBehaviourPun {
     }
 
     private void OnCollisionEnter(Collision collision) {
-        if (IsMineAndAliveCheck() && !isGrounded) {
+        if (IsMineAndAlive() && !isGrounded) {
             animator.ResetTrigger("Jump");
             animator.SetBool("JumpLand", true);
             isGrounded = true;

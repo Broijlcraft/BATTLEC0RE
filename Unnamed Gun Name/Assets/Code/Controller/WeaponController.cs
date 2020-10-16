@@ -38,7 +38,7 @@ public class WeaponController : MonoBehaviourPun {
 
     void WeaponSwitchCheck() {
         float scroll = Input.GetAxis("Mouse ScrollWheel");
-        if(!isAttaching && !isDetaching && scroll != 0 && primaryWeaponsHolder.weaponAttached && controller.IsMineAndAliveCheck()) {
+        if(!isAttaching && !isDetaching && scroll != 0 && primaryWeaponsHolder.weaponAttached && controller.IsMineAndAlive()) {
             if (!isChangingBehaviour) {
                 Weapon weapon = primaryWeaponsHolder.weaponAttached;
                 int behaviourIndex = weapon.GetBehaviourIndex(weapon);
@@ -66,7 +66,7 @@ public class WeaponController : MonoBehaviourPun {
     }
 
     void PrimaryAndPowerInputCheckAndUse(int mouseInput, WeaponsHolder holder) {
-        if (!isAttaching && !isDetaching && controller.IsMineAndAliveCheck()) {
+        if (!isAttaching && !isDetaching && controller.IsMineAndAlive()) {
             Weapon weapon = holder.weaponAttached;
             if (weapon && (weapon.weaponType != WeaponType.Primary || (weapon.weaponType == WeaponType.Primary && !isChangingBehaviour))) {
                 bool buttonPressed = false;

@@ -11,6 +11,7 @@ public class CanvasComponents : MonoBehaviour {
     public GameObject respawnUiHolder;
     public Animator respawnAnim, chargeBar;
     public HealthBarScript healthBar;
+    public ScoreScript scoreScript;
 
      [Header("Settings")]
     public Button quitReturnButton;

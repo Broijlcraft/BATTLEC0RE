@@ -14,8 +14,8 @@ public class HealthBarScript : MonoBehaviour {
     public List<HealthPartScript> healthParts = new List<HealthPartScript>();
     Controller cl;
 
-    void Start() {
-        cl = Controller.single_CLocal;
+    public void Init(Controller control) {
+        cl = control;
         if (!partsHolder) {
             partsHolder = transform;
         }
@@ -30,9 +30,10 @@ public class HealthBarScript : MonoBehaviour {
     }
 
     public IEnumerator ShowPartsOverTime() {
-        bool dev = Controller.single_CLocal.playerView.devView;
-        if (!dev) {
-            cl.canMove = false;
+        if (cl) { 
+            if (!cl.playerView.devView) {
+                cl.canMove = false;
+            }
         }
 
         for (int i = 0; i < healthParts.Count; i++) {
@@ -45,8 +46,10 @@ public class HealthBarScript : MonoBehaviour {
             hp.outline.effectColor = hp.outlineColor;
         }
 
-        if (!dev) {
-            cl.canMove = true;
+        if (cl) {
+            if (!cl.playerView.devView) {
+                cl.canMove = true;
+            }
         }
     }
 
