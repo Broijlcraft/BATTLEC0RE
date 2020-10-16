@@ -42,7 +42,9 @@ GameObject:
   - component: {fileID: 4043650086475166125}
   - component: {fileID: 5551817921317382994}
   - component: {fileID: 4926153979790087677}
-  - component: {fileID: 38715809970658956}
+  - component: {fileID: 6948850794140558971}
+  - component: {fileID: 7999769666974633582}
+  - component: {fileID: 4482520433353582230}
   m_Layer: 0
   m_Name: RefineryBridgeMesh.004
   m_TagString: Untagged
@@ -113,8 +115,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &38715809970658956
-MeshCollider:
+--- !u!65 &6948850794140558971
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -123,7 +125,34 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 1485726533421437005, guid: f1a7e18935808ca42af0e91d8a241e51, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 13.346817, y: 7.712315, z: 3.4202938}
+  m_Center: {x: -0.008804083, y: 3.8561575, z: 12.909013}
+--- !u!136 &7999769666974633582
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3842411577831357006}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1.8
+  m_Height: 7.712315
+  m_Direction: 1
+  m_Center: {x: 6.66, y: 3.8561575, z: 12.909013}
+--- !u!136 &4482520433353582230
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3842411577831357006}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1.8
+  m_Height: 7.712315
+  m_Direction: 1
+  m_Center: {x: -6.59, y: 3.8561575, z: 12.909013}
