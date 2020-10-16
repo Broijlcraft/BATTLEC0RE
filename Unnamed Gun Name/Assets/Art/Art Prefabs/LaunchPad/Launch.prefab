@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 7784557840387184737}
   - component: {fileID: 7974196331151148702}
   - component: {fileID: 637478531204591835}
-  - component: {fileID: 1120505057668696377}
   m_Layer: 0
   m_Name: LaunchPadMesh.005
   m_TagString: Untagged
@@ -80,20 +79,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &1120505057668696377
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 89714527965838704}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 6871817933712934645, guid: 42fa59aa7c59a7a4bb59982703d9aa65, type: 3}
 --- !u!1 &1405336446260940082
 GameObject:
   m_ObjectHideFlags: 0
@@ -105,7 +90,6 @@ GameObject:
   - component: {fileID: 2568556735820774813}
   - component: {fileID: 1109791715634147215}
   - component: {fileID: 6385636144173127084}
-  - component: {fileID: 4948739951808003817}
   m_Layer: 0
   m_Name: LaunchPadMesh.001
   m_TagString: Untagged
@@ -174,20 +158,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &4948739951808003817
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1405336446260940082}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 2192984755158978246, guid: 42fa59aa7c59a7a4bb59982703d9aa65, type: 3}
 --- !u!1 &2840581419730327667
 GameObject:
   m_ObjectHideFlags: 0
@@ -199,7 +169,6 @@ GameObject:
   - component: {fileID: 2886559067477686882}
   - component: {fileID: 1734339810124411289}
   - component: {fileID: 5703154756877777775}
-  - component: {fileID: 7214699976302035707}
   m_Layer: 0
   m_Name: LaunchPadMesh.003
   m_TagString: Untagged
@@ -268,20 +237,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &7214699976302035707
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2840581419730327667}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 7891892762565897550, guid: 42fa59aa7c59a7a4bb59982703d9aa65, type: 3}
 --- !u!1 &4253978759205392217
 GameObject:
   m_ObjectHideFlags: 0
@@ -293,7 +248,6 @@ GameObject:
   - component: {fileID: 6736919524738603851}
   - component: {fileID: 2265163692082066894}
   - component: {fileID: 1934182736971350944}
-  - component: {fileID: 6669528649560635310}
   m_Layer: 0
   m_Name: LaunchPadMesh.006
   m_TagString: Untagged
@@ -362,20 +316,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &6669528649560635310
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4253978759205392217}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 6930175298449667735, guid: 42fa59aa7c59a7a4bb59982703d9aa65, type: 3}
 --- !u!1 &4736644190834126788
 GameObject:
   m_ObjectHideFlags: 0
@@ -468,7 +408,6 @@ GameObject:
   - component: {fileID: 627127994473513815}
   - component: {fileID: 344982048630504985}
   - component: {fileID: 2647648920636133956}
-  - component: {fileID: 3572628089054775195}
   m_Layer: 0
   m_Name: LaunchPadTowers.001
   m_TagString: Untagged
@@ -538,20 +477,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &3572628089054775195
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4752735841263259170}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 5618811948337253588, guid: 42fa59aa7c59a7a4bb59982703d9aa65, type: 3}
 --- !u!1 &4890326654660734810
 GameObject:
   m_ObjectHideFlags: 0
@@ -563,7 +488,6 @@ GameObject:
   - component: {fileID: 7345898933901875394}
   - component: {fileID: 684907508179885829}
   - component: {fileID: 7887330380045444451}
-  - component: {fileID: 5156824000705041808}
   m_Layer: 0
   m_Name: LaunchPadMesh.002
   m_TagString: Untagged
@@ -632,20 +556,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &5156824000705041808
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4890326654660734810}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -679242387349370037, guid: 42fa59aa7c59a7a4bb59982703d9aa65, type: 3}
 --- !u!1 &5255933628661876444
 GameObject:
   m_ObjectHideFlags: 0
@@ -657,7 +567,6 @@ GameObject:
   - component: {fileID: 3816480279779234026}
   - component: {fileID: 9031593523539006617}
   - component: {fileID: 8138234494755070902}
-  - component: {fileID: 3022920413662230478}
   m_Layer: 0
   m_Name: LaunchPadTowers.002
   m_TagString: Untagged
@@ -727,20 +636,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &3022920413662230478
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5255933628661876444}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 2911285993191016114, guid: 42fa59aa7c59a7a4bb59982703d9aa65, type: 3}
 --- !u!1 &5878741791879425841
 GameObject:
   m_ObjectHideFlags: 0
