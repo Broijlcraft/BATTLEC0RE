@@ -241,7 +241,7 @@ GameObject:
   - component: {fileID: 368377035260526863}
   - component: {fileID: 7042302368993741207}
   - component: {fileID: 6888100400470053806}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cam_Main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -345,7 +345,7 @@ MonoBehaviour:
   volumeTrigger: {fileID: 368377035260526848}
   volumeLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   stopNaNPropagation: 1
   finalBlitToCameraTarget: 0
   antialiasingMode: 0
