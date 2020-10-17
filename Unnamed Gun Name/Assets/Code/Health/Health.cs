@@ -40,13 +40,20 @@ public class Health : MonoBehaviourPun {
     }
 
     public void DoDamage(int value, string killer) {
-        if (!isDead) {
-            photonView.RPC("RPC_ChangeHealth", RpcTarget.All, value, 0, 1, killer);
+        if (!isDead && !respawning) {
+            int killerTeam = TeamManager.single_TM.GetTeamIndex(killer);
+            int myTeam = TeamManager.single_TM.GetTeamIndex(photonView.Owner.NickName);
+            if(killerTeam != myTeam) {
+                if (killerTeam < ScoreScript.single_ss.scoreListings.Length) {
+                    photonView.RPC("RPC_ChangeHealth", RpcTarget.All, value, 0, 1, killer, killerTeam);
+                }
+                print($"Killer: {killer}, Team: {killerTeam} | Victim: {photonView.Owner.NickName}, Team: {myTeam}");
+            }
         }
     }
 
     [PunRPC]
-    void RPC_ChangeHealth(int value, int add, int instant, string killer) {
+    void RPC_ChangeHealth(int value, int add, int instant, string killer, int killerTeam) {
         if (!Tools.IntToBool(add)) {
             value *= -1;
         }
@@ -54,11 +61,16 @@ public class Health : MonoBehaviourPun {
         if (Manager.single_M.IsDev() && value < 0) { return; }
         
         currentHealth += value;
-        
-        if (currentHealth <= 0) {
+
+        if (currentHealth < 1) {
             isDead = true;
             currentHealth = 0;
             controller.animator.enabled = false;
+
+            if (killerTeam > -1) {
+                ScoreScript.single_ss.scoreListings[killerTeam].IncreaseScore(1);
+            }
+
             if (photonView.IsMine) {
                 string nickname = photonView.Owner.NickName;
                 nickname = Tools.RemoveIdFromNickname(nickname);
@@ -76,7 +88,9 @@ public class Health : MonoBehaviourPun {
         }
 
         bool _Instant = Tools.IntToBool(instant);
-        UpdateUiHeath(_Instant);
+        if (_Instant) {
+            UpdateUiHeath(_Instant);
+        }
     }
 
     IEnumerator Countdown() {
@@ -96,7 +110,6 @@ public class Health : MonoBehaviourPun {
     void RPC_Respawn() {
         UpdateUiHeath(false);
         isDead = false;
-        respawning = false;
         controller.animator.enabled = true;
         if (photonView.IsMine) {
             cc.respawnUiHolder.SetActive(false);
@@ -104,7 +117,7 @@ public class Health : MonoBehaviourPun {
                 controller.ResetAtStartPosition();
             }
         }
-        photonView.RPC("RPC_ChangeHealth", RpcTarget.All, maxHealth, 1, 0, "");
+        photonView.RPC("RPC_ChangeHealth", RpcTarget.All, maxHealth, 1, 0, "", -1);
     }
 
     [PunRPC]
@@ -120,7 +133,7 @@ public class Health : MonoBehaviourPun {
             if (instant) {
                 healthBar.ChangeHealth(currentHealth, maxHealth);
             } else {
-                StartCoroutine(healthBar.ShowPartsOverTime());
+                StartCoroutine(healthBar.ShowPartsOverTime(this));
             }
         }
     }

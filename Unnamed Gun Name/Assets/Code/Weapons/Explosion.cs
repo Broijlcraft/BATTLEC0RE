@@ -24,7 +24,7 @@ public class Explosion {
                 controller = colls[i].gameObject.GetComponent<Controller>();
             }
             if (controller) {
-                controller.health.DoDamage(damage, Tools.RemoveIdFromNickname(ObjectPool.single_PT.playerPools[playerID].view.Owner.NickName));
+                controller.health.DoDamage(damage, ObjectPool.single_PT.playerPools[playerID].view.Owner.NickName);
                 //controller.rigid.AddExplosionForce(explosionForce, originPosition, explosionRange);
             }
         }

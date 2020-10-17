@@ -51,7 +51,7 @@ public class FireArms : Weapon {
         if (Physics.Raycast(attackOrigin.position, attackRot, out hit, wBehaviour.range, ~TagsAndLayersManager.single_TLM.localPlayerLayerInfo.layerMask)) {
             Health health = hit.transform.GetComponent<Health>();
             if (health) {
-                health.DoDamage(wBehaviour.damagePerAttack, Tools.RemoveIdFromNickname(interactingController.photonView.Owner.NickName));
+                health.DoDamage(wBehaviour.damagePerAttack, interactingController.photonView.Owner.NickName);
             } else {
                 Vector3 pos = hit.point;
                 Quaternion rot = Quaternion.FromToRotation(Vector3.up, hit.normal);

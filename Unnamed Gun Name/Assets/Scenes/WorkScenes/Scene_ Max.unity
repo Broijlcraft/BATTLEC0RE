@@ -2226,7 +2226,7 @@ PrefabInstance:
     - target: {fileID: 368377036029992391, guid: fae503e365a52cc44855e6cc77f49f1a,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2210865005046264539, guid: fae503e365a52cc44855e6cc77f49f1a,
         type: 3}
@@ -2861,7 +2861,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &262921073
 Transform:
   m_ObjectHideFlags: 0
@@ -3081,6 +3081,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Managers
+      objectReference: {fileID: 0}
+    - target: {fileID: 5822782393773722953, guid: c5ff290bce7e59e41b7133cd59aaf1df,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5822782393773722956, guid: c5ff290bce7e59e41b7133cd59aaf1df,
         type: 3}
@@ -17133,6 +17138,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3252301043802794885, guid: bc245b06311918d48804c641f6413e55,
+        type: 3}
+      propertyPath: maxScore
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 3335987654011989349, guid: bc245b06311918d48804c641f6413e55,
         type: 3}

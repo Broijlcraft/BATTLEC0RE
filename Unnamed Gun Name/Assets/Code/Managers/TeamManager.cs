@@ -7,17 +7,21 @@ public class TeamManager : MonoBehaviour {
     public List<Team> teams = new List<Team>();
 
     private void Awake() {
-        single_TM = this;
+        if (!single_TM) {
+            single_TM = this;
+        }
     }
 
     public int GetTeamIndex(string nickname) {
         int index = -1;
         for (int i = 0; i < teams.Count; i++) {
             Team team = teams[i];
-            for (int iB = 0; iB < team.playerNames.Count; iB++) {
-                if (team.playerNames[iB].Contains(nickname)) {
-                    index = i;
-                    break;
+            if(index == -1) {
+                for (int iB = 0; iB < team.playerNames.Count; iB++) {
+                    if (team.playerNames[iB].Contains(nickname)) {
+                        index = i;
+                        break;
+                    }
                 }
             }
         }

@@ -70,11 +70,11 @@ MonoBehaviour:
       animator: {fileID: 2326550800562560887}
       attackEffect:
         attackParticle: {fileID: 0}
-    attackType: 0
+    attackType: 1
     impactEffect: {fileID: 0}
     damagePerAttack: 76
     range: 100
-    attacksPerSecond: 0.1
+    attacksPerSecond: 9
     bulletSpread: {x: 0, y: 0}
     currentAo: 0
     canNotAttack: 0

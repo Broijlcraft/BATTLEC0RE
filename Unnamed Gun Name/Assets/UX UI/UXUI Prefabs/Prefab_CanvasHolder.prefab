@@ -528,6 +528,11 @@ MonoBehaviour:
   right:
     fillImage: {fileID: 6175861218306064917}
     scoreText: {fileID: 5672696869069841301}
+  scoreListings:
+  - fillImage: {fileID: 7099713741221210072}
+    scoreText: {fileID: 5307886917818683883}
+  - fillImage: {fileID: 6175861218306064917}
+    scoreText: {fileID: 5672696869069841301}
 --- !u!1 &1320800302623120893
 GameObject:
   m_ObjectHideFlags: 0

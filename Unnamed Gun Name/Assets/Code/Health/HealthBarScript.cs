@@ -26,10 +26,11 @@ public class HealthBarScript : MonoBehaviour {
             hps.img.gameObject.SetActive(false);
             healthParts.Add(hps);
         }
-        StartCoroutine(ShowPartsOverTime());
+        StartCoroutine(ShowPartsOverTime(null));
     }
 
-    public IEnumerator ShowPartsOverTime() {
+    public IEnumerator ShowPartsOverTime(Health health) {
+        print("start");
         if (cl) { 
             if (!cl.playerView.devView) {
                 cl.canMove = false;
@@ -51,6 +52,10 @@ public class HealthBarScript : MonoBehaviour {
                 cl.canMove = true;
             }
         }
+        if (health) {
+            health.respawning = false;
+        }
+        print("Done");
     }
 
     public void ChangeHealth(int currentHealth, int maxHealth) {
