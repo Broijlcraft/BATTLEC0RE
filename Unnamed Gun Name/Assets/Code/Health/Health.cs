@@ -40,7 +40,7 @@ public class Health : MonoBehaviourPun {
     }
 
     public void DoDamage(int value, string killer) {
-        if (!isDead && !respawning) {
+        if (!isDead) {
             int killerTeam = TeamManager.single_TM.GetTeamIndex(killer);
             int myTeam = TeamManager.single_TM.GetTeamIndex(photonView.Owner.NickName);
             if(killerTeam != myTeam) {
