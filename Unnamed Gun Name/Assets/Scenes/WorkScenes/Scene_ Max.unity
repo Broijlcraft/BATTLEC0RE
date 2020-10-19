@@ -14179,7 +14179,7 @@ MonoBehaviour:
       type: 3}
     amountPerPlayer: 20
   playerPools: []
-  maxPlayers: 0
+  maxPlayers: 8
 --- !u!1 &1812925073
 GameObject:
   m_ObjectHideFlags: 0

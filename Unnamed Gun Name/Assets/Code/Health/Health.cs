@@ -67,11 +67,10 @@ public class Health : MonoBehaviourPun {
             currentHealth = 0;
             controller.animator.enabled = false;
 
-            if (killerTeam > -1) {
-                ScoreScript.single_ss.scoreListings[killerTeam].IncreaseScore(1);
-            }
-
             if (photonView.IsMine) {
+                if (killerTeam > -1) {
+                    ScoreScript.single_ss.scoreListings[killerTeam].IncreaseScore(1);
+                }
                 string nickname = photonView.Owner.NickName;
                 nickname = Tools.RemoveIdFromNickname(nickname);
                 photonView.RPC("RPC_KillFeed", RpcTarget.All, nickname, killer);
