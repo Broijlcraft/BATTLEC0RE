@@ -16964,6 +16964,11 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 957014110935259438, guid: bc245b06311918d48804c641f6413e55,
+        type: 3}
+      propertyPath: viewIdField
+      value: 14
+      objectReference: {fileID: 0}
     - target: {fileID: 1277910732069287029, guid: bc245b06311918d48804c641f6413e55,
         type: 3}
       propertyPath: m_Name
@@ -17138,11 +17143,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3252301043802794885, guid: bc245b06311918d48804c641f6413e55,
-        type: 3}
-      propertyPath: maxScore
-      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 3335987654011989349, guid: bc245b06311918d48804c641f6413e55,
         type: 3}
@@ -17378,6 +17378,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7188659043324537970, guid: bc245b06311918d48804c641f6413e55,
+        type: 3}
+      propertyPath: viewIdField
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 7999620257814498624, guid: bc245b06311918d48804c641f6413e55,
         type: 3}

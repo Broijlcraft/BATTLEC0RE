@@ -462,6 +462,7 @@ GameObject:
   - component: {fileID: 1277910732069287030}
   - component: {fileID: 7060001282430654405}
   - component: {fileID: 3252301043802794885}
+  - component: {fileID: 957014110935259438}
   m_Layer: 0
   m_Name: Prefab_CanvasHolder
   m_TagString: Untagged
@@ -522,17 +523,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43fae967cd26f0d4591b1c2ac1405093, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  left:
-    fillImage: {fileID: 7099713741221210072}
-    scoreText: {fileID: 5307886917818683883}
-  right:
-    fillImage: {fileID: 6175861218306064917}
-    scoreText: {fileID: 5672696869069841301}
+  maxScore: 25
   scoreListings:
   - fillImage: {fileID: 7099713741221210072}
     scoreText: {fileID: 5307886917818683883}
+    symbolBetweenScore: /
+    maxScore: 0
+    currentScore: 0
   - fillImage: {fileID: 6175861218306064917}
     scoreText: {fileID: 5672696869069841301}
+    symbolBetweenScore: /
+    maxScore: 0
+    currentScore: 0
+--- !u!114 &957014110935259438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1277910732069287029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 0
+  OwnershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 0}
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &1320800302623120893
 GameObject:
   m_ObjectHideFlags: 0
