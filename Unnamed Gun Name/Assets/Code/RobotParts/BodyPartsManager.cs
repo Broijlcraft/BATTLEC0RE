@@ -6,7 +6,7 @@ using UnityEngine;
 public class BodyPartsManager : MonoBehaviour {
     public List<CustomRobotPart> customRobotParts = new List<CustomRobotPart>();
 
-    [Space(30)]
+    [Space(15)]
     public Material normalMat;
     public Material normalMatEm;
     public Material heavyMat;

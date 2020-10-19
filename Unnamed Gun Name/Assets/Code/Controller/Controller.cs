@@ -168,11 +168,12 @@ public class Controller : MonoBehaviourPun {
                 if (Input.GetButtonDown("Jump")) {
                     rigid.velocity = new Vector3(0f, 5f, 0f);
                     animator.SetTrigger("Jump");
-                }
-
-                if (!Physics.Raycast(transform.position + moveSettings.jumpOffsetCheck, Vector3.down, moveSettings.distanceCheck, moveSettings.walkableLayers)) {
                     isGrounded = false;
                 }
+
+            }
+            if (!Physics.Raycast(transform.position + moveSettings.jumpOffsetCheck, Vector3.down, moveSettings.distanceCheck, moveSettings.walkableLayers)) {
+                isGrounded = false;
             }
         }
         horSpeed = Input.GetAxis("Horizontal");

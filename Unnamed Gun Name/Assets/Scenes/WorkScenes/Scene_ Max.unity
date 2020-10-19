@@ -2882,7 +2882,7 @@ PrefabInstance:
     - target: {fileID: 5822782393773722953, guid: c5ff290bce7e59e41b7133cd59aaf1df,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5822782393773722956, guid: c5ff290bce7e59e41b7133cd59aaf1df,
         type: 3}
@@ -9910,6 +9910,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 368377036029992388, guid: fae503e365a52cc44855e6cc77f49f1a,
+        type: 3}
+      propertyPath: devView
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 368377036029992390, guid: fae503e365a52cc44855e6cc77f49f1a,
         type: 3}
       propertyPath: viewIdField
@@ -9919,6 +9924,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Prefab_PlayableRobot
+      objectReference: {fileID: 0}
+    - target: {fileID: 368377036029992391, guid: fae503e365a52cc44855e6cc77f49f1a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2210865005046264539, guid: fae503e365a52cc44855e6cc77f49f1a,
         type: 3}
@@ -11215,74 +11225,92 @@ MonoBehaviour:
     bodypartType: 0
     meshes:
     - {fileID: 4865672745515092811, guid: 429efceb5faf3d043acc10686f387da4, type: 3}
+    - {fileID: 5839382774690592180, guid: 8a021691d207beb419a336ef9f9d3182, type: 3}
   - partName: UpperChest
     bodypartType: 1
     meshes:
     - {fileID: 7886269688112231381, guid: 429efceb5faf3d043acc10686f387da4, type: 3}
+    - {fileID: 2232292573215436060, guid: 8a021691d207beb419a336ef9f9d3182, type: 3}
   - partName: Chest
     bodypartType: 2
     meshes:
     - {fileID: 6954146572580109025, guid: 429efceb5faf3d043acc10686f387da4, type: 3}
+    - {fileID: 6718019399812565676, guid: 8a021691d207beb419a336ef9f9d3182, type: 3}
   - partName: Pelvis
     bodypartType: 3
     meshes:
     - {fileID: -1398212893125244025, guid: 429efceb5faf3d043acc10686f387da4, type: 3}
+    - {fileID: 8889128984618028021, guid: 8a021691d207beb419a336ef9f9d3182, type: 3}
   - partName: RightShoulder
     bodypartType: 4
     meshes:
     - {fileID: -2244739694878028796, guid: 429efceb5faf3d043acc10686f387da4, type: 3}
+    - {fileID: -3688263182710077621, guid: 8a021691d207beb419a336ef9f9d3182, type: 3}
   - partName: RightUpperArm
     bodypartType: 5
     meshes:
     - {fileID: -5566593607629077204, guid: 429efceb5faf3d043acc10686f387da4, type: 3}
+    - {fileID: 3901406241851931377, guid: 8a021691d207beb419a336ef9f9d3182, type: 3}
   - partName: RightLowerArm
     bodypartType: 6
     meshes:
     - {fileID: 6704313389526364877, guid: 429efceb5faf3d043acc10686f387da4, type: 3}
+    - {fileID: -3763381855530075021, guid: 8a021691d207beb419a336ef9f9d3182, type: 3}
   - partName: RightHip
     bodypartType: 8
     meshes:
     - {fileID: -4959845185641369521, guid: 429efceb5faf3d043acc10686f387da4, type: 3}
+    - {fileID: 8212139920668342980, guid: 8a021691d207beb419a336ef9f9d3182, type: 3}
   - partName: RightUpperLeg
     bodypartType: 9
     meshes:
     - {fileID: -2699391806375467164, guid: 429efceb5faf3d043acc10686f387da4, type: 3}
+    - {fileID: 6786258642325710975, guid: 8a021691d207beb419a336ef9f9d3182, type: 3}
   - partName: RightLowerLeg
     bodypartType: 10
     meshes:
     - {fileID: -8036468754958024020, guid: 429efceb5faf3d043acc10686f387da4, type: 3}
+    - {fileID: 2097067761012351, guid: 8a021691d207beb419a336ef9f9d3182, type: 3}
   - partName: RightFoot
     bodypartType: 11
     meshes:
     - {fileID: -8340837035332820711, guid: 429efceb5faf3d043acc10686f387da4, type: 3}
+    - {fileID: -4759218501215342049, guid: 8a021691d207beb419a336ef9f9d3182, type: 3}
   - partName: LeftShoulder
     bodypartType: 12
     meshes:
     - {fileID: 1403216765154356834, guid: 429efceb5faf3d043acc10686f387da4, type: 3}
+    - {fileID: -7308366832169516365, guid: 8a021691d207beb419a336ef9f9d3182, type: 3}
   - partName: LeftUpperArm
     bodypartType: 13
     meshes:
     - {fileID: 8319179735006939546, guid: 429efceb5faf3d043acc10686f387da4, type: 3}
+    - {fileID: -2698985819633060772, guid: 8a021691d207beb419a336ef9f9d3182, type: 3}
   - partName: LeftLowerArm
     bodypartType: 14
     meshes:
     - {fileID: -4031422342304324599, guid: 429efceb5faf3d043acc10686f387da4, type: 3}
+    - {fileID: 2954622584189263368, guid: 8a021691d207beb419a336ef9f9d3182, type: 3}
   - partName: LeftHip
     bodypartType: 16
     meshes:
     - {fileID: 8841427510208292188, guid: 429efceb5faf3d043acc10686f387da4, type: 3}
+    - {fileID: 4512101634689589595, guid: 8a021691d207beb419a336ef9f9d3182, type: 3}
   - partName: LeftUpperLeg
     bodypartType: 17
     meshes:
     - {fileID: 645210760689675030, guid: 429efceb5faf3d043acc10686f387da4, type: 3}
+    - {fileID: -8367906323164964271, guid: 8a021691d207beb419a336ef9f9d3182, type: 3}
   - partName: LeftLowerLeg
     bodypartType: 18
     meshes:
     - {fileID: -3369454049987323794, guid: 429efceb5faf3d043acc10686f387da4, type: 3}
+    - {fileID: -6824086378104023368, guid: 8a021691d207beb419a336ef9f9d3182, type: 3}
   - partName: LeftFoot
     bodypartType: 19
     meshes:
     - {fileID: 1189303768894290867, guid: 429efceb5faf3d043acc10686f387da4, type: 3}
+    - {fileID: -4480054510199761381, guid: 8a021691d207beb419a336ef9f9d3182, type: 3}
   normalMat: {fileID: 2100000, guid: 454acf8335091ce47a86da403464da67, type: 2}
   normalMatEm: {fileID: 2100000, guid: eaf004145e609944494159acfa299fe8, type: 2}
   heavyMat: {fileID: 2100000, guid: 8211b17da16da454ca8d48b81849b6ba, type: 2}
@@ -15053,11 +15081,11 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1866569733}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 9d006abbda4929f43b9cf9ef340fa5a0, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -5053925668127403250, guid: fe1e5051b3354884594dbbe935da453c, type: 3}
 --- !u!64 &1866569738
@@ -15067,11 +15095,11 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1866569734}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 9d006abbda4929f43b9cf9ef340fa5a0, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -8678823145569952518, guid: fe1e5051b3354884594dbbe935da453c, type: 3}
 --- !u!64 &1866569739
@@ -15081,11 +15109,11 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1866569735}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 9d006abbda4929f43b9cf9ef340fa5a0, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -1550514412580984892, guid: fe1e5051b3354884594dbbe935da453c, type: 3}
 --- !u!64 &1866569740
@@ -15095,11 +15123,11 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1866569736}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 9d006abbda4929f43b9cf9ef340fa5a0, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4493585093827132993, guid: fe1e5051b3354884594dbbe935da453c, type: 3}
 --- !u!1 &1870839831
