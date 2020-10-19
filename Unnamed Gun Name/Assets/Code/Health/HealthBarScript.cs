@@ -30,7 +30,6 @@ public class HealthBarScript : MonoBehaviour {
     }
 
     public IEnumerator ShowPartsOverTime(Health health) {
-        print("start");
         if (cl) { 
             if (!cl.playerView.devView) {
                 cl.canMove = false;
@@ -54,9 +53,7 @@ public class HealthBarScript : MonoBehaviour {
         }
         if (health) {
             health.StopRespawning();
-            //health.respawning = false;
         }
-        print("Done");
     }
 
     public void ChangeHealth(int currentHealth, int maxHealth) {

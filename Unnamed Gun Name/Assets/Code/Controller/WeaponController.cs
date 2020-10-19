@@ -90,10 +90,10 @@ public class WeaponController : MonoBehaviourPun {
         }
     }
 
-    public void AttachDetachWeapon(Weapon weapon, bool useAnim, bool allowDetach) {
+    public void AttachDetachWeapon(Weapon weapon, bool useAnimDelay, bool allowDetach) {
         if (!isAttaching && !isDetaching) {
             WeaponsHolder holder = GetHolder(weapon.weaponType);
-            StartCoroutine(CheckForAndSetAttached(holder, weapon, useAnim, allowDetach));
+            StartCoroutine(CheckForAndSetAttached(holder, weapon, useAnimDelay, allowDetach));
         }
     }
 
@@ -110,32 +110,32 @@ public class WeaponController : MonoBehaviourPun {
         return holder;
     }
 
-    IEnumerator CheckForAndSetAttached(WeaponsHolder holder, Weapon weapon, bool useAnim, bool allowDetach) { 
+    IEnumerator CheckForAndSetAttached(WeaponsHolder holder, Weapon weapon, bool useAnimDelay, bool allowDetach) { 
         if (!isAttaching && !isDetaching) {
             float extraAttachWaitTime = 0f;
             if (holder.weaponAttached && allowDetach) {
                 extraAttachWaitTime = holder.timeToDetach;
                 animationSpeed = 1 / holder.timeToDetach;
-                StartCoroutine(Detach(holder, useAnim));
+                StartCoroutine(Detach(holder, useAnimDelay));
             }
             if (controller.IsMineCheck()) {
                 Tools.SetLocalOrGlobalLayers(weapon.meshObjects.ToArray(), false);
             }
-            if (useAnim) {
+            if (useAnimDelay) {
                 yield return new WaitForSeconds(extraAttachWaitTime);
             }
             animationSpeed = 1 / holder.timeToAttach;
-            StartCoroutine(Attach(holder, weapon, useAnim));
+            StartCoroutine(Attach(holder, weapon, useAnimDelay));
         }
     }
 
-    IEnumerator Attach(WeaponsHolder holder, Weapon weapon, bool useAnim) {
+    IEnumerator Attach(WeaponsHolder holder, Weapon weapon, bool useAnimDelay) {
         if (weapon) {
             isAttaching = true;
             weapon.Attach(holder.weaponsHolder);
-            if (useAnim) {
-                holder.animator.speed = animationSpeed;
-                holder.animator.SetTrigger("ScrewOn");
+            holder.animator.speed = animationSpeed;
+            holder.animator.SetTrigger("ScrewOn");
+            if (useAnimDelay) {
                 yield return new WaitForSeconds(holder.timeToAttach);
             }
         }
