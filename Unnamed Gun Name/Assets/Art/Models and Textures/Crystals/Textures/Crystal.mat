@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Crystal
-  m_Shader: {fileID: 14002, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 4800000, guid: 7271601fc52e3da4f8cd8c4df6d089e3, type: 3}
   m_ShaderKeywords: EFFECT_BUMP EFFECT_HUE_VARIATION EFFECT_SUBSURFACE _EMISSION
     _NORMALMAP _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A _WINDQUALITY_NONE
   m_LightmapFlags: 1
@@ -54,6 +54,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 2800000, guid: 0580ca4e4621f2f449a76d128e402449, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:

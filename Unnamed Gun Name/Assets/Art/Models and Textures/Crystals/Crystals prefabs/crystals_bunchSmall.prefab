@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6800409979850362229}
   - component: {fileID: 283659018341842778}
   m_Layer: 0
-  m_Name: crystals_bunch
+  m_Name: crystals_bunchSmall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
