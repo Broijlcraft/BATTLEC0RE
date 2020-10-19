@@ -185,101 +185,129 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b65ac29d674d1ae4dad121a368ef69bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  robotIcons:
+  - {fileID: 21300000, guid: ef0418a315ffb6a479305f8f01f511ec, type: 3}
+  - {fileID: 21300000, guid: 92ca19fc72a612548bb7aa10592cb01f, type: 3}
+  robotMats:
+  - mat: {fileID: 2100000, guid: 454acf8335091ce47a86da403464da67, type: 2}
+    matEm: {fileID: 2100000, guid: eaf004145e609944494159acfa299fe8, type: 2}
+  - mat: {fileID: 2100000, guid: 8211b17da16da454ca8d48b81849b6ba, type: 2}
+    matEm: {fileID: 2100000, guid: 6bbe6ac393be8214e8d8948c15cd8ad7, type: 2}
   customRobotParts:
   - partName: Head
     bodypartType: 0
+    matsPerMesh: 0200000002000000
     meshes:
     - {fileID: 4865672745515092811, guid: 429efceb5faf3d043acc10686f387da4, type: 3}
     - {fileID: 5839382774690592180, guid: 8a021691d207beb419a336ef9f9d3182, type: 3}
   - partName: UpperChest
     bodypartType: 1
+    matsPerMesh: 0200000002000000
     meshes:
     - {fileID: 7886269688112231381, guid: 429efceb5faf3d043acc10686f387da4, type: 3}
     - {fileID: 2232292573215436060, guid: 8a021691d207beb419a336ef9f9d3182, type: 3}
   - partName: Chest
     bodypartType: 2
+    matsPerMesh: 0200000002000000
     meshes:
     - {fileID: 6954146572580109025, guid: 429efceb5faf3d043acc10686f387da4, type: 3}
     - {fileID: 6718019399812565676, guid: 8a021691d207beb419a336ef9f9d3182, type: 3}
   - partName: Pelvis
     bodypartType: 3
+    matsPerMesh: 0200000002000000
     meshes:
     - {fileID: -1398212893125244025, guid: 429efceb5faf3d043acc10686f387da4, type: 3}
     - {fileID: 8889128984618028021, guid: 8a021691d207beb419a336ef9f9d3182, type: 3}
   - partName: RightShoulder
     bodypartType: 4
+    matsPerMesh: 0200000002000000
     meshes:
     - {fileID: -2244739694878028796, guid: 429efceb5faf3d043acc10686f387da4, type: 3}
     - {fileID: -3688263182710077621, guid: 8a021691d207beb419a336ef9f9d3182, type: 3}
   - partName: RightUpperArm
     bodypartType: 5
+    matsPerMesh: 0200000002000000
     meshes:
     - {fileID: -5566593607629077204, guid: 429efceb5faf3d043acc10686f387da4, type: 3}
     - {fileID: 3901406241851931377, guid: 8a021691d207beb419a336ef9f9d3182, type: 3}
   - partName: RightLowerArm
     bodypartType: 6
+    matsPerMesh: 0200000002000000
     meshes:
     - {fileID: 6704313389526364877, guid: 429efceb5faf3d043acc10686f387da4, type: 3}
     - {fileID: -3763381855530075021, guid: 8a021691d207beb419a336ef9f9d3182, type: 3}
   - partName: RightHip
     bodypartType: 8
+    matsPerMesh: 0200000002000000
     meshes:
     - {fileID: -4959845185641369521, guid: 429efceb5faf3d043acc10686f387da4, type: 3}
     - {fileID: 8212139920668342980, guid: 8a021691d207beb419a336ef9f9d3182, type: 3}
   - partName: RightUpperLeg
     bodypartType: 9
+    matsPerMesh: 0100000002000000
     meshes:
     - {fileID: -2699391806375467164, guid: 429efceb5faf3d043acc10686f387da4, type: 3}
     - {fileID: 6786258642325710975, guid: 8a021691d207beb419a336ef9f9d3182, type: 3}
   - partName: RightLowerLeg
     bodypartType: 10
+    matsPerMesh: 0200000002000000
     meshes:
     - {fileID: -8036468754958024020, guid: 429efceb5faf3d043acc10686f387da4, type: 3}
     - {fileID: 2097067761012351, guid: 8a021691d207beb419a336ef9f9d3182, type: 3}
   - partName: RightFoot
     bodypartType: 11
+    matsPerMesh: 0200000002000000
     meshes:
     - {fileID: -8340837035332820711, guid: 429efceb5faf3d043acc10686f387da4, type: 3}
     - {fileID: -4759218501215342049, guid: 8a021691d207beb419a336ef9f9d3182, type: 3}
   - partName: LeftShoulder
     bodypartType: 12
+    matsPerMesh: 0200000002000000
     meshes:
     - {fileID: 1403216765154356834, guid: 429efceb5faf3d043acc10686f387da4, type: 3}
     - {fileID: -7308366832169516365, guid: 8a021691d207beb419a336ef9f9d3182, type: 3}
   - partName: LeftUpperArm
     bodypartType: 13
+    matsPerMesh: 0100000002000000
     meshes:
     - {fileID: 8319179735006939546, guid: 429efceb5faf3d043acc10686f387da4, type: 3}
     - {fileID: -2698985819633060772, guid: 8a021691d207beb419a336ef9f9d3182, type: 3}
   - partName: LeftLowerArm
     bodypartType: 14
+    matsPerMesh: 0200000002000000
     meshes:
     - {fileID: -4031422342304324599, guid: 429efceb5faf3d043acc10686f387da4, type: 3}
     - {fileID: 2954622584189263368, guid: 8a021691d207beb419a336ef9f9d3182, type: 3}
   - partName: LeftHip
     bodypartType: 16
+    matsPerMesh: 0200000002000000
     meshes:
     - {fileID: 8841427510208292188, guid: 429efceb5faf3d043acc10686f387da4, type: 3}
     - {fileID: 4512101634689589595, guid: 8a021691d207beb419a336ef9f9d3182, type: 3}
   - partName: LeftUpperLeg
     bodypartType: 17
+    matsPerMesh: 0200000002000000
     meshes:
     - {fileID: 645210760689675030, guid: 429efceb5faf3d043acc10686f387da4, type: 3}
     - {fileID: -8367906323164964271, guid: 8a021691d207beb419a336ef9f9d3182, type: 3}
   - partName: LeftLowerLeg
     bodypartType: 18
+    matsPerMesh: 0200000002000000
     meshes:
     - {fileID: -3369454049987323794, guid: 429efceb5faf3d043acc10686f387da4, type: 3}
     - {fileID: -6824086378104023368, guid: 8a021691d207beb419a336ef9f9d3182, type: 3}
   - partName: LeftFoot
     bodypartType: 19
+    matsPerMesh: 0200000002000000
     meshes:
     - {fileID: 1189303768894290867, guid: 429efceb5faf3d043acc10686f387da4, type: 3}
     - {fileID: -4480054510199761381, guid: 8a021691d207beb419a336ef9f9d3182, type: 3}
+  switchButton: {fileID: 0}
   normalMat: {fileID: 2100000, guid: 454acf8335091ce47a86da403464da67, type: 2}
   normalMatEm: {fileID: 2100000, guid: eaf004145e609944494159acfa299fe8, type: 2}
   heavyMat: {fileID: 2100000, guid: 8211b17da16da454ca8d48b81849b6ba, type: 2}
   heavyMatEm: {fileID: 2100000, guid: 6bbe6ac393be8214e8d8948c15cd8ad7, type: 2}
+  currentSelectedRobot: 0
 --- !u!114 &5822782393773722956
 MonoBehaviour:
   m_ObjectHideFlags: 0

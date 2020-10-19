@@ -19,6 +19,7 @@ public class PhotonRoomCustomMatchMaking : MonoBehaviourPunCallbacks, IInRoomCal
     [Header("HideInInspector")]
     public bool isLoaded;
     public int playersInGame, playersInRoom, myNumberInRoom;
+    public List<GameObject> playerModels = new List<GameObject>();
 
     private void Awake() {
         if (PhotonRoomCustomMatchMaking.roomSingle == null) {

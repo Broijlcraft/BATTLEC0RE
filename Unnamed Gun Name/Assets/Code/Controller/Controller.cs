@@ -30,7 +30,7 @@ public class Controller : MonoBehaviourPun {
     [HideInInspector] public Quaternion startRotation;
     [HideInInspector] public Transform nicknameTarget;
     [HideInInspector] public WeaponController weaponsController;
-
+    [HideInInspector] public BodyPartsList bpList;
 
     //replace with bodyparts when ready
     bool isGrounded;
@@ -50,6 +50,9 @@ public class Controller : MonoBehaviourPun {
         xRotationAxisAngle = 0;
         TurnCollidersOnOff(false);
         rigid = GetComponent<Rigidbody>();
+
+        bpList = GetComponent<BodyPartsList>();
+        bpList.Init();
 
         if (IsMineCheck()) {
             Controller.single_CLocal = this;
@@ -94,6 +97,7 @@ public class Controller : MonoBehaviourPun {
         startPosition = transform.position;
         startRotation = transform.rotation;
         if (IsMineCheck()) {
+            bpList.SetMeshes(BodyPartsManager.single_bpm.currentSelectedRobot);
             rigid.useGravity = true;
             if (PhotonRoomCustomMatchMaking.roomSingle) {
                 ObjectPool.single_PT.SetPoolOwners(PhotonRoomCustomMatchMaking.roomSingle.myNumberInRoom, photonView.ViewID);
