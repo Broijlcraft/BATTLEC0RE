@@ -69,7 +69,7 @@ public class Health : MonoBehaviourPun {
 
             if (photonView.IsMine) {
                 if (killerTeam > -1) {
-                    ScoreScript.single_ss.scoreListings[killerTeam].IncreaseScore(1);
+                    ScoreScript.single_ss.IncreaseScore(killerTeam, 1);
                 }
                 string nickname = photonView.Owner.NickName;
                 nickname = Tools.RemoveIdFromNickname(nickname);

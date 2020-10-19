@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using Photon.Pun;
 
-public class ScoreScript : MonoBehaviour {
+public class ScoreScript : MonoBehaviourPun {
     public static ScoreScript single_ss;
 
     public int maxScore;
@@ -24,6 +25,15 @@ public class ScoreScript : MonoBehaviour {
             sl.maxScore = maxScore;
             sl.IncreaseScore(0);
         }
+    }
+
+    public void IncreaseScore(int killerTeam, int scoreIncrease) {
+        photonView.RPC("RPC_IncreaseScore", RpcTarget.All, killerTeam, scoreIncrease);
+    }
+
+    [PunRPC]
+    void RPC_IncreaseScore(int killerTeam, int scoreIncrease) {
+        scoreListings[killerTeam].IncreaseScore(scoreIncrease);
     }
 }
 
