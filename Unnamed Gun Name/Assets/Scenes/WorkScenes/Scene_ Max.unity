@@ -14173,7 +14173,7 @@ MonoBehaviour:
     amountPerPlayer: 20
   - prefab: {fileID: 2190223931602768287, guid: 9a5663ba8b7f2144d90ad73114869b0f,
       type: 3}
-    amountPerPlayer: 20
+    amountPerPlayer: 50
   syncedPools:
   - prefab: {fileID: 2251921230218651953, guid: 8150f42dcd7282648b07acaa76e1879e,
       type: 3}
