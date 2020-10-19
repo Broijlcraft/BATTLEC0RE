@@ -52,6 +52,7 @@ MonoBehaviour:
   - RPC_SetPoolOwners
   - RPC_SwitchWeaponBehaviour
   - RPC_IncreaseScore
+  - RPC_StopRespawning
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

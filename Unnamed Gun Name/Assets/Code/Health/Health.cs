@@ -15,7 +15,7 @@ public class Health : MonoBehaviourPun {
     [HideInInspector] public Controller controller;
     CanvasComponents cc;
     HealthBarScript healthBar;
-    
+
     private void Awake() {
         currentHealth = maxHealth;
     }
@@ -31,7 +31,7 @@ public class Health : MonoBehaviourPun {
                 DoDamage(20, "Darth Max");
             } else {
                 currentHealth -= 1;
-                if(currentHealth <= 0) {
+                if (currentHealth <= 0) {
                     currentHealth = maxHealth;
                 }
                 healthBar.ChangeHealth(currentHealth, maxHealth);
@@ -40,10 +40,10 @@ public class Health : MonoBehaviourPun {
     }
 
     public void DoDamage(int value, string killer) {
-        if (!isDead) {
+        if (!isDead && !respawning) {
             int killerTeam = TeamManager.single_TM.GetTeamIndex(killer);
             int myTeam = TeamManager.single_TM.GetTeamIndex(photonView.Owner.NickName);
-            if(killerTeam != myTeam) {
+            if (killerTeam != myTeam) {
                 if (killerTeam < ScoreScript.single_ss.scoreListings.Length) {
                     photonView.RPC("RPC_ChangeHealth", RpcTarget.All, value, 0, 1, killer, killerTeam);
                 }
@@ -59,29 +59,29 @@ public class Health : MonoBehaviourPun {
         }
 
         if (Manager.single_M.IsDev() && value < 0) { return; }
-        
+
         currentHealth += value;
 
         if (currentHealth < 1) {
-            isDead = true;
-            currentHealth = 0;
-            controller.animator.enabled = false;
+            if (!respawning) {
+                respawning = true;
+                isDead = true;
+                currentHealth = 0;
+                controller.animator.enabled = false;
 
-            if (photonView.IsMine) {
-                if (killerTeam > -1) {
-                    ScoreScript.single_ss.IncreaseScore(killerTeam, 1);
-                }
-                string nickname = photonView.Owner.NickName;
-                nickname = Tools.RemoveIdFromNickname(nickname);
-                photonView.RPC("RPC_KillFeed", RpcTarget.All, nickname, killer);
-                if (!respawning) {
-                    respawning = true;
+                if (photonView.IsMine) {
+                    if (killerTeam > -1) {
+                        ScoreScript.single_ss.IncreaseScore(killerTeam, 1);
+                    }
+                    string nickname = photonView.Owner.NickName;
+                    nickname = Tools.RemoveIdFromNickname(nickname);
+                    photonView.RPC("RPC_KillFeed", RpcTarget.All, nickname, killer);
                     StartCoroutine(Countdown());
                 }
             }
         } else {
             isDead = false;
-            if(currentHealth > maxHealth) {
+            if (currentHealth > maxHealth) {
                 currentHealth = maxHealth;
             }
         }
@@ -105,6 +105,15 @@ public class Health : MonoBehaviourPun {
         photonView.RPC("RPC_Respawn", RpcTarget.All);
     }
 
+    public void StopRespawning() {
+        photonView.RPC("RPC_StopRespawning", RpcTarget.All);
+    }
+
+    [PunRPC]
+    void RPC_StopRespawning() {
+        respawning = false;
+    }
+
     [PunRPC]
     void RPC_Respawn() {
         UpdateUiHeath(false);
@@ -125,7 +134,7 @@ public class Health : MonoBehaviourPun {
         UiManager.single_UM.AddKillToFeed(killer, victim, null, null, true);
     }
 
-    void UpdateUiHeath(bool instant) { 
+    void UpdateUiHeath(bool instant) {
         float fill = currentHealth / maxHealth;
         fillHealthBar.fillAmount = fill;
         if (photonView.IsMine) {

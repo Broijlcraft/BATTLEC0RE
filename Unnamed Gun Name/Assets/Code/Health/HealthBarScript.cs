@@ -53,7 +53,8 @@ public class HealthBarScript : MonoBehaviour {
             }
         }
         if (health) {
-            health.respawning = false;
+            health.StopRespawning();
+            //health.respawning = false;
         }
         print("Done");
     }
