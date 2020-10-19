@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BodyPartsList : MonoBehaviour {
-
-    public RobotPartsSet currentRobotPartSet;
-
+    
     public List<BodyPartInRig> parts = new List<BodyPartInRig>();
-    public string jump, sprint, walk, idle;
+
     public int GetPartIndex(BodypartType bodypartType) {
         int i = -1;
         if(parts.Count > 0) {

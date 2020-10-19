@@ -84,7 +84,17 @@ ModelImporter:
   - first:
       74: 8848765555775769832
     second: metarig._Normal robot.002|Run
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_NormalRobotBody
+    second: {fileID: 2100000, guid: 454acf8335091ce47a86da403464da67, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_NormalRobotEM
+    second: {fileID: 2100000, guid: eaf004145e609944494159acfa299fe8, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
