@@ -268,7 +268,7 @@ MonoBehaviour:
     - {fileID: -7308366832169516365, guid: 8a021691d207beb419a336ef9f9d3182, type: 3}
   - partName: LeftUpperArm
     bodypartType: 13
-    matsPerMesh: 0100000002000000
+    matsPerMesh: 0200000002000000
     meshes:
     - {fileID: 8319179735006939546, guid: 429efceb5faf3d043acc10686f387da4, type: 3}
     - {fileID: -2698985819633060772, guid: 8a021691d207beb419a336ef9f9d3182, type: 3}
@@ -286,7 +286,7 @@ MonoBehaviour:
     - {fileID: 4512101634689589595, guid: 8a021691d207beb419a336ef9f9d3182, type: 3}
   - partName: LeftUpperLeg
     bodypartType: 17
-    matsPerMesh: 0200000002000000
+    matsPerMesh: 0100000002000000
     meshes:
     - {fileID: 645210760689675030, guid: 429efceb5faf3d043acc10686f387da4, type: 3}
     - {fileID: -8367906323164964271, guid: 8a021691d207beb419a336ef9f9d3182, type: 3}
