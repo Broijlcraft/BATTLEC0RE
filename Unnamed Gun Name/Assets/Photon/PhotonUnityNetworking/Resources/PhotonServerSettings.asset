@@ -53,6 +53,7 @@ MonoBehaviour:
   - RPC_SwitchWeaponBehaviour
   - RPC_IncreaseScore
   - RPC_StopRespawning
+  - RPC_SetMeshes
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

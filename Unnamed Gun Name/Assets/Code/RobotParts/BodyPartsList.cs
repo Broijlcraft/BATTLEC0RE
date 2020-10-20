@@ -13,6 +13,11 @@ public class BodyPartsList : MonoBehaviourPun {
     }
 
     public void SetMeshes(int index) {
+        photonView.RPC(nameof(RPC_SetMeshes), RpcTarget.All, index);
+    }
+
+    [PunRPC]
+    void RPC_SetMeshes(int index) {
         for (int i = 0; i < parts.Count; i++) {
             BodyPartInRig partInRig = parts[i];
             for (int iB = 0; iB < bpm.customRobotParts.Count; iB++) {
