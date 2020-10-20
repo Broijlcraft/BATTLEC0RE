@@ -599,9 +599,9 @@ MonoBehaviour:
   animator: {fileID: 368377035083181458}
   interactRange: 5
   moveSettings:
-    walkingSpeed: 5
+    walkingSpeed: 4
     walkAccelerate: 30
-    sprintSpeed: 10
+    sprintSpeed: 8
     sprintAccelerate: 30
     jumpVelocity: 5
     distanceCheck: 1.22446
