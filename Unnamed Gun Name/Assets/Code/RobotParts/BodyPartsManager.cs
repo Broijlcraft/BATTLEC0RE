@@ -21,7 +21,9 @@ public class BodyPartsManager : MonoBehaviour {
     public int currentSelectedRobot;
 
     private void Awake() {
-        single_bpm = this;
+        if (!single_bpm) {
+            single_bpm = this;
+        }
     }
 
     private void Start() {
