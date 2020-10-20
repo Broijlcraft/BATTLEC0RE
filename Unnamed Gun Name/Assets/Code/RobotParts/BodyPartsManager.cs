@@ -12,13 +12,7 @@ public class BodyPartsManager : MonoBehaviour {
 
     public Button switchButton;
 
-    [Space(15)]
-    public Material normalMat;
-    public Material normalMatEm;
-    public Material heavyMat;
-    public Material heavyMatEm;
-
-    public int currentSelectedRobot;
+    [HideInInspector] public int currentSelectedRobot;
 
     private void Awake() {
         if (!single_bpm) {

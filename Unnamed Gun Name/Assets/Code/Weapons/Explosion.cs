@@ -39,6 +39,8 @@ public class Explosion {
     }
 
     void PlayParticles(int playerID) {
-        ObjectPool.single_PT.SpawnFromPool(playerID, explosionPrefab.name, originPosition, originRotation, SyncType.UnSynced);
+        if (explosionPrefab) {
+            ObjectPool.single_PT.SpawnFromPool(playerID, explosionPrefab.name, originPosition, originRotation, SyncType.UnSynced);
+        }
     }
 }
