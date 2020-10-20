@@ -39,8 +39,10 @@ public class BodyPartsManager : MonoBehaviour {
         //    }
         //    customRobotParts.Add(part);
         //}
-        switchButton.image.sprite = robotIcons[0];
-        switchButton.onClick.AddListener(ChangeSelected);
+        if (switchButton) {
+            switchButton.image.sprite = robotIcons[0];
+            switchButton.onClick.AddListener(ChangeSelected);
+        }
     }
 
     public void ChangeSelected() {
