@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   model: {fileID: 7568584914594172677}
-  speed: 2
+  speed: 4
   rotationSpeed: 2
   maxDistance: 0.1
   targetPoint: {fileID: 0}
@@ -66,6 +66,11 @@ PrefabInstance:
     - target: {fileID: 2398319162620912206, guid: 45f135dd4b5d4794e9a6fe873ab8b512,
         type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2398319162620912206, guid: 45f135dd4b5d4794e9a6fe873ab8b512,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3027362600225110260, guid: 45f135dd4b5d4794e9a6fe873ab8b512,
