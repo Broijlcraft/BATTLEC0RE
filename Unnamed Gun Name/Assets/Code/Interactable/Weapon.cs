@@ -100,6 +100,7 @@ public class AttackEffect {
 public enum AttackType {
     Automatic,
     SemiAutomatic,
+    Charge,
     Melee
 }
 

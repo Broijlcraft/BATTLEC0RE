@@ -50,7 +50,7 @@ ParticleSystem:
   simulationSpeed: 30
   stopAction: 0
   cullingMode: 0
-  ringBufferMode: 2
+  ringBufferMode: 1
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 1
   prewarm: 0
@@ -4884,7 +4884,7 @@ ParticleSystem:
   simulationSpeed: 30
   stopAction: 0
   cullingMode: 0
-  ringBufferMode: 2
+  ringBufferMode: 1
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 1
   prewarm: 0

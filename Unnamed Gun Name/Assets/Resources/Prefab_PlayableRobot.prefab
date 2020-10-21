@@ -2429,6 +2429,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prefab_Railgun
       objectReference: {fileID: 0}
+    - target: {fileID: 2640678770320639361, guid: df9c42fb49ccd444dbfe8b57442ccf4c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2640678770321070497, guid: df9c42fb49ccd444dbfe8b57442ccf4c,
         type: 3}
       propertyPath: m_LocalPosition.x

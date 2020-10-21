@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 
 public class AssemblyArm : MonoBehaviour {
-    public Transform target;
+    public Transform target, defaultTarget;
     public AssemblyArmPart[] assemblyArmParts;
 
     private void Start() {
