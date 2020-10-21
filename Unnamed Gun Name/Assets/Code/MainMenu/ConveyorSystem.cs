@@ -52,7 +52,6 @@ public class ConveyorSystem : MonoBehaviour {
     void SpawnObject() {
         timer = 0;
         waitTime = Random.Range(timeBetweenObjectsSpawned.min, timeBetweenObjectsSpawned.max);
-        print(waitTime);
         GameObject coObject = SpawnFromPool(prefab.name, points[0].position, Quaternion.identity);
         ConveyorObjects co = coObject.GetComponent<ConveyorObjects>();
         co.Init(this);
