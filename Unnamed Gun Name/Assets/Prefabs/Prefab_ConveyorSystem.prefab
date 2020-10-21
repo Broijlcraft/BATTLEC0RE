@@ -1027,7 +1027,9 @@ MonoBehaviour:
   amountOfModels: 11
   prefab: {fileID: 639830031924921808, guid: 666b7704fd18b0546bedc04e024c36c7, type: 3}
   firstSpawnDelay: 0
-  timeBetweenObjects: 3
+  timeBetweenObjectsSpawned:
+    min: 4
+    max: 6
 --- !u!114 &5657556158044244446
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1061,7 +1063,9 @@ MonoBehaviour:
   amountOfModels: 11
   prefab: {fileID: 2112849236492711344, guid: 6080d8f82b7be4940ba2ba2d04b33afa, type: 3}
   firstSpawnDelay: 0
-  timeBetweenObjects: 3
+  timeBetweenObjectsSpawned:
+    min: 3
+    max: 3
 --- !u!1 &5657556158062478322
 GameObject:
   m_ObjectHideFlags: 0

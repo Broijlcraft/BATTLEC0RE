@@ -6,12 +6,15 @@ using UnityEditor;
 public class ConveyorSystem : MonoBehaviour {
     public Transform pointHolder;
     public Transform[] points;
-
+    
     public int amountOfModels;
     public GameObject prefab;
-    public float firstSpawnDelay = 1f, timeBetweenObjects = 1f;
-    int currentPoint;
+    public float firstSpawnDelay = 1f;
+    public RangeF timeBetweenObjectsSpawned = new RangeF() { min = 3f, max = 3f };
     public Dictionary<string, Queue<GameObject>> pool = new Dictionary<string, Queue<GameObject>>();
+
+    float timer, waitTime;
+    bool canSpawn;
 
     private void Awake() {
         Queue<GameObject> tempPool = new Queue<GameObject>();
@@ -26,15 +29,30 @@ public class ConveyorSystem : MonoBehaviour {
     }
 
     private void Start() {
-        StartCoroutine(SpawnInit());
+        if(firstSpawnDelay == 0) {
+            firstSpawnDelay = 0.01f;
+        }
+        InvokeRepeating(nameof(SpawnInit), firstSpawnDelay, 0);
     }
 
-    IEnumerator SpawnInit() {
-        yield return new WaitForSeconds(firstSpawnDelay);
-        InvokeRepeating(nameof(SpawnCart), 0, timeBetweenObjects);
+    void SpawnInit() {
+        SpawnObject();
+        canSpawn = true;
     }
 
-    void SpawnCart() {
+    private void Update() {
+        if (canSpawn) {
+            if(timer > waitTime) {
+                SpawnObject();
+            }
+            timer += Time.deltaTime;
+        }
+    }
+
+    void SpawnObject() {
+        timer = 0;
+        waitTime = Random.Range(timeBetweenObjectsSpawned.min, timeBetweenObjectsSpawned.max);
+        print(waitTime);
         GameObject coObject = SpawnFromPool(prefab.name, points[0].position, Quaternion.identity);
         ConveyorObjects co = coObject.GetComponent<ConveyorObjects>();
         co.Init(this);
@@ -77,7 +95,6 @@ public class ConveyorSystem : MonoBehaviour {
         } else {
             Debug.LogWarning($"SyncedPoolDictionary with tag {tag} doesn't exist");
         }
-
 
         return pooledObject;
     }
