@@ -1,7 +1,9 @@
 ﻿using Photon.Pun;
-using Photon.Realtime;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using Photon.Realtime;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 
 public class PhotonRoomCustomMatchMaking : MonoBehaviourPunCallbacks, IInRoomCallbacks {
@@ -15,11 +17,12 @@ public class PhotonRoomCustomMatchMaking : MonoBehaviourPunCallbacks, IInRoomCal
     public int currentScene;
     [Space]
     public Player[] photonPlayers;
-
-    [Header("HideInInspector")]
-    public bool isLoaded;
-    public int playersInGame, playersInRoom, myNumberInRoom;
-    public List<GameObject> playerModels = new List<GameObject>();
+    [Space]
+    public GameObject loadingScreen;
+    public Image loadingBar;
+    [HideInInspector] public bool isLoaded;
+    [HideInInspector] public int playersInGame, playersInRoom, myNumberInRoom;
+    [HideInInspector] public List<GameObject> playerModels = new List<GameObject>();
 
     private void Awake() {
         if (PhotonRoomCustomMatchMaking.roomSingle == null) {
@@ -133,9 +136,21 @@ public class PhotonRoomCustomMatchMaking : MonoBehaviourPunCallbacks, IInRoomCal
     }
 
     public void StartGame() {
+        loadingScreen.SetActive(true);
         isLoaded = true;
         PhotonNetwork.LoadLevel(currentScene + 1);
+        StartCoroutine(LoadLevel());
         PhotonNetwork.CurrentRoom.IsOpen = false;
+    }
+
+    IEnumerator LoadLevel() {
+        float progress = 0;
+        while(progress < 1) {
+            progress = PhotonNetwork.LevelLoadingProgress;
+            loadingBar.fillAmount = progress;
+            Debug.Log(progress);
+            yield return null;
+        }
     }
 
     void OnSceneFinishedLoading(Scene scene, LoadSceneMode mode) {
