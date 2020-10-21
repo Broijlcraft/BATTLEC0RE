@@ -105,7 +105,7 @@ public class ConveyorSystemEditor : Editor {
                 EditorUtility.SetDirty(point);
             }
             target_CS.points = points.ToArray();
-            Debug.LogWarning($"Successfully set {"Points"}, don't forget to save!");
+            Debug.LogWarning($"Successfully set {i} points, don't forget to save!");
         }
     }
 }
