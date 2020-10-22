@@ -84,7 +84,17 @@ ModelImporter:
   - first:
       74: -6254006075002521049
     second: metarig._Normal robot.002|T-pose
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: AFuxedHeavyMAT
+    second: {fileID: 2100000, guid: c1dd06da5e527f24db01fe2fc7b1773d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Heavybotem
+    second: {fileID: 2100000, guid: 12234f93b53c1464c817671d14390408, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0

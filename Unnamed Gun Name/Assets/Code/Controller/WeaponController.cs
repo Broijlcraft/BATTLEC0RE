@@ -11,6 +11,8 @@ public class WeaponController : MonoBehaviourPun {
     [HideInInspector] public Controller controller;
     [HideInInspector] public bool isAttaching, isDetaching, isChangingBehaviour;
 
+    bool isActive;
+
     public void Init(Controller control) {
         controller = control;
         primaryWeaponsHolder.Init(controller);
@@ -29,16 +31,18 @@ public class WeaponController : MonoBehaviourPun {
     }
 
     private void Update() {
-        if (!controller.health.isDead && PhotonNetwork.IsConnected) {
-            WeaponSwitchCheck();
-            PrimaryAndPowerInputCheckAndUse(1, powerWeaponsHolder);
-            PrimaryAndPowerInputCheckAndUse(0, primaryWeaponsHolder);
+        if (isActive) {
+            if (!controller.health.isDead && PhotonNetwork.IsConnected && controller.IsMineAndAlive()) {
+                WeaponSwitchCheck();
+                PrimaryAndPowerInputCheckAndUse(1, powerWeaponsHolder);
+                PrimaryAndPowerInputCheckAndUse(0, primaryWeaponsHolder);
+            }
         }
     }
 
     void WeaponSwitchCheck() {
         float scroll = Input.GetAxis("Mouse ScrollWheel");
-        if(!isAttaching && !isDetaching && scroll != 0 && primaryWeaponsHolder.weaponAttached && controller.IsMineAndAlive()) {
+        if(!isAttaching && !isDetaching && scroll != 0 && primaryWeaponsHolder.weaponAttached) {
             if (!isChangingBehaviour) {
                 Weapon weapon = primaryWeaponsHolder.weaponAttached;
                 int behaviourIndex = weapon.GetBehaviourIndex(weapon);
