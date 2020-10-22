@@ -93,7 +93,11 @@ public class Controller : MonoBehaviourPun {
         Init();
     }
 
-    void Init() {
+    public void Init() {
+        photonView.RPC(nameof(RPC_Init), RpcTarget.All);
+    }
+
+    void RPC_Init() {
         startPosition = transform.position;
         startRotation = transform.rotation;
         if (IsMineCheck()) {
