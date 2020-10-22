@@ -370,6 +370,16 @@ PrefabInstance:
       propertyPath: switchButton
       value: 
       objectReference: {fileID: 1515167884}
+    - target: {fileID: 5448391109761820104, guid: c5ff290bce7e59e41b7133cd59aaf1df,
+        type: 3}
+      propertyPath: robotMats.Array.data[1].mat
+      value: 
+      objectReference: {fileID: 2100000, guid: 6eeb6944865363f45895d0d0373c4b25, type: 2}
+    - target: {fileID: 5448391109761820104, guid: c5ff290bce7e59e41b7133cd59aaf1df,
+        type: 3}
+      propertyPath: robotMats.Array.data[1].matEm
+      value: 
+      objectReference: {fileID: 2100000, guid: 6eeb6944865363f45895d0d0373c4b25, type: 2}
     - target: {fileID: 5822782393773722953, guid: c5ff290bce7e59e41b7133cd59aaf1df,
         type: 3}
       propertyPath: m_Name
