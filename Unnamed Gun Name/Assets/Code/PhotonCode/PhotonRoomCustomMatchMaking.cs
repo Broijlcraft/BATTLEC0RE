@@ -12,7 +12,6 @@ public class PhotonRoomCustomMatchMaking : MonoBehaviourPunCallbacks, IInRoomCal
 
     public GameObject playerPrefab, lobbyGameObject, roomGameObject, playerListingPrefab, startButton, loadingTextObject;
     public Transform playersPanel;
-    [HideInInspector] public PhotonView PV;
 
     public int currentScene;
     [Space]
@@ -20,6 +19,8 @@ public class PhotonRoomCustomMatchMaking : MonoBehaviourPunCallbacks, IInRoomCal
     [Space]
     public GameObject loadingScreen;
     public Image loadingBar;
+    public GameObject[] objectsToDisableOnStartGame;
+    [HideInInspector] public PhotonView PV;
     [HideInInspector] public bool isLoaded;
     [HideInInspector] public int playersInGame, playersInRoom, myNumberInRoom;
     [HideInInspector] public List<GameObject> playerModels = new List<GameObject>();
@@ -136,6 +137,9 @@ public class PhotonRoomCustomMatchMaking : MonoBehaviourPunCallbacks, IInRoomCal
     }
 
     public void StartGame() {
+        for (int i = 0; i < objectsToDisableOnStartGame.Length; i++) {
+            objectsToDisableOnStartGame[i].SetActive(false);
+        }
         loadingScreen.SetActive(true);
         isLoaded = true;
         PhotonNetwork.LoadLevel(currentScene + 1);
@@ -147,7 +151,10 @@ public class PhotonRoomCustomMatchMaking : MonoBehaviourPunCallbacks, IInRoomCal
         float progress = 0;
         while(progress < 1) {
             progress = PhotonNetwork.LevelLoadingProgress;
-            loadingBar.fillAmount = progress;
+            progress = Mathf.Clamp01(progress) / 0.9f;
+            if (loadingBar) {
+                loadingBar.fillAmount = progress;
+            }
             Debug.Log(progress);
             yield return null;
         }

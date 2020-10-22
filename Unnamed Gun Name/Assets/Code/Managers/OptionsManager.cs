@@ -30,7 +30,7 @@ public class OptionsManager : MonoBehaviour {
             }
 
             for (int i = 0; i < cc.settingToggles.Length; i++) {
-                cc.settingToggles[i].Init();
+                cc.settingToggles[i].Init(this);
             }
 
             SetResolutions();
@@ -40,7 +40,7 @@ public class OptionsManager : MonoBehaviour {
     public void SetResolutions() {
         if (CanvasComponents.single_CC) {
             CanvasComponents cc = CanvasComponents.single_CC;
-            if (CanvasComponents.single_CC.resolutionsDropdown) {
+            if (cc.resolutionsDropdown) {
                 int index = 0;
                 resolutions = Screen.resolutions;
                 List<string> resolutionStringList = new List<string>();
@@ -64,7 +64,7 @@ public class OptionsManager : MonoBehaviour {
             }
 
             for (int i = 0; i < cc.settingToggles.Length; i++) {
-                cc.settingToggles[i].Init();
+                cc.settingToggles[i].Init(this);
             }
 
             if (cc.videoSettingsHolder) {
@@ -85,6 +85,10 @@ public class OptionsManager : MonoBehaviour {
 
     void ChangeResolution(int index) {
         Screen.SetResolution(resolutions[index].width, resolutions[index].height, Screen.fullScreen);
+    }
+
+    public void FullScreen(bool value) {
+        Screen.fullScreen = value;
     }
 
     void QuitGame() {
@@ -165,12 +169,14 @@ public enum ToggleType {
 [System.Serializable]
 public class SettingToggle {
 
+    OptionsManager optionsManager;
     public ToggleType toggleType;
     public Toggle toggle;
 
-    public void Init() {
+    public void Init(OptionsManager om) {
+        optionsManager = om;
         bool isOn = false;
-        if (PlayerPrefs.GetInt("InvertCam") == 1) {
+        if (PlayerPrefs.GetInt(toggleType.ToString()) == 1) {
             isOn = true;
         }
         toggle.isOn = isOn;
@@ -178,15 +184,20 @@ public class SettingToggle {
     }
 
     void OnToggleValueChanged(bool value) {
-        if(toggleType == ToggleType.InvertCam) {
-            int intValue = 1;
+        int intValue;
+        if (toggleType == ToggleType.InvertCam) {
             if (value) {
                 intValue = -1;
+            } else {
+                intValue = 1;
             }
-            PlayerPrefs.SetInt("InvertCam", intValue);
             if (Controller.single_CLocal) {
                 Controller.single_CLocal.InvertCamMovement();
             }
+        } else {
+            optionsManager.FullScreen(value);
+            intValue = Tools.BoolToInt(value);
         }
+        PlayerPrefs.SetInt(toggleType.ToString(), intValue);
     }
 }
