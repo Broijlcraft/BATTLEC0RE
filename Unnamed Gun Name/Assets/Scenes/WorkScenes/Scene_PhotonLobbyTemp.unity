@@ -366,6 +366,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5448391109761820104, guid: c5ff290bce7e59e41b7133cd59aaf1df,
+        type: 3}
+      propertyPath: switchButton
+      value: 
+      objectReference: {fileID: 1515167884}
     - target: {fileID: 5822782393773722953, guid: c5ff290bce7e59e41b7133cd59aaf1df,
         type: 3}
       propertyPath: m_Name
