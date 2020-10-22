@@ -96,7 +96,7 @@ MonoBehaviour:
     value: 0
   intensity:
     overrideState: 1
-    value: 1
+    value: 0.65
   color:
     overrideState: 1
     value: {r: 0, g: 0, b: 0, a: 1}
@@ -120,10 +120,10 @@ MonoBehaviour:
     value: 0
   radius:
     overrideState: 1
-    value: 0.25
+    value: 3.49
   quality:
     overrideState: 1
-    value: 2
+    value: 3
 --- !u!114 &-2040957100643401795
 MonoBehaviour:
   m_ObjectHideFlags: 3
