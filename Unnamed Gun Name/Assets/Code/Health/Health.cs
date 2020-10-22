@@ -70,6 +70,7 @@ public class Health : MonoBehaviourPun {
                 controller.animator.enabled = false;
 
                 if (photonView.IsMine) {
+                    controller.rigid.velocity = Vector3.zero;
                     if (killerTeam > -1) {
                         ScoreScript.single_ss.IncreaseScore(killerTeam, 1);
                     }
