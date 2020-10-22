@@ -62,7 +62,7 @@ MonoBehaviour:
     impactEffect: {fileID: 0}
     damagePerAttack: 95
     range: 100
-    attacksPerSecond: 5
+    attacksPerSecond: 0.2
     bulletSpread: {x: 0, y: 0}
     currentAo: 0
     canNotAttack: 0

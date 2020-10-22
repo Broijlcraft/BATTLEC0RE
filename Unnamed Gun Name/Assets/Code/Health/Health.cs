@@ -45,7 +45,7 @@ public class Health : MonoBehaviourPun {
             int myTeam = TeamManager.single_TM.GetTeamIndex(photonView.Owner.NickName);
             if (killerTeam != myTeam) {
                 if (killerTeam < ScoreScript.single_ss.scoreListings.Length) {
-                    photonView.RPC("RPC_ChangeHealth", RpcTarget.All, value, 0, 1, killer, killerTeam);
+                    photonView.RPC(nameof(RPC_ChangeHealth), RpcTarget.All, value, 0, 1, killer, killerTeam);
                 }
                 print($"Killer: {killer}, Team: {killerTeam} | Victim: {photonView.Owner.NickName}, Team: {myTeam}");
             }
@@ -76,7 +76,7 @@ public class Health : MonoBehaviourPun {
                     }
                     string nickname = photonView.Owner.NickName;
                     nickname = Tools.RemoveIdFromNickname(nickname);
-                    photonView.RPC("RPC_KillFeed", RpcTarget.All, nickname, killer);
+                    photonView.RPC(nameof(RPC_KillFeed), RpcTarget.All, nickname, killer);
                     StartCoroutine(Countdown());
                 }
             }
@@ -100,14 +100,14 @@ public class Health : MonoBehaviourPun {
             if (Manager.single_M.IsDev()) { break; }
             cc.respawnAnim.SetTrigger("Respawn");
             cc.respawnTimer.text = timer.ToString();
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(respawnTime);
             timer--;
         }
-        photonView.RPC("RPC_Respawn", RpcTarget.All);
+        photonView.RPC(nameof(RPC_Respawn), RpcTarget.All);
     }
 
     public void StopRespawning() {
-        photonView.RPC("RPC_StopRespawning", RpcTarget.All);
+        photonView.RPC(nameof(RPC_StopRespawning), RpcTarget.All);
     }
 
     [PunRPC]
@@ -126,7 +126,7 @@ public class Health : MonoBehaviourPun {
                 controller.ResetAtStartPosition();
             }
         }
-        photonView.RPC("RPC_ChangeHealth", RpcTarget.All, maxHealth, 1, 0, "", -1);
+        photonView.RPC(nameof(RPC_ChangeHealth), RpcTarget.All, maxHealth, 1, 0, "", -1);
     }
 
     [PunRPC]

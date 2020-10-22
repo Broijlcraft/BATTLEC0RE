@@ -628,6 +628,7 @@ MonoBehaviour:
   - {fileID: 5369252611612772986}
   hideCursorOnStart: 1
   canMove: 1
+  isActive: 0
   health: {fileID: 0}
   rigid: {fileID: 0}
   colliders: []
@@ -651,14 +652,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   primaryWeaponsHolder:
     weaponType: 0
-    timeToAttach: 2
+    timeToAttach: 1
     timeToDetach: 1
     weaponAttached: {fileID: 490451042765912855}
     weaponsHolder: {fileID: 6196231737381369139}
     animator: {fileID: 794956229}
   powerWeaponsHolder:
     weaponType: 1
-    timeToAttach: 2
+    timeToAttach: 1
     timeToDetach: 1
     weaponAttached: {fileID: 718304760286535867}
     weaponsHolder: {fileID: 3463437583216229512}

@@ -155,7 +155,7 @@ public class PhotonRoomCustomMatchMaking : MonoBehaviourPunCallbacks, IInRoomCal
             if (loadingBar) {
                 loadingBar.fillAmount = progress;
             }
-            Debug.Log(progress);
+            //Debug.Log(progress);
             yield return null;
         }
     }

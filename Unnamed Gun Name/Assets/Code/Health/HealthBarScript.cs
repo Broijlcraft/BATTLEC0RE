@@ -13,6 +13,7 @@ public class HealthBarScript : MonoBehaviour {
     [Header("HideInInspector")]
     public List<HealthPartScript> healthParts = new List<HealthPartScript>();
     Controller cl;
+    bool isActive;
 
     public void Init(Controller control) {
         cl = control;
@@ -53,6 +54,10 @@ public class HealthBarScript : MonoBehaviour {
         }
         if (health) {
             health.StopRespawning();
+        }
+        if (!isActive) {
+            Controller.single_CLocal.Init();
+            isActive = true;
         }
     }
 

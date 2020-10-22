@@ -11,23 +11,24 @@ public class WeaponController : MonoBehaviourPun {
     [HideInInspector] public Controller controller;
     [HideInInspector] public bool isAttaching, isDetaching, isChangingBehaviour;
 
-    bool isActive;
-
-    public void Init(Controller control) {
-        controller = control;
-        primaryWeaponsHolder.Init(controller);
-        powerWeaponsHolder.Init(controller);
-    }
+    bool isActive = false;
 
     private void Start() {
+        primaryWeaponsHolder.Init();
         if (primaryWeaponsHolder.weaponAttached) {
             primaryWeaponsHolder.weaponAttached.interactingController = controller;
             AttachDetachWeapon(primaryWeaponsHolder.weaponAttached, false, false);
         }
+
+        powerWeaponsHolder.Init();
         if (powerWeaponsHolder.weaponAttached) {
             powerWeaponsHolder.weaponAttached.interactingController = controller;
             AttachDetachWeapon(powerWeaponsHolder.weaponAttached, false, false);
-        }
+        }        
+    }
+
+    public void Init() {
+        isActive = true;
     }
 
     private void Update() {
@@ -175,21 +176,11 @@ public class WeaponsHolder {
     [Header("HideInInspector")]
     public Weapon weaponAttached;
     public Transform weaponsHolder;
-    /*[HideInInspector] */public Animator animator;
+    [HideInInspector] public Animator animator;
 
-    public void Init(Controller controller) {
-        BodypartType partType = GetHolderBodypart();
-
+    public void Init() {
         if (weaponsHolder) {
             animator = weaponsHolder.GetComponent<Animator>();
         }
-    }
-
-    BodypartType GetHolderBodypart() {
-        BodypartType partType = BodypartType.PrimaryWeaponHolder;
-        if(weaponType == WeaponType.Power) {
-            partType = BodypartType.PowerWeaponHolder;
-        }
-        return partType;
     }
 }

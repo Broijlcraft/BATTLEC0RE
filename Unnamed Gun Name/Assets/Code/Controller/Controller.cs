@@ -22,7 +22,7 @@ public class Controller : MonoBehaviourPun {
     [Header("Local Settings")]
     public bool hideCursorOnStart;
 
-    /*[HideInInspector]*/ public bool canMove;
+    /*[HideInInspector]*/ public bool canMove, isActive;
     [HideInInspector] public Health health;
     [HideInInspector] public Rigidbody rigid;
     [HideInInspector] public Collider[] colliders;
@@ -36,7 +36,7 @@ public class Controller : MonoBehaviourPun {
     bool isGrounded;
     int invertMultiplier;
     AudioListener audioListeners;
-    float currentSpeed, xRotationAxisAngle, vertical = 0, horizontal = 0;
+    float currentSpeed, xRotationAxisAngle, vertical = 0, horizontal = 0, horSpeed = 0, verSpeed = 0;
 
     [Header("Testing")]
     public bool keepLocalNicknameTextEnabled;
@@ -48,7 +48,7 @@ public class Controller : MonoBehaviourPun {
             isGrounded = true;
         }
         xRotationAxisAngle = 0;
-        TurnCollidersOnOff(false);
+        EnableColliders(false);
         rigid = GetComponent<Rigidbody>();
 
         bpList = GetComponent<BodyPartsList>();
@@ -62,19 +62,21 @@ public class Controller : MonoBehaviourPun {
         }
 
         weaponsController = GetComponent<WeaponController>();
-        weaponsController.Init(this);
+        weaponsController.controller = this;
+
         health = GetComponent<Health>();
         health.controller = this;
 
+        bool isMine = photonView.IsMine;
         if (cam) {
-            cam.enabled = false;
+            cam.enabled = isMine;
             if (localLayerCam) {
-                localLayerCam.enabled = false;
+                localLayerCam.enabled = isMine;
             }
         }
 
         audioListeners = GetComponentInChildren<AudioListener>();
-        audioListeners.enabled = false;
+        audioListeners.enabled = isMine;
 
         if (PhotonNetwork.IsConnected) {
             photonView.RPC("RPC_SetNicknameTargets", RpcTarget.All);
@@ -82,15 +84,22 @@ public class Controller : MonoBehaviourPun {
     }
 
     private void Start() {
+        EnableColliders(true);
         if (photonView.IsMine) {
-            CanvasComponents.single_CC.healthBar.Init(this);
+            CanvasComponents.single_CC.healthBar.Init(this); print("controlled by loading screen");
             if (Spawnpoints.sp_Single && PhotonRoomCustomMatchMaking.roomSingle) {
                 if (Spawnpoints.sp_Single.spawnpoints.Length > 0) {
                     Spawnpoints.sp_Single.SetSpPositionAndRotation(transform, PhotonRoomCustomMatchMaking.roomSingle.myNumberInRoom - 1);
                 }
             }
+            if (hideCursorOnStart) {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
+            animator.SetFloat("HorizontalInput", 0f);
+            animator.SetFloat("VerticalInput", 0f);
+            animator.SetFloat("MoveSpeed", 0f);
         }
-        Init();
     }
 
     public void Init() {
@@ -99,23 +108,17 @@ public class Controller : MonoBehaviourPun {
 
     [PunRPC]
     void RPC_Init() {
+        print("Init");
         startPosition = transform.position;
         startRotation = transform.rotation;
         if (IsMineCheck()) {
+            weaponsController.Init();
             bpList.SetMeshes(BodyPartsManager.single_bpm.currentSelectedRobot);
             rigid.useGravity = true;
             if (PhotonRoomCustomMatchMaking.roomSingle) {
                 ObjectPool.single_PT.SetPoolOwners(PhotonRoomCustomMatchMaking.roomSingle.myNumberInRoom, photonView.ViewID);
             }
             isGrounded = true;
-
-            if (cam) {
-                cam.enabled = true;
-                if (localLayerCam) {
-                    localLayerCam.enabled = true;
-                }
-            }
-            audioListeners.enabled = true;
 
             if (TagsAndLayersManager.single_TLM) {
                 for (int i = 0; i < meshObjectsToSetLocal.Length; i++) {
@@ -129,14 +132,10 @@ public class Controller : MonoBehaviourPun {
                 }
             }
         }
-        TurnCollidersOnOff(true);
-        if (hideCursorOnStart) {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-        }
+        isActive = true;
     }
 
-    void TurnCollidersOnOff(bool state) {
+    void EnableColliders(bool state) {
         colliders = GetComponentsInChildren<Collider>();
         for (int i = 0; i < colliders.Length; i++) {
             colliders[i].enabled = state;
@@ -163,7 +162,7 @@ public class Controller : MonoBehaviourPun {
     #endregion
 
     private void Update() {
-        if (IsMineAndAlive()) {
+        if (IsMineAndAlive() && isActive) {
             if (Input.GetButtonDown("Interact")) {
                 RaycastHit hit;
                 if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, interactRange, ~TagsAndLayersManager.single_TLM.localPlayerLayerInfo.layerMask)) {
@@ -193,9 +192,9 @@ public class Controller : MonoBehaviourPun {
         invertMultiplier = PlayerPrefs.GetInt("InvertCam", 1);
     }
 
-    float horSpeed = 0, verSpeed = 0;
     private void FixedUpdate() {
-        if (IsMineCheck() && !health.isDead) {
+        bool imaa = IsMineAndAlive();
+        if (imaa && isActive) {
             SprintCheck();
 
             float animSpeed = currentSpeed / moveSettings.sprintSpeed;
