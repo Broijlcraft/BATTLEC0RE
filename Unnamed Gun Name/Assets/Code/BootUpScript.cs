@@ -4,7 +4,14 @@ using UnityEngine;
 
 public class BootUpScript : MonoBehaviour {
 
-    public bool isPlaying;
+    public Transform canvas;
+    public bool isPlaying, enableOther;
+
+    private void Awake() {
+        canvas.transform.SetAsFirstSibling();
+        enableOther = false;
+    }
+
     private void OnDisable() {
         if (isPlaying) {
             CanvasComponents.single_CC.healthBar.Init(Controller.single_CLocal);
