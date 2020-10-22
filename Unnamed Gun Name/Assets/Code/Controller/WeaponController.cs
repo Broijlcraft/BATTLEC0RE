@@ -7,6 +7,8 @@ public class WeaponController : MonoBehaviourPun {
 
     public WeaponsHolder primaryWeaponsHolder, powerWeaponsHolder;
 
+    public Weapon[] powerWeapons;
+
     float animationSpeed;
     [HideInInspector] public Controller controller;
     [HideInInspector] public bool isAttaching, isDetaching, isChangingBehaviour;
@@ -21,6 +23,17 @@ public class WeaponController : MonoBehaviourPun {
         }
 
         powerWeaponsHolder.Init();
+        int index = BodyPartsManager.single_bpm.currentSelectedRobot;
+        Weapon weapon = powerWeapons[index];
+        for (int i = 0; i < powerWeapons.Length; i++) {
+            Weapon pw = powerWeapons[i];
+            if (i == index) {
+                pw.gameObject.SetActive(true);
+            } else {
+                pw.gameObject.SetActive(false);
+            }
+        }
+        powerWeaponsHolder.weaponAttached = weapon;
         if (powerWeaponsHolder.weaponAttached) {
             powerWeaponsHolder.weaponAttached.interactingController = controller;
             AttachDetachWeapon(powerWeaponsHolder.weaponAttached, false, false);

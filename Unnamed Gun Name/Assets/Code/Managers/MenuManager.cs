@@ -28,7 +28,11 @@ public class MenuManager : MonoBehaviour {
 
     private void Update() {
         if (Input.GetButtonDown("Cancel")) {
-            MoveUpOrCloseMenu();
+            if(currentMenuState != MenuState.Closed) {
+                MoveUpOrCloseMenu();
+            } else {
+                OpenMenu(firstMenu);
+            }
         }
     }
 

@@ -7,9 +7,9 @@ public class BootUpScript : MonoBehaviour {
     public bool isPlaying;
     private void OnDisable() {
         if (isPlaying) {
-            //transform.localRotation = Quaternion.Euler(firstEndRot);
-            //StartCoroutine(SetRot());
+            CanvasComponents.single_CC.healthBar.Init(Controller.single_CLocal);
             isPlaying = false;
+            gameObject.SetActive(false);
         }
     }
 }

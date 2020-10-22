@@ -86,7 +86,6 @@ public class Controller : MonoBehaviourPun {
     private void Start() {
         EnableColliders(true);
         if (photonView.IsMine) {
-            CanvasComponents.single_CC.healthBar.Init(this); print("controlled by loading screen");
             if (Spawnpoints.sp_Single && PhotonRoomCustomMatchMaking.roomSingle) {
                 if (Spawnpoints.sp_Single.spawnpoints.Length > 0) {
                     Spawnpoints.sp_Single.SetSpPositionAndRotation(transform, PhotonRoomCustomMatchMaking.roomSingle.myNumberInRoom - 1);
@@ -108,7 +107,6 @@ public class Controller : MonoBehaviourPun {
 
     [PunRPC]
     void RPC_Init() {
-        print("Init");
         startPosition = transform.position;
         startRotation = transform.rotation;
         if (IsMineCheck()) {

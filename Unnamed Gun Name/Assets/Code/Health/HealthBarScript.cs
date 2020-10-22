@@ -56,7 +56,10 @@ public class HealthBarScript : MonoBehaviour {
             health.StopRespawning();
         }
         if (!isActive) {
-            Controller.single_CLocal.Init();
+            Controller cl = Controller.single_CLocal;
+            if (cl) {
+                cl.Init();
+            }
             isActive = true;
         }
     }
