@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3125543338912095616}
   - component: {fileID: 7745419677838924823}
   - component: {fileID: 8854610324828023513}
-  - component: {fileID: 312799565230184944}
   m_Layer: 0
   m_Name: Tool_wrench
   m_TagString: Untagged
@@ -81,16 +80,3 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &312799565230184944
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5653460028357862264}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.5083156, y: 0.08442506, z: 0.13889237}
-  m_Center: {x: -0.23058927, y: 0.009211259, z: 0.0093418285}
