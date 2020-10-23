@@ -8,6 +8,8 @@ public class AssemblyArm : MonoBehaviour {
     public Transform target, defaultTarget;
     public AssemblyArmPart[] assemblyArmParts;
 
+    //public List<Transform> carts
+
     private void Start() {
         for (int i = 0; i < assemblyArmParts.Length; i++) {
             assemblyArmParts[i].arm = this;
@@ -26,6 +28,12 @@ public class AssemblyArm : MonoBehaviour {
             if (part.gameObject.activeSelf) {
                 Debug.DrawRay(part.position, part.forward * 2f, new Color(1f,0f,1f));
             }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other) {
+        if (other.CompareTag("Cart")) {
+
         }
     }
 }
