@@ -38,7 +38,7 @@ public class Health : MonoBehaviourPun {
             }
         }
     }
-
+    
     public void DoDamage(int value, string killer) {
         if (!isDead && !respawning) {
             int killerTeam = TeamManager.single_TM.GetTeamIndex(killer);

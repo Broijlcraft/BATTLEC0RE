@@ -892,7 +892,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da6f4f6c9a0da0d48b67c61d59ca8bb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  other: {fileID: 1277910731342137114}
+  canvas: {fileID: 1277910731342137115}
   isPlaying: 0
   enableOther: 0
 --- !u!1 &1440540684420459020
