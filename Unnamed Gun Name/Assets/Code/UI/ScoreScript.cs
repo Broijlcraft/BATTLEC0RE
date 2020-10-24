@@ -9,6 +9,7 @@ public class ScoreScript : MonoBehaviourPun {
 
     public int maxScore;
     public HudScoreListing[] scoreListings = new HudScoreListing[2];
+    bool gameover;
 
     private void Awake() {
         if (!ScoreScript.single_ss) {
@@ -28,13 +29,18 @@ public class ScoreScript : MonoBehaviourPun {
     }
 
     public void IncreaseScore(int killerTeam, int scoreIncrease) {
-        photonView.RPC("RPC_IncreaseScore", RpcTarget.All, killerTeam, scoreIncrease);
+        if (!gameover) {
+            photonView.RPC("RPC_IncreaseScore", RpcTarget.All, killerTeam, scoreIncrease);
+        }
     }
 
     [PunRPC]
     void RPC_IncreaseScore(int killerTeam, int scoreIncrease) {
-        scoreListings[killerTeam].IncreaseScore(scoreIncrease);
+        if (!gameover) {
+            scoreListings[killerTeam].IncreaseScore(scoreIncrease);
+        }
     }
+
 }
 
 public enum LeftRight {
@@ -46,7 +52,7 @@ public enum LeftRight {
 public class HudScoreListing {
     public Image fillImage;
     public Text scoreText;
-
+    public string teamName;
     public string symbolBetweenScore = "/";
 
     [Header("HideInInspector")]
@@ -56,6 +62,8 @@ public class HudScoreListing {
         currentScore += value;
         if(currentScore >= maxScore) {
             currentScore = maxScore;
+            CanvasComponents.single_CC.victoryText.gameObject.SetActive(true);
+            CanvasComponents.single_CC.victoryText.text = $"Team {teamName} won!";
         }
 
         float fill = 0;

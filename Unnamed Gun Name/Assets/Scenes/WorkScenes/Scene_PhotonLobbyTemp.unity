@@ -9791,11 +9791,14 @@ MonoBehaviour:
   respawnTimer: {fileID: 0}
   killFeedHolder: {fileID: 0}
   respawnUiHolder: {fileID: 0}
+  menuHolder: {fileID: 0}
   respawnAnim: {fileID: 0}
   chargeBar: {fileID: 0}
   healthBar: {fileID: 0}
   scoreScript: {fileID: 0}
-  quitReturnButton: {fileID: 586734428}
+  firstMenu: {fileID: 3073455486726346206}
+  moveUpButtons: []
+  quitReturnButton: {fileID: 3073455487884426119}
   resolutionsDropdown: {fileID: 3073455486624746427}
   videoSettingsHolder: {fileID: 3073455486735291517}
   settingSliders:
@@ -15172,7 +15175,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1594392730}
         m_MethodName: QuitGame
         m_Mode: 1
         m_Arguments:

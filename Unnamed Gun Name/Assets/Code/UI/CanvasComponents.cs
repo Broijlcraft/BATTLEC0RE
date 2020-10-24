@@ -6,14 +6,17 @@ using UnityEngine;
 public class CanvasComponents : MonoBehaviour {
     public static CanvasComponents single_CC;
 
-    public Text devText, respawnTimer;
+    public Text devText, respawnTimer, victoryText;
     public Transform killFeedHolder;
-    public GameObject respawnUiHolder;
+    public GameObject respawnUiHolder, menuHolder;
     public Animator respawnAnim, chargeBar;
     public HealthBarScript healthBar;
     public ScoreScript scoreScript;
+    public Menu firstMenu;
 
-     [Header("Settings")]
+    public Button[] moveUpButtons;
+
+    [Header("Settings")]
     public Button quitReturnButton;
     public Dropdown resolutionsDropdown;
     public GameObject videoSettingsHolder;

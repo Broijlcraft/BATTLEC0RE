@@ -3,12 +3,15 @@ using UnityEngine.Audio;
 using UnityEngine.UI;
 using UnityEngine;
 using System;
+using System.Runtime.InteropServices;
 
 public class OptionsManager : MonoBehaviour {
     public static OptionsManager single_OM;
     public AudioMixer audioMixer;
 
-    Resolution[] resolutions;
+    Resolution[] resolutions = new Resolution[0];
+    List<string> resolutionStringList = new List<string>();
+    int index = 0;
 
     private void Awake() {
         if (!OptionsManager.single_OM) {
@@ -24,7 +27,10 @@ public class OptionsManager : MonoBehaviour {
         if (CanvasComponents.single_CC) {
             CanvasComponents cc = CanvasComponents.single_CC;
 
-            AudioManager.audioMixer = audioMixer;
+            if(resolutions.Length == 0) {
+                AudioManager.audioMixer = audioMixer;
+            }
+
             for (int i = 0; i < cc.settingSliders.Length; i++) {
                 cc.settingSliders[i].Init();
             }
@@ -40,10 +46,8 @@ public class OptionsManager : MonoBehaviour {
     public void SetResolutions() {
         if (CanvasComponents.single_CC) {
             CanvasComponents cc = CanvasComponents.single_CC;
-            if (cc.resolutionsDropdown) {
-                int index = 0;
+            if (resolutions.Length == 0) {
                 resolutions = Screen.resolutions;
-                List<string> resolutionStringList = new List<string>();
                 List<Resolution> tempResolutions = new List<Resolution>();
 
                 for (int i = resolutions.Length - 1; i > 0; i--) {
@@ -56,12 +60,13 @@ public class OptionsManager : MonoBehaviour {
                 }
 
                 resolutions = tempResolutions.ToArray();
-                cc.resolutionsDropdown.ClearOptions();
-                cc.resolutionsDropdown.AddOptions(resolutionStringList);
-                cc.resolutionsDropdown.value = index;
-                cc.resolutionsDropdown.onValueChanged.AddListener(ChangeResolution);
-                cc.resolutionsDropdown.RefreshShownValue();
             }
+
+            cc.resolutionsDropdown.ClearOptions();
+            cc.resolutionsDropdown.AddOptions(resolutionStringList);
+            cc.resolutionsDropdown.value = index;
+            cc.resolutionsDropdown.onValueChanged.AddListener(ChangeResolution);
+            cc.resolutionsDropdown.RefreshShownValue();
 
             for (int i = 0; i < cc.settingToggles.Length; i++) {
                 cc.settingToggles[i].Init(this);
@@ -139,7 +144,7 @@ public class SettingSlider {
         slider.minValue = range.min;
         slider.onValueChanged.AddListener(OnSliderValueChanged);
         float value = 0.12f;
-
+        Debug.Log("Init setting");
         if (sliderType == SliderType.AudioSlider) {
             value = PlayerPrefs.GetFloat(audioGroup.ToString());
         } else if (sliderType == SliderType.SensitivitySlider) {
@@ -157,6 +162,10 @@ public class SettingSlider {
             PlayerPrefs.SetFloat(group, value);
         } else {
             PlayerPrefs.SetFloat(sensitivityType.ToString(), value);
+            if (Controller.single_CLocal) {
+                Controller.single_CLocal.cameraSettings.mouseSensitivity = value;
+                Debug.Log("Value " + value);
+            }
         }
     }
 }

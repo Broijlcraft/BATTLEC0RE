@@ -24,7 +24,7 @@ public class Manager : MonoBehaviour {
 
     public void SceneFinishedLoading() {
         Init();
-        MenuManager.single_MM.Init();
+        MenuManager.single_MM.MainMenuInit();
         UiManager.single_UM.Init();
     }
 

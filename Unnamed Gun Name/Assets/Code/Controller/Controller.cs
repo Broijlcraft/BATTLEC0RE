@@ -47,10 +47,11 @@ public class Controller : MonoBehaviourPun {
             canMove = false;
             isGrounded = true;
         }
+        MenuManager.single_MM.InGameInit();
         xRotationAxisAngle = 0;
         EnableColliders(false);
         rigid = GetComponent<Rigidbody>();
-
+        cameraSettings.mouseSensitivity = PlayerPrefs.GetFloat(SensitivitySlider.MouseSensitivity.ToString());
         bpList = GetComponent<BodyPartsList>();
         bpList.Init();
 

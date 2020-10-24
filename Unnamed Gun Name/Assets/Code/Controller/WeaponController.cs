@@ -46,7 +46,7 @@ public class WeaponController : MonoBehaviourPun {
 
     private void Update() {
         if (isActive) {
-            if (!controller.health.isDead && PhotonNetwork.IsConnected && controller.IsMineAndAlive()) {
+            if (!controller.health.isDead && PhotonNetwork.IsConnected && controller.IsMineAndAlive() && MenuManager.single_MM.currentMenuState == MenuState.Closed) {
                 WeaponSwitchCheck();
                 PrimaryAndPowerInputCheckAndUse(1, powerWeaponsHolder);
                 PrimaryAndPowerInputCheckAndUse(0, primaryWeaponsHolder);

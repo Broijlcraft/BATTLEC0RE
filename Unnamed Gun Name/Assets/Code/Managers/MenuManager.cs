@@ -18,32 +18,42 @@ public class MenuManager : MonoBehaviour {
         }
     }
 
-    public void Init() {
+    public void MainMenuInit() {
         isMainMenu = false;
     }
 
-    private void Start() {
-        Debug.LogWarning("Implement controller canmove");
+    public void InGameInit() {
+        isMainMenu = false;
+        currentMenuState = MenuState.Closed;
+        CanvasComponents cc = CanvasComponents.single_CC;
+        menuHolder = cc.menuHolder;
+        firstMenu = cc.firstMenu;
+        OptionsManager.single_OM.Init();
+        for (int i = 0; i < cc.moveUpButtons.Length; i++) {
+            cc.moveUpButtons[i].onClick.AddListener(MoveUpOrCloseMenu);
+        }
     }
 
     private void Update() {
-        if (Input.GetButtonDown("Cancel")) {
-            if(currentMenuState != MenuState.Closed) {
-                MoveUpOrCloseMenu();
-            } else {
-                OpenMenu(firstMenu);
-            }
+        if (Input.GetButtonDown("Cancel") && PlayerCheck()) {
+            MoveUpOrCloseMenu();
         }
+    }
+
+    bool PlayerCheck() {
+        bool menuIA = true;
+        if (Controller.single_CLocal) {
+            menuIA = Controller.single_CLocal.isActive;
+        }
+        return menuIA;
     }
 
     public void MoveUpOrCloseMenu() {
         if (currentMenuState == MenuState.Closed) {
-            if (menuHolder && firstMenu) {
-                menuHolder.SetActive(true);
-                OpenMenu(firstMenu);
-            }
+            menuHolder.SetActive(true);
+            OpenMenu(firstMenu);
         } else {
-            if (currentMenu && !currentMenu.canNotGoBackWithEsc) {
+            if (!currentMenu.canNotGoBackWithEsc) {
                 CloseMenu();
             }
         }
@@ -58,6 +68,8 @@ public class MenuManager : MonoBehaviour {
                 currentMenu = null;
                 currentMenuState = MenuState.Closed;
                 Controller.single_CLocal.canMove = true;
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
             } else {
                 OpenMenu(currentMenu.previousMenu);
             }
@@ -66,12 +78,15 @@ public class MenuManager : MonoBehaviour {
 
     public void OpenMenu(Menu menu) {
         if (menu) {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
             menu.ExtraFunctionalityOnOpen();
             currentMenu = menu;
             currentMenu.gameObject.SetActive(true);
             currentMenuState = menu.menuPosition;
             if (!isMainMenu) {
                 Controller.single_CLocal.canMove = false;
+                menuHolder.SetActive(true);
             }
         }
     }
